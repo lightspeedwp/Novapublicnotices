@@ -3,121 +3,232 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Card } from "../components/ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, Facebook } from "lucide-react";
+import { 
+  contactPageHeader, 
+  regionalContacts, 
+  regionalContactsHeader,
+  nationalPublications,
+  contactCategories,
+  helpSectionHeader,
+  socialMediaInfo,
+  contactFormLabels,
+  contactFormPlaceholders
+} from "../data/contact";
+import { socialLinks } from "../data/navigation";
 
 export default function ContactAF() {
   return (
     <Layout lang="af" showAds={true}>
-      <div className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="font-raleway text-4xl font-bold text-[#09082f] mb-4 text-center">
-              Kontak Ons
+      <div className="bg-background py-12">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Page Header */}
+          <div className="text-center mb-12">
+            <h1 className="mb-4">
+              {contactPageHeader.title.af}
             </h1>
-            <p className="text-center text-gray-600 mb-12">
-              Het u vrae oor regskennisgewings? Ons span is hier om te help.
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              {contactPageHeader.subtitle.af}
             </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <Card className="p-6">
-                <Mail className="size-8 text-[#d70025] mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Stuur E-pos</h3>
-                <p className="text-gray-600 text-sm mb-2">
-                  Vir algemene navrae en ondersteuning
-                </p>
-                <a href="mailto:notices@novanews.co.za" className="text-[#d70025] hover:underline">
-                  notices@novanews.co.za
-                </a>
-              </Card>
-
-              <Card className="p-6">
-                <Phone className="size-8 text-[#d70025] mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Bel Ons</h3>
-                <p className="text-gray-600 text-sm mb-2">
-                  Maandag tot Vrydag, 8:00 VM - 5:00 NM
-                </p>
-                <a href="tel:+27123456789" className="text-[#d70025] hover:underline">
-                  +27 12 345 6789
-                </a>
-              </Card>
-
-              <Card className="p-6">
-                <MapPin className="size-8 text-[#d70025] mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Besoek Ons</h3>
-                <p className="text-gray-600 text-sm">
-                  Mediastraat 123<br />
-                  Johannesburg, 2000<br />
-                  Suid-Afrika
-                </p>
-              </Card>
-
-              <Card className="p-6">
-                <Clock className="size-8 text-[#d70025] mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Kantoorure</h3>
-                <p className="text-gray-600 text-sm">
-                  Maandag - Vrydag: 8:00 VM - 5:00 NM<br />
-                  Saterdag: 9:00 VM - 1:00 NM<br />
-                  Sondag: Gesluit
-                </p>
-              </Card>
+          {/* Social Media Section */}
+          <div className="mb-12 p-6 bg-card border border-border rounded-lg text-center">
+            <Facebook className="size-8 text-[#d70025] mx-auto mb-3" />
+            <h3 className="mb-2">{socialMediaInfo.facebook.text.af}</h3>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <span className="text-muted-foreground">{socialMediaInfo.general.text.af}</span>
             </div>
+            <div className="flex items-center justify-center gap-4">
+              {socialLinks.map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wp-hover-scale text-muted-foreground hover:text-foreground transition-colors duration-150"
+                  aria-label={social.name}
+                >
+                  {social.icon === "facebook" && <Facebook className="size-6" />}
+                  {social.icon === "instagram" && (
+                    <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  )}
+                  {social.icon === "twitter" && (
+                    <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  )}
+                  {social.icon === "linkedin" && (
+                    <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  )}
+                  {social.icon === "youtube" && (
+                    <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
 
-            <Card className="p-8">
-              <h2 className="font-raleway text-2xl font-bold text-[#09082f] mb-6">
-                Stuur Ons 'n Boodskap
-              </h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Volle Naam *
-                    </label>
-                    <Input id="name" placeholder="Jan van der Merwe" required />
+          {/* Regional Contacts */}
+          <div className="mb-12">
+            <h2 className="mb-6">{regionalContactsHeader.title.af}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {regionalContacts.map((region, idx) => (
+                <Card key={idx} className="p-6 wp-hover-lift">
+                  <h3 className="mb-4">{region.region.af}</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <Mail className="size-5 text-[#d70025] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-1">E-pos:</p>
+                        <a href={`mailto:${region.email}`} className="wp-link text-[#d70025] hover:underline break-all">
+                          {region.email}
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Phone className="size-5 text-[#d70025] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-1">Telefoon:</p>
+                        <a href={`tel:${region.phone.replace(/\s/g, '')}`} className="wp-link text-[#d70025] hover:underline">
+                          {region.phone}
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      E-posadres *
-                    </label>
-                    <Input id="email" type="email" placeholder="jan@voorbeeld.co.za" required />
-                  </div>
-                </div>
+                </Card>
+              ))}
+            </div>
+          </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Telefoonnommer
-                    </label>
-                    <Input id="phone" type="tel" placeholder="+27 12 345 6789" />
-                  </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Onderwerp *
-                    </label>
-                    <Input id="subject" placeholder="Hoe kan ons help?" required />
-                  </div>
-                </div>
+          {/* National Publications */}
+          <div className="mb-12 p-6 bg-muted rounded-lg">
+            <h3 className="mb-4">Nasionaal</h3>
+            <div className="flex flex-wrap gap-4">
+              {nationalPublications.map((pub, idx) => (
+                <a
+                  key={idx}
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wp-link text-[#d70025] hover:underline font-medium"
+                >
+                  {pub.name}
+                </a>
+              ))}
+            </div>
+          </div>
 
+          {/* How Can We Help Section */}
+          <div className="mb-12">
+            <h2 className="mb-6">{helpSectionHeader.title.af}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {contactCategories.map((category, idx) => (
+                <Card key={idx} className="p-6">
+                  <h4 className="mb-2">{category.title.af}</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {category.description.af}
+                  </p>
+                  {category.email && (
+                    <a
+                      href={`mailto:${category.email}`}
+                      className="wp-link text-[#d70025] hover:underline text-sm break-all"
+                    >
+                      {category.email}
+                    </a>
+                  )}
+                  {category.action && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-3"
+                      asChild
+                    >
+                      <a href="/af/advertise">{category.action.af}</a>
+                    </Button>
+                  )}
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <Card className="p-8">
+            <h2 className="mb-6">Stuur vir Ons 'n Boodskap</h2>
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Boodskap *
+                  <label htmlFor="name" className="block mb-2">
+                    {contactFormLabels.name.af} <span className="text-destructive">*</span>
                   </label>
-                  <Textarea
-                    id="message"
-                    rows={6}
-                    placeholder="Beskryf asseblief u navraag..."
+                  <Input
+                    id="name"
+                    placeholder={contactFormPlaceholders.name.af}
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="email" className="block mb-2">
+                    {contactFormLabels.email.af} <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder={contactFormPlaceholders.email.af}
+                    required
+                  />
+                </div>
+              </div>
 
-                <Button
-                  type="submit"
-                  className="w-full md:w-auto bg-[#d70025] hover:bg-[#b5001f] text-white"
-                >
-                  Stuur Boodskap
-                </Button>
-              </form>
-            </Card>
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="phone" className="block mb-2">
+                    {contactFormLabels.phone.af}
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder={contactFormPlaceholders.phone.af}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block mb-2">
+                    {contactFormLabels.subject.af} <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    id="subject"
+                    placeholder={contactFormPlaceholders.subject.af}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block mb-2">
+                  {contactFormLabels.message.af} <span className="text-destructive">*</span>
+                </label>
+                <Textarea
+                  id="message"
+                  rows={6}
+                  placeholder={contactFormPlaceholders.message.af}
+                  required
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full md:w-auto bg-[#d70025] hover:bg-[#b5001f] text-white transition-colors duration-150"
+              >
+                {contactFormLabels.submit.af}
+              </Button>
+            </form>
+          </Card>
         </div>
       </div>
     </Layout>

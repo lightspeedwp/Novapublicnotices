@@ -2,6 +2,14 @@
 
 :root {
   --font-size: 16px;
+  
+  /* Nova News Brand Colors */
+  --nova-primary: #09082f;
+  --nova-primary-hover: #1a1849;
+  --nova-accent: #d70025;
+  --nova-accent-hover: #b5001f;
+  --nova-blue: #549CBE;
+  
   /* The default background color for the application. */
   --background: rgba(255, 255, 255, 1.00);
   /* The default color for elements or text that appears on top of the background. */
@@ -90,6 +98,31 @@
   --font-weight-extrabold: 800;
   /* Font family */
   --font-family-lexend: 'Lexend', sans-serif;
+  /* Animation durations */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+  /* Easing functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Hover transforms */
+  --hover-scale: 1.02;
+  --hover-scale-sm: 1.01;
+  --hover-scale-lg: 1.05;
+  --hover-translate-y: -2px;
+  --hover-translate-y-sm: -1px;
+  --hover-translate-y-lg: -4px;
+  /* Additional elevation shadows */
+  --elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --elevation-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Container max width */
+  --container-max-width: 1440px;
 }
 
 .dark {
@@ -167,6 +200,11 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --shadow-elevation-sm: var(--elevation-sm);
+  --color-nova-primary: var(--nova-primary);
+  --color-nova-primary-hover: var(--nova-primary-hover);
+  --color-nova-accent: var(--nova-accent);
+  --color-nova-accent-hover: var(--nova-accent-hover);
+  --color-nova-blue: var(--nova-blue);
 }
 
 @layer base {
@@ -245,4 +283,121 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* Container Utilities */
+.container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hover Animation Classes */
+.wp-hover-lift {
+  transition-property: transform, box-shadow;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+.wp-hover-lift:hover {
+  transform: translateY(var(--hover-translate-y));
+  box-shadow: var(--elevation-md);
+}
+
+.wp-hover-scale {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.wp-hover-scale:hover {
+  transform: scale(var(--hover-scale));
+}
+
+.wp-hover-fade {
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.wp-hover-fade:hover {
+  opacity: 0.8;
+}
+
+/* Link Transitions */
+.wp-link {
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Focus States */
+.wp-focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Nova Brand Button Classes */
+.wp-btn-accent {
+  background-color: var(--nova-accent);
+  color: white;
+  transition-property: background-color, transform, box-shadow;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+.wp-btn-accent:hover:not(:disabled) {
+  background-color: var(--nova-accent-hover);
+}
+
+.wp-btn-primary {
+  background-color: var(--nova-primary);
+  color: white;
+  transition-property: background-color, transform, box-shadow;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+.wp-btn-primary:hover:not(:disabled) {
+  background-color: var(--nova-primary-hover);
+}
+
+/* Nova Brand Text Colors */
+.wp-text-primary {
+  color: var(--nova-primary);
+}
+
+.wp-text-accent {
+  color: var(--nova-accent);
+}
+
+/* Nova Brand Background Colors */
+.wp-bg-primary {
+  background-color: var(--nova-primary);
+}
+
+.wp-bg-primary-hover {
+  background-color: var(--nova-primary-hover);
+}
+
+.wp-bg-accent {
+  background-color: var(--nova-accent);
+}
+
+.wp-bg-accent-hover {
+  background-color: var(--nova-accent-hover);
+}
+
+/* Nova Brand Border Colors */
+.wp-border-primary {
+  border-color: var(--nova-primary);
+}
+
+.wp-border-accent {
+  border-color: var(--nova-accent);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

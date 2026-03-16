@@ -1,10 +1,20 @@
 import { Link } from "react-router";
-import { Search, Menu, Globe, Facebook, Instagram, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import { Search, Menu, Globe, Facebook, Instagram, Twitter, Linkedin, Youtube, Mail, X, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Logo } from "./Logo";
-import { categories } from "../data/categories";
+import {
+  mobileNavigation,
+  topBarNavigation,
+  userNavigation,
+  footerNoticeTypesCol1,
+  footerNoticeTypesCol2,
+  footerResources,
+  footerAccount,
+  footerLegal,
+  socialLinks,
+} from "../data/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,6 +24,7 @@ interface LayoutProps {
 
 export default function Layout({ children, lang = "en", showAds = true }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMenuItems, setExpandedMenuItems] = useState<string[]>([]);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   
   const basePath = lang === "af" ? "/af" : "";
@@ -37,6 +48,18 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
       privacyPolicy: "Privacy Policy",
       help: "Help & FAQ",
       allCategories: "All Categories",
+      footerTagline: "Your trusted source for legal public notices in South Africa.",
+      newsletterTitle: "Subscribe to Our Newsletter",
+      newsletterDescription: "Get the latest public notices and updates delivered to your inbox.",
+      subscribe: "Subscribe",
+      enterEmail: "Enter your email",
+      thankYouSubscribe: "Thank you for subscribing!",
+      noticeTypes: "Notice Types",
+      moreCategories: "More Categories",
+      resources: "Resources",
+      account: "Account",
+      legal: "Legal",
+      allRightsReserved: "All rights reserved",
     },
     af: {
       home: "Tuis",
@@ -55,29 +78,52 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
       privacyPolicy: "Privaatheidsbeleid",
       help: "Hulp & Vrae",
       allCategories: "Alle Kategorieë",
+      footerTagline: "U betroubare bron vir wetlike regskennisgewings in Suid-Afrika.",
+      newsletterTitle: "Teken In Op Ons Nuusbrief",
+      newsletterDescription: "Ontvang die nuutste openbare kennisgewings en opdaterings in jou inbox.",
+      subscribe: "Teken In",
+      enterEmail: "Voer jou e-pos in",
+      thankYouSubscribe: "Dankie vir jou intekening!",
+      noticeTypes: "Kennisgewingtipes",
+      moreCategories: "Meer Kategorieë",
+      resources: "Hulpbronne",
+      account: "Rekening",
+      legal: "Regsaspekte",
+      allRightsReserved: "Alle regte voorbehou",
     },
   };
   
   const text = t[lang];
+
+  const toggleMobileMenuItem = (label: string) => {
+    setExpandedMenuItems((prev) =>
+      prev.includes(label)
+        ? prev.filter((item) => item !== label)
+        : [...prev, label]
+    );
+  };
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Top Bar */}
-      <div className="bg-[#09082f] text-white py-2">
-        <div className="container mx-auto px-4 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-4">
-            <Link to={basePath + "/"} className="hover:underline">
-              {text.home}
-            </Link>
-            <Link to={basePath + "/search"} className="hover:underline">
-              {text.allCategories}
-            </Link>
+      <div className="wp-bg-primary text-white py-2">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-sm">
+            {topBarNavigation.map((item, idx) => (
+              <Link
+                key={idx}
+                to={basePath + item.href}
+                className="wp-link hover:underline"
+              >
+                {item.label[lang]}
+              </Link>
+            ))}
           </div>
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="sm"
-              className="text-white hover:bg-white/10"
+              className="text-white hover:bg-white/10 transition-colors duration-150"
               asChild
             >
               <Link to={lang === "en" ? "/af" : "/"}>
@@ -85,22 +131,30 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
                 {lang === "en" ? "Afrikaans" : "English"}
               </Link>
             </Button>
-            <Link to={basePath + "/login"} className="hover:underline">
-              {text.login}
-            </Link>
+            {userNavigation.slice(0, 1).map((item, idx) => (
+              <Link
+                key={idx}
+                to={basePath + item.href}
+                className="wp-link hover:underline text-sm"
+              >
+                {item.label[lang]}
+              </Link>
+            ))}
             <Button
               size="sm"
-              className="bg-[#d70025] hover:bg-[#b5001f] text-white"
+              className="wp-btn-accent text-white"
               asChild
             >
-              <Link to={basePath + "/register"}>{text.register}</Link>
+              <Link to={basePath + userNavigation[1].href}>
+                {userNavigation[1].label[lang]}
+              </Link>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white border-b border-border">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link to={basePath + "/"} className="flex items-center gap-2">
@@ -111,24 +165,24 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
             <nav className="hidden md:flex items-center gap-6">
               <Link
                 to={basePath + "/search"}
-                className="text-gray-700 hover:text-[#09082f] font-medium"
+                className="wp-link text-foreground/70 hover:text-foreground"
               >
                 {text.search}
               </Link>
               <Link
                 to={basePath + "/sales"}
-                className="text-gray-700 hover:text-[#09082f] font-medium"
+                className="wp-link text-foreground/70 hover:text-foreground"
               >
                 {text.howItWorks}
               </Link>
               <Link
                 to={basePath + "/contact"}
-                className="text-gray-700 hover:text-[#09082f] font-medium"
+                className="wp-link text-foreground/70 hover:text-foreground"
               >
                 {text.contact}
               </Link>
               <Button
-                className="bg-[#d70025] hover:bg-[#b5001f] text-white"
+                className="wp-btn-accent text-white"
                 asChild
               >
                 <Link to={basePath + "/submit"}>{text.submitNotice}</Link>
@@ -142,263 +196,245 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
               className="md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <Menu className="size-6" />
+              {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
             </Button>
           </div>
-
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden pb-4 flex flex-col gap-3">
-              <Link
-                to={basePath + "/search"}
-                className="text-gray-700 hover:text-[#09082f] py-2"
-              >
-                {text.search}
-              </Link>
-              <Link
-                to={basePath + "/sales"}
-                className="text-gray-700 hover:text-[#09082f] py-2"
-              >
-                {text.howItWorks}
-              </Link>
-              <Link
-                to={basePath + "/contact"}
-                className="text-gray-700 hover:text-[#09082f] py-2"
-              >
-                {text.contact}
-              </Link>
-              <Button
-                className="bg-[#d70025] hover:bg-[#b5001f] text-white w-full"
-                asChild
-              >
-                <Link to={basePath + "/submit"}>{text.submitNotice}</Link>
-              </Button>
-            </nav>
-          )}
         </div>
       </header>
+
+      {/* Full Screen Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 bg-background md:hidden overflow-y-auto">
+          <div className="container mx-auto px-4 py-4">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between mb-8">
+              <Link to={basePath + "/"} onClick={() => setMobileMenuOpen(false)}>
+                <Logo variant="light" className="h-10 w-auto" />
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <X className="size-6" />
+              </Button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <nav className="space-y-1">
+              {mobileNavigation.map((item, idx) => (
+                <div key={idx}>
+                  {item.children ? (
+                    <div>
+                      <button
+                        onClick={() => toggleMobileMenuItem(item.label.en)}
+                        className="w-full flex items-center justify-between py-3 px-4 text-foreground hover:bg-muted rounded-md transition-colors duration-150"
+                      >
+                        <span className="font-medium">{item.label[lang]}</span>
+                        <ChevronDown
+                          className={`size-5 transition-transform duration-200 ${
+                            expandedMenuItems.includes(item.label.en) ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      {expandedMenuItems.includes(item.label.en) && (
+                        <div className="pl-4 py-2 space-y-1">
+                          {item.children.map((child, childIdx) => (
+                            <Link
+                              key={childIdx}
+                              to={basePath + child.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-2 px-4 text-foreground/70 hover:text-foreground hover:bg-muted rounded-md transition-colors duration-150"
+                            >
+                              {child.label[lang]}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={basePath + item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-3 px-4 text-foreground hover:bg-muted rounded-md transition-colors duration-150 font-medium"
+                    >
+                      {item.label[lang]}
+                    </Link>
+                  )}
+                </div>
+              ))}
+
+              {/* Mobile CTA */}
+              <div className="pt-4">
+                <Button
+                  className="w-full wp-btn-accent text-white"
+                  asChild
+                >
+                  <Link to={basePath + "/submit"} onClick={() => setMobileMenuOpen(false)}>
+                    {text.submitNotice}
+                  </Link>
+                </Button>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="flex-1">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-[#09082f] text-white mt-auto">
+      <footer className="wp-bg-primary text-white mt-auto">
         <div className="container mx-auto px-4 py-12">
           {/* Newsletter Section */}
-          <div className="mb-12 pb-8 border-b border-gray-700">
+          <div className="mb-12 pb-8 border-b border-white/20">
             <div className="max-w-2xl mx-auto text-center">
-              <Mail className="size-8 text-[#d70025] mx-auto mb-4" />
-              <h3 className="font-raleway text-2xl font-bold mb-2">
-                {lang === "en" ? "Subscribe to Our Newsletter" : "Teken In Op Ons Nuusbrief"}
+              <Mail className="size-8 wp-text-accent mx-auto mb-4" />
+              <h3 className="text-2xl font-bold mb-2">
+                {text.newsletterTitle}
               </h3>
-              <p className="text-gray-300 mb-6">
-                {lang === "en" 
-                  ? "Get the latest public notices and updates delivered to your inbox." 
-                  : "Ontvang die nuutste openbare kennisgewings en opdaterings in jou inbox."}
+              <p className="text-white/70 mb-6">
+                {text.newsletterDescription}
               </p>
               <form 
-                className="flex gap-2 max-w-md mx-auto"
+                className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  alert(lang === "en" ? "Thank you for subscribing!" : "Dankie vir jou intekening!");
+                  alert(text.thankYouSubscribe);
                   setNewsletterEmail("");
                 }}
               >
                 <Input
                   type="email"
-                  placeholder={lang === "en" ? "Enter your email" : "Voer jou e-pos in"}
+                  placeholder={text.enterEmail}
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   required
-                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/50"
                 />
-                <Button type="submit" className="bg-[#d70025] hover:bg-[#b5001f]">
-                  {lang === "en" ? "Subscribe" : "Teken In"}
+                <Button type="submit" className="wp-btn-accent">
+                  {text.subscribe}
                 </Button>
               </form>
             </div>
           </div>
 
           {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
             {/* Brand Column */}
             <div className="lg:col-span-1">
-              <Logo variant="dark" className="h-12 w-auto mb-4" />
-              <p className="text-gray-300 text-sm mb-4">
-                {lang === "en"
-                  ? "Your trusted source for legal public notices in South Africa."
-                  : "U betroubare bron vir wetlike regskennisgewings in Suid-Afrika."}
+              <Logo variant="dark" className="h-8 w-auto mb-4" />
+              <p className="text-white/70 text-sm mb-4">
+                {text.footerTagline}
               </p>
               {/* Social Media Links */}
               <div className="flex gap-3">
-                <a 
-                  href="https://www.facebook.com/NovaNewsZA/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="size-5" />
-                </a>
-                <a 
-                  href="https://www.instagram.com/novanewsza/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="size-5" />
-                </a>
-                <a 
-                  href="https://x.com/NovusMediaZA" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="Twitter/X"
-                >
-                  <Twitter className="size-5" />
-                </a>
-                <a 
-                  href="https://www.linkedin.com/company/novusmediaza/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="size-5" />
-                </a>
-                <a 
-                  href="https://www.youtube.com/@NovusMediaZA" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="YouTube"
-                >
-                  <Youtube className="size-5" />
-                </a>
+                {socialLinks.map((social, idx) => (
+                  <a
+                    key={idx}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wp-hover-scale text-white/70 hover:text-white transition-colors duration-150"
+                    aria-label={social.name}
+                  >
+                    {social.icon === "facebook" && <Facebook className="size-5" />}
+                    {social.icon === "instagram" && <Instagram className="size-5" />}
+                    {social.icon === "twitter" && <Twitter className="size-5" />}
+                    {social.icon === "linkedin" && <Linkedin className="size-5" />}
+                    {social.icon === "youtube" && <Youtube className="size-5" />}
+                  </a>
+                ))}
               </div>
             </div>
 
-            {/* Categories Column 1 */}
+            {/* Notice Types Column 1 */}
             <div>
-              <h3 className="font-semibold mb-4">{lang === "en" ? "Notice Types" : "Kennisgewingtipes"}</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                {categories.slice(0, 6).map((cat) => (
-                  <li key={cat.slug}>
-                    <Link to={basePath + "/category/" + cat.slug} className="hover:text-white transition-colors">
-                      {cat.name[lang]}
+              <h3 className="font-semibold mb-4">{text.noticeTypes}</h3>
+              <ul className="space-y-2 text-sm">
+                {footerNoticeTypesCol1.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={basePath + item.href}
+                      className="wp-link text-white/70 hover:text-white"
+                    >
+                      {item.label[lang]}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Categories Column 2 */}
+            {/* Notice Types Column 2 */}
             <div>
-              <h3 className="font-semibold mb-4">{lang === "en" ? "More Categories" : "Meer Kategorieë"}</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                {categories.slice(6).map((cat) => (
-                  <li key={cat.slug}>
-                    <Link to={basePath + "/category/" + cat.slug} className="hover:text-white transition-colors">
-                      {cat.name[lang]}
+              <h3 className="font-semibold mb-4">{text.moreCategories}</h3>
+              <ul className="space-y-2 text-sm">
+                {footerNoticeTypesCol2.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={basePath + item.href}
+                      className="wp-link text-white/70 hover:text-white"
+                    >
+                      {item.label[lang]}
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link to={basePath + "/search"} className="hover:text-white transition-colors font-medium">
-                    {lang === "en" ? "View All →" : "Bekyk Almal →"}
-                  </Link>
-                </li>
               </ul>
             </div>
 
-            {/* Resources Column */}
+            {/* Account & Resources Column */}
             <div>
-              <h3 className="font-semibold mb-4">{lang === "en" ? "Resources" : "Hulpbronne"}</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li>
-                  <Link to={basePath + "/about"} className="hover:text-white transition-colors">
-                    {text.about}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/sales"} className="hover:text-white transition-colors">
-                    {text.howItWorks}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/pricing"} className="hover:text-white transition-colors">
-                    {lang === "en" ? "Pricing" : "Pryse"}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/advertise"} className="hover:text-white transition-colors">
-                    {lang === "en" ? "Advertise" : "Adverteer"}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/faq"} className="hover:text-white transition-colors">
-                    {text.help}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/contact"} className="hover:text-white transition-colors">
-                    {text.contact}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/sitemap"} className="hover:text-white transition-colors">
-                    {lang === "en" ? "Sitemap" : "Werfkaart"}
-                  </Link>
-                </li>
+              <h3 className="font-semibold mb-4">{text.account}</h3>
+              <ul className="space-y-2 text-sm">
+                {footerAccount.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={basePath + item.href}
+                      className="wp-link text-white/70 hover:text-white"
+                    >
+                      {item.label[lang]}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Legal Column */}
+            {/* Legal & Sitemap Column */}
             <div>
-              <h3 className="font-semibold mb-4">{lang === "en" ? "Legal" : "Regsaspekte"}</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li>
-                  <Link to={basePath + "/terms"} className="hover:text-white transition-colors">
-                    {text.termsOfService}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/privacy"} className="hover:text-white transition-colors">
-                    {text.privacyPolicy}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/login"} className="hover:text-white transition-colors">
-                    {text.login}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/register"} className="hover:text-white transition-colors">
-                    {text.register}
-                  </Link>
-                </li>
-                <li>
-                  <Link to={basePath + "/my-account"} className="hover:text-white transition-colors">
-                    {text.myAccount}
-                  </Link>
-                </li>
+              <h3 className="font-semibold mb-4">{text.legal}</h3>
+              <ul className="space-y-2 text-sm">
+                {footerLegal.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={basePath + item.href}
+                      className="wp-link text-white/70 hover:text-white"
+                    >
+                      {item.label[lang]}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-gray-700 pt-8">
-            <p className="text-sm text-gray-300 text-left">
-              © {currentYear} Nova News. {lang === "en" ? "All rights reserved" : "Alle regte voorbehou"}.{" "}
-              <Link to={basePath + "/terms"} className="hover:text-white underline">
+          <div className="border-t border-white/20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-white/70 text-center sm:text-left">
+              © {currentYear} Nova News. {text.allRightsReserved}.
+            </p>
+            <div className="flex gap-4 text-sm">
+              <Link to={basePath + "/terms"} className="wp-link text-white/70 hover:text-white">
                 {text.termsOfService}
               </Link>
-              {" · "}
-              <Link to={basePath + "/privacy"} className="hover:text-white underline">
+              <span className="text-white/30">·</span>
+              <Link to={basePath + "/privacy"} className="wp-link text-white/70 hover:text-white">
                 {text.privacyPolicy}
               </Link>
-            </p>
+              <span className="text-white/30">·</span>
+              <Link to={basePath + "/sitemap"} className="wp-link text-white/70 hover:text-white">
+                {lang === "en" ? "Sitemap" : "Werfkaart"}
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

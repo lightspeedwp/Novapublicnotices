@@ -53,7 +53,7 @@ export default function CategoryBadge({ category, className, lang = "en" }: Cate
   return (
     <span
       className={cn(
-        "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border",
+        "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border transition-all duration-150",
         colorClass,
         className
       )}
