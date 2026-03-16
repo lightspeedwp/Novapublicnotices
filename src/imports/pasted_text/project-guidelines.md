@@ -1,3 +1,18 @@
+Ash,
+
+* **Value:** I’ve turned your brief into a repo-ready `Guidelines.md` that covers dynamic pages, data files, root-folder guardrails, bilingual content, no-inline-styles, WordPress-aligned CSS classes, moderation, ads, and WooCommerce-aligned account and checkout flows.
+* **Risk:** there is a hard tension between “homepage only is public” and the legal/public nature of notices, so I’ve kept that as a configurable compliance rule in the guidelines rather than pretending it is settled.
+* **Next step:** paste the file below into `/guidelines/Guidelines.md`, then use it as the source of truth for the next build pass.
+
+A few things I aligned this to before drafting:
+
+* The repo is a Vite React app using React Router and a shared styles entrypoint, so the guidelines are written for that setup rather than a generic stack.    
+* Your existing prototype already has a theme token layer in `src/styles/theme.css`, so the new rules build on CSS variables and semantic classes instead of introducing a second styling system.  
+* The uploaded standards already push toward centralised data, no hard-coded values, and keeping reports out of the root, so I adapted those patterns directly for this project.     
+
+## 1. Paste this into `/guidelines/Guidelines.md`
+
+````md
 # Nova Public Notices — Project Guidelines
 
 ## 1) Purpose
@@ -244,7 +259,7 @@ Use bilingual, modular data files:
     search.ts
     archive.ts
     submissions.ts
-```
+````
 
 ### 7.3 Type safety
 
@@ -754,3 +769,27 @@ Create next:
 * `/guidelines/_templates.md`
 
 This file remains the parent guide and should link to those sub-guides as they are added.
+
+```
+
+## 2. Notes for implementation
+
+1. Your inherited guidance already pushes toward modular, typed data files and away from inline page data, so I baked that in as a hard project rule. :contentReference[oaicite:11]{index=11} :contentReference[oaicite:12]{index=12} :contentReference[oaicite:13]{index=13}
+2. I made the styling rule stricter than the inherited examples: not just “use CSS variables”, but “do not use inline visual styling at all unless it is a rare computed exception”. That is consistent with your WordPress-aligned implementation goal and the uploaded build rules that already prohibit hard-coded pixel and hex values. :contentReference[oaicite:14]{index=14} :contentReference[oaicite:15]{index=15}
+3. The single-notice structure assumes a metadata-dense legal layout informed by the competitor notice artefact you attached, especially the title + legal body + detail sidebar pattern. :contentReference[oaicite:16]{index=16}
+
+## 3. Small but important refinement
+
+Your brief says both:
+- “members of public only browse”
+- and “all users will need to login to view more than the homepage”
+
+I would keep the guidelines exactly as above for now:
+- homepage public
+- all deeper notice content defaulted to logged-in variants in prototype
+- access policy marked as configurable pending legal review
+
+That keeps the prototype aligned to your stated preference without locking the product into a potentially risky legal assumption.
+
+Next, I’d write the matching `/prompts/cleanup.md`, `/prompts/continue.md`, and `/prompts/prompt-triggers.md` so the repo can run from these rules cleanly.
+```

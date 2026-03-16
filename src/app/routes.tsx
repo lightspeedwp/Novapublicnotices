@@ -23,6 +23,10 @@ import FAQ from "./pages/FAQ";
 import FAQAF from "./pages/FAQAF";
 import Pricing from "./pages/Pricing";
 import PricingAF from "./pages/PricingAF";
+import Sitemap from "./pages/Sitemap";
+import SitemapAF from "./pages/SitemapAF";
+import Advertise from "./pages/Advertise";
+import AdvertiseAF from "./pages/AdvertiseAF";
 
 // Auth pages
 import Register from "./pages/auth/Register";
@@ -95,6 +99,8 @@ export const router = createBrowserRouter([
       { path: "privacy", Component: Privacy },
       { path: "faq", Component: FAQ },
       { path: "pricing", Component: Pricing },
+      { path: "sitemap", Component: Sitemap },
+      { path: "advertise", Component: Advertise },
       
       // Auth
       { path: "register", Component: Register },
@@ -140,6 +146,8 @@ export const router = createBrowserRouter([
       { path: "af/privaatsfeer", Component: PrivacyAF },
       { path: "af/vaak-gestelde-vrae", Component: FAQAF },
       { path: "af/prysstruktuur", Component: PricingAF },
+      { path: "af/sitemap", Component: SitemapAF },
+      { path: "af/advertise", Component: AdvertiseAF },
       
       // Auth AF
       { path: "af/registreer", Component: RegisterAF },

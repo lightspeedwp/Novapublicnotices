@@ -1,15 +1,66 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import Layout from "../components/Layout";
 import CategoryBadge from "../components/CategoryBadge";
 import AdSlot from "../components/AdSlot";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
-import { Calendar, MapPin, FileText, Download, Share2, AlertCircle } from "lucide-react";
-import { sampleNotices } from "../data/sampleNotices";
+import { Calendar, MapPin, FileText, Download, Share2, AlertCircle, Eye, Lock } from "lucide-react";
+import { expandedNotices } from "../data/expandedNotices";
+import { useState, useEffect } from "react";
 
 export default function SingleNotice() {
   const { id } = useParams();
-  const notice = sampleNotices.find((n) => n.id === id) || sampleNotices[0];
+  const navigate = useNavigate();
+  const notice = expandedNotices.find((n) => n.id === id) || expandedNotices[0];
+  
+  // Mock authentication check - replace with actual auth logic
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [views] = useState(Math.floor(Math.random() * 10000) + 100);
+
+  useEffect(() => {
+    // Check if user is logged in (mock implementation)
+    const token = localStorage.getItem("authToken");
+    setIsAuthenticated(!!token);
+  }, []);
+
+  // Render login required message if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <Layout lang="en" showAds={true}>
+        <div className="bg-gray-50 py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <Card className="p-12 text-center">
+                <Lock className="size-16 text-gray-400 mx-auto mb-6" />
+                <h1 className="font-raleway text-3xl font-bold text-[#09082f] mb-4">
+                  Login Required
+                </h1>
+                <p className="text-gray-600 mb-8">
+                  You need to be logged in to view this public notice. Please login or create a free account to access all notices.
+                </p>
+                <div className="flex gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-[#d70025] hover:bg-[#b5001f]"
+                    onClick={() => navigate("/login")}
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    onClick={() => navigate("/register")}
+                  >
+                    Create Account
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout lang="en" showAds={true}>
@@ -76,7 +127,7 @@ export default function SingleNotice() {
                   Related Notices
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {sampleNotices.slice(1, 3).map((relatedNotice) => (
+                  {expandedNotices.filter(n => n.category === notice.category && n.id !== notice.id).slice(0, 2).map((relatedNotice) => (
                     <Card key={relatedNotice.id} className="p-4">
                       <CategoryBadge category={relatedNotice.category} className="mb-2" />
                       <Link
