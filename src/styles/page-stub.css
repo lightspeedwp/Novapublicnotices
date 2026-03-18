@@ -1,0 +1,96 @@
+/**
+ * Page Stub Component — BEM Styles
+ * Used for prototype/placeholder pages
+ * 100% CSS variables from design system
+ */
+
+/* =================================================================
+   Page Stub Layout
+   ================================================================= */
+
+.wpn-page-stub {
+  background-color: var(--muted);
+  padding: var(--space-12) 0;
+  min-height: 60vh;
+}
+
+.wpn-page-stub__container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.wpn-page-stub__card {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12);
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* =================================================================
+   Page Stub Icon
+   ================================================================= */
+
+.wpn-page-stub__icon {
+  width: 64px;
+  height: 64px;
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-6);
+  display: block;
+}
+
+/* =================================================================
+   Page Stub Typography
+   ================================================================= */
+
+.wpn-page-stub__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--nova-primary);
+  margin: 0 0 var(--space-4);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-page-stub__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  margin: 0 0 var(--space-6);
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-page-stub__note {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-page-stub {
+    padding: var(--space-8) 0;
+  }
+
+  .wpn-page-stub__card {
+    padding: var(--space-8);
+  }
+
+  .wpn-page-stub__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-4);
+  }
+
+  .wpn-page-stub__title {
+    font-size: var(--text-2xl);
+  }
+}

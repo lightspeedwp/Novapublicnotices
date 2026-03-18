@@ -68,7 +68,7 @@ export const nationalPublications = [
  */
 export const contactCategories: ContactCategory[] = [
   {
-    title: { en: "Advertise With Us", af: "Adverteer by Ons" },
+    title: { en: "Advertise with us", af: "Adverteer by ons" },
     description: {
       en: "For more information on our advertising options, visit our Advertise Page.",
       af: "Vir meer inligting oor ons advertensie-opsies, besoek ons Adverteer-bladsy.",
@@ -76,7 +76,7 @@ export const contactCategories: ContactCategory[] = [
     action: { en: "Visit Advertise Page", af: "Besoek Adverteer-bladsy" },
   },
   {
-    title: { en: "Technical Issues", af: "Tegniese Probleme" },
+    title: { en: "Technical issues", af: "Tegniese probleme" },
     description: {
       en: "Report any technical issues by emailing helpdesk@novusmedia.co.za with as much detail as possible.",
       af: "Rapporteer enige tegniese probleme deur 'n e-pos te stuur aan helpdesk@novusmedia.co.za met soveel besonderhede as moontlik.",
@@ -84,7 +84,7 @@ export const contactCategories: ContactCategory[] = [
     email: "helpdesk@novusmedia.co.za",
   },
   {
-    title: { en: "Syndication Requests", af: "Sindikasieversoeke" },
+    title: { en: "Syndication requests", af: "Sindikasieversoeke" },
     description: {
       en: "For requests to republish our material, contact syndication@novusmedia.co.za.",
       af: "Vir versoeke om ons materiaal te herpubliseer, kontak syndication@novusmedia.co.za.",
@@ -92,14 +92,14 @@ export const contactCategories: ContactCategory[] = [
     email: "syndication@novusmedia.co.za",
   },
   {
-    title: { en: "General Queries", af: "Algemene Navrae" },
+    title: { en: "General queries", af: "Algemene navrae" },
     description: {
       en: "Use the enquiry form above to direct your query to the appropriate division.",
       af: "Gebruik die navraagvorm hierbo om u navraag na die toepaslike afdeling te stuur.",
     },
   },
   {
-    title: { en: "Editorial Enquiries", af: "Redaksionele Navrae" },
+    title: { en: "Editorial enquiries", af: "Redaksionele navrae" },
     description: {
       en: "For story ideas and editorial enquiries, send an email to newsdesk@novusmedia.co.za.",
       af: "Vir verhaalidees en redaksionele navrae, stuur 'n e-pos aan newsdesk@novusmedia.co.za.",
@@ -107,7 +107,7 @@ export const contactCategories: ContactCategory[] = [
     email: "newsdesk@novusmedia.co.za",
   },
   {
-    title: { en: "Legal Matters", af: "Regskwessies" },
+    title: { en: "Legal matters", af: "Regskwessies" },
     description: {
       en: "For any legal queries, contact legal@novusmedia.co.za.",
       af: "Vir enige regsvrae, kontak legal@novusmedia.co.za.",
@@ -115,7 +115,7 @@ export const contactCategories: ContactCategory[] = [
     email: "legal@novusmedia.co.za",
   },
   {
-    title: { en: "Classified Ads", af: "Geklassifiseerde Advertensies" },
+    title: { en: "Classified ads", af: "Geklassifiseerde advertensies" },
     description: {
       en: "To place a classified ad, job listing, or submit an event, email classifieds@novusmedia.co.za.",
       af: "Om 'n geklassifiseerde advertensie, pos of gebeurtenis in te dien, stuur 'n e-pos aan classifieds@novusmedia.co.za.",
@@ -141,7 +141,7 @@ export const socialMediaInfo = {
  * Page Header Content
  */
 export const contactPageHeader = {
-  title: { en: "Contact Us", af: "Kontak Ons" },
+  title: { en: "Contact us", af: "Kontak ons" },
   subtitle: {
     en: "We love hearing from our readers! Whether you have a story tip, a question, or just want to reach out to our team, we're here for you. Below, you'll find all the ways you can get in touch with us.",
     af: "Ons hou daarvan om van ons lesers te hoor! Of jy 'n storie-wenk het, 'n vraag, of net met ons span wil kontak maak, ons is hier vir jou. Hieronder sal jy al die maniere vind waarop jy met ons in kontak kan kom.",
@@ -166,14 +166,14 @@ export const helpSectionHeader = {
  * Contact Form
  */
 export const contactFormLabels = {
-  name: { en: "Full Name", af: "Volle Naam" },
-  email: { en: "Email Address", af: "E-posadres" },
-  phone: { en: "Phone Number", af: "Telefoonnommer" },
+  name: { en: "Full name", af: "Volle naam" },
+  email: { en: "Email address", af: "E-posadres" },
+  phone: { en: "Phone number", af: "Telefoonnommer" },
   region: { en: "Region", af: "Streek" },
-  category: { en: "Enquiry Type", af: "Navraag Tipe" },
+  category: { en: "Enquiry type", af: "Navraag tipe" },
   subject: { en: "Subject", af: "Onderwerp" },
   message: { en: "Message", af: "Boodskap" },
-  submit: { en: "Send Message", af: "Stuur Boodskap" },
+  submit: { en: "Send message", af: "Stuur boodskap" },
   required: { en: "Required", af: "Verplig" },
   optional: { en: "Optional", af: "Opsioneel" },
 };

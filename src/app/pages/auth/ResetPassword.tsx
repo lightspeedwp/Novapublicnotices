@@ -9,7 +9,7 @@ export default function ResetPassword() {
       <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8">
           <div className="text-center mb-8">
-            <h1 className="font-raleway text-3xl font-bold text-[#09082f] mb-2">
+            <h1 className="wpn-heading-h1 wpn-heading--primary mb-2">
               Reset Password
             </h1>
             <p className="text-gray-600">Enter your new password</p>
@@ -30,7 +30,7 @@ export default function ResetPassword() {
               <Input id="confirmPassword" type="password" placeholder="••••••••" required />
             </div>
 
-            <Button type="submit" className="w-full bg-[#d70025] hover:bg-[#b5001f]">
+            <Button type="submit" className="w-full wpn-button wpn-button--accent">
               Reset Password
             </Button>
           </form>

@@ -23,28 +23,28 @@ export const mainNavigation: NavItem[] = [
     href: "/",
   },
   {
-    label: { en: "Search Notices", af: "Soek Kennisgewings" },
+    label: { en: "Search notices", af: "Soek kennisgewings" },
     href: "/search",
   },
   {
-    label: { en: "Public Notices", af: "Openbare Kennisgewings" },
+    label: { en: "Public notices", af: "Openbare kennisgewings" },
     href: "/search",
     children: [
       { label: { en: "Estates", af: "Boedels" }, href: "/category/estates" },
-      { label: { en: "Liquor Licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
+      { label: { en: "Liquor licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
       { label: { en: "Tenders", af: "Tenders" }, href: "/category/tenders" },
-      { label: { en: "Town Planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
-      { label: { en: "Business Licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
-      { label: { en: "Court Orders", af: "Hofbevele" }, href: "/category/court-orders" },
-      { label: { en: "Lost Documents", af: "Verloorde Dokumente" }, href: "/category/lost-documents" },
-      { label: { en: "Environmental Notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
-      { label: { en: "Sale in Execution", af: "Verkoping in Eksekusie" }, href: "/category/sale-in-execution" },
-      { label: { en: "General Notices", af: "Algemene Kennisgewings" }, href: "/category/general-notices" },
-      { label: { en: "View All Categories", af: "Bekyk Alle Kategorieë" }, href: "/search" },
+      { label: { en: "Town planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
+      { label: { en: "Business licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
+      { label: { en: "Court orders", af: "Hofbevele" }, href: "/category/court-orders" },
+      { label: { en: "Lost documents", af: "Verloorde dokumente" }, href: "/category/lost-documents" },
+      { label: { en: "Environmental notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
+      { label: { en: "Sale in execution", af: "Verkoping in eksekusie" }, href: "/category/sale-in-execution" },
+      { label: { en: "General notices", af: "Algemene kennisgewings" }, href: "/category/general-notices" },
+      { label: { en: "View all categories", af: "Bekyk alle kategorieë" }, href: "/search" },
     ],
   },
   {
-    label: { en: "How It Works", af: "Hoe Dit Werk" },
+    label: { en: "How it works", af: "Hoe dit werk" },
     href: "/sales",
   },
   {
@@ -62,8 +62,12 @@ export const topBarNavigation: NavItem[] = [
     href: "/",
   },
   {
-    label: { en: "All Categories", af: "Alle Kategorieë" },
+    label: { en: "All categories", af: "Alle kategorieë" },
     href: "/search",
+  },
+  {
+    label: { en: "Help", af: "Hulp" },
+    href: "/help",
   },
 ];
 
@@ -72,7 +76,7 @@ export const topBarNavigation: NavItem[] = [
  */
 export const userNavigation: NavItem[] = [
   {
-    label: { en: "Login", af: "Meld Aan" },
+    label: { en: "Login", af: "Meld aan" },
     href: "/login",
   },
   {
@@ -80,7 +84,7 @@ export const userNavigation: NavItem[] = [
     href: "/register",
   },
   {
-    label: { en: "My Account", af: "My Rekening" },
+    label: { en: "My account", af: "My rekening" },
     href: "/my-account",
   },
 ];
@@ -90,34 +94,34 @@ export const userNavigation: NavItem[] = [
  */
 export const footerNoticeTypesCol1: NavItem[] = [
   { label: { en: "Estates", af: "Boedels" }, href: "/category/estates" },
-  { label: { en: "Liquor Licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
+  { label: { en: "Liquor licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
   { label: { en: "Tenders", af: "Tenders" }, href: "/category/tenders" },
-  { label: { en: "Town Planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
-  { label: { en: "Business Licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
-  { label: { en: "Court Orders", af: "Hofbevele" }, href: "/category/court-orders" },
+  { label: { en: "Town planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
+  { label: { en: "Business licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
+  { label: { en: "Court orders", af: "Hofbevele" }, href: "/category/court-orders" },
 ];
 
 /**
  * Footer Navigation - Notice Types Column 2
  */
 export const footerNoticeTypesCol2: NavItem[] = [
-  { label: { en: "Lost Documents", af: "Verloorde Dokumente" }, href: "/category/lost-documents" },
-  { label: { en: "Environmental Notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
-  { label: { en: "Sale in Execution", af: "Verkoping in Eksekusie" }, href: "/category/sale-in-execution" },
+  { label: { en: "Lost documents", af: "Verloorde dokumente" }, href: "/category/lost-documents" },
+  { label: { en: "Environmental notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
+  { label: { en: "Sale in execution", af: "Verkoping in eksekusie" }, href: "/category/sale-in-execution" },
   { label: { en: "Adoptions", af: "Aannemings" }, href: "/category/adoptions" },
-  { label: { en: "General Notices", af: "Algemene Kennisgewings" }, href: "/category/general-notices" },
-  { label: { en: "View All →", af: "Bekyk Almal →" }, href: "/search" },
+  { label: { en: "General notices", af: "Algemene kennisgewings" }, href: "/category/general-notices" },
+  { label: { en: "View all →", af: "Bekyk almal →" }, href: "/search" },
 ];
 
 /**
  * Footer Navigation - Resources
  */
 export const footerResources: NavItem[] = [
-  { label: { en: "About Us", af: "Oor Ons" }, href: "/about" },
-  { label: { en: "How It Works", af: "Hoe Dit Werk" }, href: "/sales" },
+  { label: { en: "About us", af: "Oor ons" }, href: "/about" },
+  { label: { en: "How it works", af: "Hoe dit werk" }, href: "/sales" },
   { label: { en: "Pricing", af: "Pryse" }, href: "/pricing" },
   { label: { en: "Advertise", af: "Adverteer" }, href: "/advertise" },
-  { label: { en: "Help & FAQ", af: "Hulp & Vrae" }, href: "/faq" },
+  { label: { en: "Help & FAQ", af: "Hulp & vrae" }, href: "/faq" },
   { label: { en: "Contact", af: "Kontak" }, href: "/contact" },
 ];
 
@@ -125,19 +129,19 @@ export const footerResources: NavItem[] = [
  * Footer Navigation - Account
  */
 export const footerAccount: NavItem[] = [
-  { label: { en: "Login", af: "Meld Aan" }, href: "/login" },
+  { label: { en: "Login", af: "Meld aan" }, href: "/login" },
   { label: { en: "Register", af: "Registreer" }, href: "/register" },
-  { label: { en: "My Account", af: "My Rekening" }, href: "/my-account" },
-  { label: { en: "Submit Notice", af: "Dien Kennisgewing In" }, href: "/submit" },
-  { label: { en: "Track Submission", af: "Volg Indiening" }, href: "/my-account/notices" },
+  { label: { en: "My account", af: "My rekening" }, href: "/my-account" },
+  { label: { en: "Submit notice", af: "Dien kennisgewing in" }, href: "/submit" },
+  { label: { en: "Track submission", af: "Volg indiening" }, href: "/my-account/notices" },
 ];
 
 /**
  * Footer Navigation - Legal
  */
 export const footerLegal: NavItem[] = [
-  { label: { en: "Terms of Service", af: "Diensbepalings" }, href: "/terms" },
-  { label: { en: "Privacy Policy", af: "Privaatheidsbeleid" }, href: "/privacy" },
+  { label: { en: "Terms of service", af: "Diensbepalings" }, href: "/terms" },
+  { label: { en: "Privacy policy", af: "Privaatheidsbeleid" }, href: "/privacy" },
   { label: { en: "Sitemap", af: "Werfkaart" }, href: "/sitemap" },
 ];
 
@@ -185,28 +189,28 @@ export const mobileNavigation: NavItem[] = [
     href: "/",
   },
   {
-    label: { en: "Search All Notices", af: "Soek Alle Kennisgewings" },
+    label: { en: "Search all notices", af: "Soek alle kennisgewings" },
     href: "/search",
   },
   {
-    label: { en: "Public Notices", af: "Openbare Kennisgewings" },
+    label: { en: "Public notices", af: "Openbare kennisgewings" },
     href: "/search",
     children: [
       { label: { en: "Estates", af: "Boedels" }, href: "/category/estates" },
-      { label: { en: "Liquor Licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
+      { label: { en: "Liquor licences", af: "Dranklisensiëring" }, href: "/category/liquor-licences" },
       { label: { en: "Tenders", af: "Tenders" }, href: "/category/tenders" },
-      { label: { en: "Town Planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
-      { label: { en: "Business Licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
-      { label: { en: "Court Orders", af: "Hofbevele" }, href: "/category/court-orders" },
-      { label: { en: "Lost Documents", af: "Verloorde Dokumente" }, href: "/category/lost-documents" },
-      { label: { en: "Environmental Notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
-      { label: { en: "Sale in Execution", af: "Verkoping in Eksekusie" }, href: "/category/sale-in-execution" },
+      { label: { en: "Town planning", af: "Stadsbeplanningskennisgewings" }, href: "/category/town-planning" },
+      { label: { en: "Business licences", af: "Besigheidslisensiëring" }, href: "/category/business-licences" },
+      { label: { en: "Court orders", af: "Hofbevele" }, href: "/category/court-orders" },
+      { label: { en: "Lost documents", af: "Verloorde dokumente" }, href: "/category/lost-documents" },
+      { label: { en: "Environmental notices", af: "Omgewingskennisgewings" }, href: "/category/environmental-notices" },
+      { label: { en: "Sale in execution", af: "Verkoping in eksekusie" }, href: "/category/sale-in-execution" },
       { label: { en: "Adoptions", af: "Aannemings" }, href: "/category/adoptions" },
-      { label: { en: "General Notices", af: "Algemene Kennisgewings" }, href: "/category/general-notices" },
+      { label: { en: "General notices", af: "Algemene kennisgewings" }, href: "/category/general-notices" },
     ],
   },
   {
-    label: { en: "How It Works", af: "Hoe Dit Werk" },
+    label: { en: "How it works", af: "Hoe dit werk" },
     href: "/sales",
   },
   {
@@ -218,11 +222,11 @@ export const mobileNavigation: NavItem[] = [
     href: "/contact",
   },
   {
-    label: { en: "My Account", af: "My Rekening" },
+    label: { en: "My account", af: "My rekening" },
     href: "/my-account",
   },
   {
-    label: { en: "Help & FAQ", af: "Hulp & Vrae" },
+    label: { en: "Help & FAQ", af: "Hulp & vrae" },
     href: "/faq",
   },
 ];

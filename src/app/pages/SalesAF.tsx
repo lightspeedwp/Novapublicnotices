@@ -2,49 +2,69 @@ import { Link } from "react-router";
 import Layout from "../components/Layout";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
-import { Check, Upload, FileText, DollarSign, Clock, Phone } from "lucide-react";
+import { Check, Upload, FileText, DollarSign, Clock, Phone, Home } from "lucide-react";
+import "../../styles/components.css";
 
 export default function SalesAF() {
   return (
     <Layout lang="af" showAds={true}>
-      <div className="bg-gradient-to-br from-[#09082f] to-[#1a1849] text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="font-raleway text-4xl md:text-5xl font-bold mb-4">
-            Hoe Regskennisgewings Werk
+      {/* Page Header */}
+      <div className="wpn-page-header wpn-bg--primary">
+        <div className="wpn-page-header__container">
+          {/* Breadcrumb */}
+          <nav className="wpn-breadcrumb wpn-breadcrumb--light" aria-label="Broodkrummels">
+            <ol className="wpn-breadcrumb__list">
+              <li className="wpn-breadcrumb__item">
+                <Link to="/af" className="wpn-breadcrumb__link">
+                  <Home className="wpn-breadcrumb__icon" />
+                  Tuis
+                </Link>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__separator">/</span>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__current">Verkope en ondersteuning</span>
+              </li>
+            </ol>
+          </nav>
+
+          <h1 className="wpn-page-header__title wpn-page-header__title--white">
+            Hoe om openbare kennisgewings te publiseer
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Alles wat u moet weet oor die publisering van wettige regskennisgewings in Suid-Afrika
+          <p className="wpn-page-header__subtitle wpn-page-header__subtitle--light">
+            Alles wat u moet weet oor die publisering van wettige kennisgewings in Suid-Afrika
           </p>
         </div>
       </div>
 
-      <div className="bg-gray-50 py-12">
+      <div className="bg-muted py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <section className="mb-16">
-              <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-6 text-center">
+              <h2 className="wpn-heading-h2 wpn-heading--primary wpn-heading--center mb-6">
                 Wat is Regskennisgewings?
               </h2>
               <Card className="p-8">
-                <p className="text-gray-700 mb-4">
+                <p className="text-foreground mb-4">
                   Regskennisgewings is wetlik vereiste aankondigings wat gepubliseer moet word om die publiek in te lig oor aangeleenthede van regsbelang. Dit sluit boedelkennisgewings, tenders, dranklisensie-aansoeke, stadsbeplanningsvoorstelle, en ander statutêre vereistes in.
                 </p>
-                <p className="text-gray-700">
+                <p className="text-foreground">
                   In Suid-Afrika moet baie regskennisgewings in amptelike koerante en nuusblaaie gepubliseer word om aan wetlike vereistes te voldoen. Ons platform bied 'n digitale aanvulling tot tradisionele drukpublikasie, wat wye sigbaarheid en permanente soekbaarheid verseker.
                 </p>
               </Card>
             </section>
 
             <section className="mb-16">
-              <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-6 text-center">
+              <h2 className="wpn-heading-h2 wpn-heading--primary wpn-heading--center mb-6">
                 Publikasie-Opsies
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="p-6">
-                  <h3 className="font-raleway text-xl font-semibold text-[#09082f] mb-4">
+                  <h3 className="wpn-heading-h4 wpn-heading--primary mb-4">
                     Slegs Digitaal
                   </h3>
-                  <div className="text-3xl font-bold text-[#d70025] mb-4">Vanaf R500</div>
+                  <div className="wpn-heading-h2 wpn-text--accent mb-4">Vanaf R500</div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <Check className="size-5 text-green-600 shrink-0 mt-0.5" />
@@ -63,19 +83,19 @@ export default function SalesAF() {
                       <span className="text-sm">Aflaaibare bewys van publikasie</span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-[#d70025] hover:bg-[#b5001f]" asChild>
+                  <Button className="w-full wpn-button wpn-button--accent" asChild>
                     <Link to="/af/indien">Dien Digitale Kennisgewing In</Link>
                   </Button>
                 </Card>
 
-                <Card className="p-6 border-2 border-[#09082f]">
-                  <div className="bg-[#09082f] text-white text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">
+                <Card className="p-6 wpn-border--primary-thick">
+                  <div className="wpn-bg--primary text-white text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">
                     AANBEVEEL
                   </div>
-                  <h3 className="font-raleway text-xl font-semibold text-[#09082f] mb-4">
+                  <h3 className="wpn-heading-h4 wpn-heading--primary mb-4">
                     Druk + Digitale Pakket
                   </h3>
-                  <div className="text-3xl font-bold text-[#d70025] mb-4">Pasgemaakte Kwotasie</div>
+                  <div className="wpn-heading-h2 wpn-text--accent mb-4">Pasgemaakte Kwotasie</div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <Check className="size-5 text-green-600 shrink-0 mt-0.5" />
@@ -94,7 +114,7 @@ export default function SalesAF() {
                       <span className="text-sm">Toegewyde rekeningbestuurder ondersteuning</span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-[#09082f] hover:bg-[#09082f]/90" asChild>
+                  <Button className="w-full wpn-button wpn-button--primary" asChild>
                     <Link to="/af/kontak">Kontak Verkoopspan</Link>
                   </Button>
                 </Card>
@@ -102,19 +122,19 @@ export default function SalesAF() {
             </section>
 
             <section>
-              <Card className="p-8 bg-[#09082f] text-white text-center">
+              <Card className="p-8 wpn-bg--primary text-white text-center">
                 <Phone className="size-12 mx-auto mb-4" />
-                <h2 className="font-raleway text-2xl font-bold mb-4">
+                <h2 className="wpn-heading-h3 wpn-heading--white mb-4">
                   Het u Hulp Nodig met U Kennisgewing?
                 </h2>
-                <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+                <p className="text-white/80 mb-6 max-w-2xl mx-auto">
                   Ons verkoopspan kan help met komplekse kennisgewings, grootmaat indiening, en druk + digitale pakkette.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" variant="outline" className="bg-white text-[#09082f] hover:bg-gray-100" asChild>
+                  <Button size="lg" variant="outline" className="bg-white wpn-text--primary hover:bg-muted" asChild>
                     <Link to="/af/kontak">Kontak Verkope</Link>
                   </Button>
-                  <Button size="lg" className="bg-[#d70025] hover:bg-[#b5001f]" asChild>
+                  <Button size="lg" className="wpn-button wpn-button--accent" asChild>
                     <Link to="/af/indien">Dien Aanlyn In</Link>
                   </Button>
                 </div>

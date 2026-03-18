@@ -1,78 +1,275 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Layout from "../../components/Layout";
-import { Card } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-import { FileText, Package, User, Settings } from "lucide-react";
+import AccountSidebar from "../../components/AccountSidebar";
+import { Eye, ShoppingBag, FileText, ClockCounterClockwise } from "@phosphor-icons/react";
+import "../../../styles/components.css";
 
 export default function DashboardAF() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    alert("U is afgemeld.");
+    navigate("/af/aanmeld");
+  };
+
   return (
     <Layout lang="af" showAds={true}>
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="font-raleway text-3xl font-bold text-[#09082f] mb-8">My Rekening</h1>
+      <div className="wpn-account-wrapper">
+        <div className="wpn-account-container">
+          <h1 className="wpn-heading-h1 wpn-heading--primary wpn-account__page-title">
+            My rekening
+          </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="p-6">
-              <FileText className="size-10 text-[#d70025] mb-4" />
-              <h3 className="font-semibold text-lg mb-2">My Kennisgewings</h3>
-              <p className="text-sm text-gray-600 mb-4">Bekyk en bestuur u ingedien kennisgewings</p>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/af/my-rekening/kennisgewings">Bekyk Kennisgewings</Link>
-              </Button>
-            </Card>
+          <div className="wpn-account-layout">
+            {/* Sidebar Navigation */}
+            <AccountSidebar currentPage="dashboard" onLogout={handleLogout} lang="af" />
 
-            <Card className="p-6">
-              <Package className="size-10 text-[#d70025] mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Bestellings</h3>
-              <p className="text-sm text-gray-600 mb-4">Volg u bestellings en betalings</p>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/af/my-rekening/bestellings">Bekyk Bestellings</Link>
-              </Button>
-            </Card>
+            {/* Main Content */}
+            <div className="wpn-account-layout__main">
+              {/* Welcome Message */}
+              <div className="wpn-account-card">
+                <p className="wpn-account-card__text">
+                  Hallo <strong>Jan Doe</strong> (nie u nie?{" "}
+                  <button onClick={handleLogout} className="wpn-link wpn-link--accent">
+                    Meld af
+                  </button>
+                  )
+                </p>
+                <p className="wpn-account-card__text wpn-account-card__text--muted">
+                  Vanaf u rekening dashboard kan u{" "}
+                  <Link to="/af/my-rekening/bestellings" className="wpn-link wpn-link--accent">
+                    onlangse bestellings
+                  </Link>{" "}
+                  bekyk, u{" "}
+                  <Link to="/af/my-rekening/kennisgewings" className="wpn-link wpn-link--accent">
+                    gepubliseerde kennisgewings
+                  </Link>{" "}
+                  bestuur, en u{" "}
+                  <Link to="/af/my-rekening/profiel" className="wpn-link wpn-link--accent">
+                    rekening besonderhede
+                  </Link>{" "}
+                  wysig.
+                </p>
+              </div>
 
-            <Card className="p-6">
-              <User className="size-10 text-[#d70025] mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Profiel</h3>
-              <p className="text-sm text-gray-600 mb-4">Werk u rekening inligting by</p>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/af/my-rekening/profiel">Redigeer Profiel</Link>
-              </Button>
-            </Card>
-
-            <Card className="p-6">
-              <Settings className="size-10 text-[#d70025] mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Instellings</h3>
-              <p className="text-sm text-gray-600 mb-4">Bestuur rekening instellings</p>
-              <Button variant="outline" size="sm">Instellings</Button>
-            </Card>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <h3 className="font-raleway font-bold text-lg mb-4">Onlangse Kennisgewings</h3>
-              <div className="space-y-3">
-                <div className="p-3 bg-gray-50 rounded">
-                  <p className="font-medium text-sm">Tender Kennisgewing - TEN-2026-001</p>
-                  <p className="text-xs text-gray-600">Status: Gepubliseer</p>
+              {/* Statistics Grid */}
+              <div className="wpn-account-stats">
+                <div className="wpn-stat-card">
+                  <div className="wpn-stat-card__icon-wrapper">
+                    <ShoppingBag className="wpn-stat-card__icon" />
+                  </div>
+                  <div className="wpn-stat-card__value">12</div>
+                  <div className="wpn-stat-card__label">Totale bestellings</div>
                 </div>
-                <div className="p-3 bg-gray-50 rounded">
-                  <p className="font-medium text-sm">Boedel Kennisgewing - EST-2026-002</p>
-                  <p className="text-xs text-gray-600">Status: Wagter Hersien</p>
+
+                <div className="wpn-stat-card">
+                  <div className="wpn-stat-card__icon-wrapper">
+                    <FileText className="wpn-stat-card__icon" />
+                  </div>
+                  <div className="wpn-stat-card__value">8</div>
+                  <div className="wpn-stat-card__label">Gepubliseerde kennisgewings</div>
+                </div>
+
+                <div className="wpn-stat-card">
+                  <div className="wpn-stat-card__icon-wrapper">
+                    <ClockCounterClockwise className="wpn-stat-card__icon" />
+                  </div>
+                  <div className="wpn-stat-card__value">3</div>
+                  <div className="wpn-stat-card__label">Wag hersien</div>
                 </div>
               </div>
-            </Card>
 
-            <Card className="p-6">
-              <h3 className="font-raleway font-bold text-lg mb-4">Vinnige Aksies</h3>
-              <div className="space-y-3">
-                <Button className="w-full bg-[#d70025] hover:bg-[#b5001f]" asChild>
-                  <Link to="/af/indien">Dien Nuwe Kennisgewing In</Link>
-                </Button>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/af/soek">Soek Kennisgewings</Link>
-                </Button>
+              {/* Recent Orders */}
+              <div className="wpn-account-card">
+                <div className="wpn-account-card__header">
+                  <h2 className="wpn-account-card__title">Onlangse bestellings</h2>
+                  <Link to="/af/my-rekening/bestellings" className="wpn-link wpn-link--accent wpn-link--sm">
+                    Bekyk alles
+                  </Link>
+                </div>
+                
+                <div className="wpn-table-wrapper">
+                  <table className="wpn-table">
+                    <thead className="wpn-table__head">
+                      <tr className="wpn-table__row">
+                        <th className="wpn-table__header">Bestelling</th>
+                        <th className="wpn-table__header">Datum</th>
+                        <th className="wpn-table__header">Status</th>
+                        <th className="wpn-table__header">Totaal</th>
+                        <th className="wpn-table__header">Aksies</th>
+                      </tr>
+                    </thead>
+                    <tbody className="wpn-table__body">
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">#12345</td>
+                        <td className="wpn-table__cell">14 Maart 2026</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--success">
+                            Voltooi
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell wpn-table__cell--semibold">R 2,450.00</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/my-rekening/bestellings/12345"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">#12344</td>
+                        <td className="wpn-table__cell">10 Maart 2026</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--success">
+                            Voltooi
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell wpn-table__cell--semibold">R 1,200.00</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/my-rekening/bestellings/12344"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">#12343</td>
+                        <td className="wpn-table__cell">5 Maart 2026</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--warning">
+                            Verwerk
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell wpn-table__cell--semibold">R 3,100.00</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/my-rekening/bestellings/12343"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </Card>
+
+              {/* Recent Notices */}
+              <div className="wpn-account-card">
+                <div className="wpn-account-card__header">
+                  <h2 className="wpn-account-card__title">Onlangse kennisgewings</h2>
+                  <Link to="/af/my-rekening/kennisgewings" className="wpn-link wpn-link--accent wpn-link--sm">
+                    Bekyk alles
+                  </Link>
+                </div>
+                
+                <div className="wpn-table-wrapper">
+                  <table className="wpn-table">
+                    <thead className="wpn-table__head">
+                      <tr className="wpn-table__row">
+                        <th className="wpn-table__header">Titel</th>
+                        <th className="wpn-table__header">Kategorie</th>
+                        <th className="wpn-table__header">Status</th>
+                        <th className="wpn-table__header">Gepubliseer</th>
+                        <th className="wpn-table__header">Aksies</th>
+                      </tr>
+                    </thead>
+                    <tbody className="wpn-table__body">
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">
+                          Boedelkennisgewing - Jan Smith
+                        </td>
+                        <td className="wpn-table__cell">Boedels</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--success">
+                            Gepubliseer
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell">12 Maart 2026</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/kennisgewing/boedelkennisgewing-jan-smith"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">
+                          Dranklisensiieaansoek
+                        </td>
+                        <td className="wpn-table__cell">Dranklisensies</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--warning">
+                            Onder hersiening
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell">—</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/my-rekening/kennisgewings"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                      <tr className="wpn-table__row">
+                        <td className="wpn-table__cell wpn-table__cell--semibold">
+                          Dorpsbeplanningshetsonering
+                        </td>
+                        <td className="wpn-table__cell">Dorpsbeplanning</td>
+                        <td className="wpn-table__cell">
+                          <span className="wpn-badge wpn-badge--success">
+                            Gepubliseer
+                          </span>
+                        </td>
+                        <td className="wpn-table__cell">8 Maart 2026</td>
+                        <td className="wpn-table__cell">
+                          <Link
+                            to="/af/kennisgewing/dorpsbeplanning-hersonering"
+                            className="wpn-link wpn-link--accent wpn-link--sm"
+                          >
+                            <Eye className="wpn-icon wpn-icon--xs" />
+                            Bekyk
+                          </Link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="wpn-account-card">
+                <h2 className="wpn-account-card__title">Vinnige aksies</h2>
+                <div className="wpn-account-actions">
+                  <Link to="/af/indien" className="wpn-button wpn-button--accent">
+                    <FileText className="wpn-icon wpn-icon--sm" />
+                    Dien nuwe kennisgewing in
+                  </Link>
+                  <Link to="/af/my-rekening/bestellings" className="wpn-button wpn-button--outline">
+                    <ShoppingBag className="wpn-icon wpn-icon--sm" />
+                    Bekyk alle bestellings
+                  </Link>
+                  <Link to="/af/my-rekening/profiel" className="wpn-button wpn-button--outline">
+                    Wysig rekeningbesonderhede
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

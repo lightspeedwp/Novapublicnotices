@@ -1,0 +1,26 @@
+/**
+ * Submit Entry Page — BEM Styles
+ * Icon sizing for submit notice category selection
+ * 100% CSS variables from design system
+ */
+
+/* =================================================================
+   Button Icon Sizing
+   ================================================================= */
+
+.wpn-button svg,
+.wpn-button--accent svg,
+.wpn-button--outline svg,
+.wpn-button--lg svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+/* =================================================================
+   Ad Slot Spacing (Submit Entry Context)
+   ================================================================= */
+
+.wpn-submit-entry + .wpn-ad-slot {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}

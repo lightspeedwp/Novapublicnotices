@@ -1,4 +1,5 @@
 import NoticeCard from "./NoticeCard";
+import "./NoticeGrid.css";
 
 interface Notice {
   id: string;
@@ -22,14 +23,10 @@ export default function NoticeGrid({
   lang = "en",
   columns = 3
 }: NoticeGridProps) {
-  const gridClasses = {
-    1: "grid-cols-1",
-    2: "grid-cols-1 md:grid-cols-2",
-    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-  };
+  const gridClass = `wpn-notice-grid--cols-${columns}`;
 
   return (
-    <div className={`grid ${gridClasses[columns]} gap-6`}>
+    <div className={`wpn-notice-grid ${gridClass}`}>
       {notices.map((notice) => (
         <NoticeCard
           key={notice.id}

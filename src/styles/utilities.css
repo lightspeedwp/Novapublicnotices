@@ -1,0 +1,573 @@
+/**
+ * Utility Classes — Enhanced BEM Patterns
+ * 100% CSS variables from design system
+ * 
+ * These are semantic utility classes for common patterns
+ * NOT generic Tailwind-style utilities
+ */
+
+/* =================================================================
+   Section Spacing Utilities
+   ================================================================= */
+
+.wpn-section--sm {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+.wpn-section--md {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+.wpn-section--lg {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.wpn-section--xl {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+}
+
+@media (min-width: 768px) {
+  .wpn-section--md {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .wpn-section--lg {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
+}
+
+/* =================================================================
+   Section Background Variants
+   ================================================================= */
+
+.wpn-section--muted {
+  background-color: var(--muted);
+}
+
+.wpn-section--card {
+  background-color: var(--card);
+}
+
+.wpn-section--primary {
+  background: linear-gradient(135deg, var(--nova-primary), #0a0729);
+  color: white;
+}
+
+.wpn-section--accent {
+  background: linear-gradient(135deg, var(--nova-accent), var(--nova-accent-hover));
+  color: white;
+}
+
+/* =================================================================
+   Container Utilities
+   ================================================================= */
+
+.wpn-container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  width: 100%;
+}
+
+.wpn-container--narrow {
+  max-width: 48rem; /* 768px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.wpn-container--wide {
+  max-width: 80rem; /* 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.wpn-container--full {
+  max-width: 100%;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* =================================================================
+   Grid Utilities — Flexbox-based (NO CSS Grid)
+   ================================================================= */
+
+.wpn-grid--2col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-grid--2col > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .wpn-grid--2col > * {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+}
+
+.wpn-grid--3col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-grid--3col > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .wpn-grid--3col > * {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-grid--3col > * {
+    flex: 1 1 calc(33.333% - var(--space-4));
+  }
+}
+
+.wpn-grid--4col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-grid--4col > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .wpn-grid--4col > * {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-grid--4col > * {
+    flex: 1 1 calc(25% - var(--space-5));
+  }
+}
+
+/* =================================================================
+   Gap Utilities
+   ================================================================= */
+
+.wpn-gap-xs {
+  gap: var(--space-2);
+}
+
+.wpn-gap-sm {
+  gap: var(--space-3);
+}
+
+.wpn-gap-md {
+  gap: var(--space-4);
+}
+
+.wpn-gap-lg {
+  gap: var(--space-6);
+}
+
+.wpn-gap-xl {
+  gap: var(--space-8);
+}
+
+/* =================================================================
+   Spacing Utilities (Bottom Margin Only)
+   ================================================================= */
+
+.wpn-mb-2 {
+  margin-bottom: var(--space-2);
+}
+
+.wpn-mb-3 {
+  margin-bottom: var(--space-3);
+}
+
+.wpn-mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+.wpn-mb-6 {
+  margin-bottom: var(--space-6);
+}
+
+.wpn-mb-8 {
+  margin-bottom: var(--space-8);
+}
+
+.wpn-mb-12 {
+  margin-bottom: var(--space-12);
+}
+
+/* =================================================================
+   Section Headers
+   ================================================================= */
+
+.wpn-section-header {
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.wpn-section-header--left {
+  margin-bottom: var(--space-8);
+  text-align: left;
+}
+
+.wpn-section-header__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--foreground);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .wpn-section-header__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.wpn-section-header__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .wpn-section-header__subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+.wpn-section-header--flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .wpn-section-header--flex {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* =================================================================
+   Main Content Area
+   ================================================================= */
+
+.wpn-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =================================================================
+   Page Headers
+   ================================================================= */
+
+.wpn-page-header {
+  background: linear-gradient(135deg, var(--nova-primary), #0a0729);
+  color: white;
+  padding: var(--space-12) 0 var(--space-8);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient overlay */
+.wpn-page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(215, 0, 37, 0.1),
+    transparent
+  );
+  animation: wpn-header-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes wpn-header-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.wpn-page-header__content {
+  position: relative;
+  z-index: 1;
+}
+
+.wpn-page-header__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .wpn-page-header__title {
+    font-size: var(--text-4xl);
+  }
+}
+
+.wpn-page-header__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+  max-width: 48rem;
+}
+
+@media (min-width: 768px) {
+  .wpn-page-header__description {
+    font-size: var(--text-lg);
+  }
+}
+
+/* =================================================================
+   Cards
+   ================================================================= */
+
+.wpn-card {
+  background: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.wpn-card__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--foreground);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-3);
+}
+
+.wpn-card__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Text Content
+   ================================================================= */
+
+.wpn-text-center {
+  text-align: center;
+}
+
+.wpn-text-left {
+  text-align: left;
+}
+
+.wpn-text-right {
+  text-align: right;
+}
+
+/* =================================================================
+   Display Utilities
+   ================================================================= */
+
+.wpn-hidden {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .wpn-hidden-sm {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-hidden-md {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-hidden-lg {
+    display: none;
+  }
+}
+
+.wpn-visible-sm {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .wpn-visible-sm {
+    display: block;
+  }
+}
+
+.wpn-visible-md {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .wpn-visible-md {
+    display: block;
+  }
+}
+
+/* =================================================================
+   Dividers
+   ================================================================= */
+
+.wpn-divider {
+  height: var(--border-width-1);
+  background-color: var(--border-color-default);
+  border: none;
+  margin: var(--space-8) 0;
+}
+
+.wpn-divider--thick {
+  height: var(--border-width-2);
+}
+
+.wpn-divider--primary {
+  background-color: var(--nova-accent);
+}
+
+/* =================================================================
+   Loading States
+   ================================================================= */
+
+.wpn-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 0%,
+    var(--border-color-default) 50%,
+    var(--muted) 100%
+  );
+  background-size: 200% 100%;
+  animation: wpn-skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes wpn-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.wpn-skeleton--text {
+  height: 1em;
+  margin-bottom: var(--space-2);
+}
+
+.wpn-skeleton--title {
+  height: 2em;
+  margin-bottom: var(--space-3);
+}
+
+.wpn-skeleton--card {
+  height: 200px;
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Screen reader only */
+.wpn-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip to content link */
+.wpn-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--nova-accent);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  z-index: 100;
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.wpn-skip-link:focus {
+  top: 0;
+}
+
+/* Reduced motion support for animations */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-page-header::before,
+  .wpn-skeleton {
+    animation: none;
+  }
+}
+
+/* =================================================================
+   Print Utilities
+   ================================================================= */
+
+@media print {
+  .wpn-no-print {
+    display: none !important;
+  }
+
+  .wpn-page-break-before {
+    page-break-before: always;
+  }
+
+  .wpn-page-break-after {
+    page-break-after: always;
+  }
+
+  .wpn-page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}

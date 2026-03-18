@@ -541,6 +541,59 @@ All colors, fonts, spacing, radii, borders, and shadows must come from shared to
 
 Never bypass tokens for convenience.
 
+### 13.5 Heading and content capitalization
+
+**CRITICAL RULE: Always use sentence case for all headings, labels, and UI text.**
+
+Sentence case means:
+- Only the first letter of the heading is capitalized
+- Proper nouns are capitalized (e.g., Nova News, WordPress)
+- Everything else is lowercase
+
+**Correct examples:**
+- "Contact us"
+- "Submit a notice"
+- "My account dashboard"
+- "Search public notices"
+- "Saved searches and alerts"
+- "Help and FAQ center"
+- "Privacy and cookie policy"
+
+**Incorrect examples (DO NOT USE):**
+- ❌ "Contact Us"
+- ❌ "Submit A Notice"
+- ❌ "My Account Dashboard"
+- ❌ "Search Public Notices"
+- ❌ "Saved Searches And Alerts"
+- ❌ "Help And FAQ Center"
+- ❌ "Privacy And Cookie Policy"
+
+**Applies to:**
+- All page titles (h1, h2, h3, h4, h5, h6)
+- All button labels
+- All navigation links
+- All form labels
+- All card titles
+- All section headings
+- All modal titles
+- All data file content
+
+**Exceptions:**
+- Acronyms and abbreviations (FAQ, ID, VAT, PDF)
+- Proper nouns (Nova News, WordPress, PayFast, WooCommerce)
+- Technical terms that require specific capitalization
+
+**Rationale:**
+- More modern, friendly, and approachable
+- Aligns with contemporary web design best practices
+- Easier to read and less formal
+- Consistent with leading platforms (Google, Apple, Airbnb)
+- WordPress admin interface uses sentence case
+
+**Implementation:**
+All data files, UI components, and content must follow sentence case.
+Audit existing content and update to sentence case before deployment.
+
 ---
 
 ## 14) Ads
@@ -754,3 +807,75 @@ Create next:
 * `/guidelines/_templates.md`
 
 This file remains the parent guide and should link to those sub-guides as they are added.
+
+---
+
+## 21) Guidelines and Prompts Structure
+
+### Created Guidelines
+
+* **[locale-architecture.md](./locale-architecture.md)** — Bilingual English/Afrikaans architecture standards
+* **[data-model.md](./data-model.md)** — Notice data structure, taxonomies, and category-specific fields
+* **[notice-fields-schema.md](./notice-fields-schema.md)** — Universal field schema for all 25 categories
+* **[design-tokens/](./design-tokens/)** — Complete design token system (14 guideline files)
+  * [README.md](./design-tokens/README.md) — Design tokens overview
+  * [CSS Architecture](./design-tokens/css-architecture.md) — BEM, WordPress alignment
+  * [Colors](./design-tokens/colors.md) — Brand and semantic colors
+  * [Typography](./design-tokens/typography.md) — Fonts, scales, weights
+  * [Spacing](./design-tokens/spacing.md) — Gap-first spacing system
+  * [Buttons](./design-tokens/buttons.md) — Button variants and sizes
+  * [Forms](./design-tokens/forms.md) — Form fields and controls
+  * [Navigation](./design-tokens/navigation.md) — Nav patterns and bilingual switching
+  * [Iconography](./design-tokens/iconography.md) — Phosphor Icons integration
+  * [Borders](./design-tokens/borders.md) — Border tokens and patterns
+  * [Radii](./design-tokens/radii.md) — Border radius scale
+  * [Shadows](./design-tokens/shadows.md) — Elevation system
+  * [Animations](./design-tokens/animations.md) — Motion and transitions
+  * [Responsive](./design-tokens/responsive.md) — Breakpoints and layouts
+  * [Light & Dark Mode](./design-tokens/light-dark-mode.md) — Color mode tokens
+
+### Created Prompts
+
+**Master Orchestrator:**
+* **[orchestrator.md](../prompts/orchestrator.md)** — Master audit coordinator that runs all sub-audits in sequence
+
+**Architecture Audits:**
+* **[audit-locale.md](../prompts/audit-locale.md)** — Bilingual architecture & route equivalence audit
+* **[audit-routing.md](../prompts/audit-routing.md)** — Route integrity & bilingual navigation audit
+* **[audit-data.md](../prompts/audit-data.md)** — Notice data architecture, bilingual pairs, type safety audit
+
+**Styling & Design System Audits:**
+* **[audit-styling.md](../prompts/audit-styling.md)** — CSS variables, no inline styles, semantic classes audit
+* **[audit-css.md](../prompts/audit-css.md)** — CSS architecture, imports, WordPress classes audit
+* **[audit-tokens.md](../prompts/audit-tokens.md)** — CSS variable compliance, font face enforcement audit
+* **[audit-phosphor.md](../prompts/audit-phosphor.md)** — Phosphor Icons usage, no legacy Lucide icons audit
+
+**Template Parts Audits:**
+* **[audit-header.md](../prompts/audit-header.md)** — Header template part consistency across all pages
+* **[audit-footer.md](../prompts/audit-footer.md)** — Footer template part consistency across all pages
+* **[audit-hero.md](../prompts/audit-hero.md)** — Hero template part usage on ALL pages and templates (critical)
+
+**Accessibility & Performance Audits:**
+* **[audit-accessibility.md](../prompts/audit-accessibility.md)** — Comprehensive WCAG 2.1 AA audit with bilingual support
+* **[audit-a11y.md](../prompts/audit-a11y.md)** — Quick accessibility check
+* **[audit-performance.md](../prompts/audit-performance.md)** — Render performance, assets, bundle size audit
+
+**Archive Prompts:**
+* **[archive-prompts.md](../prompts/archive-prompts.md)** — Review and archive specific/completed prompts
+* **[archive-reports.md](../prompts/archive-reports.md)** — Review and archive old audit reports
+* **[archive-tasks.md](../prompts/archive-tasks.md)** — Review and archive completed task lists
+* **[archive-guidelines.md](../prompts/archive-guidelines.md)** — Review and archive deprecated guidelines
+
+**Maintenance Prompts:**
+* **[migrate-icons.md](../prompts/migrate-icons.md)** — Migrate from Lucide to Phosphor Icons
+* **[cleanup.md](../prompts/cleanup.md)** — Enforce project standards across codebase
+* **[update-triggers.md](../prompts/update-triggers.md)** — Update trigger registry and check circular references
+
+**Utility Prompts:**
+* **[process-reports.md](../prompts/process-reports.md)** — Organize reports, create task lists from audits
+* **[status.md](../prompts/status.md)** — Project health dashboard, metrics, compliance check
+* **[continue.md](../prompts/continue.md)** — Continue previous work session
+* **[data-expansion.md](../prompts/data-expansion.md)** — Expand notice data for categories
+* **[prompt-triggers.md](../prompts/prompt-triggers.md)** — Complete trigger word registry (v2.3.0)
+
+**Note:** All prompts use trigger words. See `/prompts/prompt-triggers.md` for complete trigger reference.

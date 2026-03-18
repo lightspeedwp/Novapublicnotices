@@ -1,0 +1,555 @@
+/**
+ * Empty State Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful contextual states with smooth animations
+ * 
+ * Features:
+ * - Icon pulse animations
+ * - Smooth fade-in transitions
+ * - Color-coded states (error, info, search)
+ * - Professional suggestions layout
+ * - Responsive design
+ * - Full accessibility
+ */
+
+/* =================================================================
+   Empty State — Base Component
+   ================================================================= */
+
+.wpn-empty-state {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background-color: var(--muted);
+  position: relative;
+}
+
+.wpn-empty-state__container {
+  max-width: 48rem; /* 768px */
+  width: 100%;
+  text-align: center;
+  animation: wpn-empty-fade-in-up var(--duration-slow) var(--ease-out);
+}
+
+@keyframes wpn-empty-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-8));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================================================
+   Icon — Animated Circle
+   ================================================================= */
+
+.wpn-empty-state__icon {
+  width: var(--space-20);
+  height: var(--space-20);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  background-color: var(--muted);
+  border: var(--border-width-2) solid var(--border-color-default);
+  position: relative;
+  animation: wpn-icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wpn-icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.wpn-empty-state__icon-svg {
+  width: var(--space-10);
+  height: var(--space-10);
+  color: var(--muted-foreground);
+  animation: wpn-icon-rotate 3s ease-in-out infinite;
+}
+
+@keyframes wpn-icon-rotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* Icon Variants — Color-coded States */
+.wpn-empty-state__icon--search {
+  background: linear-gradient(135deg, var(--info-bg), rgba(59, 130, 246, 0.05));
+  border-color: var(--info-fg);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.wpn-empty-state__icon--search .wpn-empty-state__icon-svg {
+  color: var(--info-fg);
+}
+
+.wpn-empty-state__icon--error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border-color: var(--destructive);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.wpn-empty-state__icon--error .wpn-empty-state__icon-svg {
+  color: var(--destructive);
+}
+
+@keyframes wpn-error-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+.wpn-empty-state__icon--error {
+  animation: wpn-error-pulse 2s ease-in-out infinite;
+}
+
+.wpn-empty-state__icon--info {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+.wpn-empty-state__icon--info .wpn-empty-state__icon-svg {
+  color: #22c55e;
+}
+
+.wpn-empty-state__icon--start {
+  background: linear-gradient(135deg, var(--muted), var(--background));
+  border-color: var(--border-color-default);
+}
+
+.wpn-empty-state__icon--start .wpn-empty-state__icon-svg {
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Title & Subtitle — Staggered Animation
+   ================================================================= */
+
+.wpn-empty-state__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--foreground);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+  animation: wpn-title-fade-in var(--duration-normal) var(--ease-out) 0.1s both;
+}
+
+@keyframes wpn-title-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-empty-state__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.wpn-empty-state__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-8);
+  line-height: var(--line-height-relaxed);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  animation: wpn-subtitle-fade-in var(--duration-normal) var(--ease-out) 0.2s both;
+}
+
+@keyframes wpn-subtitle-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-empty-state__subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+/* =================================================================
+   Query Info — Glass Card
+   ================================================================= */
+
+.wpn-empty-state__query-info {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  animation: wpn-query-info-fade-in var(--duration-normal) var(--ease-out) 0.3s both;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes wpn-query-info-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpn-empty-state__query-text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+.wpn-empty-state__query-highlight {
+  font-weight: var(--font-weight-semibold);
+  color: var(--nova-accent);
+  background: linear-gradient(135deg, var(--nova-accent), #ff1744);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wpn-empty-state__filter-count {
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  background-color: var(--muted);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--border-width-1) solid var(--border-color-default);
+}
+
+/* =================================================================
+   Suggestions — Checklist Card
+   ================================================================= */
+
+.wpn-empty-state__suggestions {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  text-align: left;
+  animation: wpn-suggestions-fade-in var(--duration-normal) var(--ease-out) 0.4s both;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes wpn-suggestions-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-empty-state__suggestions-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-empty-state__suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wpn-empty-state__suggestion-item {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  padding-left: var(--space-6);
+  position: relative;
+  line-height: var(--line-height-relaxed);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-empty-state__suggestion-item::before {
+  content: "•";
+  position: absolute;
+  left: var(--space-2);
+  color: var(--nova-accent);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-lg);
+}
+
+.wpn-empty-state__suggestion-item:hover {
+  color: var(--foreground);
+}
+
+/* =================================================================
+   Search Tips — Info Box
+   ================================================================= */
+
+.wpn-empty-state__search-tips {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+  border: var(--border-width-1) solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+  text-align: left;
+  animation: wpn-tips-fade-in var(--duration-normal) var(--ease-out) 0.5s both;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+@keyframes wpn-tips-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-empty-state__search-tips-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wpn-empty-state__search-tips-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.wpn-empty-state__search-tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-empty-state__search-tips-list li {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  padding-left: var(--space-6);
+  position: relative;
+  line-height: var(--line-height-relaxed);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-empty-state__search-tips-list li::before {
+  content: "✓";
+  position: absolute;
+  left: var(--space-2);
+  color: #3b82f6;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-base);
+}
+
+.wpn-empty-state__search-tips-list li:hover {
+  color: var(--foreground);
+}
+
+/* =================================================================
+   Error Details
+   ================================================================= */
+
+.wpn-empty-state__error-details {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-8);
+  padding: var(--space-4);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+  border: var(--border-width-1) solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-lg);
+  line-height: var(--line-height-relaxed);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+}
+
+.wpn-empty-state__check-back {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-8);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Actions — Buttons with Stagger
+   ================================================================= */
+
+.wpn-empty-state__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+  animation: wpn-actions-fade-in var(--duration-normal) var(--ease-out) 0.6s both;
+}
+
+@keyframes wpn-actions-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .wpn-empty-state__actions {
+    flex-direction: row;
+  }
+}
+
+.wpn-empty-state__button-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+/* =================================================================
+   Variant: Error State
+   ================================================================= */
+
+.wpn-empty-state--error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.02), transparent);
+}
+
+/* =================================================================
+   Variant: Start State (No Search Yet)
+   ================================================================= */
+
+.wpn-empty-state--start {
+  background-color: var(--background);
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-empty-state {
+    padding: var(--space-6) var(--space-4);
+    min-height: 50vh;
+  }
+
+  .wpn-empty-state__icon {
+    width: var(--space-16);
+    height: var(--space-16);
+  }
+
+  .wpn-empty-state__icon-svg {
+    width: var(--space-8);
+    height: var(--space-8);
+  }
+
+  .wpn-empty-state__suggestions,
+  .wpn-empty-state__search-tips {
+    padding: var(--space-4);
+  }
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-empty-state__container,
+  .wpn-empty-state__icon,
+  .wpn-empty-state__icon-svg,
+  .wpn-empty-state__title,
+  .wpn-empty-state__subtitle,
+  .wpn-empty-state__query-info,
+  .wpn-empty-state__suggestions,
+  .wpn-empty-state__search-tips,
+  .wpn-empty-state__actions {
+    animation: none;
+  }
+
+  .wpn-empty-state__suggestion-item,
+  .wpn-empty-state__search-tips-list li {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wpn-empty-state__icon {
+    border-width: var(--border-width-2);
+  }
+
+  .wpn-empty-state__query-info,
+  .wpn-empty-state__suggestions,
+  .wpn-empty-state__search-tips,
+  .wpn-empty-state__error-details {
+    border-width: var(--border-width-2);
+  }
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-empty-state {
+    display: none;
+  }
+}

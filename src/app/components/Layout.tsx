@@ -1,9 +1,24 @@
 import { Link } from "react-router";
-import { Search, Menu, Globe, Facebook, Instagram, Twitter, Linkedin, Youtube, Mail, X, ChevronDown } from "lucide-react";
+import { 
+  MagnifyingGlass, 
+  List, 
+  Globe, 
+  FacebookLogo, 
+  InstagramLogo, 
+  TwitterLogo, 
+  LinkedinLogo, 
+  YoutubeLogo, 
+  Envelope, 
+  X, 
+  CaretDown,
+  User,
+  SignOut
+} from "@phosphor-icons/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Logo } from "./Logo";
+import { useAuth } from "../contexts/AuthContext";
 import {
   mobileNavigation,
   topBarNavigation,
@@ -15,6 +30,7 @@ import {
   footerLegal,
   socialLinks,
 } from "../data/navigation";
+import "../../styles/components.css";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,6 +42,7 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMenuItems, setExpandedMenuItems] = useState<string[]>([]);
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const { isLoggedIn, toggleLoginState } = useAuth();
   
   const basePath = lang === "af" ? "/af" : "";
   const currentYear = new Date().getFullYear();
@@ -104,85 +121,121 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
   };
   
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="wpn-layout">
       {/* Top Bar */}
-      <div className="wp-bg-primary text-white py-2">
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm">
+      <div className="wpn-layout__topbar">
+        <div className="wpn-layout__topbar-container">
+          <div className="wpn-layout__topbar-links">
             {topBarNavigation.map((item, idx) => (
               <Link
                 key={idx}
                 to={basePath + item.href}
-                className="wp-link hover:underline"
+                className="wpn-layout__topbar-link"
               >
                 {item.label[lang]}
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="wpn-layout__topbar-actions">
+            {/* Login State Toggle - DEV ONLY */}
+            <button
+              onClick={toggleLoginState}
+              className="wpn-layout__topbar-auth-toggle"
+              title={isLoggedIn ? "Switch to logged out state" : "Switch to logged in state"}
+            >
+              {isLoggedIn ? (
+                <>
+                  <User className="wpn-layout__topbar-icon" weight="fill" />
+                  <span className="wpn-layout__topbar-auth-label">Logged In</span>
+                </>
+              ) : (
+                <>
+                  <User className="wpn-layout__topbar-icon" />
+                  <span className="wpn-layout__topbar-auth-label">Logged Out</span>
+                </>
+              )}
+            </button>
+
+            {/* Language Switcher */}
             <Button
               variant="ghost"
               size="sm"
-              className="text-white hover:bg-white/10 transition-colors duration-150"
+              className="wpn-layout__topbar-lang-btn"
               asChild
             >
               <Link to={lang === "en" ? "/af" : "/"}>
-                <Globe className="size-4 mr-2" />
+                <Globe className="wpn-layout__topbar-icon" />
                 {lang === "en" ? "Afrikaans" : "English"}
               </Link>
             </Button>
-            {userNavigation.slice(0, 1).map((item, idx) => (
-              <Link
-                key={idx}
-                to={basePath + item.href}
-                className="wp-link hover:underline text-sm"
-              >
-                {item.label[lang]}
-              </Link>
-            ))}
-            <Button
-              size="sm"
-              className="wp-btn-accent text-white"
-              asChild
-            >
-              <Link to={basePath + userNavigation[1].href}>
-                {userNavigation[1].label[lang]}
-              </Link>
-            </Button>
+
+            {/* Conditional Navigation Based on Login State */}
+            {isLoggedIn ? (
+              <>
+                {/* Logged In - Show My Account Link */}
+                <Link
+                  to={basePath + "/my-account"}
+                  className="wpn-layout__topbar-link wpn-layout__topbar-link--account"
+                >
+                  <User className="wpn-layout__topbar-icon" weight="bold" />
+                  {text.myAccount}
+                </Link>
+              </>
+            ) : (
+              <>
+                {/* Logged Out - Show Login Link */}
+                <Link
+                  to={basePath + userNavigation[0].href}
+                  className="wpn-layout__topbar-link"
+                >
+                  {userNavigation[0].label[lang]}
+                </Link>
+                {/* Logged Out - Show Register Button */}
+                <Button
+                  size="sm"
+                  className="wpn-button wpn-button--sm wpn-button--accent"
+                  asChild
+                >
+                  <Link to={basePath + userNavigation[1].href}>
+                    {userNavigation[1].label[lang]}
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {/* Header */}
-      <header className="bg-white border-b border-border">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <Link to={basePath + "/"} className="flex items-center gap-2">
+      <header className="wpn-layout__header">
+        <div className="wpn-layout__container">
+          <div className="wpn-layout__header-container">
+            <Link to={basePath + "/"} className="wpn-layout__logo-link">
               <Logo variant="light" className="h-12 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="wpn-layout__nav">
               <Link
                 to={basePath + "/search"}
-                className="wp-link text-foreground/70 hover:text-foreground"
+                className="wpn-layout__nav-link"
               >
                 {text.search}
               </Link>
               <Link
                 to={basePath + "/sales"}
-                className="wp-link text-foreground/70 hover:text-foreground"
+                className="wpn-layout__nav-link"
               >
                 {text.howItWorks}
               </Link>
               <Link
                 to={basePath + "/contact"}
-                className="wp-link text-foreground/70 hover:text-foreground"
+                className="wpn-layout__nav-link"
               >
                 {text.contact}
               </Link>
               <Button
-                className="wp-btn-accent text-white"
+                className="wpn-button wpn-button--md wpn-button--accent"
                 asChild
               >
                 <Link to={basePath + "/submit"}>{text.submitNotice}</Link>
@@ -193,10 +246,10 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="wpn-layout__mobile-menu-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+              {mobileMenuOpen ? <X /> : <List />}
             </Button>
           </div>
         </div>
@@ -204,236 +257,289 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
 
       {/* Full Screen Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-background md:hidden overflow-y-auto">
-          <div className="container mx-auto px-4 py-4">
-            {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between mb-8">
-              <Link to={basePath + "/"} onClick={() => setMobileMenuOpen(false)}>
-                <Logo variant="light" className="h-10 w-auto" />
-              </Link>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <X className="size-6" />
-              </Button>
-            </div>
+        <div className="wpn-layout__mobile-menu">
+          <div className="wpn-layout__container">
+            <div className="wpn-layout__mobile-menu-container">
+              {/* Mobile Menu Header */}
+              <div className="wpn-layout__mobile-menu-header">
+                <Link to={basePath + "/"} onClick={() => setMobileMenuOpen(false)}>
+                  <Logo variant="light" className="h-10 w-auto" />
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <X />
+                </Button>
+              </div>
 
-            {/* Mobile Navigation */}
-            <nav className="space-y-1">
-              {mobileNavigation.map((item, idx) => (
-                <div key={idx}>
-                  {item.children ? (
-                    <div>
-                      <button
-                        onClick={() => toggleMobileMenuItem(item.label.en)}
-                        className="w-full flex items-center justify-between py-3 px-4 text-foreground hover:bg-muted rounded-md transition-colors duration-150"
-                      >
-                        <span className="font-medium">{item.label[lang]}</span>
-                        <ChevronDown
-                          className={`size-5 transition-transform duration-200 ${
-                            expandedMenuItems.includes(item.label.en) ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      {expandedMenuItems.includes(item.label.en) && (
-                        <div className="pl-4 py-2 space-y-1">
-                          {item.children.map((child, childIdx) => (
-                            <Link
-                              key={childIdx}
-                              to={basePath + child.href}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block py-2 px-4 text-foreground/70 hover:text-foreground hover:bg-muted rounded-md transition-colors duration-150"
-                            >
-                              {child.label[lang]}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
+              {/* Mobile Navigation */}
+              <nav className="wpn-layout__mobile-nav">
+                {/* Top Bar Navigation Items - Mobile Only */}
+                <div className="wpn-layout__mobile-nav-section">
+                  {topBarNavigation.map((item, idx) => (
                     <Link
+                      key={idx}
                       to={basePath + item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-3 px-4 text-foreground hover:bg-muted rounded-md transition-colors duration-150 font-medium"
+                      className="wpn-layout__mobile-nav-link"
                     >
                       {item.label[lang]}
                     </Link>
-                  )}
+                  ))}
                 </div>
-              ))}
 
-              {/* Mobile CTA */}
-              <div className="pt-4">
-                <Button
-                  className="w-full wp-btn-accent text-white"
-                  asChild
-                >
-                  <Link to={basePath + "/submit"} onClick={() => setMobileMenuOpen(false)}>
-                    {text.submitNotice}
+                {/* Main Navigation Items */}
+                {mobileNavigation.map((item, idx) => (
+                  <div key={idx} className="wpn-layout__mobile-nav-expandable">
+                    {item.children ? (
+                      <div>
+                        <button
+                          onClick={() => toggleMobileMenuItem(item.label.en)}
+                          className="wpn-layout__mobile-nav-toggle"
+                        >
+                          <span>{item.label[lang]}</span>
+                          <CaretDown
+                            className={`wpn-layout__mobile-nav-toggle-icon ${
+                              expandedMenuItems.includes(item.label.en) ? "wpn-layout__mobile-nav-toggle-icon--rotated" : ""
+                            }`}
+                          />
+                        </button>
+                        {expandedMenuItems.includes(item.label.en) && (
+                          <div className="wpn-layout__mobile-nav-submenu">
+                            {item.children.map((child, childIdx) => (
+                              <Link
+                                key={childIdx}
+                                to={basePath + child.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="wpn-layout__mobile-nav-link"
+                              >
+                                {child.label[lang]}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        to={basePath + item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="wpn-layout__mobile-nav-link wpn-layout__mobile-nav-link--highlighted"
+                      >
+                        {item.label[lang]}
+                      </Link>
+                    )}
+                  </div>
+                ))}
+
+                {/* Mobile CTA */}
+                <div className="wpn-layout__mobile-cta">
+                  <Button
+                    className="wpn-button wpn-button--md wpn-button--accent wpn-button--full"
+                    asChild
+                  >
+                    <Link to={basePath + "/submit"} onClick={() => setMobileMenuOpen(false)}>
+                      {text.submitNotice}
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* User Account Section - Mobile Only */}
+                <div className="wpn-layout__mobile-account-section">
+                  {/* Login Link */}
+                  <Link
+                    to={basePath + userNavigation[0].href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="wpn-layout__mobile-nav-link"
+                  >
+                    {userNavigation[0].label[lang]}
                   </Link>
-                </Button>
-              </div>
-            </nav>
+                  
+                  {/* Register Button */}
+                  <Button
+                    className="wpn-button wpn-button--md wpn-button--accent wpn-button--full"
+                    asChild
+                  >
+                    <Link to={basePath + userNavigation[1].href} onClick={() => setMobileMenuOpen(false)}>
+                      {userNavigation[1].label[lang]}
+                    </Link>
+                  </Button>
+
+                  {/* Language Switcher */}
+                  <Button
+                    variant="outline"
+                    className="wpn-button--full"
+                    asChild
+                  >
+                    <Link to={lang === "en" ? "/af" : "/"} onClick={() => setMobileMenuOpen(false)}>
+                      <Globe className="wpn-layout__topbar-icon" />
+                      {lang === "en" ? "Afrikaans" : "English"}
+                    </Link>
+                  </Button>
+                </div>
+              </nav>
+            </div>
           </div>
         </div>
       )}
 
       {/* Main Content */}
-      <main className="flex-1">{children}</main>
+      <main className="wpn-layout__main">{children}</main>
 
       {/* Footer */}
-      <footer className="wp-bg-primary text-white mt-auto">
-        <div className="container mx-auto px-4 py-12">
-          {/* Newsletter Section */}
-          <div className="mb-12 pb-8 border-b border-white/20">
-            <div className="max-w-2xl mx-auto text-center">
-              <Mail className="size-8 wp-text-accent mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-2">
-                {text.newsletterTitle}
-              </h3>
-              <p className="text-white/70 mb-6">
-                {text.newsletterDescription}
-              </p>
-              <form 
-                className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert(text.thankYouSubscribe);
-                  setNewsletterEmail("");
-                }}
-              >
-                <Input
-                  type="email"
-                  placeholder={text.enterEmail}
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  required
-                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                />
-                <Button type="submit" className="wp-btn-accent">
-                  {text.subscribe}
-                </Button>
-              </form>
-            </div>
-          </div>
-
-          {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
-            {/* Brand Column */}
-            <div className="lg:col-span-1">
-              <Logo variant="dark" className="h-8 w-auto mb-4" />
-              <p className="text-white/70 text-sm mb-4">
-                {text.footerTagline}
-              </p>
-              {/* Social Media Links */}
-              <div className="flex gap-3">
-                {socialLinks.map((social, idx) => (
-                  <a
-                    key={idx}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="wp-hover-scale text-white/70 hover:text-white transition-colors duration-150"
-                    aria-label={social.name}
-                  >
-                    {social.icon === "facebook" && <Facebook className="size-5" />}
-                    {social.icon === "instagram" && <Instagram className="size-5" />}
-                    {social.icon === "twitter" && <Twitter className="size-5" />}
-                    {social.icon === "linkedin" && <Linkedin className="size-5" />}
-                    {social.icon === "youtube" && <Youtube className="size-5" />}
-                  </a>
-                ))}
+      <footer className="wpn-layout__footer">
+        <div className="wpn-layout__container">
+          <div className="wpn-layout__footer-container">
+            {/* Newsletter Section */}
+            <div className="wpn-layout__footer-newsletter">
+              <div className="wpn-layout__footer-newsletter-content">
+                <Envelope className="wpn-layout__footer-newsletter-icon" />
+                <h3 className="wpn-layout__footer-newsletter-title">
+                  {text.newsletterTitle}
+                </h3>
+                <p className="wpn-layout__footer-newsletter-description">
+                  {text.newsletterDescription}
+                </p>
+                <form 
+                  className="wpn-layout__footer-newsletter-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    alert(text.thankYouSubscribe);
+                    setNewsletterEmail("");
+                  }}
+                >
+                  <Input
+                    type="email"
+                    placeholder={text.enterEmail}
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    required
+                    className="wpn-layout__footer-newsletter-input"
+                  />
+                  <Button type="submit" className="wpn-button wpn-button--md wpn-button--accent">
+                    {text.subscribe}
+                  </Button>
+                </form>
               </div>
             </div>
 
-            {/* Notice Types Column 1 */}
-            <div>
-              <h3 className="font-semibold mb-4">{text.noticeTypes}</h3>
-              <ul className="space-y-2 text-sm">
-                {footerNoticeTypesCol1.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={basePath + item.href}
-                      className="wp-link text-white/70 hover:text-white"
+            {/* Main Footer Grid */}
+            <div className="wpn-layout__footer-grid">
+              {/* Brand Column */}
+              <div className="wpn-layout__footer-column wpn-layout__footer-column--brand">
+                <Logo variant="dark" className="h-8 w-auto mb-4" />
+                <p className="wpn-layout__footer-brand-tagline">
+                  {text.footerTagline}
+                </p>
+                {/* Social Media Links */}
+                <div className="wpn-layout__footer-social-links">
+                  {socialLinks.map((social, idx) => (
+                    <a
+                      key={idx}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="wpn-layout__footer-social-link"
+                      aria-label={social.name}
                     >
-                      {item.label[lang]}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                      {social.icon === "facebook" && <FacebookLogo className="wpn-layout__footer-social-icon" />}
+                      {social.icon === "instagram" && <InstagramLogo className="wpn-layout__footer-social-icon" />}
+                      {social.icon === "twitter" && <TwitterLogo className="wpn-layout__footer-social-icon" />}
+                      {social.icon === "linkedin" && <LinkedinLogo className="wpn-layout__footer-social-icon" />}
+                      {social.icon === "youtube" && <YoutubeLogo className="wpn-layout__footer-social-icon" />}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Notice Types Column 1 */}
+              <div className="wpn-layout__footer-column">
+                <h3 className="wpn-layout__footer-column-title">{text.noticeTypes}</h3>
+                <ul className="wpn-layout__footer-links">
+                  {footerNoticeTypesCol1.map((item, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={basePath + item.href}
+                        className="wpn-layout__footer-link"
+                      >
+                        {item.label[lang]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Notice Types Column 2 */}
+              <div className="wpn-layout__footer-column">
+                <h3 className="wpn-layout__footer-column-title">{text.moreCategories}</h3>
+                <ul className="wpn-layout__footer-links">
+                  {footerNoticeTypesCol2.map((item, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={basePath + item.href}
+                        className="wpn-layout__footer-link"
+                      >
+                        {item.label[lang]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Account & Resources Column */}
+              <div className="wpn-layout__footer-column">
+                <h3 className="wpn-layout__footer-column-title">{text.account}</h3>
+                <ul className="wpn-layout__footer-links">
+                  {footerAccount.map((item, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={basePath + item.href}
+                        className="wpn-layout__footer-link"
+                      >
+                        {item.label[lang]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal & Sitemap Column */}
+              <div className="wpn-layout__footer-column">
+                <h3 className="wpn-layout__footer-column-title">{text.legal}</h3>
+                <ul className="wpn-layout__footer-links">
+                  {footerLegal.map((item, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={basePath + item.href}
+                        className="wpn-layout__footer-link"
+                      >
+                        {item.label[lang]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            {/* Notice Types Column 2 */}
-            <div>
-              <h3 className="font-semibold mb-4">{text.moreCategories}</h3>
-              <ul className="space-y-2 text-sm">
-                {footerNoticeTypesCol2.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={basePath + item.href}
-                      className="wp-link text-white/70 hover:text-white"
-                    >
-                      {item.label[lang]}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Account & Resources Column */}
-            <div>
-              <h3 className="font-semibold mb-4">{text.account}</h3>
-              <ul className="space-y-2 text-sm">
-                {footerAccount.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={basePath + item.href}
-                      className="wp-link text-white/70 hover:text-white"
-                    >
-                      {item.label[lang]}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Legal & Sitemap Column */}
-            <div>
-              <h3 className="font-semibold mb-4">{text.legal}</h3>
-              <ul className="space-y-2 text-sm">
-                {footerLegal.map((item, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={basePath + item.href}
-                      className="wp-link text-white/70 hover:text-white"
-                    >
-                      {item.label[lang]}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-white/20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-white/70 text-center sm:text-left">
-              © {currentYear} Nova News. {text.allRightsReserved}.
-            </p>
-            <div className="flex gap-4 text-sm">
-              <Link to={basePath + "/terms"} className="wp-link text-white/70 hover:text-white">
-                {text.termsOfService}
-              </Link>
-              <span className="text-white/30">·</span>
-              <Link to={basePath + "/privacy"} className="wp-link text-white/70 hover:text-white">
-                {text.privacyPolicy}
-              </Link>
-              <span className="text-white/30">·</span>
-              <Link to={basePath + "/sitemap"} className="wp-link text-white/70 hover:text-white">
-                {lang === "en" ? "Sitemap" : "Werfkaart"}
-              </Link>
+            {/* Bottom Bar */}
+            <div className="wpn-layout__footer-bottom">
+              <p className="wpn-layout__footer-copyright">
+                © {currentYear} Nova News. {text.allRightsReserved}.
+              </p>
+              <div className="wpn-layout__footer-legal-links">
+                <Link to={basePath + "/terms"} className="wpn-layout__footer-link">
+                  {text.termsOfService}
+                </Link>
+                <span className="wpn-layout__footer-separator">·</span>
+                <Link to={basePath + "/privacy"} className="wpn-layout__footer-link">
+                  {text.privacyPolicy}
+                </Link>
+                <span className="wpn-layout__footer-separator">·</span>
+                <Link to={basePath + "/sitemap"} className="wpn-layout__footer-link">
+                  {lang === "en" ? "Sitemap" : "Werfkaart"}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

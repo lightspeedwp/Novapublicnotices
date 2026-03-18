@@ -1,0 +1,508 @@
+/**
+ * Sales Page — Complete BEM Styles
+ * Centralized styling for sales and marketing page
+ * 100% CSS variables from design system
+ */
+
+/* =================================================================
+   Sales Steps Container
+   ================================================================= */
+
+.wpn-sales-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.wpn-sales-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.wpn-sales-step__content {
+  flex: 1;
+}
+
+.wpn-sales-step__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--heading-h3-size);
+  font-weight: var(--heading-h3-weight);
+  line-height: var(--heading-h3-line-height);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-sales-step__card {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.wpn-sales-step__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+/* =================================================================
+   Step Badge
+   ================================================================= */
+
+.wpn-step-badge {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--nova-accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-heading);
+  font-size: var(--heading-h3-size);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-md);
+}
+
+/* =================================================================
+   Submission Options
+   ================================================================= */
+
+.wpn-submission-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-submission-option {
+  background-color: var(--muted);
+  border: 2px solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--duration-normal) var(--ease-out);
+  flex: 1 1 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-submission-option {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+}
+
+.wpn-submission-option:hover {
+  border-color: var(--nova-primary);
+}
+
+.wpn-submission-option--primary {
+  background-color: rgba(215, 0, 37, 0.03);
+  border-color: var(--nova-accent);
+}
+
+.wpn-submission-option__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-submission-option__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wpn-submission-option__list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-submission-option__list-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wpn-submission-option__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .wpn-submission-option__actions {
+    flex-direction: row;
+  }
+}
+
+/* =================================================================
+   Process Steps
+   ================================================================= */
+
+.wpn-process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.wpn-process-step__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-process-step__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Icon Badge
+   ================================================================= */
+
+.wpn-icon-badge {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--muted);
+  border: var(--border-width-1) solid var(--border-color-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wpn-icon-badge__icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Stats Grid
+   ================================================================= */
+
+.wpn-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.wpn-stat-box {
+  background-color: var(--muted);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  flex: 1 1 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-stat-box {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}
+
+.wpn-stat-box__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wpn-stat-box__content {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* =================================================================
+   Pricing Cards
+   ================================================================= */
+
+.wpn-pricing-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-pricing-card {
+  background-color: var(--card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+  position: relative;
+  flex: 1 1 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-pricing-card {
+    flex: 1 1 calc(33.333% - var(--space-4));
+  }
+}
+
+.wpn-pricing-card:hover {
+  border-color: var(--nova-accent);
+}
+
+.wpn-pricing-card--featured {
+  border-color: var(--nova-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.wpn-pricing-card__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--nova-accent);
+  color: #ffffff;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+}
+
+.wpn-pricing-card__header {
+  text-align: center;
+  padding-bottom: var(--space-6);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-pricing-card__icon {
+  width: var(--icon-size-2xl);
+  height: var(--icon-size-2xl);
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-4);
+  display: block;
+}
+
+.wpn-pricing-card__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--heading-h4-size);
+  font-weight: var(--heading-h4-weight);
+  color: var(--foreground);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-pricing-card__price {
+  font-family: var(--font-family-heading);
+  font-size: var(--heading-h2-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--nova-accent);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.wpn-pricing-card__period {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  display: block;
+}
+
+.wpn-pricing-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wpn-pricing-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-pricing-card__feature-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--nova-accent);
+  flex-shrink: 0;
+}
+
+/* =================================================================
+   Feature Grid
+   ================================================================= */
+
+.wpn-feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-feature-card {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform var(--duration-normal) var(--ease-out);
+  flex: 1 1 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-feature-card {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-feature-card {
+    flex: 1 1 calc(25% - var(--space-5));
+  }
+}
+
+.wpn-feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.wpn-feature-card__icon {
+  width: var(--icon-size-2xl);
+  height: var(--icon-size-2xl);
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-4);
+  display: block;
+}
+
+.wpn-feature-card__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-feature-card__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* =================================================================
+   FAQ List
+   ================================================================= */
+
+.wpn-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.wpn-faq-item {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.wpn-faq-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.wpn-faq-item__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.wpn-faq-item__icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: var(--nova-accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wpn-faq-item__question {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-faq-item__answer {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* =================================================================
+   Hero/Header Text — WHITE on Dark Backgrounds
+   ================================================================= */
+
+/* Ensure all hero/header titles and subtitles are white */
+.wpn-page-header__title--white,
+.wpn-heading--white {
+  color: #ffffff !important;
+}
+
+.wpn-page-header__subtitle--light,
+.wpn-text--white-muted {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* CTA Section on dark background */
+.wpn-bg--primary .wpn-heading-h2,
+.wpn-section.wpn-bg--primary h2 {
+  color: #ffffff;
+}
+
+.wpn-bg--primary .wpn-text-xl,
+.wpn-section.wpn-bg--primary .wpn-text-xl {
+  color: rgba(255, 255, 255, 0.9);
+}

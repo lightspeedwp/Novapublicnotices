@@ -1,0 +1,533 @@
+/**
+ * Theme Variables — CSS Custom Properties
+ * 
+ * All design tokens for the Nova Public Notices Portal.
+ * This file contains ONLY CSS custom properties (variables).
+ * No classes or selectors beyond :root and .dark.
+ * 
+ * Dependencies: None (root level variables)
+ * 
+ * Usage:
+ * - Import in theme.css or index.css
+ * - Reference via var(--variable-name)
+ * 
+ * Last Updated: 2026-03-16
+ * File Size: ~450 lines (within 600-line limit)
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* =================================================================
+     Nova News Brand Colors
+     ================================================================= */
+  --nova-primary: #09082f;
+  --nova-primary-hover: #1a1849;
+  --nova-accent: #d70025;
+  --nova-accent-hover: #b5001f;
+  --nova-blue: #549CBE;
+  
+  /* =================================================================
+     Category Colors — All 25 Public Notice Categories
+     ================================================================= */
+  
+  /* Estates */
+  --color-category-estates-bg: rgba(84, 156, 190, 0.1);
+  --color-category-estates-fg: #2c5f7d;
+  --color-category-estates-border: rgba(84, 156, 190, 0.3);
+  
+  /* Tenders */
+  --color-category-tenders-bg: rgba(215, 0, 37, 0.1);
+  --color-category-tenders-fg: #b5001f;
+  --color-category-tenders-border: rgba(215, 0, 37, 0.3);
+  
+  /* Liquor Licences */
+  --color-category-liquor-licences-bg: rgba(255, 159, 28, 0.1);
+  --color-category-liquor-licences-fg: #cc7700;
+  --color-category-liquor-licences-border: rgba(255, 159, 28, 0.3);
+  
+  /* Court Orders */
+  --color-category-court-orders-bg: rgba(120, 80, 160, 0.1);
+  --color-category-court-orders-fg: #6a4c93;
+  --color-category-court-orders-border: rgba(120, 80, 160, 0.3);
+  
+  /* Divorce / Antenuptial */
+  --color-category-divorce-bg: rgba(231, 76, 60, 0.1);
+  --color-category-divorce-fg: #c0392b;
+  --color-category-divorce-border: rgba(231, 76, 60, 0.3);
+  
+  /* Insolvent Estates */
+  --color-category-insolvent-estates-bg: rgba(155, 89, 182, 0.1);
+  --color-category-insolvent-estates-fg: #8e44ad;
+  --color-category-insolvent-estates-border: rgba(155, 89, 182, 0.3);
+  
+  /* Curatorship */
+  --color-category-curatorship-bg: rgba(52, 152, 219, 0.1);
+  --color-category-curatorship-fg: #2980b9;
+  --color-category-curatorship-border: rgba(52, 152, 219, 0.3);
+  
+  /* Surrender of Estate */
+  --color-category-surrender-of-estate-bg: rgba(149, 165, 166, 0.1);
+  --color-category-surrender-of-estate-fg: #7f8c8d;
+  --color-category-surrender-of-estate-border: rgba(149, 165, 166, 0.3);
+  
+  /* Environmental */
+  --color-category-environmental-bg: rgba(46, 204, 113, 0.1);
+  --color-category-environmental-fg: #27ae60;
+  --color-category-environmental-border: rgba(46, 204, 113, 0.3);
+  
+  /* Business Licences */
+  --color-category-business-licences-bg: rgba(241, 196, 15, 0.1);
+  --color-category-business-licences-fg: #f39c12;
+  --color-category-business-licences-border: rgba(241, 196, 15, 0.3);
+  
+  /* Sale in Execution */
+  --color-category-sale-in-execution-bg: rgba(230, 126, 34, 0.1);
+  --color-category-sale-in-execution-fg: #d35400;
+  --color-category-sale-in-execution-border: rgba(230, 126, 34, 0.3);
+  
+  /* Sale of Business */
+  --color-category-sale-of-business-bg: rgba(26, 188, 156, 0.1);
+  --color-category-sale-of-business-fg: #16a085;
+  --color-category-sale-of-business-border: rgba(26, 188, 156, 0.3);
+  
+  /* Town Planning */
+  --color-category-town-planning-bg: rgba(52, 73, 94, 0.1);
+  --color-category-town-planning-fg: #34495e;
+  --color-category-town-planning-border: rgba(52, 73, 94, 0.3);
+  
+  /* Pension / Provident */
+  --color-category-pension-provident-bg: rgba(142, 68, 173, 0.1);
+  --color-category-pension-provident-fg: #9b59b6;
+  --color-category-pension-provident-border: rgba(142, 68, 173, 0.3);
+  
+  /* Adoptions */
+  --color-category-adoptions-bg: rgba(255, 107, 129, 0.1);
+  --color-category-adoptions-fg: #e74c3c;
+  --color-category-adoptions-border: rgba(255, 107, 129, 0.3);
+  
+  /* Lost Documents */
+  --color-category-lost-documents-bg: rgba(189, 195, 199, 0.1);
+  --color-category-lost-documents-fg: #95a5a6;
+  --color-category-lost-documents-border: rgba(189, 195, 199, 0.3);
+  
+  /* Re-registrations */
+  --color-category-re-registrations-bg: rgba(41, 128, 185, 0.1);
+  --color-category-re-registrations-fg: #2980b9;
+  --color-category-re-registrations-border: rgba(41, 128, 185, 0.3);
+  
+  /* Demolition */
+  --color-category-demolition-bg: rgba(192, 57, 43, 0.1);
+  --color-category-demolition-fg: #c0392b;
+  --color-category-demolition-border: rgba(192, 57, 43, 0.3);
+  
+  /* Town Establishment */
+  --color-category-town-establishment-bg: rgba(127, 140, 141, 0.1);
+  --color-category-town-establishment-fg: #7f8c8d;
+  --color-category-town-establishment-border: rgba(127, 140, 141, 0.3);
+  
+  /* General Notices */
+  --color-category-general-bg: rgba(108, 122, 137, 0.1);
+  --color-category-general-fg: #6c7a89;
+  --color-category-general-border: rgba(108, 122, 137, 0.3);
+  
+  /* Name Changes */
+  --color-category-name-changes-bg: rgba(87, 96, 111, 0.1);
+  --color-category-name-changes-fg: #57606f;
+  --color-category-name-changes-border: rgba(87, 96, 111, 0.3);
+  
+  /* Company Notices */
+  --color-category-company-bg: rgba(39, 174, 96, 0.1);
+  --color-category-company-fg: #27ae60;
+  --color-category-company-border: rgba(39, 174, 96, 0.3);
+  
+  /* Municipalities */
+  --color-category-municipalities-bg: rgba(22, 160, 133, 0.1);
+  --color-category-municipalities-fg: #16a085;
+  --color-category-municipalities-border: rgba(22, 160, 133, 0.3);
+  
+  /* Government Gazette */
+  --color-category-government-gazette-bg: rgba(41, 128, 185, 0.1);
+  --color-category-government-gazette-fg: #2980b9;
+  --color-category-government-gazette-border: rgba(41, 128, 185, 0.3);
+  
+  /* Close Corporations */
+  --color-category-close-corporations-bg: rgba(211, 84, 0, 0.1);
+  --color-category-close-corporations-fg: #d35400;
+  --color-category-close-corporations-border: rgba(211, 84, 0, 0.3);
+  
+  /* =================================================================
+     Semantic Colors (UI System)
+     ================================================================= */
+  /* The default background color for the application. */
+  --background: rgba(255, 255, 255, 1.00);
+  /* The default color for elements or text that appears on top of the background. */
+  --foreground: rgba(9, 9, 9, 1.00);
+  /* The background color for cards, modals, and other containers. */
+  --card: rgba(255, 255, 255, 1.00);
+  /* The default color for text or elements that appear on top of cards, modals and other background containers. */
+  --card-foreground: rgba(9, 9, 9, 1.00);
+  /* The background color for dropdowns and tooltips. */
+  --popover: rgba(255, 255, 255, 1.00);
+  /* The default color for text or elements that appear on top of dropdowns and tooltips. */
+  --popover-foreground: rgba(9, 9, 9, 1.00);
+  /* The primary color used for buttons, links, and other interactive elements. */
+  --primary: rgba(30, 106, 255, 1.00);
+  /* The default color for text or elements that appear on top of primary colored elements. */
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  /* The secondary color used for secondary(but NOT-DESTRUCTIVE) buttons and interactive elements. */
+  --secondary: rgba(224, 224, 224, 1.00);
+  /* The default color for text or elements that appear on top of secondary colored elements. */
+  --secondary-foreground: rgba(44, 44, 44, 1.00);
+  /* The muted color used for less prominent elements, such as disabled buttons or disabled text. */
+  --muted: rgba(238, 238, 238, 1.00);
+  /* The default color for text or elements that appear on top of muted colored elements. */
+  --muted-foreground: rgba(117, 117, 117, 1.00);
+  /* The accent color used for highlights, links, and other interactive elements. */
+  --accent: rgba(0, 71, 208, 1.00);
+  /* The default color for text or elements that appear on top of accent colored elements. */
+  --accent-foreground: rgba(255, 255, 255, 1.00);
+  /* The color used for background in destructive actions, such as delete buttons or error messages. */
+  --destructive: rgba(204, 0, 0, 1.00);
+  /* The default color for text or elements that appear on top of destructive colored elements. */
+  --destructive-foreground: rgba(255, 255, 255, 1.00);
+  /* The default border color for elements such as inputs, buttons, and other containers. */
+  --border: rgba(220, 220, 220, 1.00);  /* Softer, much lighter gray - was too harsh at 117 */
+  /* The border color specifically for input fields - lighter blue for better UX */
+  --input-border: rgba(84, 156, 190, 0.4);
+  /* The default background color for input fields once the text has been filled. Should be either transparent or match the input-background. */
+  --input: rgba(245, 245, 245, 1.00);
+  /* The default background color for input fields, text areas, and other input elements. */
+  --input-background: rgba(245, 245, 245, 1.00);
+  /* The color for focus rings, outlines, and other focus indicators. */
+  --ring: rgba(30, 106, 255, 1.00);
+  
+  /* =================================================================
+     Chart Colors
+     ================================================================= */
+  --chart-1: rgba(30, 106, 255, 1.00);
+  --chart-2: rgba(0, 71, 208, 1.00);
+  --chart-3: rgba(21, 135, 1, 1.00);
+  --chart-4: rgba(223, 147, 0, 1.00);
+  --chart-5: rgba(204, 0, 0, 1.00);
+  
+  /* =================================================================
+     Sidebar Colors
+     ================================================================= */
+  --sidebar: rgba(255, 255, 255, 1.00);
+  --sidebar-foreground: rgba(9, 9, 9, 1.00);
+  --sidebar-primary: rgba(30, 106, 255, 1.00);
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-accent: rgba(0, 71, 208, 1.00);
+  --sidebar-accent-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-border: rgba(117, 117, 117, 1.00);
+  --sidebar-ring: rgba(30, 106, 255, 1.00);
+  
+  /* =================================================================
+     Spacing Scale — Fluid & Responsive with clamp()
+     Gap-First Approach: Scales from mobile (320px) to desktop (1440px+)
+     Tighter spacing on mobile, more generous spacing on desktop
+     ================================================================= */
+  
+  /* No spacing */
+  --space-0: 0;
+  
+  /* Small Spacing — Minimal scaling for compact mobile layouts */
+  --space-1: clamp(0.1875rem, 0.175rem + 0.05vw, 0.25rem);      /* 3px → 4px */
+  --space-2: clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem);          /* 6px → 8px */
+  --space-3: clamp(0.625rem, 0.575rem + 0.2vw, 0.75rem);        /* 10px → 12px */
+  --space-4: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);             /* 14px → 16px */
+  
+  /* Medium Spacing — Moderate scaling for balanced layouts */
+  --space-5: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);              /* 16px → 20px */
+  --space-6: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* 20px → 24px */
+  --space-8: clamp(1.625rem, 1.4rem + 0.9vw, 2rem);             /* 26px → 32px */
+  
+  /* Large Spacing — Progressive scaling for generous desktop layouts */
+  --space-10: clamp(2rem, 1.7rem + 1.2vw, 2.5rem);              /* 32px → 40px */
+  --space-12: clamp(2.375rem, 2rem + 1.5vw, 3rem);              /* 38px → 48px */
+  --space-16: clamp(3rem, 2.5rem + 2vw, 4rem);                  /* 48px → 64px */
+  --space-20: clamp(3.75rem, 3rem + 3vw, 5rem);                 /* 60px → 80px */
+  
+  /* =================================================================
+     Typography Scale — Fluid & Responsive with clamp()
+     Scales smoothly from mobile (320px) to desktop (1440px+)
+     ================================================================= */
+  
+  /* Body text sizes — minimal scaling for readability */
+  --text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);        /* 11px → 12px */
+  --text-sm: clamp(0.8125rem, 0.775rem + 0.15vw, 0.875rem);      /* 13px → 14px */
+  --text-base: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);          /* 15px → 16px */
+  --text-md: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);            /* 16px → 17px */
+  
+  /* Heading sizes — progressive fluid scaling */
+  --text-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);             /* 20px → 24px */
+  --text-xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);                /* 24px → 32px */
+  --text-2xl: clamp(1.875rem, 1.625rem + 1vw, 2.5rem);           /* 30px → 40px */
+  --text-3xl: clamp(2.25rem, 1.875rem + 1.5vw, 3rem);            /* 36px → 48px */
+  --text-4xl: clamp(2.75rem, 2.25rem + 2vw, 3.75rem);            /* 44px → 60px */
+  --text-5xl: clamp(3.25rem, 2.625rem + 2.5vw, 4.5rem);          /* 52px → 72px */
+  --text-6xl: clamp(4rem, 3rem + 4vw, 6rem);                     /* 64px → 96px */
+  
+  /* Special hero size — dramatic scaling */
+  --text-hero: clamp(3rem, 2.375rem + 2.5vw, 4rem);              /* 48px → 64px */
+  
+  /* Font Weights — Reduced by 100 for lighter, more readable text */
+  --font-weight-thin: 100;
+  --font-weight-light: 200;
+  --font-weight-normal: 300;
+  --font-weight-regular: 300;
+  --font-weight-medium: 400;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 500;  /* Reduced from 600 for lighter feel */
+  --font-weight-extrabold: 600;  /* Reduced from 700 */
+  
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.15;
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Font Families */
+  --font-family-lexend: 'Lexend', sans-serif;
+  --font-family-heading: var(--font-family-lexend);
+  --font-family-body: var(--font-family-lexend);
+  --font-family-meta: var(--font-family-lexend);
+  
+  /* =================================================================
+     Heading Presets (H1-H6) — Fluid & Responsive
+     All sizes automatically scale with viewport using clamp()
+     ================================================================= */
+  /* H1 - Page Title / Hero */
+  --heading-h1-size: var(--text-4xl);        /* 44px → 60px fluid */
+  --heading-h1-weight: var(--font-weight-semibold);  /* 500 */
+  --heading-h1-line-height: var(--line-height-tight);
+  
+  /* H2 - Section Title */
+  --heading-h2-size: var(--text-3xl);        /* 36px → 48px fluid */
+  --heading-h2-weight: var(--font-weight-semibold);  /* 500 */
+  --heading-h2-line-height: var(--line-height-snug);
+  
+  /* H3 - Subsection Title */
+  --heading-h3-size: var(--text-2xl);        /* 30px → 40px fluid */
+  --heading-h3-weight: var(--font-weight-semibold);  /* 500 */
+  --heading-h3-line-height: var(--line-height-snug);
+  
+  /* H4 - Card Title */
+  --heading-h4-size: var(--text-xl);         /* 24px → 32px fluid */
+  --heading-h4-weight: var(--font-weight-semibold);  /* 500 */
+  --heading-h4-line-height: var(--line-height-snug);
+  
+  /* H5 - Small Heading */
+  --heading-h5-size: var(--text-lg);         /* 20px → 24px fluid */
+  --heading-h5-weight: var(--font-weight-medium);    /* 400 */
+  --heading-h5-line-height: var(--line-height-snug);
+  
+  /* H6 - Tiny Heading */
+  --heading-h6-size: var(--text-base);       /* 15px → 16px fluid */
+  --heading-h6-weight: var(--font-weight-medium);    /* 400 */
+  --heading-h6-line-height: var(--line-height-normal);
+  
+  /* =================================================================
+     Component Tokens — Buttons
+     ================================================================= */
+  --button-height-sm: 44px;
+  --button-height-md: 48px;
+  --button-height-lg: 56px;
+  --button-padding-sm: 0 var(--space-4);
+  --button-padding-md: 0 var(--space-5);
+  --button-padding-lg: 0 var(--space-6);
+  --button-gap: var(--space-2);
+  
+  /* =================================================================
+     Component Tokens — Form Fields
+     ================================================================= */
+  --form-field-height: 48px;
+  --form-field-padding-x: var(--space-4);
+  --form-field-padding-y: var(--space-3);
+  --form-field-radius: var(--radius-md);
+  --form-field-border: var(--border);
+  --form-field-background: var(--input-background);
+  --form-field-text: var(--foreground);
+  --form-field-placeholder: var(--muted-foreground);
+  --form-field-focus-ring: var(--ring);
+  --form-field-error: var(--destructive);
+  
+  /* =================================================================
+     Icon Sizes
+     ================================================================= */
+  --icon-size-xs: 12px;
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 32px;
+  --icon-size-2xl: 48px;
+  --icon-size-3xl: 64px;
+  --icon-size-4xl: 80px;
+  --icon-size-5xl: 96px;
+  --icon-size-hero: 72px;
+  
+  /* =================================================================
+     Border System
+     ================================================================= */
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-color-default: var(--border);
+  --border-color-strong: #d1d5db;  /* Softer medium-light gray instead of harsh #bdbdbd */
+  --border-color-brand: var(--nova-primary);
+  --border-color-accent: var(--nova-accent);
+  
+  /* Lighter border colors for cards and containers */
+  --border-color-light: #e5e7eb;
+  --border-color-subtle: #f3f4f6;
+  --border-color-hover: var(--nova-primary);
+  
+  /* Card-specific borders */
+  --card-border-width: 1px;
+  --card-border-color: var(--border-color-light);
+  --card-border-color-hover: var(--nova-primary);
+  
+  /* =================================================================
+     Border Radius
+     ================================================================= */
+  --radius: 4px;
+  --radius-button: 4px;
+  --radius-card: 8px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+  
+  /* =================================================================
+     Elevation & Shadows
+     ================================================================= */
+  --elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --elevation-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Shadow Aliases */
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-xl: var(--elevation-xl);
+  --shadow-hover: var(--elevation-md);
+  
+  /* =================================================================
+     Navigation Tokens
+     ================================================================= */
+  --nav-height-desktop: 80px;
+  --nav-height-mobile: 64px;
+  --nav-surface: var(--card);
+  --nav-surface-inverse: var(--nova-primary);
+  --nav-link-color: var(--foreground);
+  --nav-link-hover: var(--nova-primary);
+  --nav-link-active: var(--nova-accent);
+  --nav-border: var(--border-color-default);
+  
+  /* =================================================================
+     Status Colors
+     ================================================================= */
+  --status-published-bg: #eaf6ef;
+  --status-published-fg: #1f6d3d;
+  --status-pending-bg: #fff4e5;
+  --status-pending-fg: #9c5b00;
+  --status-draft-bg: #eef2f7;
+  --status-draft-fg: #46566b;
+  --status-archived-bg: #f2f2f2;
+  --status-archived-fg: #5f5f5f;
+  
+  /* Info Box & Alert Colors */
+  --success-bg: #f0fdf4;
+  --success-fg: #22c55e;
+  --info-bg: #eff6ff;
+  --info-fg: #3b82f6;
+  --warning-bg: #fefce8;
+  --warning-fg: #eab308;
+  
+  /* Info Banner Colors (for important notices and instructions) */
+  --info-banner-bg: rgba(59, 130, 246, 0.1);
+  --info-banner-border: rgb(59, 130, 246);
+  --info-banner-icon: rgb(59, 130, 246);
+  --info-banner-text: rgb(30, 64, 175);
+  
+  /* =================================================================
+     Animation & Motion
+     ================================================================= */
+  /* Durations */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+  
+  /* Easing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Hover Transforms */
+  --hover-scale: 1.02;
+  --hover-scale-sm: 1.01;
+  --hover-scale-lg: 1.05;
+  --hover-translate-y: -2px;
+  --hover-translate-y-sm: -1px;
+  --hover-translate-y-lg: -4px;
+  
+  /* =================================================================
+     Layout Tokens
+     ================================================================= */
+  --container-max-width: 1440px;
+}
+
+/* =================================================================
+   Dark Mode Overrides
+   ================================================================= */
+
+.dark {
+  --background: rgba(9, 9, 9, 1.00);
+  --foreground: rgba(255, 255, 255, 1.00);
+  --card: rgba(44, 44, 44, 1.00);
+  --card-foreground: rgba(255, 255, 255, 1.00);
+  --popover: rgba(44, 44, 44, 1.00);
+  --popover-foreground: rgba(255, 255, 255, 1.00);
+  --primary: rgba(30, 106, 255, 1.00);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --secondary: rgba(117, 117, 117, 1.00);
+  --secondary-foreground: rgba(255, 255, 255, 1.00);
+  --muted: rgba(117, 117, 117, 1.00);
+  --muted-foreground: rgba(224, 224, 224, 1.00);
+  --accent: rgba(0, 71, 208, 1.00);
+  --accent-foreground: rgba(255, 255, 255, 1.00);
+  --destructive: rgba(204, 0, 0, 1.00);
+  --destructive-foreground: rgba(255, 255, 255, 1.00);
+  --border: rgba(117, 117, 117, 1.00);
+  --input: rgba(44, 44, 44, 1.00);
+  --input-background: rgba(44, 44, 44, 1.00);
+  --ring: rgba(30, 106, 255, 1.00);
+  --chart-1: rgba(30, 106, 255, 1.00);
+  --chart-2: rgba(0, 71, 208, 1.00);
+  --chart-3: rgba(21, 135, 1, 1.00);
+  --chart-4: rgba(223, 147, 0, 1.00);
+  --chart-5: rgba(204, 0, 0, 1.00);
+  --sidebar: rgba(44, 44, 44, 1.00);
+  --sidebar-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-primary: rgba(30, 106, 255, 1.00);
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-accent: rgba(0, 71, 208, 1.00);
+  --sidebar-accent-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-border: rgba(117, 117, 117, 1.00);
+  --sidebar-ring: rgba(30, 106, 255, 1.00);
+}

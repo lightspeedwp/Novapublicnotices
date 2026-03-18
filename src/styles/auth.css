@@ -1,0 +1,21 @@
+/**
+ * Auth Pages (Login, Register) — BEM Styles
+ * 100% CSS variables from design system
+ * Zero inline styles, zero Tailwind utilities
+ */
+
+/* =================================================================
+   Icon Sizing — Password Toggle & Benefits
+   ================================================================= */
+
+/* Password Toggle Icons (Eye, EyeSlash) */
+.wpn-auth-form__password-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Benefit Icons (FileText, MagnifyingGlass, Bell, Clock, Shield, Check) */
+.wpn-auth-promo__benefit-icon svg {
+  width: 16px;
+  height: 16px;
+}

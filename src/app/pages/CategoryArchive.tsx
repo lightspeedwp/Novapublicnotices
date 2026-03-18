@@ -1,88 +1,186 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router";
 import Layout from "../components/Layout";
-import SearchFilterBar from "../components/SearchFilterBar";
-import NoticeCard from "../components/NoticeCard";
+import Hero from "../components/Hero";
+import StatsBlock from "../components/StatsBlock";
+import NoticeGrid from "../components/NoticeGrid";
 import AdSlot from "../components/AdSlot";
-import CategoryBadge from "../components/CategoryBadge";
 import { Button } from "../components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { sampleNotices } from "../data/sampleNotices";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { getNoticesByCategory } from "../lib/search";
+import { generateCategoryStatsData } from "../lib/noticeHelpers";
+import { getCategoryBySlug } from "../data/categories";
+import type { HeroData } from "../data/heroes/types";
+import "../../styles/components.css";
+import "../../styles/category-archive.css";
 
 export default function CategoryArchive() {
   const { slug } = useParams();
-  const categoryNotices = sampleNotices.filter((n) => n.category === slug);
-  const currentPage = 1;
-  const totalPages = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const noticesPerPage = 12;
+
+  // Get category configuration
+  const category = getCategoryBySlug(slug || "");
+  const lang = "en"; // TODO: Get from context/route
+
+  // Filter notices by category using the search helper
+  const categoryNotices = getNoticesByCategory(slug || "", lang);
+
+  const totalResults = categoryNotices.length;
+  const totalPages = Math.ceil(totalResults / noticesPerPage);
+
+  // Paginate results
+  const startIndex = (currentPage - 1) * noticesPerPage;
+  const endIndex = startIndex + noticesPerPage;
+  const paginatedNotices = categoryNotices.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Generate pagination items
+  const getPaginationItems = () => {
+    const items: (number | string)[] = [];
+    
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        items.push(i);
+      }
+    } else {
+      items.push(1);
+      
+      if (currentPage > 3) {
+        items.push("...");
+      }
+      
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+      
+      for (let i = start; i <= end; i++) {
+        items.push(i);
+      }
+      
+      if (currentPage < totalPages - 2) {
+        items.push("...");
+      }
+      
+      items.push(totalPages);
+    }
+    
+    return items;
+  };
+
+  // Get category name from data (or fallback to slug formatting)
+  const categoryName = category?.name[lang] || slug
+    ?.split("-")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ") || "";
+
+  // Generate category stats
+  const categoryStats = generateCategoryStatsData(slug || "", lang);
+
+  // Create Hero data with optional category-specific overrides
+  const heroData: HeroData = {
+    title: `${categoryName} notices`,
+    description: category?.heroDescription?.[lang] || 
+                 `Browse all ${categoryName.toLowerCase()} public notices. Updated daily with new notices from across South Africa.`,
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Categories', href: '/search' },
+      { label: categoryName },
+    ],
+    size: category?.heroSize || 'md',
+    alignment: 'left',
+    layout: category?.heroLayout || 'default',
+  };
 
   return (
     <Layout lang="en" showAds={true}>
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <nav className="text-sm text-gray-600 mb-6">
-            <Link to="/" className="hover:text-[#09082f]">Home</Link>
-            {" / "}
-            <Link to="/search" className="hover:text-[#09082f]">Search</Link>
-            {" / "}
-            <span className="text-gray-900 capitalize">{slug?.replace("-", " ")}</span>
-          </nav>
+      {/* Hero Section */}
+      <Hero data={heroData} lang="en" />
 
-          <div className="mb-6">
-            <h1 className="font-raleway text-3xl font-bold text-[#09082f] mb-2">
-              {slug?.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
-            </h1>
-            <p className="text-gray-600">
-              Showing {categoryNotices.length} notices in this category
-            </p>
-          </div>
-
-          <SearchFilterBar lang="en" showResults={true} resultCount={categoryNotices.length} />
-
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <div className="flex flex-col gap-4">
-                {categoryNotices.map((notice) => (
-                  <NoticeCard
-                    key={notice.id}
-                    id={notice.id}
-                    title={notice.title.en}
-                    category={notice.category}
-                    publishDate={notice.publishDate}
-                    location={notice.location}
-                    referenceNumber={notice.referenceNumber}
-                    excerpt={notice.excerpt.en}
-                    publisher={notice.publisher}
-                    lang="en"
-                  />
-                ))}
-              </div>
-
-              <div className="mt-8 flex items-center justify-center gap-2">
-                <Button variant="outline" size="sm" disabled={currentPage === 1}>
-                  <ChevronLeft className="size-4" />
-                </Button>
-                {[1, 2, 3, "...", totalPages].map((page, index) => (
-                  <Button
-                    key={index}
-                    variant={page === currentPage ? "default" : "outline"}
-                    size="sm"
-                    className={page === currentPage ? "bg-[#09082f] hover:bg-[#09082f]/90" : ""}
-                    disabled={page === "..."}
-                  >
-                    {page}
-                  </Button>
-                ))}
-                <Button variant="outline" size="sm" disabled={currentPage === totalPages}>
-                  <ChevronRight className="size-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <AdSlot slot="ad_sidebar_1" height={250} />
-              <AdSlot slot="ad_sidebar_2" height={250} />
-            </div>
-          </div>
+      {/* Stats Block */}
+      <section className="wpn-section--sm wpn-section--muted">
+        <div className="wpn-container">
+          <StatsBlock stats={categoryStats} showIcons={true} />
         </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="wpn-container wpn-results-layout">
+        <div className="wpn-results-layout__main">
+          {paginatedNotices.length > 0 ? (
+            <>
+              <NoticeGrid 
+                notices={paginatedNotices} 
+                lang="en"
+                columns={3}
+              />
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="wpn-pagination">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="wpn-pagination__button"
+                  >
+                    <CaretLeft />
+                  </Button>
+
+                  {getPaginationItems().map((page, index) => (
+                    <Button
+                      key={index}
+                      variant={page === currentPage ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => typeof page === "number" && handlePageChange(page)}
+                      disabled={page === "..."}
+                      className={
+                        page === currentPage
+                          ? "wpn-pagination__button wpn-pagination__button--active"
+                          : "wpn-pagination__button"
+                      }
+                    >
+                      {page}
+                    </Button>
+                  ))}
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="wpn-pagination__button"
+                  >
+                    <CaretRight />
+                  </Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="wpn-empty-state">
+              <p className="wpn-empty-state__title">
+                No notices found in this category.
+              </p>
+              <div className="wpn-mt-4">
+                <Button variant="outline" className="wpn-button wpn-button--outline" asChild>
+                  <Link to="/search">Browse All Categories</Link>
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <aside className="wpn-results-layout__sidebar">
+          <div className="wpn-results-layout__sidebar-inner">
+            <AdSlot slot="ad_sidebar_1" height={250} />
+            <AdSlot slot="ad_sidebar_2" height={250} />
+          </div>
+        </aside>
       </div>
     </Layout>
   );

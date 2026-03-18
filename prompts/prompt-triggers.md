@@ -1,230 +1,390 @@
-# Prompt Triggers
+# Prompt Triggers — Nova Public Notices Portal
 
-Quick reference for when to use each prompt file.
+**Category:** Reference  
+**Version:** 5.0.0  
+**Last Updated:** 2026-03-18  
+**Status:** Active
 
-## When to Use Each Prompt
+---
 
-### `/prompts/cleanup.md`
-**Trigger phrases:**
-- "Clean up the codebase"
-- "Audit against guidelines"
-- "Remove inline styles"
-- "Fix standards violations"
-- "Prepare for production"
-- "Code quality check"
-- "Enforce project rules"
+## Purpose
 
-**Use when:**
-- Starting a new sprint
-- Before major releases
-- After rapid prototyping
-- When technical debt accumulates
-- Before WordPress handoff
+Quick reference guide for all prompt trigger words in the Nova Public Notices Portal project. Type any trigger word to execute the corresponding audit or task.
 
-### `/prompts/continue.md`
-**Trigger phrases:**
-- "Continue development"
-- "Resume work"
-- "What's next?"
-- "How do I start?"
-- "Show me the project structure"
-- "I'm new to this project"
+---
 
-**Use when:**
-- Starting a work session
-- Onboarding a new developer
-- Returning after a break
-- Context switching from another project
-- Need to understand project conventions
+## Master Orchestrators
 
-### `/guidelines/Guidelines.md`
-**Trigger phrases:**
-- "What are the project rules?"
-- "How should I structure this?"
-- "Is this allowed?"
-- "What's the standard for...?"
-- "Show me the requirements"
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `audit` | `/prompts/orchestrator.md` | Run all audit sub-prompts in sequence |
+| `orchestrator` | `/prompts/orchestrator.md` | Same as `audit` |
+| `archive` | `/prompts/archive-orchestrator.md` | Run all archive-* prompts in sequence |
+| `cleanup` | `/prompts/cleanup-orchestrator.md` | Run all cleanup-* prompts + archive |
+| `update` | `/prompts/update-orchestrator.md` | Run all update-* prompts in sequence |
+| `expand` | `/prompts/expand-orchestrator.md` | Run all expand-* prompts in sequence |
+| `optimise` or `optimize` | `/prompts/optimise.md` | Run all optimization prompts in sequence |
 
-**Use when:**
-- Making architectural decisions
-- Resolving code review questions
-- Planning new features
-- Settling team debates
-- Documenting exceptions
+---
 
-## Common Scenarios
+## Optimization Prompts (NEW)
 
-### Scenario: New Developer Joining
-1. Read `/guidelines/Guidelines.md`
-2. Follow `/prompts/continue.md` setup section
-3. Review recent reports in `/reports/`
-4. Check `/tasks/task-list.md` for available work
+### Core Optimizations
 
-### Scenario: Starting New Feature
-1. Check `/guidelines/Guidelines.md` for relevant section
-2. Follow `/prompts/continue.md` "Starting a New Feature" workflow
-3. Create data files first (EN + AF)
-4. Implement with semantic classes
-5. Update `/tasks/task-list.md`
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `optimise memory` | `/prompts/optimise-memory.md` | File size & memory optimization |
+| `optimize memory` | `/prompts/optimise-memory.md` | (American spelling alias) |
+| `optimise performance` | `/prompts/optimise-performance.md` | Runtime performance & Web Vitals (TO CREATE) |
+| `optimise assets` | `/prompts/optimise-assets.md` | Static asset optimization (TO CREATE) |
+| `optimise css` | `/prompts/optimise-css.md` | CSS architecture optimization (TO CREATE) |
+| `optimise components` | `/prompts/optimise-components.md` | Component consolidation (TO CREATE) |
+| `optimise data` | `/prompts/optimise-data.md` | Data structure optimization (TO CREATE) |
 
-### Scenario: Code Review Fails
-1. Run `/prompts/cleanup.md` audit
-2. Check specific guideline sections
-3. Fix violations
-4. Re-submit for review
+### Quality Optimizations
 
-### Scenario: Preparing for WordPress Handoff
-1. Run full `/prompts/cleanup.md` audit
-2. Verify all guidelines met
-3. Generate `/reports/` documentation
-4. Create handoff checklist in `/docs/`
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `optimise accessibility` | `/prompts/optimise-accessibility.md` | A11y improvements (TO CREATE) |
+| `optimise a11y` | `/prompts/optimise-accessibility.md` | (Shorthand alias) |
+| `optimise seo` | `/prompts/optimise-seo.md` | SEO optimization (TO CREATE) |
 
-### Scenario: Technical Debt Accumulating
-1. Schedule cleanup sprint
-2. Run `/prompts/cleanup.md` checklist
-3. Document findings in `/reports/`
-4. Create remediation tasks in `/tasks/`
+### Specialized Optimizations
 
-### Scenario: Bilingual Content Update
-1. Locate relevant data files in `/src/app/data/`
-2. Update both `.en.ts` and `.af.ts` files
-3. Verify types match
-4. Test language switching
-5. Follow `/guidelines/Guidelines.md` section 12
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `optimise fonts` | `/prompts/optimise-fonts.md` | Font optimization (TO CREATE) |
+| `optimise images` | `/prompts/optimise-images.md` | Image optimization (TO CREATE) |
+| `optimise bundle` | `/prompts/optimise-bundle.md` | Bundle size reduction (TO CREATE) |
+| `optimise forms` | `/prompts/optimise-forms.md` | Form optimization (TO CREATE) |
+| `optimise routing` | `/prompts/optimise-routing.md` | Route optimization (TO CREATE) |
+| `optimise animation` | `/prompts/optimise-animation.md` | Animation performance (TO CREATE) |
+| `optimise state` | `/prompts/optimise-state.md` | State management (TO CREATE) |
+| `optimise caching` | `/prompts/optimise-caching.md` | Cache strategy (TO CREATE) |
+| `optimise testing` | `/prompts/optimise-testing.md` | Test suite optimization (TO CREATE) |
 
-### Scenario: Adding New Notice Category
-1. Review `/guidelines/Guidelines.md` section 9
-2. Update category data files (EN + AF)
-3. Add category-specific fields if needed
-4. Update category badge component
-5. Test search and filtering
-6. Document in `/CHANGELOG.md`
+---
 
-### Scenario: Styling Question
-1. Check `/src/styles/theme.css` for available tokens
-2. Review `/guidelines/Guidelines.md` section 13
-3. Use semantic class names
-4. Never use inline styles
-5. Test in both languages
+## Audit Prompts
 
-### Scenario: Authentication Flow Change
-1. Review `/guidelines/Guidelines.md` section 8.1
-2. Update both logged-in and logged-out states
-3. Update data files in `/src/app/data/auth/`
-4. Test access control rules
-5. Document behavior
+### Architecture Audits
 
-### Scenario: Performance Issue
-1. Check file sizes (max 500 lines recommended)
-2. Review `/guidelines/Guidelines.md` section 16
-3. Implement lazy loading if needed
-4. Split large data files
-5. Audit component rendering
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `audit locale` | `/prompts/audit-locale.md` | Bilingual architecture & route equivalence |
+| `audit routing` | `/prompts/audit-routing.md` | Route integrity & bilingual navigation |
+| `audit data` | `/prompts/audit-data.md` | Notice data architecture, bilingual pairs, type safety |
 
-## Quick Decision Tree
+### Styling & Design System
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `audit styling` | `/prompts/audit-styling.md` | CSS variables, no inline styles, semantic classes |
+| `audit css` | `/prompts/audit-css.md` | CSS architecture, imports, WordPress classes |
+| `audit tokens` | `/prompts/audit-tokens.md` | CSS variable compliance, font face enforcement |
+| `audit phosphor` | `/prompts/audit-phosphor.md` | Phosphor Icons usage, no legacy Lucide icons |
+
+### Template Parts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `audit header` | `/prompts/audit-header.md` | Header template part consistency across all pages |
+| `audit footer` | `/prompts/audit-footer.md` | Footer template part consistency across all pages |
+| `audit hero` | `/prompts/audit-hero.md` | Hero template part usage on ALL pages and templates |
+
+### Accessibility
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `audit accessibility` | `/prompts/audit-accessibility.md` | Comprehensive WCAG 2.1 AA audit with bilingual support |
+| `audit a11y` | `/prompts/audit-a11y.md` | Quick accessibility check |
+
+### Performance
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `audit performance` | `/prompts/audit-performance.md` | Render performance, assets, bundle size |
+
+---
+
+## Archive Prompts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------| 
+| `archive prompts` | `/prompts/archive-prompts.md` | Review and archive specific/completed prompts |
+| `archive reports` | `/prompts/archive-reports.md` | Review and archive old audit reports |
+| `archive tasks` | `/prompts/archive-tasks.md` | Review and archive completed task lists |
+| `archive guidelines` | `/prompts/archive-guidelines.md` | Review and archive deprecated guidelines |
+
+---
+
+## Maintenance Prompts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `migrate icons` | `/prompts/migrate-icons.md` | Migrate from Lucide to Phosphor Icons |
+| `cleanup` | `/prompts/cleanup.md` | Enforce project standards across codebase |
+| `update triggers` | `/prompts/update-triggers.md` | Update trigger registry and check circular references |
+
+---
+
+## Update Prompts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `update data` | `/prompts/update-data.md` | Migrate hard-coded content to data files |
+| `update routes` | `/prompts/update-routes.md` | Synchronize React Router configuration |
+| `update sitemap` | `/prompts/update-sitemap.md` | Generate current application sitemap |
+| `update guidelines` | `/prompts/update-guidelines.md` | Sync project standards documentation |
+| `update prompts` | `/prompts/update-prompts.md` | Maintain prompt file system |
+| `update reports` | `/prompts/update-reports.md` | Organize and index audit reports |
+| `update tasks` | `/prompts/update-tasks.md` | Synchronize task tracking |
+| `update status` | `/prompts/update-status.md` | Generate project health dashboard |
+
+---
+
+## Expand Prompts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `expand prompts` | `/prompts/expand-prompts.md` | AI-driven prompt recommendations from chat history |
+| `expand guidelines` | `/prompts/expand-guidelines.md` | AI-driven guideline recommendations from chat history |
+| `expand functionality` | `/prompts/expand-functionality.md` | AI-driven feature recommendations based on gaps and industry standards |
+| `expand pages` | `/prompts/expand-pages.md` | AI-driven page recommendations based on user journeys and requirements |
+| `expand templates` | `/prompts/expand-templates.md` | Template pattern analysis and reusable template recommendations |
+| `expand patterns` | `/prompts/expand-patterns.md` | Block pattern analysis and reusable UI section recommendations |
+| `expand components` | `/prompts/expand-components.md` | Component architecture analysis and atomic component recommendations |
+| `expand data` | `/prompts/expand-data.md` | Data structure analysis and shared interface recommendations |
+| `expand triggers` | `/prompts/expand-triggers.md` | Meta-trigger analysis for gaps and orchestrator opportunities |
+| `expand dev-tools` | `/prompts/expand-dev-tools.md` | Development workflow analysis and automation recommendations |
+| `expand blocks` | `/prompts/expand-blocks.md` | Block component analysis following WordPress architecture |
+| `expand parts` | `/prompts/expand-parts.md` | Template part analysis and variant system recommendations |
+| `expand styles` | `/prompts/expand-styles.md` | Style architecture analysis and BEM/CSS variable compliance |
+
+---
+
+## Utility Prompts
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `process reports` | `/prompts/process-reports.md` | Organize reports, create task lists from audits |
+| `status` | `/prompts/status.md` | Project health dashboard, metrics, compliance check |
+| `continue` | `/prompts/continue.md` | Continue previous work session |
+| `data expansion` | `/prompts/data-expansion.md` | Expand notice data for categories |
+
+---
+
+## Trigger Word Patterns
+
+### Base Triggers
+
+Use the base trigger to run the full audit:
+```
+audit accessibility    → Full accessibility audit
+audit locale          → Full locale architecture audit
+audit styling         → Full styling system audit
+```
+
+### Combined Triggers
+
+Run multiple audits in sequence:
+```
+audit locale, styling, routing    → Run 3 audits
+audit performance, accessibility  → Run 2 audits
+```
+
+### Chained Triggers
+
+Execute audit then process results:
+```
+audit && process reports    → Run all audits, then generate task lists
+```
+
+---
+
+## Nova Public Notices Specific Triggers
+
+### Notice-Specific Audits
+
+These audits check notice portal functionality:
+
+| Focus Area | Trigger | Checks |
+|------------|---------|--------|
+| **Notice Data** | `audit data model` | Category fields, taxonomy completeness, notice structure |
+| **Notice Search** | `audit functionality` | Search filters, locale filtering, pagination |
+| **Notice Cards** | `audit performance` | Card render performance, image optimization |
+| **Notice Forms** | `audit accessibility` | Submit notice form accessibility, validation |
+| **Bilingual Routes** | `audit locale` | EN/AF route pairs, language switcher |
+
+### Moderation & Workflows
+
+To be created as project progresses:
+
+| Trigger | Purpose |
+|---------|---------|
+| `audit moderation` | Check moderation workflow completeness |
+| `audit checkout` | Verify WooCommerce-aligned checkout flow |
+| `audit forms` | Validate all form submissions and validation |
+
+---
+
+## Quick Audit Cheat Sheet
+
+### Before Deployment
+```bash
+# Run full audit suite
+audit
+
+# Or run critical audits only
+audit locale, accessibility, performance, styling
+```
+
+### After Adding Features
+```bash
+# Added new notice category
+audit data model, functionality
+
+# Added new bilingual page
+audit locale, routing, accessibility
+
+# Modified styles
+audit styling, responsive, layout
+
+# Added images
+audit performance, accessibility
+```
+
+### Weekly Health Check
+```bash
+# Core compliance
+audit locale, styling, accessibility
+
+# Generate reports
+audit && process reports
+```
+
+---
+
+## Trigger Response Format
+
+All audit prompts follow this standard response:
+
+1. **Read Guidelines** — Load relevant guideline files
+2. **Scan Files** — Audit specified files/components
+3. **Identify Issues** — Critical, major, minor
+4. **Apply Fixes** — Auto-fix where safe
+5. **Generate Report** — Save to `/reports/YYYY-MM-DD-{audit-name}.md`
+6. **Output Summary** — Display findings count and next steps
+
+---
+
+## Report Naming Convention
+
+All audit reports saved to `/reports/` with date prefix:
 
 ```
-Need to understand project rules?
-  → /guidelines/Guidelines.md
-
-Need to start working?
-  → /prompts/continue.md
-
-Need to fix code quality?
-  → /prompts/cleanup.md
-
-Need to add bilingual content?
-  → /guidelines/Guidelines.md section 12
-  → Check /src/app/data/ structure
-
-Need to add new page?
-  → /prompts/continue.md "Adding a New Page"
-  → /guidelines/Guidelines.md section 7
-
-Need to style something?
-  → /guidelines/Guidelines.md section 13
-  → Check /src/styles/theme.css
-
-Unsure if something is allowed?
-  → /guidelines/Guidelines.md section 4
-
-Need to organize files?
-  → /guidelines/Guidelines.md section 6
-
-Need to understand routes?
-  → /guidelines/Guidelines.md section 8
-  → Check /src/app/routes.tsx
+/reports/YYYY-MM-DD-locale-audit.md
+/reports/YYYY-MM-DD-styling-audit.md
+/reports/YYYY-MM-DD-accessibility-audit.md
+/reports/YYYY-MM-DD-performance-audit.md
+/reports/YYYY-MM-DD-routing-audit.md
 ```
 
-## Emergency Reference
+---
 
-### "I broke something!"
-1. Check console for errors
-2. Verify TypeScript compilation
-3. Review recent changes in git
-4. Check if data files match types
-5. Test authentication state
-6. Verify language switching
+## Task List Generation
 
-### "Where does this file go?"
-- Prompts → `/prompts/`
-- Reports → `/reports/`
-- Tasks → `/tasks/`
-- Docs → `/docs/`
-- Guidelines → `/guidelines/`
-- Scripts → `/scripts/`
-- Nothing else in root!
+After running audits, process reports into task lists:
 
-### "How do I name this file?"
-- Pages: `PascalCase.tsx`
-- Components: `PascalCase.tsx`
-- Data: `kebab-case.en.ts` or `kebab-case.af.ts`
-- Utilities: `kebab-case.ts`
-- Documentation: `kebab-case.md`
+```bash
+# Manually trigger task generation
+process reports
 
-### "Is inline styling allowed?"
-**NO.** Never use `style={{}}` for visual properties.
-Only exception: truly dynamic computed values (rare).
-Always use semantic CSS classes instead.
+# Or chain with audit
+audit && process reports
+```
 
-### "Do I need bilingual support?"
-**YES.** Always create both `.en.ts` and `.af.ts` data files.
-English and Afrikaans ship together from day one.
+Task lists created in `/tasks/`:
+```
+/tasks/locale-tasks.md
+/tasks/styling-tasks.md
+/tasks/accessibility-tasks.md
+/tasks/master-task-list.md
+```
 
-### "Can I hard-code this color?"
-**NO.** Always use CSS variables from `/src/styles/theme.css`.
-Never hard-code hex, rgb, or hsl values in components.
+---
 
-## Maintenance Schedule
+## Prompt File Location Reference
 
-### Daily
-- Follow `/prompts/continue.md` workflow
-- Update `/tasks/task-list.md` as you work
-- Document decisions in code comments
+All prompts stored in `/prompts/`:
 
-### Weekly
-- Review `/tasks/task-list.md`
-- Quick cleanup audit (inline styles check)
-- Update `/CHANGELOG.md`
+```
+/prompts/
+  orchestrator.md              # Master audit coordinator
+  audit-locale.md             # Bilingual architecture
+  audit-styling.md            # Styling compliance
+  audit-accessibility.md      # WCAG 2.1 AA
+  audit-performance.md        # Performance optimization
+  audit-routing.md            # Route integrity
+  audit-responsive.md         # Responsive design (to be created)
+  audit-layout.md             # Layout integrity (to be created)
+  audit-functionality.md      # UI interactions (to be created)
+  audit-guidelines.md         # Documentation standards (to be created)
+  audit-data-model.md         # Notice data structure (to be created)
+  prompt-triggers.md          # This file
+```
 
-### Sprint End
-- Full `/prompts/cleanup.md` audit
-- Generate progress report in `/reports/`
-- Update `/docs/` with new patterns
-- Review and update `/tasks/task-list.md`
+---
 
-### Pre-Release
-- Complete `/prompts/cleanup.md` checklist
-- Full accessibility audit
-- Performance audit
-- Bilingual testing
-- Generate handoff documentation
+## Custom Trigger Creation
 
-## Getting Help
+To add new audit trigger:
 
-If prompts don't cover your scenario:
-1. Check `/docs/` for additional documentation
-2. Review similar existing implementations
-3. Consult `/guidelines/Guidelines.md` principles
-4. Document your decision for future reference
-5. Add to `/docs/` if it's a common pattern
+1. Create prompt file in `/prompts/audit-{name}.md`
+2. Add trigger word to frontmatter: `**Trigger Word:** audit {name}`
+3. Update this file with new trigger
+4. Update orchestrator.md execution order if needed
+5. Test trigger executes correctly
+
+---
+
+## Environment Notes
+
+**Figma Make Environment:**
+- No terminal commands
+- All file edits via tools
+- React Router (not react-router-dom)
+- Lucide React icons
+- CSS variables from `/src/styles/theme.css`
+- WordPress-aligned class names (`.wp-*`)
+
+**Design System Compliance:**
+- All colors via CSS variables
+- All spacing via CSS tokens
+- Typography via defined font faces only
+- No inline styles (except truly dynamic values)
+- No hard-coded hex/rgb/spacing values
+
+---
+
+## Related Documentation
+
+- **[orchestrator.md](./orchestrator.md)** — Master audit workflow
+- **[Guidelines.md](../guidelines/Guidelines.md)** — Project standards
+- **[locale-architecture.md](../guidelines/locale-architecture.md)** — Bilingual rules
+- **[data-model.md](../guidelines/data-model.md)** — Notice structure
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---|---|---|
+| 5.0.0 | 2026-03-18 | Added 10 new optimization prompts (memory, performance, assets, css, components, data, accessibility, a11y, seo, fonts, images, bundle, forms, routing, animation, state, caching, testing) — Total: 61 active prompts |
+| 4.1.0 | 2026-03-18 | Added 3 new expand prompts (blocks, parts, styles) for WordPress architecture — Total: 51 active prompts |
+| 4.0.0 | 2026-03-18 | Added expand orchestrator + 10 expand prompts (functionality, pages, templates, patterns, components, data, triggers, dev-tools) — Total: 48 active prompts |
+| 3.0.0 | 2026-03-18 | Added 3 orchestrators (archive, cleanup, update) + 8 update prompts + 2 expand prompts — Total: 38 active prompts |
+| 2.3.0 | 2026-03-18 | Added archive prompts, maintenance prompts, and template parts audit |
+| 2.1.0 | 2026-03-16 | Added migrate-icons prompt for Lucide to Phosphor migration |
+| 2.0.0 | 2026-03-16 | Added 6 new prompts: audit-data, audit-css, audit-tokens, audit-a11y, process-reports, status — total 11 active prompts |
+| 1.0.0 | 2026-03-16 | Initial trigger reference for Nova Public Notices Portal with 5 active audits |

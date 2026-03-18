@@ -1,14 +1,6 @@
-/* Nova News Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Raleway:wght@400;500;600;700;800&display=swap');
+/* Nova News Font Import - Lexend Only */
+/* Only import Lexend as specified in project guidelines */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap');
 
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-.font-lexend {
-  font-family: 'Lexend', sans-serif;
-}
-
-.font-raleway {
-  font-family: 'Raleway', sans-serif;
-}
+/* Font styling is handled in theme.css via CSS variables */
+/* No body or utility classes needed here - theme.css is the single source of truth */

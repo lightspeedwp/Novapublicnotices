@@ -1,0 +1,208 @@
+/**
+ * AdSlot Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful ad placeholder with subtle animations
+ * 
+ * Features:
+ * - Dashed border for visual distinction
+ * - Subtle pulse animation
+ * - Professional typography
+ * - Responsive sizing
+ */
+
+/* =================================================================
+   Ad Slot — Base
+   ================================================================= */
+
+.wpn-ad-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--muted);
+  border: var(--border-width-2) dashed var(--border-color-default);
+  border-radius: var(--radius-md);
+  min-height: 250px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+/* Subtle pulse animation */
+.wpn-ad-slot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: wpn-ad-pulse 3s infinite;
+}
+
+@keyframes wpn-ad-pulse {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Hover state */
+.wpn-ad-slot:hover {
+  border-color: var(--border-color-strong);
+  background: var(--background);
+}
+
+/* =================================================================
+   Ad Slot Content
+   ================================================================= */
+
+.wpn-ad-slot__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted-foreground);
+  gap: var(--space-2);
+  padding: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+/* =================================================================
+   Ad Slot Label
+   ================================================================= */
+
+.wpn-ad-slot__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot__label {
+    font-size: var(--text-base);
+  }
+}
+
+/* =================================================================
+   Ad Slot Dimensions
+   ================================================================= */
+
+.wpn-ad-slot__dimensions {
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* =================================================================
+   Ad Slot Variants
+   ================================================================= */
+
+/* Leaderboard - Wide horizontal ad */
+.wpn-ad-slot--leaderboard {
+  min-height: 90px;
+  max-height: 90px;
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot--leaderboard {
+    min-height: 120px;
+    max-height: 120px;
+  }
+}
+
+/* MPU - Medium Rectangle */
+.wpn-ad-slot--mpu {
+  min-height: 250px;
+  max-width: 300px;
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot--mpu {
+    min-height: 300px;
+    max-width: 336px;
+  }
+}
+
+/* Sidebar - Tall vertical ad */
+.wpn-ad-slot--sidebar {
+  min-height: 600px;
+  max-width: 300px;
+}
+
+/* Billboard - Large horizontal ad */
+.wpn-ad-slot--billboard {
+  min-height: 250px;
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot--billboard {
+    min-height: 300px;
+  }
+}
+
+/* Mobile Banner - Mobile-optimized */
+.wpn-ad-slot--mobile-banner {
+  min-height: 50px;
+  max-height: 100px;
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot--mobile-banner {
+    display: none;
+  }
+}
+
+/* Skyscraper - Extra tall sidebar */
+.wpn-ad-slot--skyscraper {
+  min-height: 600px;
+  max-width: 160px;
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-ad-slot::before {
+    animation: none;
+  }
+  
+  .wpn-ad-slot {
+    transition: none;
+  }
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-ad-slot {
+    min-height: 200px;
+  }
+  
+  .wpn-ad-slot__content {
+    padding: var(--space-3);
+  }
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-ad-slot {
+    display: none;
+  }
+}

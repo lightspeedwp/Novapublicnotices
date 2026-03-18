@@ -1,0 +1,256 @@
+/* =================================================================
+   Radix UI Select Component Overrides
+   ================================================================= */
+
+/* BEM Class for Select Trigger (preferred approach) */
+.wpn-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground); /* CRITICAL: Dark text on light background */
+  background-color: var(--input-background);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+  min-height: 44px; /* Changed from 40px for better accessibility */
+}
+
+.wpn-select-trigger:focus {
+  outline: none;
+  border-color: var(--nova-primary);
+  box-shadow: 0 0 0 3px rgba(9, 8, 47, 0.1);
+}
+
+.wpn-select-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--muted);
+}
+
+.wpn-select-trigger[data-placeholder] {
+  color: var(--muted-foreground);
+}
+
+/* Select Trigger Icon */
+.wpn-select-trigger svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+/* Fallback: Data attribute selector (for backwards compatibility) */
+[data-slot="select-trigger"] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground); /* CRITICAL: Added visible text color */
+  background-color: var(--input-background);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+  min-height: 44px;
+}
+
+[data-slot="select-trigger"]:focus {
+  outline: none;
+  border-color: var(--nova-primary);
+  box-shadow: 0 0 0 3px rgba(9, 8, 47, 0.1);
+}
+
+[data-slot="select-trigger"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--muted);
+}
+
+[data-slot="select-trigger"][data-placeholder] {
+  color: var(--muted-foreground);
+}
+
+/* Select Icon */
+[data-slot="select-trigger"] svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+/* Select Content (the dropdown panel) */
+[data-slot="select-content"] {
+  position: relative;
+  z-index: 50;
+  max-height: var(--radix-select-content-available-height);
+  min-width: 8rem;
+  overflow: hidden;
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Ensure select content is positioned above other elements */
+[data-slot="select-content"] {
+  isolation: isolate;
+}
+
+/* Select Viewport */
+[data-slot="select-content"] > div[data-radix-select-viewport] {
+  padding: var(--space-1);
+}
+
+/* Select Item (individual option) */
+[data-slot="select-item"] {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--foreground);
+  background-color: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+[data-slot="select-item"]:hover,
+[data-slot="select-item"][data-highlighted] {
+  background-color: var(--muted);
+}
+
+[data-slot="select-item"][data-state="checked"] {
+  background-color: rgba(9, 8, 47, 0.05);
+  font-weight: var(--font-weight-medium);
+}
+
+[data-slot="select-item"][data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Select Item Indicator (checkmark) */
+[data-slot="select-item"] > span:first-child {
+  position: absolute;
+  right: var(--space-2);
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-slot="select-item"] svg {
+  width: 16px;
+  height: 16px;
+  color: var(--nova-primary);
+}
+
+/* Select Label */
+[data-slot="select-label"] {
+  padding: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* Select Separator */
+[data-slot="select-separator"] {
+  height: 1px;
+  margin: var(--space-1) calc(var(--space-1) * -1);
+  background-color: var(--border-color-default);
+}
+
+/* Scroll Buttons */
+[data-slot="select-scroll-up-button"],
+[data-slot="select-scroll-down-button"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  cursor: pointer;
+}
+
+[data-slot="select-scroll-up-button"] svg,
+[data-slot="select-scroll-down-button"] svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-foreground);
+}
+
+/* =================================================================
+   Helper Text & Validation
+   ================================================================= */
+
+.wpn-form__help-text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin-top: var(--space-1);
+}
+
+.wpn-form__error {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--nova-accent);
+  margin-top: var(--space-1);
+}
+
+.wpn-form__input--error,
+.wpn-form__select--error,
+.wpn-form__textarea--error,
+[data-slot="select-trigger"][aria-invalid="true"] {
+  border-color: var(--nova-accent);
+}
+
+.wpn-form__input--error:focus,
+.wpn-form__select--error:focus,
+.wpn-form__textarea--error:focus,
+[data-slot="select-trigger"][aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(215, 0, 37, 0.1);
+}
+
+/* =================================================================
+   Checkbox & Radio
+   ================================================================= */
+
+.wpn-form__checkbox,
+.wpn-form__radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.wpn-form__checkbox input,
+.wpn-form__radio input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--nova-primary);
+}
+
+.wpn-form__checkbox label,
+.wpn-form__radio label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  cursor: pointer;
+}

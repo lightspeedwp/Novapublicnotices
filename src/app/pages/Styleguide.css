@@ -1,0 +1,440 @@
+/**
+ * Styleguide Page - BEM CSS
+ * Nova Public Notices Portal Design System Documentation
+ */
+
+/* ============================================================================
+   PAGE SHELL
+   ========================================================================== */
+
+.styleguide {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+}
+
+/* ============================================================================
+   HEADER
+   ========================================================================== */
+
+.styleguide__header {
+  margin-bottom: var(--space-12);
+}
+
+.styleguide__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--nova-primary);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-tight);
+}
+
+.styleguide__subtitle {
+  font-size: var(--text-lg);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-normal);
+  max-width: 800px;
+}
+
+/* ============================================================================
+   TABLE OF CONTENTS
+   ========================================================================== */
+
+.styleguide__toc {
+  padding: var(--space-6);
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-16);
+}
+
+.styleguide__toc-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--nova-primary);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-snug);
+}
+
+.styleguide__toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.styleguide__toc-link {
+  color: var(--nova-accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+  font-size: var(--text-base);
+  line-height: var(--line-height-normal);
+}
+
+.styleguide__toc-link:hover {
+  color: var(--nova-accent-hover);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   SECTIONS
+   ========================================================================== */
+
+.styleguide__section {
+  margin-bottom: var(--space-16);
+}
+
+.styleguide__section-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--nova-primary);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-width-2) solid var(--border-color-default);
+  line-height: var(--line-height-snug);
+}
+
+.styleguide__subsection {
+  margin-bottom: var(--space-8);
+}
+
+.styleguide__subsection-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-snug);
+}
+
+.styleguide__description {
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================================
+   COLOR SWATCHES
+   ========================================================================== */
+
+.styleguide__color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.styleguide__color-swatch {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.styleguide__color-sample {
+  height: 80px;
+  width: 100%;
+}
+
+.styleguide__color-info {
+  padding: var(--space-3);
+  background: var(--card);
+}
+
+.styleguide__color-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-1);
+  line-height: var(--line-height-normal);
+}
+
+.styleguide__color-value {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  font-family: 'Courier New', monospace;
+  line-height: var(--line-height-normal);
+}
+
+/* ============================================================================
+   TYPOGRAPHY SAMPLES
+   ========================================================================== */
+
+.styleguide__typography-samples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.styleguide__type-sample {
+  padding: var(--space-4);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  background: var(--card);
+}
+
+.styleguide__type-label {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+  font-weight: var(--font-weight-medium);
+}
+
+.styleguide__type-example {
+  /* Inherits styles from the element being demonstrated */
+}
+
+/* ============================================================================
+   SPACING DEMO
+   ========================================================================== */
+
+.styleguide__spacing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-4);
+}
+
+.styleguide__spacing-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.styleguide__spacing-box {
+  background: var(--nova-accent);
+  border-radius: var(--radius-sm);
+}
+
+.styleguide__spacing-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted-foreground);
+  font-family: 'Courier New', monospace;
+}
+
+/* ============================================================================
+   BUTTON DEMO
+   ========================================================================== */
+
+.styleguide__button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.styleguide__button-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.styleguide__button-group-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin-bottom: var(--space-1);
+}
+
+/* ============================================================================
+   FORM DEMO
+   ========================================================================== */
+
+.styleguide__form-example {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.styleguide__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.styleguide__form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.styleguide__form-input {
+  min-height: var(--form-field-height);
+  padding: var(--form-field-padding-y) var(--form-field-padding-x);
+  border: var(--border-width-1) solid var(--form-field-border);
+  border-radius: var(--form-field-radius);
+  background-color: var(--form-field-background);
+  color: var(--form-field-text);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  line-height: var(--line-height-normal);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.styleguide__form-input:focus-visible {
+  outline: 2px solid var(--form-field-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--nova-primary);
+}
+
+.styleguide__form-input::placeholder {
+  color: var(--form-field-placeholder);
+}
+
+/* ============================================================================
+   ICON DEMO
+   ========================================================================== */
+
+.styleguide__icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-4);
+}
+
+.styleguide__icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  background: var(--card);
+}
+
+.styleguide__icon-label {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+/* ============================================================================
+   ELEVATION DEMO
+   ========================================================================== */
+
+.styleguide__elevation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+
+.styleguide__elevation-card {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.styleguide__elevation-card--sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.styleguide__elevation-card--md {
+  box-shadow: var(--shadow-md);
+}
+
+.styleguide__elevation-card--lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.styleguide__elevation-card--xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* ============================================================================
+   ANIMATION DEMO
+   ========================================================================== */
+
+.styleguide__animation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+
+.styleguide__animation-demo {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nova-accent);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+/* ============================================================================
+   CSS VARIABLES TABLE
+   ========================================================================== */
+
+.styleguide__var-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-8);
+  font-size: var(--text-sm);
+}
+
+.styleguide__var-table thead {
+  background: var(--muted);
+}
+
+.styleguide__var-table th {
+  padding: var(--space-3);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  border-bottom: var(--border-width-2) solid var(--border-color-strong);
+}
+
+.styleguide__var-table td {
+  padding: var(--space-3);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+.styleguide__var-table code {
+  font-family: 'Courier New', monospace;
+  background: var(--muted);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--nova-primary);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .styleguide {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .styleguide__title {
+    font-size: var(--text-3xl);
+  }
+
+  .styleguide__color-grid,
+  .styleguide__button-grid,
+  .styleguide__icon-grid,
+  .styleguide__elevation-grid,
+  .styleguide__animation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .styleguide__spacing-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}

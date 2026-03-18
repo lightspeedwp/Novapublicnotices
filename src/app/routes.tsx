@@ -1,3 +1,8 @@
+/**
+ * Application Routes
+ * Bilingual routing configuration for Nova Public Notices Portal
+ */
+
 import { createBrowserRouter } from "react-router";
 
 // Public pages
@@ -27,6 +32,10 @@ import Sitemap from "./pages/Sitemap";
 import SitemapAF from "./pages/SitemapAF";
 import Advertise from "./pages/Advertise";
 import AdvertiseAF from "./pages/AdvertiseAF";
+import Styleguide from "./pages/Styleguide";
+import StyleGuide from "./pages/StyleGuide";
+import CompareNotices from "./pages/CompareNotices";
+import CompareNoticesAF from "./pages/CompareNoticesAF";
 
 // Auth pages
 import Register from "./pages/auth/Register";
@@ -47,6 +56,12 @@ import Orders from "./pages/account/Orders";
 import OrdersAF from "./pages/account/OrdersAF";
 import Profile from "./pages/account/Profile";
 import ProfileAF from "./pages/account/ProfileAF";
+import SavedSearches from "./pages/account/SavedSearches";
+import SavedSearchesAF from "./pages/account/SavedSearchesAF";
+import Settings from "./pages/account/Settings";
+import SettingsAF from "./pages/account/SettingsAF";
+import Help from "./pages/Help";
+import HelpAF from "./pages/HelpAF";
 
 // Submission pages
 import SubmitEntry from "./pages/submit/Entry";
@@ -101,6 +116,9 @@ export const router = createBrowserRouter([
       { path: "pricing", Component: Pricing },
       { path: "sitemap", Component: Sitemap },
       { path: "advertise", Component: Advertise },
+      { path: "styleguide", Component: StyleGuide },
+      { path: "compare", Component: CompareNotices },
+      { path: "help", Component: Help },
       
       // Auth
       { path: "register", Component: Register },
@@ -114,6 +132,8 @@ export const router = createBrowserRouter([
       { path: "my-account/notices", Component: MyNotices },
       { path: "my-account/orders", Component: Orders },
       { path: "my-account/profile", Component: Profile },
+      { path: "my-account/saved-searches", Component: SavedSearches },
+      { path: "my-account/settings", Component: Settings },
       
       // Submit
       { path: "submit", Component: SubmitEntry },
@@ -148,6 +168,9 @@ export const router = createBrowserRouter([
       { path: "af/prysstruktuur", Component: PricingAF },
       { path: "af/sitemap", Component: SitemapAF },
       { path: "af/advertise", Component: AdvertiseAF },
+      { path: "af/styleguide", Component: StyleGuide },
+      { path: "af/vergelyk", Component: CompareNoticesAF },
+      { path: "af/hulp", Component: HelpAF },
       
       // Auth AF
       { path: "af/registreer", Component: RegisterAF },
@@ -161,6 +184,8 @@ export const router = createBrowserRouter([
       { path: "af/my-rekening/kennisgewings", Component: MyNoticesAF },
       { path: "af/my-rekening/bestellings", Component: OrdersAF },
       { path: "af/my-rekening/profiel", Component: ProfileAF },
+      { path: "af/my-rekening/gestoorde-soektogte", Component: SavedSearchesAF },
+      { path: "af/my-rekening/instellings", Component: SettingsAF },
       
       // Submit AF
       { path: "af/indien", Component: SubmitEntryAF },

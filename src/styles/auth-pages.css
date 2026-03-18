@@ -1,0 +1,465 @@
+/**
+ * Auth Pages — Login, Register, and Login Wall Components
+ * 
+ * Two-column WooCommerce-style auth layouts with BEM methodology
+ * 
+ * Dependencies:
+ * - theme-variables.css (CSS custom properties)
+ * 
+ * Components:
+ * - .wpn-auth — Main auth page wrapper
+ * - .wpn-auth-grid — Two-column grid layout
+ * - .wpn-auth-form — Login/register form column
+ * - .wpn-auth-promo — Benefits/promotion column
+ * - .wpn-login-wall — Notice detail login gate
+ * 
+ * Last Updated: 2026-03-17
+ */
+
+/* =================================================================
+   Auth Page Layout
+   ================================================================= */
+
+.wpn-auth {
+  min-height: 80vh;
+  background-color: var(--color-background-muted);
+  padding: var(--space-12) 0;
+}
+
+.wpn-auth__container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .wpn-auth__container {
+    padding: 0 var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-auth__container {
+    padding: 0 var(--container-padding-desktop);
+  }
+}
+
+/* =================================================================
+   Two-Column Grid Layout
+   ================================================================= */
+
+.wpn-auth-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .wpn-auth-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+}
+
+/* =================================================================
+   Auth Form Column
+   ================================================================= */
+
+.wpn-auth-form {
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .wpn-auth-form {
+    padding: var(--space-12);
+  }
+}
+
+.wpn-auth-form__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.wpn-auth-form__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-auth-form__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.wpn-auth-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.wpn-auth-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-auth-form__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.wpn-auth-form__input {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Password input with toggle button */
+.wpn-auth-form__input--with-toggle {
+  padding-right: 44px;
+}
+
+.wpn-auth-form__input:focus {
+  outline: none;
+  border-color: var(--nova-accent);
+  box-shadow: 0 0 0 3px rgba(215, 0, 37, 0.1);
+}
+
+.wpn-auth-form__input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.wpn-auth-form__password-wrapper {
+  position: relative;
+}
+
+.wpn-auth-form__password-toggle {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.wpn-auth-form__password-toggle:hover {
+  color: var(--color-text-primary);
+}
+
+.wpn-auth-form__options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  gap: var(--space-4);
+}
+
+.wpn-auth-form__remember {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.wpn-auth-form__checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  accent-color: var(--nova-accent);
+  cursor: pointer;
+}
+
+.wpn-auth-form__remember-label {
+  font-family: var(--font-family-body);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.wpn-auth-form__forgot-link {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--nova-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wpn-auth-form__forgot-link:hover {
+  color: var(--nova-accent-hover);
+  text-decoration: underline;
+}
+
+.wpn-auth-form__footer {
+  text-align: center;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.wpn-auth-form__footer-link {
+  font-weight: var(--font-weight-medium);
+  color: var(--nova-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wpn-auth-form__footer-link:hover {
+  color: var(--nova-accent-hover);
+  text-decoration: underline;
+}
+
+/* =================================================================
+   Auth Promo Column
+   ================================================================= */
+
+.wpn-auth-promo {
+  background: linear-gradient(
+    135deg,
+    var(--nova-primary) 0%,
+    var(--nova-primary-hover) 100%
+  );
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .wpn-auth-promo {
+    padding: var(--space-12);
+  }
+}
+
+.wpn-auth-promo__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+@media (min-width: 768px) {
+  .wpn-auth-promo__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.wpn-auth-promo__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-auth-promo__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-auth-promo__benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.wpn-auth-promo__benefit-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.wpn-auth-promo__benefit-text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: white;
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-auth-promo__cta {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin-top: auto;
+}
+
+.wpn-auth-promo__cta-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+  margin-bottom: var(--space-2);
+}
+
+.wpn-auth-promo__cta-text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Login Wall (Notice Detail Pages)
+   ================================================================= */
+
+.wpn-login-wall {
+  background-color: var(--color-background-muted);
+  padding: var(--space-16) 0;
+}
+
+.wpn-login-wall__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .wpn-login-wall__container {
+    padding: 0 var(--container-padding-tablet);
+  }
+}
+
+.wpn-login-wall__card {
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .wpn-login-wall__card {
+    padding: var(--space-12);
+  }
+}
+
+.wpn-login-wall__icon {
+  width: 64px;
+  height: 64px;
+  color: var(--color-text-secondary);
+  margin: 0 auto var(--space-6);
+}
+
+.wpn-login-wall__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-tight);
+}
+
+.wpn-login-wall__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  line-height: var(--line-height-relaxed);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wpn-login-wall__benefits {
+  background-color: var(--color-background-muted);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.wpn-login-wall__benefits-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-login-wall__benefits-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .wpn-login-wall__benefits-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wpn-login-wall__benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.wpn-login-wall__benefit-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--nova-accent);
+  flex-shrink: 0;
+}
+
+.wpn-login-wall__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .wpn-login-wall__actions {
+    flex-direction: row;
+  }
+}
+
+.wpn-login-wall__footer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}

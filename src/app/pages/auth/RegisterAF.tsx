@@ -11,7 +11,7 @@ export default function RegisterAF() {
       <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="font-raleway text-3xl font-bold text-[#09082f] mb-2">
+            <h1 className="wpn-heading-h1 wpn-heading--primary mb-2">
               Skep Rekening
             </h1>
             <p className="text-gray-600">Registreer om regskennisgewings in te dien en te bestuur</p>
@@ -71,11 +71,11 @@ export default function RegisterAF() {
                 <div className="flex items-start gap-2">
                   <input type="checkbox" id="terms" className="mt-1" required />
                   <label htmlFor="terms" className="text-sm text-gray-600">
-                    Ek stem in tot die <Link to="/af/terms" className="text-[#d70025] hover:underline">Diensbepalings</Link> en <Link to="/af/privacy" className="text-[#d70025] hover:underline">Privaatheidsbeleid</Link>
+                    Ek stem in tot die <Link to="/af/terms" className="wpn-link--accent">Diensbepalings</Link> en <Link to="/af/privacy" className="wpn-link--accent">Privaatheidsbeleid</Link>
                   </label>
                 </div>
 
-                <Button type="submit" className="w-full bg-[#d70025] hover:bg-[#b5001f]">
+                <Button type="submit" className="w-full wpn-button wpn-button--accent">
                   Skep Rekening
                 </Button>
               </form>
@@ -136,11 +136,11 @@ export default function RegisterAF() {
                 <div className="flex items-start gap-2">
                   <input type="checkbox" id="orgTerms" className="mt-1" required />
                   <label htmlFor="orgTerms" className="text-sm text-gray-600">
-                    Ek stem in tot die <Link to="/af/terms" className="text-[#d70025] hover:underline">Diensbepalings</Link> en <Link to="/af/privacy" className="text-[#d70025] hover:underline">Privaatheidsbeleid</Link>
+                    Ek stem in tot die <Link to="/af/terms" className="wpn-link--accent">Diensbepalings</Link> en <Link to="/af/privacy" className="wpn-link--accent">Privaatheidsbeleid</Link>
                   </label>
                 </div>
 
-                <Button type="submit" className="w-full bg-[#d70025] hover:bg-[#b5001f]">
+                <Button type="submit" className="w-full wpn-button wpn-button--accent">
                   Skep Organisasie Rekening
                 </Button>
               </form>
@@ -149,7 +149,7 @@ export default function RegisterAF() {
 
           <div className="mt-6 text-center text-sm text-gray-600">
             Het u reeds 'n rekening?{" "}
-            <Link to="/af/aanmeld" className="text-[#d70025] hover:underline font-medium">
+            <Link to="/af/aanmeld" className="wpn-link--accent font-medium">
               Meld hier aan
             </Link>
           </div>

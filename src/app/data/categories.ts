@@ -10,6 +10,15 @@ export interface Category {
   };
   icon?: string;
   count?: number;
+  /** Optional hero layout override - defaults to 'default' */
+  heroLayout?: 'default' | 'split' | 'centered' | 'minimal' | 'with-stats';
+  /** Optional hero size override - defaults to 'md' */
+  heroSize?: 'sm' | 'md' | 'lg';
+  /** Optional custom hero description (overrides default) */
+  heroDescription?: {
+    en?: string;
+    af?: string;
+  };
 }
 
 export const categories: Category[] = [
@@ -22,6 +31,13 @@ export const categories: Category[] = [
     description: {
       en: "Government and municipal tenders and requests for proposals",
       af: "Regering en munisipale tenders en versoeke vir voorstelle",
+    },
+    // Custom hero for high-visibility category
+    heroLayout: 'with-stats',
+    heroSize: 'lg',
+    heroDescription: {
+      en: "Access thousands of government tenders from municipalities, provinces, and national departments across South Africa. Updated daily.",
+      af: "Toegang tot duisende regeringstenders vanaf munisipaliteite, provinsies, en nasionale departemente regoor Suid-Afrika. Daagliks bygewerk.",
     },
   },
   {

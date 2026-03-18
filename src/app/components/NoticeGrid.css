@@ -1,0 +1,51 @@
+/**
+ * NoticeGrid Component — BEM CSS (Flexbox-based)
+ * Uses design tokens from theme.css
+ * NO CSS GRID - uses flexbox per project requirements
+ */
+
+.wpn-notice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+/* Single column (mobile default) */
+.wpn-notice-grid--cols-1 > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Two columns with responsive breakpoint */
+.wpn-notice-grid--cols-2 > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-notice-grid--cols-2 > * {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+/* Three columns with responsive breakpoints */
+.wpn-notice-grid--cols-3 > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-notice-grid--cols-3 > * {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-notice-grid--cols-3 > * {
+    flex: 0 0 calc(33.333% - var(--space-4));
+    max-width: calc(33.333% - var(--space-4));
+  }
+}

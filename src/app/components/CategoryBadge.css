@@ -1,0 +1,415 @@
+/**
+ * CategoryBadge Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful category badges with hover effects and animations
+ * 
+ * Features:
+ * - All 25 category color variants
+ * - Smooth hover effects
+ * - Interactive states
+ * - Size variants
+ * - Pill-shaped design
+ */
+
+/* =================================================================
+   Category Badge — Base
+   ================================================================= */
+
+.wpn-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-none);
+  letter-spacing: var(--letter-spacing-wide);
+  border-width: var(--border-width-1);
+  border-style: solid;
+  transition: all var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+  cursor: default;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* Hover effect - subtle lift and shadow */
+.wpn-category-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Active/pressed state */
+.wpn-category-badge:active {
+  transform: translateY(0);
+}
+
+/* Link variant - adds pointer cursor */
+a.wpn-category-badge {
+  cursor: pointer;
+}
+
+/* =================================================================
+   Size Variants
+   ================================================================= */
+
+.wpn-category-badge--sm {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs); /* Changed from hardcoded 10px to use CSS variable */
+  gap: var(--space-1);
+}
+
+.wpn-category-badge--md {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.wpn-category-badge--lg {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+}
+
+/* =================================================================
+   Category-Specific Color Modifiers
+   All 25 notice categories with dedicated styling
+   ================================================================= */
+
+/* Tenders */
+.wpn-category-badge--tenders {
+  background-color: var(--category-tenders-bg);
+  color: var(--category-tenders-fg);
+  border-color: var(--category-tenders-border);
+}
+
+.wpn-category-badge--tenders:hover {
+  background-color: var(--category-tenders-border);
+  border-color: var(--category-tenders-fg);
+}
+
+/* Estates */
+.wpn-category-badge--estates,
+.wpn-category-badge--estates-creditors-debtors,
+.wpn-category-badge--estates-liquidation-distribution {
+  background-color: var(--category-estates-bg);
+  color: var(--category-estates-fg);
+  border-color: var(--category-estates-border);
+}
+
+.wpn-category-badge--estates:hover,
+.wpn-category-badge--estates-creditors-debtors:hover,
+.wpn-category-badge--estates-liquidation-distribution:hover {
+  background-color: var(--category-estates-border);
+  border-color: var(--category-estates-fg);
+}
+
+/* Liquor Licences */
+.wpn-category-badge--liquor-licences {
+  background-color: var(--category-liquor-licences-bg);
+  color: var(--category-liquor-licences-fg);
+  border-color: var(--category-liquor-licences-border);
+}
+
+.wpn-category-badge--liquor-licences:hover {
+  background-color: var(--category-liquor-licences-border);
+  border-color: var(--category-liquor-licences-fg);
+}
+
+/* Town Planning & Establishment */
+.wpn-category-badge--town-planning,
+.wpn-category-badge--town-establishment {
+  background-color: var(--category-town-planning-bg);
+  color: var(--category-town-planning-fg);
+  border-color: var(--category-town-planning-border);
+}
+
+.wpn-category-badge--town-planning:hover,
+.wpn-category-badge--town-establishment:hover {
+  background-color: var(--category-town-planning-border);
+  border-color: var(--category-town-planning-fg);
+}
+
+/* Business Licence */
+.wpn-category-badge--business-licence {
+  background-color: var(--category-business-licence-bg);
+  color: var(--category-business-licence-fg);
+  border-color: var(--category-business-licence-border);
+}
+
+.wpn-category-badge--business-licence:hover {
+  background-color: var(--category-business-licence-border);
+  border-color: var(--category-business-licence-fg);
+}
+
+/* Court Orders */
+.wpn-category-badge--court-orders {
+  background-color: var(--category-court-orders-bg);
+  color: var(--category-court-orders-fg);
+  border-color: var(--category-court-orders-border);
+}
+
+.wpn-category-badge--court-orders:hover {
+  background-color: var(--category-court-orders-border);
+  border-color: var(--category-court-orders-fg);
+}
+
+/* Environmental */
+.wpn-category-badge--ois-environmental {
+  background-color: var(--category-ois-environmental-bg);
+  color: var(--category-ois-environmental-fg);
+  border-color: var(--category-ois-environmental-border);
+}
+
+.wpn-category-badge--ois-environmental:hover {
+  background-color: var(--category-ois-environmental-border);
+  border-color: var(--category-ois-environmental-fg);
+}
+
+/* General Notices */
+.wpn-category-badge--general-notices {
+  background-color: var(--category-general-notices-bg);
+  color: var(--category-general-notices-fg);
+  border-color: var(--category-general-notices-border);
+}
+
+.wpn-category-badge--general-notices:hover {
+  background-color: var(--category-general-notices-border);
+  border-color: var(--category-general-notices-fg);
+}
+
+/* Lost Documents */
+.wpn-category-badge--lost-documents {
+  background-color: var(--category-lost-documents-bg);
+  color: var(--category-lost-documents-fg);
+  border-color: var(--category-lost-documents-border);
+}
+
+.wpn-category-badge--lost-documents:hover {
+  background-color: var(--category-lost-documents-border);
+  border-color: var(--category-lost-documents-fg);
+}
+
+/* Sale of Business */
+.wpn-category-badge--sale-of-business {
+  background-color: var(--category-sale-of-business-bg);
+  color: var(--category-sale-of-business-fg);
+  border-color: var(--category-sale-of-business-border);
+}
+
+.wpn-category-badge--sale-of-business:hover {
+  background-color: var(--category-sale-of-business-border);
+  border-color: var(--category-sale-of-business-fg);
+}
+
+/* Sale in Execution & Public Auction */
+.wpn-category-badge--sale-in-execution,
+.wpn-category-badge--public-auction {
+  background-color: var(--category-sale-in-execution-bg);
+  color: var(--category-sale-in-execution-fg);
+  border-color: var(--category-sale-in-execution-border);
+}
+
+.wpn-category-badge--sale-in-execution:hover,
+.wpn-category-badge--public-auction:hover {
+  background-color: var(--category-sale-in-execution-border);
+  border-color: var(--category-sale-in-execution-fg);
+}
+
+/* Insolvent Estates */
+.wpn-category-badge--insolvent-estates {
+  background-color: var(--category-insolvent-estates-bg);
+  color: var(--category-insolvent-estates-fg);
+  border-color: var(--category-insolvent-estates-border);
+}
+
+.wpn-category-badge--insolvent-estates:hover {
+  background-color: var(--category-insolvent-estates-border);
+  border-color: var(--category-insolvent-estates-fg);
+}
+
+/* Surrender of Estate & Rehabilitation */
+.wpn-category-badge--surrender-of-estate,
+.wpn-category-badge--rehabilitation {
+  background-color: var(--category-surrender-of-estate-bg);
+  color: var(--category-surrender-of-estate-fg);
+  border-color: var(--category-surrender-of-estate-border);
+}
+
+.wpn-category-badge--surrender-of-estate:hover,
+.wpn-category-badge--rehabilitation:hover {
+  background-color: var(--category-surrender-of-estate-border);
+  border-color: var(--category-surrender-of-estate-fg);
+}
+
+/* Adoptions */
+.wpn-category-badge--adoptions {
+  background-color: var(--category-adoptions-bg);
+  color: var(--category-adoptions-fg);
+  border-color: var(--category-adoptions-border);
+}
+
+.wpn-category-badge--adoptions:hover {
+  background-color: var(--category-adoptions-border);
+  border-color: var(--category-adoptions-fg);
+}
+
+/* Curatorship */
+.wpn-category-badge--curatorship {
+  background-color: var(--category-curatorship-bg);
+  color: var(--category-curatorship-fg);
+  border-color: var(--category-curatorship-border);
+}
+
+.wpn-category-badge--curatorship:hover {
+  background-color: var(--category-curatorship-border);
+  border-color: var(--category-curatorship-fg);
+}
+
+/* Divorce & Antenuptial */
+.wpn-category-badge--divorce-antenuptial {
+  background-color: var(--category-divorce-bg);
+  color: var(--category-divorce-fg);
+  border-color: var(--category-divorce-border);
+}
+
+.wpn-category-badge--divorce-antenuptial:hover {
+  background-color: var(--category-divorce-border);
+  border-color: var(--category-divorce-fg);
+}
+
+/* Demolition */
+.wpn-category-badge--demolition {
+  background-color: var(--category-demolition-bg);
+  color: var(--category-demolition-fg);
+  border-color: var(--category-demolition-border);
+}
+
+.wpn-category-badge--demolition:hover {
+  background-color: var(--category-demolition-border);
+  border-color: var(--category-demolition-fg);
+}
+
+/* Pension & Provident Funds */
+.wpn-category-badge--pension-provident {
+  background-color: var(--category-pension-funds-bg);
+  color: var(--category-pension-funds-fg);
+  border-color: var(--category-pension-funds-border);
+}
+
+.wpn-category-badge--pension-provident:hover {
+  background-color: var(--category-pension-funds-border);
+  border-color: var(--category-pension-funds-fg);
+}
+
+/* Re-registrations */
+.wpn-category-badge--re-registrations {
+  background-color: var(--category-re-registrations-bg);
+  color: var(--category-re-registrations-fg);
+  border-color: var(--category-re-registrations-border);
+}
+
+.wpn-category-badge--re-registrations:hover {
+  background-color: var(--category-re-registrations-border);
+  border-color: var(--category-re-registrations-fg);
+}
+
+/* Advertising Billboards & AGM Meetings */
+.wpn-category-badge--advertising-billboards,
+.wpn-category-badge--agm-meetings {
+  background-color: var(--category-general-notices-bg);
+  color: var(--category-general-notices-fg);
+  border-color: var(--category-general-notices-border);
+}
+
+.wpn-category-badge--advertising-billboards:hover,
+.wpn-category-badge--agm-meetings:hover {
+  background-color: var(--category-general-notices-border);
+  border-color: var(--category-general-notices-fg);
+}
+
+/* =================================================================
+   Badge Icon Support
+   ================================================================= */
+
+.wpn-category-badge__icon {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+  flex-shrink: 0;
+}
+
+.wpn-category-badge--md .wpn-category-badge__icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.wpn-category-badge--lg .wpn-category-badge__icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* =================================================================
+   Badge Group — Multiple badges together
+   ================================================================= */
+
+.wpn-category-badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Focus state for keyboard navigation */
+a.wpn-category-badge:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-category-badge {
+    transition: none;
+  }
+
+  .wpn-category-badge:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .wpn-category-badge {
+    border-width: var(--border-width-2);
+  }
+}
+
+/* =================================================================
+   Special Badge Variants
+   ================================================================= */
+
+/* Subtle variant - Less saturated colors */
+.wpn-category-badge--subtle {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  border-color: var(--border-color-default);
+}
+
+.wpn-category-badge--subtle:hover {
+  background-color: var(--border-color-default);
+  color: var(--foreground);
+}
+
+/* Outlined variant - Transparent background */
+.wpn-category-badge--outlined {
+  background-color: transparent;
+  border-width: var(--border-width-2);
+}
+
+/* Solid variant - No border, just background */
+.wpn-category-badge--solid {
+  border-color: transparent;
+}

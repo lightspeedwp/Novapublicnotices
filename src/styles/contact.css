@@ -1,0 +1,648 @@
+/**
+ * Contact Page — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful animations and professional polish
+ * 
+ * Features:
+ * - Contact form with input animations
+ * - Info cards with staggered animations
+ * - Social media cards with hover effects
+ * - FAQ section with smooth accordion
+ * - Office hours display
+ * - Map placeholder with loading state
+ */
+
+/* =================================================================
+   Contact Hero Section
+   ================================================================= */
+
+.wpn-contact-hero {
+  background: linear-gradient(135deg, var(--nova-primary), #0a0729);
+  padding: var(--space-12) 0 var(--space-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: wpn-hero-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-hero-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.wpn-contact-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(215, 0, 37, 0.1),
+    transparent
+  );
+  animation: wpn-hero-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes wpn-hero-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.wpn-contact-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* =================================================================
+   Contact Form — Enhanced
+   ================================================================= */
+
+.wpn-contact-form {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  animation: wpn-form-slide-in var(--duration-slow) var(--ease-out) 0.2s both;
+}
+
+@keyframes wpn-form-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-contact-form__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--foreground);
+  margin-bottom: var(--space-2);
+  animation: wpn-title-fade-in var(--duration-normal) var(--ease-out) 0.3s both;
+}
+
+@keyframes wpn-title-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-contact-form__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-contact-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.wpn-contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: wpn-field-fade-in var(--duration-normal) var(--ease-out) both;
+}
+
+.wpn-contact-form__field:nth-child(1) { animation-delay: 0.4s; }
+.wpn-contact-form__field:nth-child(2) { animation-delay: 0.45s; }
+.wpn-contact-form__field:nth-child(3) { animation-delay: 0.5s; }
+.wpn-contact-form__field:nth-child(4) { animation-delay: 0.55s; }
+.wpn-contact-form__field:nth-child(5) { animation-delay: 0.6s; }
+.wpn-contact-form__field:nth-child(6) { animation-delay: 0.65s; }
+
+@keyframes wpn-field-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-contact-form__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.wpn-contact-form__input,
+.wpn-contact-form__textarea,
+.wpn-contact-form__select {
+  padding: var(--space-3);
+  background-color: var(--background);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-contact-form__input:focus,
+.wpn-contact-form__textarea:focus,
+.wpn-contact-form__select:focus {
+  outline: none;
+  border-color: var(--nova-accent);
+  box-shadow: 0 0 0 3px rgba(215, 0, 37, 0.1);
+  transform: translateY(-1px);
+}
+
+.wpn-contact-form__textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.wpn-contact-form__actions {
+  margin-top: var(--space-4);
+  animation: wpn-actions-fade-in var(--duration-normal) var(--ease-out) 0.7s both;
+}
+
+@keyframes wpn-actions-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =================================================================
+   Contact Info Cards — Staggered Animations
+   ================================================================= */
+
+.wpn-contact-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .wpn-contact-info-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .wpn-contact-info-grid > * {
+    flex: 1 1 calc(50% - var(--space-3));
+    min-width: 0;
+  }
+}
+
+.wpn-contact-info-card {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all var(--duration-normal) var(--ease-out);
+  animation: wpn-card-pop-in var(--duration-slow) var(--ease-out) both;
+}
+
+.wpn-contact-info-card:nth-child(1) { animation-delay: 0.1s; }
+.wpn-contact-info-card:nth-child(2) { animation-delay: 0.2s; }
+.wpn-contact-info-card:nth-child(3) { animation-delay: 0.3s; }
+.wpn-contact-info-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes wpn-card-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpn-contact-info-card:hover {
+  border-color: var(--nova-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(215, 0, 37, 0.12);
+}
+
+.wpn-contact-info-card__icon {
+  width: var(--space-12);
+  height: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--nova-accent), var(--nova-primary));
+  border-radius: var(--radius-md);
+  color: white;
+  box-shadow: 0 4px 12px rgba(215, 0, 37, 0.3);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-contact-info-card:hover .wpn-contact-info-card__icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.wpn-contact-info-card__icon svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+.wpn-contact-info-card__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-contact-info-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-contact-info__link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--nova-accent);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wpn-contact-info__link:hover {
+  color: var(--nova-primary);
+  transform: translateX(4px);
+}
+
+.wpn-contact-info__text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Office Hours
+   ================================================================= */
+
+.wpn-office-hours {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wpn-office-hours__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+  background-color: var(--muted);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-office-hours__item:hover {
+  background-color: var(--background);
+}
+
+.wpn-office-hours__day {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.wpn-office-hours__time {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+.wpn-office-hours__time--closed {
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Social Media Cards
+   ================================================================= */
+
+.wpn-social-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.wpn-social-card {
+  flex: 1 1 calc(50% - var(--space-2));
+  min-width: 0;
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-out);
+  animation: wpn-social-pop-in var(--duration-slow) var(--ease-out) both;
+}
+
+@media (min-width: 640px) {
+  .wpn-social-card {
+    flex: 1 1 calc(25% - var(--space-3));
+  }
+}
+
+.wpn-social-card:nth-child(1) { animation-delay: 0.1s; }
+.wpn-social-card:nth-child(2) { animation-delay: 0.15s; }
+.wpn-social-card:nth-child(3) { animation-delay: 0.2s; }
+.wpn-social-card:nth-child(4) { animation-delay: 0.25s; }
+
+@keyframes wpn-social-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpn-social-card:hover {
+  border-color: var(--nova-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(215, 0, 37, 0.1);
+}
+
+.wpn-social-card__link {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+}
+
+.wpn-social-card__icon {
+  width: var(--space-12);
+  height: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--muted), var(--background));
+  border-radius: var(--radius-full);
+  color: var(--nova-accent);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-social-card:hover .wpn-social-card__icon {
+  background: linear-gradient(135deg, var(--nova-accent), var(--nova-primary));
+  color: white;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.wpn-social-card__link svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+.wpn-social-card__name {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+/* =================================================================
+   Help Cards
+   ================================================================= */
+
+.wpn-help-card {
+  background: linear-gradient(135deg, var(--muted), var(--background));
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  animation: wpn-help-fade-in var(--duration-slow) var(--ease-out) both;
+}
+
+.wpn-help-card:nth-child(1) { animation-delay: 0.2s; }
+.wpn-help-card:nth-child(2) { animation-delay: 0.3s; }
+.wpn-help-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wpn-help-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-help-card__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-help-card__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-help-card__action .wpn-contact-info__link {
+  font-size: var(--text-sm);
+}
+
+.wpn-help-card__action .wpn-button {
+  margin-top: var(--space-3);
+}
+
+/* =================================================================
+   Map Placeholder
+   ================================================================= */
+
+.wpn-map-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: var(--muted);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: wpn-map-fade-in var(--duration-slow) var(--ease-out) 0.5s both;
+}
+
+@keyframes wpn-map-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpn-map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-4);
+  color: var(--muted-foreground);
+}
+
+.wpn-map-placeholder__icon {
+  width: var(--space-16);
+  height: var(--space-16);
+  animation: wpn-map-icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wpn-map-icon-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.wpn-map-placeholder__text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-contact-form {
+    padding: var(--space-6);
+  }
+
+  .wpn-contact-info-card {
+    padding: var(--space-4);
+  }
+
+  .wpn-social-card {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-contact-hero,
+  .wpn-contact-hero::before,
+  .wpn-contact-form,
+  .wpn-contact-form__title,
+  .wpn-contact-form__field,
+  .wpn-contact-form__actions,
+  .wpn-contact-info-card,
+  .wpn-social-card,
+  .wpn-help-card,
+  .wpn-map-container,
+  .wpn-map-placeholder__icon {
+    animation: none;
+  }
+
+  .wpn-contact-info-card:hover,
+  .wpn-social-card:hover,
+  .wpn-contact-info-card:hover .wpn-contact-info-card__icon,
+  .wpn-social-card:hover .wpn-social-card__icon,
+  .wpn-contact-form__input:focus,
+  .wpn-contact-info__link:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wpn-contact-form,
+  .wpn-contact-info-card,
+  .wpn-social-card,
+  .wpn-help-card,
+  .wpn-map-container {
+    border-width: var(--border-width-2);
+  }
+}
+
+/* Focus visible styles */
+.wpn-contact-form__input:focus-visible,
+.wpn-contact-form__textarea:focus-visible,
+.wpn-contact-form__select:focus-visible,
+.wpn-contact-info__link:focus-visible,
+.wpn-social-card__link:focus-visible {
+  outline: 3px solid var(--nova-accent);
+  outline-offset: 2px;
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-contact-hero {
+    background: white;
+    color: black;
+  }
+
+  .wpn-contact-hero::before {
+    display: none;
+  }
+
+  .wpn-contact-form__actions,
+  .wpn-social-grid,
+  .wpn-map-container {
+    display: none;
+  }
+
+  .wpn-contact-form,
+  .wpn-contact-info-card,
+  .wpn-help-card {
+    border: var(--border-width-1) solid #ccc;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}

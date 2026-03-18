@@ -1,3 +1,10 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+@import './layout-utilities.css';
+@import './forms.css';
+@import './ads.css';
+@import './category-card.css';
+@import './auth-pages.css';
+@import './submit-pages.css';
+@import './search-results.css';

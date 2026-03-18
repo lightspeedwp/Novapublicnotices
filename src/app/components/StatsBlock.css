@@ -1,0 +1,414 @@
+/**
+ * Stats Block Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful statistics display with animations and polish
+ * 
+ * Features:
+ * - Smooth counter animations
+ * - Glass morphism dark variant
+ * - Responsive grid layout (flexbox)
+ * - Icon integration
+ * - Number formatting support
+ */
+
+/* =================================================================
+   Stats Block — Base
+   ================================================================= */
+
+.wpn-stats {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-stats:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-default);
+}
+
+/* Dark Variant for Hero Integration */
+.wpn-stats--dark {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--border-width-1) solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.wpn-stats--dark:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.wpn-stats--dark .wpn-stats__item-value,
+.wpn-stats--dark .wpn-stats__item-label {
+  color: white;
+}
+
+.wpn-stats--dark .wpn-stats__item-icon {
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Stats Grid — Flexbox Layout
+   ================================================================= */
+
+.wpn-stats__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* 2-column layout on tablet */
+@media (min-width: 640px) {
+  .wpn-stats__grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .wpn-stats__grid > * {
+    flex: 1 1 calc(50% - var(--space-3));
+    min-width: 0;
+  }
+}
+
+/* 4-column layout on desktop */
+@media (min-width: 1024px) {
+  .wpn-stats__grid > * {
+    flex: 1 1 calc(25% - var(--space-5));
+  }
+}
+
+/* Compact Grid for 2 or 3 items */
+.wpn-stats__grid--compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .wpn-stats__grid--compact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .wpn-stats__grid--compact > * {
+    flex: 1 1 200px;
+    min-width: 0;
+    max-width: 300px;
+  }
+}
+
+/* =================================================================
+   Stats Item
+   ================================================================= */
+
+.wpn-stats__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  opacity: 0;
+  animation: wpn-stats-fade-in var(--duration-normal) var(--ease-out) forwards;
+}
+
+/* Stagger animation for each stat */
+.wpn-stats__item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wpn-stats__item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wpn-stats__item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.wpn-stats__item:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes wpn-stats-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Item with Icon Layout */
+.wpn-stats__item--with-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* =================================================================
+   Stats Item Icon
+   ================================================================= */
+
+.wpn-stats__item-icon-wrapper {
+  flex-shrink: 0;
+  width: var(--space-12);
+  height: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(9, 8, 47, 0.05);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-stats__item:hover .wpn-stats__item-icon-wrapper {
+  background-color: rgba(9, 8, 47, 0.1);
+  transform: scale(1.05);
+}
+
+.wpn-stats__item-icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: var(--nova-primary);
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.wpn-stats__item:hover .wpn-stats__item-icon {
+  transform: scale(1.1);
+}
+
+/* Dark variant icon styling */
+.wpn-stats--dark .wpn-stats__item-icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wpn-stats--dark .wpn-stats__item:hover .wpn-stats__item-icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* =================================================================
+   Stats Item Content
+   ================================================================= */
+
+.wpn-stats__item-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+/* =================================================================
+   Stats Item Value — The Number
+   ================================================================= */
+
+.wpn-stats__item-value {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-none);
+  color: var(--nova-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-stats__item:hover .wpn-stats__item-value {
+  color: var(--nova-accent);
+}
+
+.wpn-stats--dark .wpn-stats__item:hover .wpn-stats__item-value {
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+  .wpn-stats__item-value {
+    font-size: var(--text-4xl);
+  }
+}
+
+/* =================================================================
+   Stats Item Label
+   ================================================================= */
+
+.wpn-stats__item-label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--muted-foreground);
+  text-transform: none;
+}
+
+@media (min-width: 768px) {
+  .wpn-stats__item-label {
+    font-size: var(--text-base);
+  }
+}
+
+/* =================================================================
+   Stats Title (Optional Header)
+   ================================================================= */
+
+.wpn-stats__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--nova-primary);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-color-light);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-stats--dark .wpn-stats__title {
+  color: white;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .wpn-stats__title {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* =================================================================
+   Stats in Hero Context
+   ================================================================= */
+
+.wpn-hero .wpn-stats {
+  animation: wpn-stats-hero-fade-in var(--duration-slow) var(--ease-out) 0.5s both;
+}
+
+@keyframes wpn-stats-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================================================
+   Stats Divider
+   ================================================================= */
+
+.wpn-stats__divider {
+  width: 100%;
+  height: var(--border-width-1);
+  background-color: var(--border-color-light);
+}
+
+.wpn-stats--dark .wpn-stats__divider {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 639px) {
+  .wpn-stats {
+    padding: var(--space-5);
+  }
+
+  .wpn-stats__grid {
+    gap: var(--space-5);
+  }
+
+  .wpn-stats__item-value {
+    font-size: var(--text-2xl);
+  }
+
+  .wpn-stats__item-icon-wrapper {
+    width: var(--space-10);
+    height: var(--space-10);
+  }
+
+  .wpn-stats__item-icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-stats {
+    padding: var(--space-8);
+  }
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-stats,
+  .wpn-stats__item,
+  .wpn-stats__item-icon-wrapper,
+  .wpn-stats__item-icon,
+  .wpn-stats__item-value {
+    animation: none;
+    transition: none;
+  }
+
+  .wpn-stats__item {
+    opacity: 1;
+  }
+
+  .wpn-stats__item:hover .wpn-stats__item-icon-wrapper,
+  .wpn-stats__item:hover .wpn-stats__item-icon {
+    transform: none;
+  }
+}
+
+/* =================================================================
+   Stats Variants
+   ================================================================= */
+
+/* Minimal Variant - No background, just the stats */
+.wpn-stats--minimal {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.wpn-stats--minimal:hover {
+  box-shadow: none;
+}
+
+/* Bordered Variant - Strong border emphasis */
+.wpn-stats--bordered {
+  border: var(--border-width-2) solid var(--border-color-strong);
+}
+
+.wpn-stats--bordered:hover {
+  border-color: var(--nova-primary);
+}
+
+/* Accent Variant - Red accent highlights */
+.wpn-stats--accent .wpn-stats__item-value {
+  color: var(--nova-accent);
+}
+
+.wpn-stats--accent .wpn-stats__item-icon {
+  color: var(--nova-accent);
+}
+
+.wpn-stats--accent .wpn-stats__item-icon-wrapper {
+  background-color: rgba(215, 0, 37, 0.1);
+}
+
+.wpn-stats--accent .wpn-stats__item:hover .wpn-stats__item-icon-wrapper {
+  background-color: rgba(215, 0, 37, 0.15);
+}

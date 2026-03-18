@@ -1,133 +1,80 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import SearchFilterBar from "../components/SearchFilterBar";
+import Hero from "../components/Hero";
 import NoticeCard from "../components/NoticeCard";
 import AdSlot from "../components/AdSlot";
-import CategoryBadge from "../components/CategoryBadge";
+import { CategoryGrid } from "../components/CategoryCard";
+import { getAllCategoriesWithCounts } from "../data/categories/categories-data";
 import { Button } from "../components/ui/button";
 import {
   FileText,
-  Search,
-  Upload,
+  MagnifyingGlass,
+  UploadSimple,
   CheckCircle,
   ArrowRight,
   Clock,
-  Shield,
-  HeadphonesIcon,
-} from "lucide-react";
-import { sampleNotices } from "../data/sampleNotices";
+  ShieldCheck,
+  Headphones,
+} from "@phosphor-icons/react";
+import { getRecentNotices } from "../data/notices/allCategories";
+import { useHero } from "../hooks/useHero";
+import "../../styles/home.css";
 
 export default function Home() {
-  const recentNotices = sampleNotices.slice(0, 6);
-
-  const categories = [
-    { slug: "tenders", icon: FileText, count: 234 },
-    { slug: "estates", icon: FileText, count: 456 },
-    { slug: "liquor-licences", icon: FileText, count: 123 },
-    { slug: "town-planning", icon: FileText, count: 189 },
-    { slug: "business-licence", icon: FileText, count: 98 },
-    { slug: "environmental", icon: FileText, count: 67 },
-    { slug: "court-orders", icon: FileText, count: 145 },
-    { slug: "general", icon: FileText, count: 312 },
-  ];
+  const heroData = useHero('home', 'en');
+  const recentNotices = getRecentNotices(6);
+  
+  // Get categories with content dynamically (filter out categories with 0 notices)
+  const categories = getAllCategoriesWithCounts()
+    .filter(cat => cat.count > 0)
+    .slice(0, 9); // Top 9 categories with content
 
   return (
     <Layout lang="en" showAds={true}>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#09082f] to-[#1a1849] text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-raleway text-4xl md:text-5xl font-bold mb-4">
-              South Africa's Public Notices Directory
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8">
-              Search, discover, and publish legally required public notices quickly and
-              efficiently. Your trusted source for tenders, estates, licences, and more.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-[#d70025] hover:bg-[#b5001f] text-white text-lg px-8"
-                asChild
-              >
-                <Link to="/search">
-                  <Search className="mr-2 size-5" />
-                  Search Notices
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white text-[#09082f] hover:bg-gray-100 text-lg px-8"
-                asChild
-              >
-                <Link to="/submit">
-                  <Upload className="mr-2 size-5" />
-                  Submit a Notice
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Search Bar Section */}
-      <section className="py-8 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <SearchFilterBar lang="en" />
-        </div>
-      </section>
+      {heroData && <Hero data={heroData} lang="en" />}
 
       {/* Categories Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-8 text-center">
-            Browse by Category
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <Link
-                  key={cat.slug}
-                  to={`/category/${cat.slug}`}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-[#09082f] hover:shadow-lg transition-all group"
-                >
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="size-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-[#09082f] transition-colors">
-                      <Icon className="size-6 text-gray-600 group-hover:text-white transition-colors" />
-                    </div>
-                    <div>
-                      <CategoryBadge category={cat.slug} className="mb-2" />
-                      <p className="text-sm text-gray-600">{cat.count} notices</p>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+      <section className="wpn-section--md">
+        <div className="wpn-container">
+          <div className="wpn-section-header">
+            <h2 className="wpn-section-header__title">
+              Browse by category
+            </h2>
+            <p className="wpn-section-header__subtitle">
+              Explore public notices organized by type - from estates and tenders to liquor licences and town planning
+            </p>
           </div>
+          
+          <CategoryGrid 
+            categories={categories} 
+            language="en"
+            columns={3}
+          />
 
           {/* Top Ad Slot */}
-          <AdSlot slot="ad_top_leaderboard" height={90} label="Advertisement" />
+          <div className="mt-12">
+            <AdSlot slot="ad_top_leaderboard" height={90} label="Advertisement" />
+          </div>
         </div>
       </section>
 
       {/* Recent Notices */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-raleway text-3xl font-bold text-[#09082f]">
+      <section className="wpn-section--md wpn-section--muted">
+        <div className="wpn-container">
+          <div className="wpn-section-header--flex">
+            <h2 className="wpn-section-header__title">
               Recently Published
             </h2>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="wpn-button wpn-button--outline" asChild>
               <Link to="/search">
                 View All
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="wpn-button__icon--trailing" />
               </Link>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="wpn-grid--3col wpn-gap-lg">
             {recentNotices.map((notice) => (
               <NoticeCard
                 key={notice.id}
@@ -147,74 +94,76 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-4 text-center">
-            How Public Notices Work
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Whether you're searching for notices or need to publish one, we make the process
-            simple and compliant.
-          </p>
+      <section className="wpn-section">
+        <div className="wpn-container">
+          <div className="wpn-section-header">
+            <h2 className="wpn-section-header__title">
+              How Public Notices Work
+            </h2>
+            <p className="wpn-section-header__subtitle">
+              Whether you're searching for notices or need to publish one, we make the process
+              simple and compliant.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <Search className="size-8" />
+          <div className="wpn-grid--3col wpn-gap-xl wpn-mb-12">
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <MagnifyingGlass />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Search Notices</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Search Notices</h3>
+              <p className="wpn-step__description">
                 Use our advanced search and filtering to find specific public notices by
                 category, location, or date.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <Upload className="size-8" />
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <UploadSimple />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Submit Your Notice</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Submit Your Notice</h3>
+              <p className="wpn-step__description">
                 Submit notices online through our guided form. All submissions are reviewed
                 before publication.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="size-8" />
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <CheckCircle />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Get Published</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Get Published</h3>
+              <p className="wpn-step__description">
                 Once approved, your notice goes live and becomes searchable. Download proof
                 of publication anytime.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <Clock className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Fast Turnaround</h4>
-              <p className="text-sm text-gray-600">
+          <div className="wpn-grid--3col wpn-gap-lg">
+            <div className="wpn-feature">
+              <Clock className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Fast Turnaround</h4>
+              <p className="wpn-feature__description">
                 Most notices are reviewed and published within 48 hours of submission and
                 payment.
               </p>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <Shield className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Legally Compliant</h4>
-              <p className="text-sm text-gray-600">
+            <div className="wpn-feature">
+              <ShieldCheck className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Legally Compliant</h4>
+              <p className="wpn-feature__description">
                 All notices meet South African legal publication requirements and are
                 archived for compliance.
               </p>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <HeadphonesIcon className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Expert Support</h4>
-              <p className="text-sm text-gray-600">
+            <div className="wpn-feature">
+              <Headphones className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Expert Support</h4>
+              <p className="wpn-feature__description">
                 Need help? Our sales team can assist with complex notices or bulk
                 submissions.
               </p>
@@ -224,19 +173,19 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#09082f] text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-raleway text-3xl font-bold mb-4">
+      <section className="wpn-cta-section wpn-cta-section--spaced">
+        <div className="wpn-cta-section__container">
+          <h2 className="wpn-cta-section__title">
             Need to Publish a Public Notice?
           </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="wpn-cta-section__description wpn-cta-section__description--narrow">
             Get started with our simple self-service submission process, or contact our sales
             team for assistance with print and digital packages.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="wpn-cta-section__actions">
             <Button
               size="lg"
-              className="bg-[#d70025] hover:bg-[#b5001f] text-white"
+              className="wpn-button wpn-button--lg wpn-button--accent"
               asChild
             >
               <Link to="/submit">Submit Notice Online</Link>
@@ -244,7 +193,7 @@ export default function Home() {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white text-[#09082f] hover:bg-gray-100"
+              className="wpn-button wpn-button--lg wpn-button--white"
               asChild
             >
               <Link to="/sales">Speak to Sales</Link>

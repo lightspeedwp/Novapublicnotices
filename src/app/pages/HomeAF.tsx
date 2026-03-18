@@ -34,20 +34,20 @@ export default function HomeAF() {
   return (
     <Layout lang="af" showAds={true}>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#09082f] to-[#1a1849] text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-raleway text-4xl md:text-5xl font-bold mb-4">
+      <section className="wpn-hero">
+        <div className="wpn-hero__container">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="wpn-hero__title">
               Suid-Afrika se Regskennisgewings Gids
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8">
+            <p className="wpn-hero__subtitle">
               Soek, ontdek en publiseer wetlik vereiste regskennisgewings vinnig en
               doeltreffend. U betroubare bron vir tenders, boedels, lisensies, en meer.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="wpn-hero__actions">
               <Button
                 size="lg"
-                className="bg-[#d70025] hover:bg-[#b5001f] text-white text-lg px-8"
+                className="wpn-button wpn-button--lg wpn-button--accent"
                 asChild
               >
                 <Link to="/af/soek">
@@ -58,7 +58,7 @@ export default function HomeAF() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white text-[#09082f] hover:bg-gray-100 text-lg px-8"
+                className="wpn-button wpn-button--lg wpn-button--white"
                 asChild
               >
                 <Link to="/af/indien">
@@ -72,18 +72,20 @@ export default function HomeAF() {
       </section>
 
       {/* Search Bar Section */}
-      <section className="py-8 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-8 bg-muted">
+        <div className="wpn-container">
           <SearchFilterBar lang="af" />
         </div>
       </section>
 
       {/* Categories Section */}
       <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-8 text-center">
-            Blaai volgens Kategorie
-          </h2>
+        <div className="wpn-container">
+          <div className="wpn-section-header">
+            <h2 className="wpn-section-header__title">
+              Blaai volgens Kategorie
+            </h2>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {categories.map((cat) => {
               const Icon = cat.icon;
@@ -91,16 +93,14 @@ export default function HomeAF() {
                 <Link
                   key={cat.slug}
                   to={`/af/kategorie/${cat.slug}`}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-[#09082f] hover:shadow-lg transition-all group"
+                  className="wpn-category-card"
                 >
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="size-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-[#09082f] transition-colors">
-                      <Icon className="size-6 text-gray-600 group-hover:text-white transition-colors" />
-                    </div>
-                    <div>
-                      <CategoryBadge category={cat.slug} lang="af" className="mb-2" />
-                      <p className="text-sm text-gray-600">{cat.count} kennisgewings</p>
-                    </div>
+                  <div className="wpn-category-card__icon">
+                    <Icon />
+                  </div>
+                  <div>
+                    <CategoryBadge category={cat.slug} className="mb-2" />
+                    <p className="wpn-category-card__count">{cat.count} kennisgewings</p>
                   </div>
                 </Link>
               );
@@ -113,13 +113,13 @@ export default function HomeAF() {
       </section>
 
       {/* Recent Notices */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-12 bg-muted">
+        <div className="wpn-container">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-raleway text-3xl font-bold text-[#09082f]">
+            <h2 className="wpn-section-header__title">
               Onlangs Gepubliseer
             </h2>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="wpn-button wpn-button--outline" asChild>
               <Link to="/af/soek">
                 Sien Alles
                 <ArrowRight className="ml-2 size-4" />
@@ -148,68 +148,71 @@ export default function HomeAF() {
 
       {/* How It Works Section */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="font-raleway text-3xl font-bold text-[#09082f] mb-4 text-center">
-            Hoe Regskennisgewings Werk
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Of u soek vir kennisgewings of moet een publiseer, ons maak die proses eenvoudig en volgbaar.
-          </p>
+        <div className="wpn-container">
+          <div className="wpn-section-header">
+            <h2 className="wpn-section-header__title">
+              Hoe Regskennisgewings Werk
+            </h2>
+            <p className="wpn-section-header__subtitle">
+              Of u nou soek na kennisgewings of een moet publiseer, ons maak die proses
+              eenvoudig en volgbaar.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <Search className="size-8" />
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <Search />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Soek Kennisgewings</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Soek Kennisgewings</h3>
+              <p className="wpn-step__description">
                 Gebruik ons gevorderde soek- en filtreringsfunksies om spesifieke regskennisgewings te vind volgens kategorie, ligging, of datum.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <Upload className="size-8" />
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <Upload />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Dien U Kennisgewing In</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Dien U Kennisgewing In</h3>
+              <p className="wpn-step__description">
                 Dien kennisgewings aanlyn in deur ons geleide vorm. Alle indiening word hersien voor publikasie.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="size-16 rounded-full bg-[#09082f] text-white flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="size-8" />
+            <div className="wpn-step">
+              <div className="wpn-step__icon">
+                <CheckCircle />
               </div>
-              <h3 className="font-raleway font-semibold text-xl mb-2">Word Gepubliseer</h3>
-              <p className="text-gray-600">
+              <h3 className="wpn-step__title">Word Gepubliseer</h3>
+              <p className="wpn-step__description">
                 Sodra goedgekeur, gaan u kennisgewing lewendig en word soekbaar. Laai bewys van publikasie enige tyd af.
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <Clock className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Vinnige Ommekeer</h4>
-              <p className="text-sm text-gray-600">
+            <div className="wpn-feature">
+              <Clock className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Vinnige Ommekeer</h4>
+              <p className="wpn-feature__description">
                 Meeste kennisgewings word binne 48 uur na indiening en betaling hersien en gepubliseer.
               </p>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <Shield className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Wetlik Volgbaar</h4>
-              <p className="text-sm text-gray-600">
-                Alle kennisgewings voldoen aan Suid-Afrikaanse wetlike publikasievereistes en word geargiveer vir nakoming.
+            <div className="wpn-feature">
+              <Shield className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Wetlik Volgbaar</h4>
+              <p className="wpn-feature__description">
+                Alle kennisgewings voldoen aan Suid-Afrikaanse wetlike publikasievereistes en word vir voldoening geargiveer.
               </p>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <HeadphonesIcon className="size-8 text-[#d70025] mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Kundige Ondersteuning</h4>
-              <p className="text-sm text-gray-600">
-                Het u hulp nodig? Ons verkoopspan kan help met komplekse kennisgewings of grootmaat indiening.
+            <div className="wpn-feature">
+              <HeadphonesIcon className="wpn-feature__icon" />
+              <h4 className="wpn-feature__title">Kundige Ondersteuning</h4>
+              <p className="wpn-feature__description">
+                Benodig hulp? Ons verkoopspan kan met komplekse kennisgewings of massa-indienings help.
               </p>
             </div>
           </div>
@@ -217,18 +220,18 @@ export default function HomeAF() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#09082f] text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-raleway text-3xl font-bold mb-4">
+      <section className="wpn-cta-section">
+        <div className="wpn-cta-section__container">
+          <h2 className="wpn-cta-section__title">
             Moet u 'n Regskennisgewing Publiseer?
           </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="wpn-cta-section__description max-w-2xl mx-auto">
             Begin met ons eenvoudige selfbediening-indieningsproses, of kontak ons verkoopspan vir hulp met druk- en digitale pakkette.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="wpn-cta-section__actions">
             <Button
               size="lg"
-              className="bg-[#d70025] hover:bg-[#b5001f] text-white"
+              className="wpn-button wpn-button--lg wpn-button--accent"
               asChild
             >
               <Link to="/af/indien">Dien Kennisgewing Aanlyn In</Link>
@@ -236,7 +239,7 @@ export default function HomeAF() {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white text-[#09082f] hover:bg-gray-100"
+              className="wpn-button wpn-button--lg wpn-button--white"
               asChild
             >
               <Link to="/af/verkope">Praat met Verkope</Link>

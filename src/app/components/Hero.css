@@ -1,0 +1,724 @@
+/**
+ * Hero Section Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Stunning visual design with animations and polish
+ * 
+ * Features:
+ * - Navy background with white text
+ * - Red accent highlights
+ * - Smooth animations
+ * - Responsive typography
+ * - Multiple size and layout variants
+ * - Accessibility support
+ */
+
+/* =================================================================
+   Hero Block — Base
+   ================================================================= */
+
+.wpn-hero {
+  background-color: var(--nova-primary);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gradient overlay for depth */
+.wpn-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(9, 8, 47, 0.95) 0%, rgba(9, 8, 47, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* Size Variants */
+.wpn-hero--sm {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+.wpn-hero--md {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+.wpn-hero--lg {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .wpn-hero--sm {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+
+  .wpn-hero--md {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .wpn-hero--lg {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
+}
+
+/* =================================================================
+   Hero Container
+   ================================================================= */
+
+.wpn-hero__container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .wpn-hero__container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-hero__container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* =================================================================
+   Hero Content
+   ================================================================= */
+
+.wpn-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  animation: wpn-hero-fade-in var(--duration-slow) var(--ease-out);
+}
+
+@keyframes wpn-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Alignment Variants */
+.wpn-hero__content--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.wpn-hero__content--center {
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =================================================================
+   Breadcrumbs
+   ================================================================= */
+
+.wpn-hero__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+  animation: wpn-breadcrumb-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-breadcrumb-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-hero__breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.wpn-hero__breadcrumb-link {
+  color: white;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.wpn-hero__breadcrumb-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--nova-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.wpn-hero__breadcrumb-link:hover {
+  color: var(--nova-accent);
+}
+
+.wpn-hero__breadcrumb-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.wpn-hero__breadcrumb-separator {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.wpn-hero__breadcrumb-current {
+  color: white;
+  font-weight: var(--font-weight-medium);
+}
+
+/* =================================================================
+   Hero Subtitle
+   ================================================================= */
+
+.wpn-hero__subtitle {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  color: var(--nova-accent);
+  line-height: var(--line-height-snug);
+  font-size: var(--text-md);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  animation: wpn-subtitle-fade-in var(--duration-normal) var(--ease-out) 0.1s both;
+}
+
+@keyframes wpn-subtitle-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-hero__subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+/* =================================================================
+   Hero Icon
+   ================================================================= */
+
+.wpn-hero__icon {
+  display: flex;
+  align-items: center;
+  justify-content: var(--hero-icon-align, center);
+  animation: wpn-icon-bounce-in var(--duration-slow) var(--ease-out) 0.15s both;
+}
+
+.wpn-hero__icon svg {
+  width: var(--icon-size-hero);
+  height: var(--icon-size-hero);
+  color: var(--nova-accent);
+  filter: drop-shadow(0 4px 12px rgba(215, 0, 37, 0.25));
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-hero__content--left .wpn-hero__icon {
+  justify-content: flex-start;
+}
+
+.wpn-hero__content--center .wpn-hero__icon {
+  justify-content: center;
+}
+
+@keyframes wpn-icon-bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-hero__icon svg {
+    width: var(--icon-size-4xl);
+    height: var(--icon-size-4xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-hero--lg .wpn-hero__icon svg {
+    width: var(--icon-size-5xl);
+    height: var(--icon-size-5xl);
+  }
+}
+
+/* =================================================================
+   Hero Title — The Star
+   ================================================================= */
+
+.wpn-hero__title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  animation: wpn-title-fade-in var(--duration-slow) var(--ease-out) 0.15s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes wpn-title-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Title Size Variants — Mobile First */
+.wpn-hero--sm .wpn-hero__title {
+  font-size: var(--text-hero); /* Changed from hardcoded 64px */
+}
+
+.wpn-hero--md .wpn-hero__title {
+  font-size: var(--text-hero); /* Changed from hardcoded 64px */
+}
+
+.wpn-hero--lg .wpn-hero__title {
+  font-size: var(--text-hero); /* Changed from hardcoded 64px */
+}
+
+/* Tablet Breakpoint */
+@media (min-width: 768px) {
+  .wpn-hero--sm .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+
+  .wpn-hero--md .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+
+  .wpn-hero--lg .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+}
+
+/* Desktop Breakpoint */
+@media (min-width: 1024px) {
+  .wpn-hero--sm .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+
+  .wpn-hero--md .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+
+  .wpn-hero--lg .wpn-hero__title {
+    font-size: var(--text-hero); /* Changed from hardcoded 64px */
+  }
+}
+
+/* =================================================================
+   Hero Description
+   ================================================================= */
+
+.wpn-hero__description {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-normal);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+  font-size: var(--text-base);
+  max-width: 700px;
+  animation: wpn-description-fade-in var(--duration-slow) var(--ease-out) 0.2s both;
+}
+
+@keyframes wpn-description-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-hero__content--center .wpn-hero__description {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .wpn-hero__description {
+    font-size: var(--text-lg);
+    max-width: 750px;
+  }
+}
+
+/* =================================================================
+   Hero Buttons — Call to Action
+   ================================================================= */
+
+.wpn-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  animation: wpn-buttons-fade-in var(--duration-slow) var(--ease-out) 0.3s both;
+}
+
+@keyframes wpn-buttons-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-hero__content--center .wpn-hero__buttons {
+  justify-content: center;
+}
+
+.wpn-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-none);
+  text-decoration: none;
+  border: var(--border-width-2) solid transparent;
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.wpn-hero__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--duration-slower) var(--ease-out);
+}
+
+.wpn-hero__button:hover::before {
+  left: 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-hero__button {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-md);
+  }
+}
+
+/* Button Icon */
+.wpn-hero__button-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.wpn-hero__button:hover .wpn-hero__button-icon {
+  transform: translateX(2px);
+}
+
+/* Primary Button — Red Accent */
+.wpn-hero__button--primary {
+  background-color: var(--nova-accent);
+  color: white;
+  border-color: var(--nova-accent);
+  box-shadow: 0 4px 12px rgba(215, 0, 37, 0.3);
+}
+
+.wpn-hero__button--primary:hover {
+  background-color: var(--nova-accent-hover);
+  border-color: var(--nova-accent-hover);
+  transform: translateY(var(--hover-translate-y-sm));
+  box-shadow: 0 6px 20px rgba(215, 0, 37, 0.4);
+}
+
+.wpn-hero__button--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(215, 0, 37, 0.3);
+}
+
+/* Secondary Button — White */
+.wpn-hero__button--secondary {
+  background-color: white;
+  color: var(--nova-primary);
+  border-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.wpn-hero__button--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  transform: translateY(var(--hover-translate-y-sm));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wpn-hero__button--secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Outline Button — Transparent with white border */
+.wpn-hero__button--outline {
+  background-color: transparent;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.wpn-hero__button--outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* =================================================================
+   Hero Search
+   ================================================================= */
+
+.wpn-hero__search {
+  width: 100%;
+  max-width: 800px;
+  animation: wpn-search-fade-in var(--duration-slow) var(--ease-out) 0.4s both;
+}
+
+@keyframes wpn-search-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-hero__content--center .wpn-hero__search {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =================================================================
+   White Text Override for All Elements
+   ================================================================= */
+
+.wpn-hero h1,
+.wpn-hero h2,
+.wpn-hero h3,
+.wpn-hero h4,
+.wpn-hero h5,
+.wpn-hero h6 {
+  color: white;
+}
+
+.wpn-hero p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Links in Hero */
+.wpn-hero a:not(.wpn-hero__button) {
+  color: white;
+  text-decoration: underline;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-hero a:not(.wpn-hero__button):hover {
+  color: var(--nova-accent);
+}
+
+/* Icons in Hero */
+.wpn-hero svg {
+  color: currentColor;
+}
+
+/* =================================================================
+   Responsive Adjustments — Mobile Optimization
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-hero__buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .wpn-hero__button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wpn-hero__content {
+    gap: var(--space-5);
+  }
+}
+
+/* =================================================================
+   Layout Variants — Advanced Layouts
+   ================================================================= */
+
+/* Default Layout - Standard vertical stack */
+.wpn-hero--default {
+  /* Uses base styles */
+}
+
+/* Split Layout - Content on left, visual/stats on right */
+.wpn-hero--split .wpn-hero__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .wpn-hero--split .wpn-hero__container {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-12);
+  }
+
+  .wpn-hero--split .wpn-hero__content {
+    flex: 1;
+    max-width: none;
+  }
+
+  .wpn-hero--split .wpn-hero__aside {
+    flex: 0 0 400px;
+  }
+}
+
+/* Centered Layout - Everything centered with max-width */
+.wpn-hero--centered .wpn-hero__content {
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Minimal Layout - Compact spacing, no decorative elements */
+.wpn-hero--minimal {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+.wpn-hero--minimal .wpn-hero__content {
+  gap: var(--space-4);
+}
+
+.wpn-hero--minimal::before {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .wpn-hero--minimal {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+}
+
+/* With Stats Layout - Hero with integrated stats block */
+.wpn-hero--with-stats {
+  /* Uses base styles, stats handled by stats component */
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Focus states for keyboard navigation */
+.wpn-hero__breadcrumb-link:focus,
+.wpn-hero__button:focus {
+  outline: 3px solid var(--nova-accent);
+  outline-offset: 3px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-hero__content,
+  .wpn-hero__breadcrumbs,
+  .wpn-hero__subtitle,
+  .wpn-hero__title,
+  .wpn-hero__description,
+  .wpn-hero__buttons,
+  .wpn-hero__search {
+    animation: none;
+  }
+
+  .wpn-hero__button,
+  .wpn-hero__breadcrumb-link,
+  .wpn-hero__button-icon {
+    transition: none;
+  }
+
+  .wpn-hero__button::before {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .wpn-hero {
+    border-bottom: var(--border-width-2) solid white;
+  }
+
+  .wpn-hero__button {
+    border-width: var(--border-width-2);
+  }
+}

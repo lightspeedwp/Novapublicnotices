@@ -1,0 +1,576 @@
+/**
+ * Search & Filter Bar Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful animations and professional polish
+ * 
+ * Features:
+ * - Staggered fade-in animations
+ * - Icon animations on interactions
+ * - Filter pill animations
+ * - Smooth transitions
+ * - Responsive design
+ * - Full accessibility
+ */
+
+/* =================================================================
+   Search Filter Bar — Base Component
+   ================================================================= */
+
+.wpn-search-filter-bar {
+  background: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: wpn-filter-bar-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-filter-bar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-search-filter-bar__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* =================================================================
+   Main Search Row
+   ================================================================= */
+
+.wpn-search-filter-bar__search-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: wpn-search-row-fade-in var(--duration-normal) var(--ease-out) 0.05s both;
+}
+
+@keyframes wpn-search-row-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-search-filter-bar__search-row {
+    flex-direction: row;
+    gap: var(--space-2);
+  }
+}
+
+.wpn-search-filter-bar__search-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.wpn-search-filter-bar__search-icon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--muted-foreground);
+  pointer-events: none;
+  z-index: 1;
+  animation: wpn-search-icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wpn-search-icon-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Icon sizing classes */
+.wpn-search-filter-bar__button-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+.wpn-search-filter-bar__toggle-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-search-filter-bar__toggle-icon--rotate {
+  transform: rotate(180deg);
+}
+
+.wpn-search-filter-bar__results-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+.wpn-search-filter-bar__clear-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+.wpn-search-filter-bar__search-input {
+  width: 100%;
+  padding-left: calc(var(--space-3) + var(--icon-size-md) + var(--space-3));
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  background-color: var(--background);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  padding-right: var(--space-3);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-search-filter-bar__search-input:focus {
+  outline: none;
+  border-color: var(--nova-accent);
+  box-shadow: 0 0 0 3px rgba(215, 0, 37, 0.1);
+}
+
+.wpn-search-filter-bar__search-input::placeholder {
+  color: var(--muted-foreground);
+  font-family: var(--font-family-body);
+}
+
+/* =================================================================
+   Quick Filters — Flexbox Grid
+   ================================================================= */
+
+.wpn-search-filter-bar__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  animation: wpn-filters-fade-in var(--duration-normal) var(--ease-out) 0.1s both;
+}
+
+@keyframes wpn-filters-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-search-filter-bar__filters > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .wpn-search-filter-bar__filters > * {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-search-filter-bar__filters > * {
+    flex: 1 1 calc(33.333% - var(--space-2));
+  }
+}
+
+.wpn-search-filter-bar__filter-select {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+}
+
+/* =================================================================
+   Actions Row
+   ================================================================= */
+
+.wpn-search-filter-bar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  animation: wpn-actions-fade-in var(--duration-normal) var(--ease-out) 0.15s both;
+}
+
+@keyframes wpn-actions-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.wpn-search-filter-bar__results-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: linear-gradient(135deg, rgba(215, 0, 37, 0.1), rgba(215, 0, 37, 0.05));
+  border: var(--border-width-1) solid rgba(215, 0, 37, 0.2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--nova-accent);
+  animation: wpn-badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wpn-badge-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(215, 0, 37, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(215, 0, 37, 0);
+  }
+}
+
+.wpn-search-filter-bar__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-search-filter-bar__toggle-btn:hover {
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Advanced Filters Section
+   ================================================================= */
+
+.wpn-search-filter-bar__advanced {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  margin-top: var(--space-2);
+  border-top: var(--border-width-1) solid var(--border-color-default);
+  animation: wpn-advanced-slide-down var(--duration-slow) var(--ease-out);
+}
+
+@keyframes wpn-advanced-slide-down {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+.wpn-search-filter-bar__advanced > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .wpn-search-filter-bar__advanced > * {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-search-filter-bar__advanced > * {
+    flex: 1 1 calc(33.333% - var(--space-3));
+  }
+}
+
+.wpn-search-filter-bar__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-search-filter-bar__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.wpn-search-filter-bar__input {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--foreground);
+  background-color: var(--background);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-search-filter-bar__input:focus {
+  outline: none;
+  border-color: var(--nova-accent);
+  box-shadow: 0 0 0 3px rgba(215, 0, 37, 0.1);
+}
+
+/* =================================================================
+   Active Filters Pills
+   ================================================================= */
+
+.wpn-search-filter-bar__active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: linear-gradient(135deg, var(--muted), var(--background));
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  animation: wpn-active-filters-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-active-filters-fade-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.8);
+    transform-origin: top;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.wpn-search-filter-bar__active-filters-label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.wpn-search-filter-bar__filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--nova-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  animation: wpn-pill-pop-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-pill-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpn-search-filter-bar__filter-pill:hover {
+  background-color: var(--nova-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(215, 0, 37, 0.3);
+}
+
+.wpn-search-filter-bar__filter-pill:active {
+  transform: translateY(0);
+}
+
+.wpn-search-filter-bar__filter-pill-remove {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+  flex-shrink: 0;
+}
+
+/* =================================================================
+   Clear Filters Button
+   ================================================================= */
+
+.wpn-search-filter-bar__clear {
+  width: fit-content;
+  align-self: flex-start;
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  animation: wpn-clear-btn-fade-in var(--duration-normal) var(--ease-out) 0.2s both;
+}
+
+@keyframes wpn-clear-btn-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =================================================================
+   Mobile Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-search-filter-bar {
+    padding: var(--space-4);
+  }
+
+  .wpn-search-filter-bar__content {
+    gap: var(--space-3);
+  }
+
+  .wpn-search-filter-bar__search-row {
+    gap: var(--space-2);
+  }
+
+  .wpn-search-filter-bar__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wpn-search-filter-bar__results-badge {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =================================================================
+   Loading State
+   ================================================================= */
+
+.wpn-search-filter-bar--loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.wpn-search-filter-bar--loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--nova-accent),
+    transparent
+  );
+  animation: wpn-loading-sweep 1.5s ease-in-out infinite;
+}
+
+@keyframes wpn-loading-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-search-filter-bar,
+  .wpn-search-filter-bar__search-row,
+  .wpn-search-filter-bar__filters,
+  .wpn-search-filter-bar__actions,
+  .wpn-search-filter-bar__advanced,
+  .wpn-search-filter-bar__active-filters,
+  .wpn-search-filter-bar__filter-pill,
+  .wpn-search-filter-bar__clear {
+    animation: none;
+  }
+
+  .wpn-search-filter-bar__search-icon {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .wpn-search-filter-bar__results-badge {
+    animation: none;
+  }
+
+  .wpn-search-filter-bar__toggle-icon,
+  .wpn-search-filter-bar__search-input,
+  .wpn-search-filter-bar__input,
+  .wpn-search-filter-bar__filter-pill,
+  .wpn-search-filter-bar__toggle-btn {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wpn-search-filter-bar {
+    border-width: var(--border-width-2);
+  }
+
+  .wpn-search-filter-bar__search-input:focus,
+  .wpn-search-filter-bar__input:focus {
+    outline: 3px solid var(--nova-accent);
+    outline-offset: 2px;
+  }
+
+  .wpn-search-filter-bar__filter-pill {
+    border: var(--border-width-1) solid white;
+  }
+}
+
+/* Focus visible styles */
+.wpn-search-filter-bar__toggle-btn:focus-visible,
+.wpn-search-filter-bar__filter-pill:focus-visible {
+  outline: 3px solid var(--nova-accent);
+  outline-offset: 2px;
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-search-filter-bar {
+    display: none;
+  }
+}

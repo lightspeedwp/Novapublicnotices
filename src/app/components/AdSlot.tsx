@@ -1,4 +1,5 @@
 import { cn } from "./ui/utils";
+import "./AdSlot.css";
 
 interface AdSlotProps {
   slot: string;
@@ -11,20 +12,17 @@ interface AdSlotProps {
 export default function AdSlot({ slot, width, height, className, label }: AdSlotProps) {
   return (
     <div
-      className={cn(
-        "bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center rounded",
-        className
-      )}
+      className={cn("wpn-ad-slot", className)}
       style={{
-        minHeight: height ? `${height}px` : "250px",
-        width: width ? `${width}px` : "100%",
+        minHeight: height ? `${height}px` : undefined,
+        width: width ? `${width}px` : undefined,
       }}
     >
-      <div className="text-center text-gray-400">
-        <div className="font-lexend font-semibold text-sm mb-1">
+      <div className="wpn-ad-slot__content">
+        <div className="wpn-ad-slot__label">
           {label || "Advertisement"}
         </div>
-        <div className="text-xs">
+        <div className="wpn-ad-slot__dimensions">
           {width && height ? `${width} × ${height}` : slot}
         </div>
       </div>

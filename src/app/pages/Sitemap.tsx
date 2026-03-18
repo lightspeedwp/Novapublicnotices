@@ -1,82 +1,158 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
 import { categories } from "../data/categories";
+import { Home } from "lucide-react";
+import "../../styles/components.css";
 
 export default function Sitemap() {
   return (
     <Layout lang="en" showAds={true}>
-      <div className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4">
-          <h1 className="font-raleway text-4xl font-bold text-[#09082f] mb-8">Sitemap</h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Page Header */}
+      <section className="wpn-page-header">
+        <div className="wpn-page-header__container">
+          {/* Breadcrumb */}
+          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
+            <ol className="wpn-breadcrumb__list">
+              <li className="wpn-breadcrumb__item">
+                <Link to="/" className="wpn-breadcrumb__link">
+                  <Home className="wpn-breadcrumb__icon" />
+                  Home
+                </Link>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__separator">/</span>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__current">Sitemap</span>
+              </li>
+            </ol>
+          </nav>
+
+          <h1 className="wpn-page-header__title wpn-page-header__title--white">
+            Sitemap
+          </h1>
+          <p className="wpn-page-header__subtitle">
+            Navigate all pages and notice categories on the Nova Public Notices Portal
+          </p>
+        </div>
+      </section>
+
+      {/* Sitemap Content */}
+      <section className="wpn-sitemap">
+        <div className="wpn-sitemap__container">
+          <div className="wpn-sitemap__grid">
+            
             {/* Main Pages */}
-            <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Main Pages</h2>
-              <ul className="space-y-2 text-sm">
-                <li><Link to="/" className="text-[#d70025] hover:underline">Home</Link></li>
-                <li><Link to="/search" className="text-[#d70025] hover:underline">Search Notices</Link></li>
-                <li><Link to="/about" className="text-[#d70025] hover:underline">About Us</Link></li>
-                <li><Link to="/contact" className="text-[#d70025] hover:underline">Contact</Link></li>
-                <li><Link to="/sales" className="text-[#d70025] hover:underline">How It Works</Link></li>
-                <li><Link to="/pricing" className="text-[#d70025] hover:underline">Pricing</Link></li>
-                <li><Link to="/advertise" className="text-[#d70025] hover:underline">Advertise</Link></li>
-                <li><Link to="/faq" className="text-[#d70025] hover:underline">FAQ</Link></li>
+            <div className="wpn-sitemap__section">
+              <h2 className="wpn-sitemap__section-title">Main pages</h2>
+              <ul className="wpn-sitemap__list">
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/" className="wpn-sitemap__link">Home</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/search" className="wpn-sitemap__link">Search Notices</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/about" className="wpn-sitemap__link">About Us</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/contact" className="wpn-sitemap__link">Contact</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/sales" className="wpn-sitemap__link">How It Works</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/pricing" className="wpn-sitemap__link">Pricing</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/advertise" className="wpn-sitemap__link">Advertise</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/faq" className="wpn-sitemap__link">FAQ</Link>
+                </li>
               </ul>
-            </Card>
+            </div>
 
             {/* Notice Categories */}
-            <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Notice Categories</h2>
-              <ul className="space-y-2 text-sm">
+            <div className="wpn-sitemap__section">
+              <h2 className="wpn-sitemap__section-title">Notice categories</h2>
+              <ul className="wpn-sitemap__list">
                 {categories.map((cat) => (
-                  <li key={cat.slug}>
-                    <Link to={`/category/${cat.slug}`} className="text-[#d70025] hover:underline">
+                  <li key={cat.slug} className="wpn-sitemap__list-item">
+                    <Link to={`/category/${cat.slug}`} className="wpn-sitemap__link">
                       {cat.name.en}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </Card>
+            </div>
 
             {/* Account & Submission */}
-            <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Account & Submission</h2>
-              <ul className="space-y-2 text-sm">
-                <li><Link to="/login" className="text-[#d70025] hover:underline">Login</Link></li>
-                <li><Link to="/register" className="text-[#d70025] hover:underline">Register</Link></li>
-                <li><Link to="/my-account" className="text-[#d70025] hover:underline">My Account</Link></li>
-                <li><Link to="/my-account/notices" className="text-[#d70025] hover:underline">My Notices</Link></li>
-                <li><Link to="/my-account/orders" className="text-[#d70025] hover:underline">Orders</Link></li>
-                <li><Link to="/my-account/profile" className="text-[#d70025] hover:underline">Profile</Link></li>
-                <li><Link to="/submit" className="text-[#d70025] hover:underline">Submit Notice</Link></li>
+            <div className="wpn-sitemap__section">
+              <h2 className="wpn-sitemap__section-title">Account & submission</h2>
+              <ul className="wpn-sitemap__list">
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/login" className="wpn-sitemap__link">Login</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/register" className="wpn-sitemap__link">Register</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/my-account" className="wpn-sitemap__link">My Account</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/my-account/notices" className="wpn-sitemap__link">My Notices</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/my-account/orders" className="wpn-sitemap__link">Orders</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/my-account/profile" className="wpn-sitemap__link">Profile</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/submit" className="wpn-sitemap__link">Submit Notice</Link>
+                </li>
               </ul>
-            </Card>
+            </div>
 
             {/* Legal Pages */}
-            <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Legal</h2>
-              <ul className="space-y-2 text-sm">
-                <li><Link to="/terms" className="text-[#d70025] hover:underline">Terms of Service</Link></li>
-                <li><Link to="/privacy" className="text-[#d70025] hover:underline">Privacy Policy</Link></li>
+            <div className="wpn-sitemap__section">
+              <h2 className="wpn-sitemap__section-title">Legal</h2>
+              <ul className="wpn-sitemap__list">
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/terms" className="wpn-sitemap__link">Terms of Service</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/privacy" className="wpn-sitemap__link">Privacy Policy</Link>
+                </li>
               </ul>
-            </Card>
+            </div>
 
             {/* Afrikaans Pages */}
-            <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Afrikaans</h2>
-              <ul className="space-y-2 text-sm">
-                <li><Link to="/af" className="text-[#d70025] hover:underline">Tuis</Link></li>
-                <li><Link to="/af/soek" className="text-[#d70025] hover:underline">Soek Kennisgewings</Link></li>
-                <li><Link to="/af/oor-ons" className="text-[#d70025] hover:underline">Oor Ons</Link></li>
-                <li><Link to="/af/kontak" className="text-[#d70025] hover:underline">Kontak</Link></li>
-                <li><Link to="/af/verkope" className="text-[#d70025] hover:underline">Hoe Dit Werk</Link></li>
+            <div className="wpn-sitemap__section">
+              <h2 className="wpn-sitemap__section-title">Afrikaans</h2>
+              <ul className="wpn-sitemap__list">
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/af" className="wpn-sitemap__link">Tuis</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/af/soek" className="wpn-sitemap__link">Soek Kennisgewings</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/af/oor-ons" className="wpn-sitemap__link">Oor Ons</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/af/kontak" className="wpn-sitemap__link">Kontak</Link>
+                </li>
+                <li className="wpn-sitemap__list-item">
+                  <Link to="/af/verkope" className="wpn-sitemap__link">Hoe Dit Werk</Link>
+                </li>
               </ul>
-            </Card>
+            </div>
+
           </div>
         </div>
-      </div>
+      </section>
     </Layout>
   );
 }

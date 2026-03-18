@@ -1,0 +1,137 @@
+/**
+ * Page Header & Breadcrumb Components
+ * 
+ * Professional breadcrumb navigation and page headers for all pages
+ * 
+ * Dependencies:
+ * - theme-variables.css (CSS custom properties)
+ * 
+ * Components:
+ * - .wpn-breadcrumb — Breadcrumb navigation
+ * - .wpn-page-header — Page header section with title and subtitle
+ * 
+ * Last Updated: 2026-03-17
+ */
+
+/* =================================================================
+   Breadcrumb Navigation
+   ================================================================= */
+
+.wpn-breadcrumb {
+  margin-bottom: var(--space-8);
+}
+
+.wpn-breadcrumb__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wpn-breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wpn-breadcrumb__link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wpn-breadcrumb__link:hover {
+  color: var(--nova-accent);
+}
+
+.wpn-breadcrumb__separator {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--color-border);
+  user-select: none;
+}
+
+.wpn-breadcrumb__current {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.wpn-breadcrumb__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+/* Light variant for dark backgrounds */
+.wpn-breadcrumb--light .wpn-breadcrumb__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wpn-breadcrumb--light .wpn-breadcrumb__link:hover {
+  color: rgba(255, 255, 255, 0.9); /* Changed from hardcoded white to explicit white with transparency */
+}
+
+.wpn-breadcrumb--light .wpn-breadcrumb__separator {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.wpn-breadcrumb--light .wpn-breadcrumb__current {
+  color: rgba(255, 255, 255, 1); /* Changed from hardcoded #ffffff */
+}
+
+/* =================================================================
+   Page Header Component
+   ================================================================= */
+
+.wpn-page-header {
+  padding-top: 48px;
+  padding-bottom: 80px;
+  padding-left: 32px;
+  padding-right: 32px;
+  background-color: var(--background);
+  margin: 0;
+}
+
+.wpn-page-header__container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.wpn-page-header__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--heading-h1-size);
+  font-weight: var(--heading-h1-weight);
+  line-height: var(--heading-h1-line-height);
+  color: var(--foreground);
+  margin-bottom: var(--space-4);
+}
+
+/* White text variant for dark backgrounds */
+.wpn-page-header__title--white {
+  color: #ffffff;
+}
+
+.wpn-page-header__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-md);
+  color: var(--muted-foreground);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Light subtitle variant for dark backgrounds */
+.wpn-page-header__subtitle--light {
+  color: rgba(255, 255, 255, 0.8);
+}

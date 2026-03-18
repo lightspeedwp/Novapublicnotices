@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams, Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
 import SearchFilterBar from "../components/SearchFilterBar";
-import NoticeCard from "../components/NoticeCard";
+import NoticeGrid from "../components/NoticeGrid";
+import EmptyState from "../components/EmptyState";
 import AdSlot from "../components/AdSlot";
-import { Button } from "../components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { searchNotices, SearchFilters } from "../lib/search";
+import { CaretLeft, CaretRight, House, FileText, Funnel } from "@phosphor-icons/react";
+import { searchNotices, SearchFilters } from "../lib/searchOptimized";
+import "../../styles/search-results.css";
 
 export default function SearchResultsAF() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const resultsPerPage = 10;
+  const resultsPerPage = 12;
 
   // Extract filters from URL params
   const filters: SearchFilters = {
@@ -21,6 +23,9 @@ export default function SearchResultsAF() {
     dateFrom: searchParams.get("dateFrom") || undefined,
     dateTo: searchParams.get("dateTo") || undefined,
     status: searchParams.get("status") || "all",
+    publisher: searchParams.get("publisher") || undefined,
+    referenceNumber: searchParams.get("ref") || undefined,
+    sort: searchParams.get("sort") || "newest",
   };
 
   // Perform search
@@ -33,6 +38,14 @@ export default function SearchResultsAF() {
   const endIndex = startIndex + resultsPerPage;
   const paginatedResults = allResults.slice(startIndex, endIndex);
 
+  // Count active filters
+  const activeFiltersCount = Object.entries(filters).filter(([key, value]) => {
+    if (key === "sort") return false; // Don't count sort as a filter
+    if (key === "query" && !value) return false;
+    if (value === "all" || value === "" || value === undefined) return false;
+    return true;
+  }).length;
+
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
@@ -41,6 +54,10 @@ export default function SearchResultsAF() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleClearFilters = () => {
+    setSearchParams({});
   };
 
   // Generate pagination items
@@ -81,93 +98,156 @@ export default function SearchResultsAF() {
 
   return (
     <Layout lang="af" showAds={true}>
-      <div className="bg-muted/30 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="mb-6">
-            Soek Regskennisgewings
-          </h1>
+      {/* Hero Section */}
+      <Hero
+        title="Soek openbare kennisgewings"
+        description={filters.query ? `Resultate vir "${filters.query}"` : "Vind die kennisgewings wat jy soek"}
+        size="sm"
+        variant="center"
+        breadcrumbs={[
+          { label: "Tuis", href: "/af" },
+          { label: "Soek openbare kennisgewings" },
+        ]}
+        showSearchBar={false}
+      />
 
-          <SearchFilterBar lang="af" showResults={true} resultCount={totalResults} />
-
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Main Content */}
+      <div className="wpn-search-results">
+        <div className="wpn-search-results__container">
+          <div className="wpn-search-results__layout">
+            
             {/* Main Results */}
-            <div className="lg:col-span-2">
-              {paginatedResults.length > 0 ? (
-                <div className="flex flex-col gap-4">
-                  {paginatedResults.map((notice) => (
-                    <NoticeCard
-                      key={notice.id}
-                      id={notice.id}
-                      title={notice.title.af}
-                      category={notice.category}
-                      publishDate={notice.publishDate}
-                      location={notice.location}
-                      referenceNumber={notice.referenceNumber}
-                      excerpt={notice.excerpt.af}
-                      publisher={notice.publisher}
-                      lang="af"
-                    />
-                  ))}
+            <div className="wpn-search-results__main">
+              
+              {/* Results Header */}
+              <div className="wpn-search-results__header">
+                <div className="wpn-search-results__header-top">
+                  <h2 className="wpn-search-results__title">
+                    {totalResults} {totalResults === 1 ? "resultaat" : "resultate"}
+                  </h2>
                 </div>
-              ) : (
-                <div className="bg-card border border-border rounded-lg p-12 text-center">
-                  <p className="text-muted-foreground mb-4">
-                    Geen kennisgewings gevind wat by u soektogte pas nie.
+                
+                {filters.query && (
+                  <p className="wpn-search-results__query">
+                    Wys resultate vir <span className="wpn-search-results__query-highlight">"{filters.query}"</span>
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    Probeer om u filters of soekterm aan te pas.
-                  </p>
+                )}
+
+                <div className="wpn-search-results__meta">
+                  <div className="wpn-search-results__meta-item">
+                    <FileText className="wpn-search-results__meta-icon" weight="duotone" />
+                    <span className="wpn-search-results__meta-value">{totalResults}</span>
+                    <span>{totalResults === 1 ? "kennisgewing gevind" : "kennisgewings gevind"}</span>
+                  </div>
+                  
+                  {currentPage > 1 && (
+                    <div className="wpn-search-results__meta-item">
+                      <span>Bladsy {currentPage} van {totalPages}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Active Filters Banner */}
+              {activeFiltersCount > 0 && (
+                <div className="wpn-search-results__filters-banner">
+                  <div className="wpn-search-results__filters-content">
+                    <Funnel className="wpn-search-results__filters-icon" weight="duotone" />
+                    <span className="wpn-search-results__filters-text">
+                      <span className="wpn-search-results__filters-count">{activeFiltersCount}</span>
+                      {activeFiltersCount === 1 ? " filter" : " filters"} toegepas
+                    </span>
+                  </div>
+                  <button 
+                    onClick={handleClearFilters}
+                    className="wpn-search-results__filters-clear"
+                  >
+                    Verwyder alles
+                  </button>
                 </div>
               )}
 
+              {/* Search Filter Bar */}
+              <SearchFilterBar lang="af" showResults={false} resultCount={totalResults} />
+
+              {/* Results Grid or Empty State */}
+              <div className="wpn-search-results__grid">
+                {paginatedResults.length > 0 ? (
+                  <NoticeGrid 
+                    notices={paginatedResults} 
+                    lang="af"
+                    columns={3}
+                  />
+                ) : (
+                  <EmptyState
+                    type="no-results"
+                    query={filters.query}
+                    filters={{
+                      category: filters.category,
+                      location: filters.location,
+                      dateFrom: filters.dateFrom,
+                      dateTo: filters.dateTo,
+                      status: filters.status,
+                      publisher: filters.publisher,
+                      referenceNumber: filters.referenceNumber,
+                    }}
+                    onClearFilters={handleClearFilters}
+                    lang="af"
+                  />
+                )}
+              </div>
+
               {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="mt-8 flex items-center justify-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
+              {totalPages > 1 && paginatedResults.length > 0 && (
+                <nav className="wpn-search-results__pagination" aria-label="Paginering">
+                  <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="transition-colors duration-150"
+                    className="wpn-search-results__pagination-button"
+                    aria-label="Vorige bladsy"
                   >
-                    <ChevronLeft className="size-4" />
-                  </Button>
+                    <CaretLeft size={16} weight="bold" />
+                  </button>
                   
                   {getPaginationItems().map((page, index) => (
-                    <Button
+                    <button
                       key={index}
-                      variant={page === currentPage ? "default" : "outline"}
-                      size="sm"
                       onClick={() => typeof page === "number" && handlePageChange(page)}
                       disabled={page === "..."}
                       className={
                         page === currentPage
-                          ? "bg-[#09082f] hover:bg-[#09082f]/90 transition-colors duration-150"
-                          : "transition-colors duration-150"
+                          ? "wpn-search-results__pagination-button wpn-search-results__pagination-button--active"
+                          : page === "..."
+                          ? "wpn-search-results__pagination-button wpn-search-results__pagination-button--ellipsis"
+                          : "wpn-search-results__pagination-button"
                       }
+                      aria-label={typeof page === "number" ? `Bladsy ${page}` : "Meer bladsye"}
+                      aria-current={page === currentPage ? "page" : undefined}
                     >
                       {page}
-                    </Button>
+                    </button>
                   ))}
                   
-                  <Button
-                    variant="outline"
-                    size="sm"
+                  <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="transition-colors duration-150"
+                    className="wpn-search-results__pagination-button"
+                    aria-label="Volgende bladsy"
                   >
-                    <ChevronRight className="size-4" />
-                  </Button>
-                </div>
+                    <CaretRight size={16} weight="bold" />
+                  </button>
+                </nav>
               )}
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
-              <AdSlot slot="ad_sidebar_1" height={250} />
-              <AdSlot slot="ad_sidebar_2" height={250} />
-            </div>
+            <aside className="wpn-search-results__sidebar">
+              <div className="wpn-search-results__sidebar-inner">
+                <AdSlot slot="ad_sidebar_1" height={250} />
+                <AdSlot slot="ad_sidebar_2" height={250} />
+              </div>
+            </aside>
+
           </div>
         </div>
       </div>

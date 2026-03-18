@@ -1,0 +1,598 @@
+/* =================================================================
+   Layout Utilities — Flexbox Grid System
+   ================================================================= 
+   
+   Purpose: 
+   Reusable flexbox-based layout utilities for grids, columns, and
+   responsive card layouts. Uses CSS variables from design system.
+   NO CSS GRID - all layouts use flexbox per project requirements.
+   
+   Components:
+   - .wpn-grid — Flex-based grid container
+   - .wpn-col — Column utilities (2, 3, 4, etc.)
+   - .wpn-flex — Flex utilities
+   - .wpn-stack — Vertical stacking
+   - .wpn-cluster — Horizontal grouping
+   
+   Last Updated: 2026-03-17
+   ================================================================= */
+
+/* =================================================================
+   Container
+   ================================================================= */
+
+.wpn-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .wpn-container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+.wpn-container--narrow {
+  max-width: 1200px;
+}
+
+.wpn-container--wide {
+  max-width: 1600px;
+}
+
+/* =================================================================
+   Flex Grid System (Flexbox-based, NO CSS Grid)
+   ================================================================= */
+
+/* Base Grid Container */
+.wpn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-grid--gap-2 {
+  gap: var(--space-2);
+}
+
+.wpn-grid--gap-3 {
+  gap: var(--space-3);
+}
+
+.wpn-grid--gap-4 {
+  gap: var(--space-4);
+}
+
+.wpn-grid--gap-5 {
+  gap: var(--space-5);
+}
+
+.wpn-grid--gap-6 {
+  gap: var(--space-6);
+}
+
+.wpn-grid--gap-8 {
+  gap: var(--space-8);
+}
+
+.wpn-grid--gap-10 {
+  gap: var(--space-10);
+}
+
+.wpn-grid--gap-12 {
+  gap: var(--space-12);
+}
+
+/* =================================================================
+   Column System (Mobile-first responsive)
+   ================================================================= */
+
+/* 1 Column (default mobile) */
+.wpn-col-1 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* 2 Columns */
+.wpn-col-2 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-col-2 {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+/* 3 Columns */
+.wpn-col-3 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-col-3 {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-col-3 {
+    flex: 0 0 calc(33.333% - var(--space-4));
+    max-width: calc(33.333% - var(--space-4));
+  }
+}
+
+/* 4 Columns */
+.wpn-col-4 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-col-4 {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-col-4 {
+    flex: 0 0 calc(25% - var(--space-4_5));
+    max-width: calc(25% - var(--space-4_5));
+  }
+}
+
+/* =================================================================
+   Notice Cards Grid (Most Common Layout)
+   ================================================================= */
+
+.wpn-notices-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-notices-grid__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-notices-grid__item {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-notices-grid__item {
+    flex: 0 0 calc(33.333% - var(--space-4));
+    max-width: calc(33.333% - var(--space-4));
+  }
+}
+
+/* 2 Column Grid */
+.wpn-notices-grid--2col .wpn-notices-grid__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-notices-grid--2col .wpn-notices-grid__item {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+/* 4 Column Grid */
+.wpn-notices-grid--4col .wpn-notices-grid__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-notices-grid--4col .wpn-notices-grid__item {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-notices-grid--4col .wpn-notices-grid__item {
+    flex: 0 0 calc(25% - var(--space-4_5));
+    max-width: calc(25% - var(--space-4_5));
+  }
+}
+
+/* =================================================================
+   Flex Utilities
+   ================================================================= */
+
+.wpn-flex {
+  display: flex;
+}
+
+.wpn-flex--wrap {
+  flex-wrap: wrap;
+}
+
+.wpn-flex--nowrap {
+  flex-wrap: nowrap;
+}
+
+.wpn-flex--column {
+  flex-direction: column;
+}
+
+.wpn-flex--row {
+  flex-direction: row;
+}
+
+/* Justify Content */
+.wpn-flex--justify-start {
+  justify-content: flex-start;
+}
+
+.wpn-flex--justify-center {
+  justify-content: center;
+}
+
+.wpn-flex--justify-end {
+  justify-content: flex-end;
+}
+
+.wpn-flex--justify-between {
+  justify-content: space-between;
+}
+
+.wpn-flex--justify-around {
+  justify-content: space-around;
+}
+
+/* Align Items */
+.wpn-flex--align-start {
+  align-items: flex-start;
+}
+
+.wpn-flex--align-center {
+  align-items: center;
+}
+
+.wpn-flex--align-end {
+  align-items: flex-end;
+}
+
+.wpn-flex--align-stretch {
+  align-items: stretch;
+}
+
+/* Gap */
+.wpn-flex--gap-2 {
+  gap: var(--space-2);
+}
+
+.wpn-flex--gap-3 {
+  gap: var(--space-3);
+}
+
+.wpn-flex--gap-4 {
+  gap: var(--space-4);
+}
+
+.wpn-flex--gap-5 {
+  gap: var(--space-5);
+}
+
+.wpn-flex--gap-6 {
+  gap: var(--space-6);
+}
+
+.wpn-flex--gap-8 {
+  gap: var(--space-8);
+}
+
+.wpn-flex--gap-10 {
+  gap: var(--space-10);
+}
+
+.wpn-flex--gap-12 {
+  gap: var(--space-12);
+}
+
+/* =================================================================
+   Stack (Vertical Layout)
+   ================================================================= */
+
+.wpn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.wpn-stack--gap-2 {
+  gap: var(--space-2);
+}
+
+.wpn-stack--gap-3 {
+  gap: var(--space-3);
+}
+
+.wpn-stack--gap-4 {
+  gap: var(--space-4);
+}
+
+.wpn-stack--gap-5 {
+  gap: var(--space-5);
+}
+
+.wpn-stack--gap-6 {
+  gap: var(--space-6);
+}
+
+.wpn-stack--gap-8 {
+  gap: var(--space-8);
+}
+
+.wpn-stack--gap-10 {
+  gap: var(--space-10);
+}
+
+.wpn-stack--gap-12 {
+  gap: var(--space-12);
+}
+
+/* =================================================================
+   Cluster (Horizontal Layout)
+   ================================================================= */
+
+.wpn-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.wpn-cluster--gap-2 {
+  gap: var(--space-2);
+}
+
+.wpn-cluster--gap-3 {
+  gap: var(--space-3);
+}
+
+.wpn-cluster--gap-4 {
+  gap: var(--space-4);
+}
+
+.wpn-cluster--gap-5 {
+  gap: var(--space-5);
+}
+
+.wpn-cluster--gap-6 {
+  gap: var(--space-6);
+}
+
+.wpn-cluster--nowrap {
+  flex-wrap: nowrap;
+}
+
+/* =================================================================
+   Two Column Layout (Sidebar + Main)
+   ================================================================= */
+
+.wpn-two-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .wpn-two-col {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.wpn-two-col__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.wpn-two-col__sidebar {
+  flex: 0 0 100%;
+}
+
+@media (min-width: 1024px) {
+  .wpn-two-col__sidebar {
+    flex: 0 0 320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .wpn-two-col__sidebar {
+    flex: 0 0 380px;
+  }
+}
+
+/* Reversed (sidebar first) */
+.wpn-two-col--reverse {
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 1024px) {
+  .wpn-two-col--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* =================================================================
+   Feature Grid (Homepage Features, etc.)
+   ================================================================= */
+
+.wpn-feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.wpn-feature-grid__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-feature-grid__item {
+    flex: 0 0 calc(50% - var(--space-4));
+    max-width: calc(50% - var(--space-4));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-feature-grid__item {
+    flex: 0 0 calc(33.333% - var(--space-5_33));
+    max-width: calc(33.333% - var(--space-5_33));
+  }
+}
+
+/* =================================================================
+   Card Grid (Generic Cards)
+   ================================================================= */
+
+.wpn-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.wpn-card-grid__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-card-grid__item {
+    flex: 0 0 calc(50% - var(--space-3));
+    max-width: calc(50% - var(--space-3));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-card-grid__item {
+    flex: 0 0 calc(33.333% - var(--space-4));
+    max-width: calc(33.333% - var(--space-4));
+  }
+}
+
+/* =================================================================
+   Spacing Utilities
+   ================================================================= */
+
+.wpn-spacing-section {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .wpn-spacing-section {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+}
+
+.wpn-spacing-section--sm {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .wpn-spacing-section--sm {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+}
+
+.wpn-spacing-section--lg {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .wpn-spacing-section--lg {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
+}
+
+/* =================================================================
+   Responsive Utilities
+   ================================================================= */
+
+/* Hide on mobile */
+@media (max-width: 767px) {
+  .wpn-hide-mobile {
+    display: none;
+  }
+}
+
+/* Hide on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wpn-hide-tablet {
+    display: none;
+  }
+}
+
+/* Hide on desktop */
+@media (min-width: 1024px) {
+  .wpn-hide-desktop {
+    display: none;
+  }
+}
+
+/* Show only on mobile */
+.wpn-show-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .wpn-show-mobile {
+    display: none;
+  }
+}
+
+/* Show only on tablet */
+.wpn-show-tablet {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wpn-show-tablet {
+    display: block;
+  }
+}
+
+/* Show only on desktop */
+.wpn-show-desktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .wpn-show-desktop {
+    display: block;
+  }
+}

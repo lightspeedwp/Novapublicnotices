@@ -1,0 +1,921 @@
+/**
+ * Layout Component — Comprehensive BEM Styles
+ * Header, Navigation, Footer, and Mobile Menu
+ */
+
+/* ============================================
+   Layout Wrapper
+   ============================================ */
+
+.wpn-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+}
+
+/* ============================================
+   Container (Reusable)
+   ============================================ */
+
+.wpn-layout__container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  width: 100%;
+}
+
+/* ============================================
+   Top Bar
+   ============================================ */
+
+.wpn-layout__topbar {
+  background-color: var(--nova-primary);
+  color: white;
+  padding: var(--space-2) 0;
+}
+
+.wpn-layout__topbar-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .wpn-layout__topbar-container {
+    display: flex;
+  }
+}
+
+.wpn-layout__topbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+  font-family: var(--font-family-body);
+}
+
+.wpn-layout__topbar-link {
+  color: white;
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__topbar-link:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.wpn-layout__topbar-link--account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: var(--font-weight-medium);
+}
+
+.wpn-layout__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Auth Toggle - DEV ONLY */
+.wpn-layout__topbar-auth-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.1);
+  border: var(--border-width-1) solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  color: white;
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__topbar-auth-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(var(--hover-translate-y-sm));
+}
+
+.wpn-layout__topbar-auth-toggle:active {
+  transform: translateY(0);
+}
+
+.wpn-layout__topbar-auth-label {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .wpn-layout__topbar-auth-label {
+    display: none;
+  }
+}
+
+.wpn-layout__topbar-lang-btn {
+  /* Styles handled by button component */
+}
+
+.wpn-layout__topbar-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  margin-right: var(--space-2);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.wpn-layout__header {
+  background-color: white;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.wpn-layout__header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.wpn-layout__logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ============================================
+   Desktop Navigation
+   ============================================ */
+
+.wpn-layout__nav {
+  display: none;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .wpn-layout__nav {
+    display: flex;
+  }
+}
+
+.wpn-layout__nav-link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-normal);
+}
+
+.wpn-layout__nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.wpn-layout__nav-link--active {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+   Mobile Menu Button
+   ============================================ */
+
+.wpn-layout__mobile-menu-btn {
+  display: flex;
+  color: var(--foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__mobile-menu-btn:hover {
+  color: var(--nova-accent);
+}
+
+@media (min-width: 768px) {
+  .wpn-layout__mobile-menu-btn {
+    display: none;
+  }
+}
+
+/* ============================================
+   Mobile Menu Overlay — Modern Full-Screen Design
+   ============================================ */
+
+.wpn-layout__mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: linear-gradient(
+    135deg,
+    var(--nova-primary) 0%,
+    rgba(9, 8, 47, 0.98) 100%
+  );
+  backdrop-filter: blur(20px);
+  overflow-y: auto;
+  animation: wpn-mobile-menu-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-mobile-menu-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .wpn-layout__mobile-menu {
+    display: none;
+  }
+}
+
+.wpn-layout__mobile-menu-container {
+  padding: var(--space-5);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: wpn-mobile-menu-slide-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-mobile-menu-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.wpn-layout__mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  border-bottom: var(--border-width-1) solid rgba(255, 255, 255, 0.1);
+  animation: wpn-mobile-header-fade-in var(--duration-slow) var(--ease-out) 0.1s both;
+}
+
+@keyframes wpn-mobile-header-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modern close button styling */
+.wpn-layout__mobile-menu-header button {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__mobile-menu-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.wpn-layout__mobile-menu-header button svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+/* ============================================
+   Mobile Navigation — Modern Staggered Animation
+   ============================================ */
+
+.wpn-layout__mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.wpn-layout__mobile-nav-section {
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-bottom: var(--border-width-1) solid rgba(255, 255, 255, 0.1);
+  animation: wpn-mobile-section-fade-in var(--duration-slow) var(--ease-out) 0.15s both;
+}
+
+@keyframes wpn-mobile-section-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modern link styling with subtle hover effects */
+.wpn-layout__mobile-nav-link {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-tight);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient hover effect */
+.wpn-layout__mobile-nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(215, 0, 37, 0.15) 0%,
+    rgba(215, 0, 37, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__mobile-nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.wpn-layout__mobile-nav-link:hover::before {
+  opacity: 1;
+}
+
+.wpn-layout__mobile-nav-link:active {
+  transform: translateX(4px);
+}
+
+/* Highlighted links (primary nav items) */
+.wpn-layout__mobile-nav-link--highlighted {
+  font-weight: var(--font-weight-medium);
+  color: white;
+  font-size: var(--text-xl);
+}
+
+/* ============================================
+   Expandable Menu Items — Modern Accordion
+   ============================================ */
+
+.wpn-layout__mobile-nav-expandable {
+  animation: wpn-mobile-item-fade-in var(--duration-slow) var(--ease-out);
+  animation-fill-mode: both;
+}
+
+/* Stagger animation delays for each item */
+.wpn-layout__mobile-nav-expandable:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.wpn-layout__mobile-nav-expandable:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.wpn-layout__mobile-nav-expandable:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.wpn-layout__mobile-nav-expandable:nth-child(4) {
+  animation-delay: 0.35s;
+}
+
+.wpn-layout__mobile-nav-expandable:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes wpn-mobile-item-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-layout__mobile-nav-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: var(--font-family-body);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  text-align: left;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.wpn-layout__mobile-nav-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(8px);
+}
+
+.wpn-layout__mobile-nav-toggle:hover::before {
+  opacity: 1;
+}
+
+.wpn-layout__mobile-nav-toggle span {
+  position: relative;
+  z-index: 1;
+}
+
+.wpn-layout__mobile-nav-toggle-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  transition: transform var(--duration-fast) var(--ease-out);
+  position: relative;
+  z-index: 1;
+}
+
+.wpn-layout__mobile-nav-toggle-icon--rotated {
+  transform: rotate(180deg);
+}
+
+/* Modern submenu with slide-down animation */
+.wpn-layout__mobile-nav-submenu {
+  padding-left: var(--space-6);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  animation: wpn-submenu-slide-down var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-submenu-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+.wpn-layout__mobile-nav-submenu .wpn-layout__mobile-nav-link {
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.wpn-layout__mobile-nav-submenu .wpn-layout__mobile-nav-link:hover {
+  color: white;
+}
+
+/* ============================================
+   Mobile CTA Button — Prominent Design
+   ============================================ */
+
+.wpn-layout__mobile-cta {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-4);
+  animation: wpn-mobile-cta-fade-in var(--duration-slow) var(--ease-out) 0.45s both;
+}
+
+@keyframes wpn-mobile-cta-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-layout__mobile-cta button,
+.wpn-layout__mobile-cta a {
+  width: 100%;
+  padding: var(--space-5);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  background: var(--nova-accent);
+  color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgba(215, 0, 37, 0.4);
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.wpn-layout__mobile-cta button::before,
+.wpn-layout__mobile-cta a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.wpn-layout__mobile-cta button:hover,
+.wpn-layout__mobile-cta a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(215, 0, 37, 0.5);
+}
+
+.wpn-layout__mobile-cta button:hover::before,
+.wpn-layout__mobile-cta a:hover::before {
+  opacity: 1;
+}
+
+.wpn-layout__mobile-cta button:active,
+.wpn-layout__mobile-cta a:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   Mobile Account Section — Bottom Area
+   ============================================ */
+
+.wpn-layout__mobile-account-section {
+  padding-top: var(--space-6);
+  margin-top: auto;
+  border-top: var(--border-width-1) solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: wpn-mobile-account-fade-in var(--duration-slow) var(--ease-out) 0.5s both;
+}
+
+@keyframes wpn-mobile-account-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-layout__mobile-account-section .wpn-layout__mobile-nav-link {
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .wpn-layout__mobile-menu,
+  .wpn-layout__mobile-menu-container,
+  .wpn-layout__mobile-menu-header,
+  .wpn-layout__mobile-nav-section,
+  .wpn-layout__mobile-nav-link,
+  .wpn-layout__mobile-nav-expandable,
+  .wpn-layout__mobile-nav-toggle,
+  .wpn-layout__mobile-nav-submenu,
+  .wpn-layout__mobile-cta,
+  .wpn-layout__mobile-account-section {
+    animation: none;
+    transition: none;
+  }
+
+  .wpn-layout__mobile-nav-link:hover,
+  .wpn-layout__mobile-nav-toggle:hover {
+    transform: none;
+  }
+
+  .wpn-layout__mobile-menu-header button:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.wpn-layout__footer {
+  background-color: var(--nova-primary);
+  color: white;
+  margin-top: auto;
+}
+
+.wpn-layout__footer-container {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+/* Newsletter Section */
+.wpn-layout__footer-newsletter {
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.wpn-layout__footer-newsletter-content {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.wpn-layout__footer-newsletter-icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-4);
+}
+
+.wpn-layout__footer-newsletter-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  margin-bottom: var(--space-2);
+}
+
+.wpn-layout__footer-newsletter-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-layout__footer-newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 448px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .wpn-layout__footer-newsletter-form {
+    flex-direction: row;
+  }
+}
+
+.wpn-layout__footer-newsletter-input {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: var(--font-family-body);
+}
+
+.wpn-layout__footer-newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Footer Grid */
+.wpn-layout__footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .wpn-layout__footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-layout__footer-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.wpn-layout__footer-column {
+  /* Footer column container */
+}
+
+.wpn-layout__footer-column--brand {
+  /* Brand column specific styles */
+}
+
+.wpn-layout__footer-brand-tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-layout__footer-social-links {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.wpn-layout__footer-social-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color var(--duration-normal);
+}
+
+.wpn-layout__footer-social-link:hover {
+  color: white;
+}
+
+.wpn-layout__footer-social-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.wpn-layout__footer-column-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+  margin-bottom: var(--space-4);
+}
+
+.wpn-layout__footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-layout__footer-link {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: color var(--duration-normal);
+}
+
+.wpn-layout__footer-link:hover {
+  color: white;
+}
+
+/* Footer Bottom Bar */
+.wpn-layout__footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .wpn-layout__footer-bottom {
+    flex-direction: row;
+  }
+}
+
+.wpn-layout__footer-copyright {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .wpn-layout__footer-copyright {
+    text-align: left;
+  }
+}
+
+.wpn-layout__footer-legal-links {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.wpn-layout__footer-separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+
+.wpn-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+.wpn-layout [aria-hidden="true"] {
+  pointer-events: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================
+   Icon Sizing — BEM Override for removed size props
+   ============================================ */
+
+/* Mobile Menu Button Icons (X, List) */
+.wpn-layout__mobile-menu-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile Nav Toggle Icons (CaretDown) */
+.wpn-layout__mobile-nav-toggle-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-layout__mobile-nav-toggle-icon--rotated {
+  transform: rotate(180deg);
+}
+
+/* Footer Social Icons (FacebookLogo, InstagramLogo, TwitterLogo, LinkedinLogo, YoutubeLogo) */
+.wpn-layout__footer-social-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* Footer Newsletter Icon (Envelope) */
+.wpn-layout__footer-newsletter-icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .wpn-layout__topbar,
+  .wpn-layout__header,
+  .wpn-layout__footer,
+  .wpn-layout__mobile-menu {
+    display: none;
+  }
+}

@@ -44,7 +44,7 @@ export default function Register() {
       <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-3xl">
           <div className="text-center mb-8">
-            <h1 className="font-raleway text-4xl font-bold text-[#09082f] mb-2">
+            <h1 className="wpn-heading-h1 wpn-heading--primary mb-2">
               Register
             </h1>
             <p className="text-gray-600">Create your account to access public notices</p>
@@ -53,7 +53,7 @@ export default function Register() {
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* User Details Section */}
             <Card className="p-8">
-              <h2 className="font-raleway text-2xl font-bold text-[#09082f] mb-6">
+              <h2 className="wpn-heading-h3 wpn-heading--primary mb-6">
                 User Details
               </h2>
               
@@ -146,7 +146,8 @@ export default function Register() {
                   <input 
                     type="checkbox" 
                     id="registerPublisher" 
-                    className="mt-1 size-4 accent-[#d70025]"
+                    className="mt-1 size-4"
+                    style={{ accentColor: 'var(--nova-accent)' }}
                     checked={registerAsPublisher}
                     onChange={(e) => setRegisterAsPublisher(e.target.checked)}
                   />
@@ -160,7 +161,7 @@ export default function Register() {
             {/* Company Details Section - Only shown if registering as publisher */}
             {registerAsPublisher && (
               <Card className="p-8">
-                <h2 className="font-raleway text-2xl font-bold text-[#09082f] mb-6">
+                <h2 className="wpn-heading-h3 wpn-heading--primary mb-6">
                   Company Details
                 </h2>
                 
@@ -247,7 +248,7 @@ export default function Register() {
                         </button>
                       </div>
                     ) : (
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#d70025] transition-colors cursor-pointer">
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:wpn-border--accent transition-colors cursor-pointer">
                         <input
                           type="file"
                           id="logo"
@@ -278,16 +279,17 @@ export default function Register() {
                   <input 
                     type="checkbox" 
                     id="terms" 
-                    className="mt-1 size-4 accent-[#d70025]" 
+                    className="mt-1 size-4"
+                    style={{ accentColor: 'var(--nova-accent)' }}
                     required 
                   />
                   <label htmlFor="terms" className="text-sm text-gray-700">
                     I agree to the{" "}
-                    <Link to="/terms" className="text-[#d70025] hover:underline font-medium">
+                    <Link to="/terms" className="wpn-link--accent font-medium">
                       Terms of Service
                     </Link>
                     {" "}and{" "}
-                    <Link to="/privacy" className="text-[#d70025] hover:underline font-medium">
+                    <Link to="/privacy" className="wpn-link--accent font-medium">
                       Privacy Policy
                     </Link>
                   </label>
@@ -304,7 +306,7 @@ export default function Register() {
                   </Button>
                   <Button 
                     type="submit" 
-                    className="flex-1 bg-[#d70025] hover:bg-[#b5001f]"
+                    className="flex-1 wpn-button wpn-button--accent"
                   >
                     Submit
                   </Button>
@@ -315,7 +317,7 @@ export default function Register() {
 
           <div className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#d70025] hover:underline font-medium">
+            <Link to="/login" className="wpn-link--accent font-medium">
               Sign in here
             </Link>
           </div>

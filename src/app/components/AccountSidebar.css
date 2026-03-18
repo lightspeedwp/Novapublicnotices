@@ -1,0 +1,307 @@
+/**
+ * AccountSidebar Component — Enhanced BEM CSS
+ * 100% CSS variables from design system
+ * Beautiful navigation with smooth animations
+ * 
+ * Features:
+ * - Staggered fade-in animations
+ * - Hover lift effects
+ * - Active state with gradient
+ * - Icon animations
+ * - Smooth transitions
+ * - Full accessibility
+ */
+
+/* =================================================================
+   Account Sidebar — Base Component
+   ================================================================= */
+
+.wpn-account-sidebar {
+  background: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: wpn-sidebar-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-sidebar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-account-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* =================================================================
+   Navigation Links
+   ================================================================= */
+
+.wpn-account-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted-foreground);
+  text-decoration: none;
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Staggered animation for each link */
+.wpn-account-sidebar__link:nth-child(1) {
+  animation: wpn-link-fade-in var(--duration-normal) var(--ease-out) 0.05s both;
+}
+
+.wpn-account-sidebar__link:nth-child(2) {
+  animation: wpn-link-fade-in var(--duration-normal) var(--ease-out) 0.1s both;
+}
+
+.wpn-account-sidebar__link:nth-child(3) {
+  animation: wpn-link-fade-in var(--duration-normal) var(--ease-out) 0.15s both;
+}
+
+.wpn-account-sidebar__link:nth-child(4) {
+  animation: wpn-link-fade-in var(--duration-normal) var(--ease-out) 0.2s both;
+}
+
+.wpn-account-sidebar__link:nth-child(5) {
+  animation: wpn-link-fade-in var(--duration-normal) var(--ease-out) 0.25s both;
+}
+
+@keyframes wpn-link-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wpn-account-sidebar__link:last-child {
+  border-bottom: none;
+}
+
+/* Sliding indicator before element */
+.wpn-account-sidebar__link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--nova-accent), var(--nova-accent-hover));
+  transform: scaleY(0);
+  transition: transform var(--duration-normal) var(--ease-out);
+  transform-origin: bottom;
+}
+
+/* Hover state */
+.wpn-account-sidebar__link:hover {
+  background: linear-gradient(90deg, var(--muted), transparent);
+  color: var(--foreground);
+  padding-left: calc(var(--space-4) + var(--space-1));
+}
+
+.wpn-account-sidebar__link:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.wpn-account-sidebar__link:hover .wpn-account-sidebar__icon {
+  transform: scale(1.1) rotate(5deg);
+  color: var(--nova-accent);
+}
+
+/* Active state */
+.wpn-account-sidebar__link--active {
+  background: linear-gradient(135deg, var(--nova-primary), var(--nova-primary-hover)); /* Fixed: was #0a0729 */
+  color: white;
+  font-weight: var(--font-weight-semibold);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wpn-account-sidebar__link--active::before {
+  transform: scaleY(1);
+  background: linear-gradient(180deg, var(--nova-accent), var(--nova-accent-hover)); /* Fixed: was #ff1744 */
+  width: 4px;
+}
+
+.wpn-account-sidebar__link--active:hover {
+  background: linear-gradient(135deg, var(--nova-primary-hover), var(--nova-primary)); /* Fixed: was #0a0729 */
+  padding-left: var(--space-4);
+}
+
+.wpn-account-sidebar__link--active .wpn-account-sidebar__icon {
+  color: white;
+}
+
+.wpn-account-sidebar__link--active:hover .wpn-account-sidebar__icon {
+  transform: scale(1.15);
+  color: white;
+}
+
+/* Icon animations */
+.wpn-account-sidebar__icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+/* =================================================================
+   Mobile Responsive
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-account-sidebar {
+    border-radius: var(--radius-md);
+  }
+
+  .wpn-account-sidebar__link {
+    padding: var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .wpn-account-sidebar__icon {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+}
+
+/* Horizontal layout for mobile tabs */
+@media (max-width: 640px) {
+  .wpn-account-sidebar {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .wpn-account-sidebar__nav {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .wpn-account-sidebar__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wpn-account-sidebar__link {
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width-2) solid transparent;
+    border-right: var(--border-width-1) solid var(--border-color-default);
+    white-space: nowrap;
+    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .wpn-account-sidebar__link:last-child {
+    border-right: none;
+  }
+
+  .wpn-account-sidebar__link::before {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    transform: scaleX(0);
+  }
+
+  .wpn-account-sidebar__link:hover::before {
+    transform: scaleX(1);
+  }
+
+  .wpn-account-sidebar__link--active {
+    border-bottom-color: var(--nova-accent);
+  }
+
+  .wpn-account-sidebar__link--active::before {
+    transform: scaleX(1);
+    height: 3px;
+  }
+
+  .wpn-account-sidebar__link:hover {
+    padding-left: var(--space-4);
+  }
+}
+
+/* =================================================================
+   Accessibility Enhancements
+   ================================================================= */
+
+/* Focus visible styles */
+.wpn-account-sidebar__link:focus-visible {
+  outline: 3px solid var(--nova-accent);
+  outline-offset: -3px;
+  z-index: 1;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-account-sidebar,
+  .wpn-account-sidebar__link {
+    animation: none;
+  }
+
+  .wpn-account-sidebar__link,
+  .wpn-account-sidebar__link::before,
+  .wpn-account-sidebar__icon {
+    transition: none;
+  }
+
+  .wpn-account-sidebar__link:hover .wpn-account-sidebar__icon,
+  .wpn-account-sidebar__link--active .wpn-account-sidebar__icon {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wpn-account-sidebar {
+    border-width: var(--border-width-2);
+  }
+
+  .wpn-account-sidebar__link {
+    border-bottom-width: var(--border-width-2);
+  }
+
+  .wpn-account-sidebar__link--active {
+    outline: 2px solid white;
+    outline-offset: -2px;
+  }
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-account-sidebar {
+    display: none;
+  }
+}

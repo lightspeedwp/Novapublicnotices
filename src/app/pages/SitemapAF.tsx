@@ -2,37 +2,67 @@ import { Link } from "react-router";
 import Layout from "../components/Layout";
 import { Card } from "../components/ui/card";
 import { categories } from "../data/categories";
+import { Home } from "lucide-react";
+import "../../styles/components.css";
 
 export default function SitemapAF() {
   return (
     <Layout lang="af" showAds={true}>
-      <div className="bg-gray-50 py-12">
+      {/* Page Header */}
+      <section className="wpn-page-header">
+        <div className="wpn-page-header__container">
+          {/* Breadcrumb */}
+          <nav className="wpn-breadcrumb" aria-label="Broodkrummels">
+            <ol className="wpn-breadcrumb__list">
+              <li className="wpn-breadcrumb__item">
+                <Link to="/af" className="wpn-breadcrumb__link">
+                  <Home className="wpn-breadcrumb__icon" />
+                  Tuis
+                </Link>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__separator">/</span>
+              </li>
+              <li className="wpn-breadcrumb__item">
+                <span className="wpn-breadcrumb__current">Werfkaart</span>
+              </li>
+            </ol>
+          </nav>
+
+          <h1 className="wpn-page-header__title">
+            Werfkaart
+          </h1>
+          <p className="wpn-page-header__subtitle">
+            Navigeer alle bladsye en kennisgewingkategorieë op die Nova Openbare Kennisgewings Portaal
+          </p>
+        </div>
+      </section>
+
+      <div className="bg-[var(--muted)] pb-12">
         <div className="container mx-auto px-4">
-          <h1 className="font-raleway text-4xl font-bold text-[#09082f] mb-8">Werfkaart</h1>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Hoofbladsye */}
             <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Hoofbladsye</h2>
+              <h2 className="wpn-heading-h4 wpn-heading--primary mb-4">Hoofbladsye</h2>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/af" className="text-[#d70025] hover:underline">Tuis</Link></li>
-                <li><Link to="/af/soek" className="text-[#d70025] hover:underline">Soek Kennisgewings</Link></li>
-                <li><Link to="/af/oor-ons" className="text-[#d70025] hover:underline">Oor Ons</Link></li>
-                <li><Link to="/af/kontak" className="text-[#d70025] hover:underline">Kontak</Link></li>
-                <li><Link to="/af/verkope" className="text-[#d70025] hover:underline">Hoe Dit Werk</Link></li>
-                <li><Link to="/af/prysstruktuur" className="text-[#d70025] hover:underline">Pryse</Link></li>
-                <li><Link to="/af/adverteer" className="text-[#d70025] hover:underline">Adverteer</Link></li>
-                <li><Link to="/af/vaak-gestelde-vrae" className="text-[#d70025] hover:underline">Vrae</Link></li>
+                <li><Link to="/af" className="wpn-link--accent hover:underline">Tuis</Link></li>
+                <li><Link to="/af/soek" className="wpn-link--accent hover:underline">Soek Kennisgewings</Link></li>
+                <li><Link to="/af/oor-ons" className="wpn-link--accent hover:underline">Oor Ons</Link></li>
+                <li><Link to="/af/kontak" className="wpn-link--accent hover:underline">Kontak</Link></li>
+                <li><Link to="/af/verkope" className="wpn-link--accent hover:underline">Hoe Dit Werk</Link></li>
+                <li><Link to="/af/prysstruktuur" className="wpn-link--accent hover:underline">Pryse</Link></li>
+                <li><Link to="/af/adverteer" className="wpn-link--accent hover:underline">Adverteer</Link></li>
+                <li><Link to="/af/vaak-gestelde-vrae" className="wpn-link--accent hover:underline">Vrae</Link></li>
               </ul>
             </Card>
 
             {/* Kennisgewingkategorieë */}
             <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Kennisgewingkategorieë</h2>
+              <h2 className="wpn-heading-h4 wpn-heading--primary mb-4">Kennisgewingkategorieë</h2>
               <ul className="space-y-2 text-sm">
                 {categories.map((cat) => (
                   <li key={cat.slug}>
-                    <Link to={`/af/kategorie/${cat.slug}`} className="text-[#d70025] hover:underline">
+                    <Link to={`/af/kategorie/${cat.slug}`} className="wpn-link--accent hover:underline">
                       {cat.name.af}
                     </Link>
                   </li>
@@ -42,15 +72,15 @@ export default function SitemapAF() {
 
             {/* Rekening & Indiening */}
             <Card className="p-6">
-              <h2 className="font-raleway text-xl font-bold text-[#09082f] mb-4">Rekening & Indiening</h2>
+              <h2 className="wpn-heading-h4 wpn-heading--primary mb-4">Rekening & Indiening</h2>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/af/aanmeld" className="text-[#d70025] hover:underline">Meld Aan</Link></li>
-                <li><Link to="/af/registreer" className="text-[#d70025] hover:underline">Registreer</Link></li>
-                <li><Link to="/af/my-rekening" className="text-[#d70025] hover:underline">My Rekening</Link></li>
-                <li><Link to="/af/my-rekening/kennisgewings" className="text-[#d70025] hover:underline">My Kennisgewings</Link></li>
-                <li><Link to="/af/my-rekening/bestellings" className="text-[#d70025] hover:underline">Bestellings</Link></li>
-                <li><Link to="/af/my-rekening/profiel" className="text-[#d70025] hover:underline">Profiel</Link></li>
-                <li><Link to="/af/indien" className="text-[#d70025] hover:underline">Dien Kennisgewing In</Link></li>
+                <li><Link to="/af/aanmeld" className="wpn-link--accent hover:underline">Meld Aan</Link></li>
+                <li><Link to="/af/registreer" className="wpn-link--accent hover:underline">Registreer</Link></li>
+                <li><Link to="/af/my-rekening" className="wpn-link--accent hover:underline">My Rekening</Link></li>
+                <li><Link to="/af/my-rekening/kennisgewings" className="wpn-link--accent hover:underline">My Kennisgewings</Link></li>
+                <li><Link to="/af/my-rekening/bestellings" className="wpn-link--accent hover:underline">Bestellings</Link></li>
+                <li><Link to="/af/my-rekening/profiel" className="wpn-link--accent hover:underline">Profiel</Link></li>
+                <li><Link to="/af/indien" className="wpn-link--accent hover:underline">Dien Kennisgewing In</Link></li>
               </ul>
             </Card>
           </div>

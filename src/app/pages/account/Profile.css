@@ -1,0 +1,175 @@
+/**
+ * Profile Page — BEM CSS
+ * Uses design tokens from theme.css
+ */
+
+.wpn-profile {
+  background: var(--muted);
+  padding: var(--space-12) 0;
+  min-height: calc(100vh - 400px);
+}
+
+.wpn-profile__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.wpn-profile__header {
+  margin-bottom: var(--space-8);
+}
+
+.wpn-profile__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--foreground);
+  margin-bottom: var(--space-2);
+}
+
+.wpn-profile__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--muted-foreground);
+}
+
+.wpn-profile__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .wpn-profile__content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .wpn-profile__content > :first-child {
+    flex: 0 0 280px;
+  }
+  
+  .wpn-profile__content > :last-child {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* Sidebar Navigation */
+.wpn-profile__sidebar {
+  /* Empty for now, layout handled by grid */
+}
+
+/* Main Content Area */
+.wpn-profile__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Section Card */
+.wpn-profile__section {
+  background: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.wpn-profile__section-header {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-profile__section-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-profile__section-description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin-top: var(--space-2);
+}
+
+/* Form Styles */
+.wpn-profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.wpn-profile__form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.wpn-profile__form-grid > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wpn-profile__form-grid--cols-2 > * {
+    flex: 0 0 calc(50% - var(--space-2));
+    max-width: calc(50% - var(--space-2));
+  }
+}
+
+.wpn-profile__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-profile__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.wpn-profile__label--required::after {
+  content: " *";
+  color: var(--destructive);
+}
+
+.wpn-profile__form-actions {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-profile__alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+}
+
+.wpn-profile__alert--success {
+  background-color: var(--status-published-bg);
+  color: var(--status-published-fg);
+  border: var(--border-width-1) solid var(--status-published-fg);
+}
+
+.wpn-profile__alert--info {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-fg);
+  border: var(--border-width-1) solid var(--status-pending-fg);
+}
+
+.wpn-profile__alert-icon {
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}

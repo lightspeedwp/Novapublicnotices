@@ -4,13 +4,13 @@ interface LogoProps {
 }
 
 export function Logo({ variant = "light", className = "" }: LogoProps) {
-  // For dark mode (footer), we invert the colors: white text and keep red accent
-  // For light mode (header), we use the original colors: dark text and red accent
+  // For dark variant (footer/dark backgrounds): white text and icons
+  // For light variant (header/light backgrounds): dark text and icons
   
-  const textColor = variant === "dark" ? "#FFFFFF" : "#09082F";
-  const accentColor = "#D3000D"; // Red stays the same in both modes
-  const iconColor = variant === "dark" ? "#FFFFFF" : "#09082F";
-  const blueAccent = "#549CBE"; // Blue accent stays the same
+  const textColor = variant === "dark" ? "#FFFFFF" : "var(--nova-primary)";
+  const accentColor = "var(--nova-accent)";
+  const iconColor = variant === "dark" ? "#FFFFFF" : "var(--nova-primary)";
+  const blueAccent = "var(--nova-blue)";
   
   return (
     <svg 

@@ -6,6 +6,27 @@ Use this prompt to audit and clean the codebase against project standards.
 
 Enforce the rules defined in `/guidelines/Guidelines.md` across the entire codebase.
 
+## Prerequisites
+
+**ALWAYS run archive orchestrator first:**
+
+Before running cleanup checks, execute:
+
+```
+archive
+```
+
+This ensures:
+- Deprecated prompts are archived
+- Old reports are moved to archive
+- Completed tasks are archived
+- Deprecated guidelines are archived
+- Active directories contain only current files
+
+**Then proceed with cleanup checks below.**
+
+---
+
 ## Checklist
 
 ### 1. Root Cleanliness

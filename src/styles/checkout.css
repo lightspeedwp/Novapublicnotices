@@ -1,0 +1,648 @@
+/**
+ * Checkout Page Component Styles
+ * 
+ * BEM-based styles for Checkout page
+ * Fully controlled by CSS variables from design system
+ */
+
+/* =================================================================
+   Checkout Wrapper & Container
+   ================================================================= */
+
+.wpn-checkout-wrapper {
+  background-color: var(--muted);
+  padding: var(--space-8) 0;
+  min-height: 80vh;
+}
+
+@media (min-width: 768px) {
+  .wpn-checkout-wrapper {
+    padding: var(--space-12) 0;
+  }
+}
+
+.wpn-checkout-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .wpn-checkout-container {
+    padding: 0 var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-checkout-container {
+    padding: 0 var(--container-padding-desktop);
+  }
+}
+
+/* =================================================================
+   Checkout Header
+   ================================================================= */
+
+.wpn-checkout-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.wpn-checkout-header h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.wpn-checkout-header h1 svg {
+  width: 40px;
+  height: 40px;
+}
+
+.wpn-checkout-header__subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+/* =================================================================
+   Checkout Form Layout
+   ================================================================= */
+
+.wpn-checkout-form {
+  margin-top: var(--space-6);
+}
+
+.wpn-checkout-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .wpn-checkout-layout {
+    flex-direction: row;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+}
+
+.wpn-checkout-layout__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.wpn-checkout-layout__sidebar {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .wpn-checkout-layout__sidebar {
+    width: 420px;
+    position: sticky;
+    top: var(--space-6);
+  }
+}
+
+/* =================================================================
+   Checkout Section
+   ================================================================= */
+
+.wpn-checkout-section {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .wpn-checkout-section {
+    padding: var(--space-8);
+  }
+}
+
+.wpn-checkout-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-checkout-section__icon {
+  width: var(--space-6);
+  height: var(--space-6);
+  color: var(--nova-accent);
+  flex-shrink: 0;
+}
+
+.wpn-checkout-section__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--nova-primary);
+  margin: 0;
+}
+
+/* =================================================================
+   Payment Methods
+   ================================================================= */
+
+.wpn-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wpn-payment-method {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--muted);
+  border: var(--border-width-2) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.wpn-payment-method::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--nova-accent), var(--nova-primary));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-payment-method:hover {
+  border-color: var(--nova-accent);
+  background-color: var(--card);
+  transform: translateX(4px);
+  box-shadow: 0 2px 12px rgba(215, 0, 37, 0.1);
+}
+
+.wpn-payment-method:hover::before {
+  transform: scaleY(1);
+}
+
+.wpn-payment-method--active {
+  border-color: var(--nova-accent);
+  background-color: rgba(215, 0, 37, 0.05);
+  box-shadow: 0 0 0 1px var(--nova-accent);
+}
+
+.wpn-payment-method--active::before {
+  transform: scaleY(1);
+}
+
+.wpn-payment-method__radio {
+  appearance: none;
+  width: var(--space-5);
+  height: var(--space-5);
+  border: var(--border-width-2) solid var(--border-color-default);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.wpn-payment-method__radio:checked {
+  border-color: var(--nova-accent);
+  background-color: var(--nova-accent);
+}
+
+.wpn-payment-method__radio:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--space-2);
+  height: var(--space-2);
+  background-color: white;
+  border-radius: var(--radius-full);
+}
+
+.wpn-payment-method__content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.wpn-payment-method__icon {
+  width: var(--space-6);
+  height: var(--space-6);
+  color: var(--nova-accent);
+  flex-shrink: 0;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-payment-method:hover .wpn-payment-method__icon {
+  transform: scale(1.1);
+}
+
+.wpn-payment-method__text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-1) / 2);
+}
+
+.wpn-payment-method__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-payment-method__description {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+.wpn-payment-method__badge {
+  width: var(--space-5);
+  height: var(--space-5);
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.wpn-payment-method--active .wpn-payment-method__badge {
+  color: var(--nova-accent);
+  transform: scale(1.1);
+}
+
+/* =================================================================
+   Checkout Security Notice
+   ================================================================= */
+
+.wpn-checkout-security {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  background: linear-gradient(135deg, rgba(9, 8, 47, 0.03), rgba(9, 8, 47, 0.01));
+  border-radius: var(--radius-md);
+  border: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-checkout-security__icon {
+  width: var(--space-5);
+  height: var(--space-5);
+  color: var(--nova-primary);
+  flex-shrink: 0;
+  margin-top: calc(var(--space-1) / 2);
+}
+
+.wpn-checkout-security__text {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Checkout Checkbox (Terms)
+   ================================================================= */
+
+.wpn-checkout-terms {
+  padding: var(--space-4);
+  background-color: var(--muted);
+  border-radius: var(--radius-md);
+}
+
+.wpn-checkout-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  position: relative;
+}
+
+.wpn-checkout-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.wpn-checkout-checkbox__checkmark {
+  width: var(--space-5);
+  height: var(--space-5);
+  border: var(--border-width-2) solid var(--border-color-default);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+  background-color: var(--card);
+  margin-top: calc(var(--space-1) / 2);
+}
+
+.wpn-checkout-checkbox__input:checked ~ .wpn-checkout-checkbox__checkmark {
+  background-color: var(--nova-accent);
+  border-color: var(--nova-accent);
+}
+
+.wpn-checkout-checkbox__input:checked ~ .wpn-checkout-checkbox__checkmark::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.wpn-checkout-checkbox__label {
+  font-size: var(--text-sm);
+  color: var(--foreground);
+  line-height: var(--line-height-relaxed);
+}
+
+/* =================================================================
+   Order Summary
+   ================================================================= */
+
+.wpn-checkout-summary {
+  background-color: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.wpn-checkout-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--nova-accent), var(--nova-primary));
+}
+
+@media (min-width: 768px) {
+  .wpn-checkout-summary {
+    padding: var(--space-8);
+  }
+}
+
+.wpn-checkout-summary__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-checkout-summary__icon {
+  width: var(--space-6);
+  height: var(--space-6);
+  color: var(--nova-accent);
+  flex-shrink: 0;
+}
+
+.wpn-checkout-summary__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--nova-primary);
+  margin: 0;
+}
+
+.wpn-checkout-summary__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+/* =================================================================
+   Checkout Item
+   ================================================================= */
+
+.wpn-checkout-item {
+  padding: var(--space-4);
+  background-color: var(--muted);
+  border-radius: var(--radius-md);
+  border: var(--border-width-1) solid transparent;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.wpn-checkout-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--nova-accent), var(--nova-primary));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.wpn-checkout-item:hover {
+  border-color: var(--border-color-default);
+  background-color: var(--card);
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(215, 0, 37, 0.08);
+}
+
+.wpn-checkout-item:hover::before {
+  transform: scaleY(1);
+}
+
+.wpn-checkout-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.wpn-checkout-item__title {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  margin: 0;
+  line-height: var(--line-height-snug);
+  flex: 1;
+}
+
+.wpn-checkout-item__price {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--nova-primary);
+  white-space: nowrap;
+}
+
+.wpn-checkout-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.wpn-checkout-item__type {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* =================================================================
+   Checkout Totals
+   ================================================================= */
+
+.wpn-checkout-summary__totals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--muted);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.wpn-checkout-total__label {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+.wpn-checkout-total__value {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-checkout-total--final {
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+  border-top: var(--border-width-2) solid var(--border-color-default);
+}
+
+.wpn-checkout-total--final .wpn-checkout-total__label {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+
+.wpn-checkout-total--final .wpn-checkout-total__value {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--nova-accent);
+}
+
+/* =================================================================
+   Checkout Summary Footer
+   ================================================================= */
+
+.wpn-checkout-summary__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: var(--border-width-1) solid var(--border-color-default);
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* =================================================================
+   Responsive Adjustments
+   ================================================================= */
+
+@media (max-width: 767px) {
+  .wpn-checkout-wrapper {
+    padding: var(--space-6) 0;
+  }
+
+  .wpn-checkout-section {
+    padding: var(--space-4);
+  }
+
+  .wpn-checkout-summary {
+    padding: var(--space-4);
+  }
+}
+
+/* =================================================================
+   Print Styles
+   ================================================================= */
+
+@media print {
+  .wpn-checkout-wrapper {
+    background-color: white;
+  }
+
+  .wpn-checkout-section,
+  .wpn-checkout-summary {
+    border: var(--border-width-1) solid #ccc;
+    box-shadow: none;
+  }
+
+  .wpn-button {
+    display: none;
+  }
+}
+
+/* =================================================================
+   Icon Sizing — BEM Override for size prop removal
+   ================================================================= */
+
+/* Form Label Icons */
+.wpn-form__label-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Payment Method Icons (larger) */
+.wpn-payment-method__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Button Icons in Checkout */
+.wpn-button svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* Summary Footer Icon */
+.wpn-checkout-summary__footer svg {
+  width: 14px;
+  height: 14px;
+}

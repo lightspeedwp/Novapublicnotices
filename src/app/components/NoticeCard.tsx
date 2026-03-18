@@ -1,7 +1,8 @@
 import { Link } from "react-router";
-import { Calendar, MapPin, FileText } from "lucide-react";
+import { CalendarBlank, MapPin, FileText } from "@phosphor-icons/react";
 import CategoryBadge from "./CategoryBadge";
 import { cn } from "./ui/utils";
+import "./NoticeCard.css";
 
 interface NoticeCardProps {
   id: string;
@@ -34,41 +35,37 @@ export default function NoticeCard({
   return (
     <Link
       to={`${basePath}/${noticePath}/${id}`}
-      className={cn(
-        "block bg-card border border-border rounded-lg p-4 wp-hover-lift transition-all duration-150",
-        className
-      )}
+      className={cn("wpn-notice-card", className)}
     >
-      <div className="flex flex-col gap-3">
-        <div className="flex items-start justify-between gap-2">
-          <CategoryBadge category={category} lang={lang} />
-          <span className="text-xs text-muted-foreground flex items-center gap-1 shrink-0">
-            <FileText className="size-3" />
-            {referenceNumber}
-          </span>
-        </div>
-
-        <h3 className="font-semibold text-base text-foreground line-clamp-2 wp-link">
+      <div className="wpn-notice-card__content">
+        <h3 className="wpn-notice-card__title">
           {title}
         </h3>
 
+        <CategoryBadge category={category} lang={lang} />
+
+        <span className="wpn-notice-card__reference">
+          <FileText className="wpn-notice-card__reference-icon" />
+          {referenceNumber}
+        </span>
+
         {excerpt && (
-          <p className="text-sm text-muted-foreground line-clamp-2">{excerpt}</p>
+          <p className="wpn-notice-card__excerpt">{excerpt}</p>
         )}
 
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1">
-            <Calendar className="size-3" />
+        <div className="wpn-notice-card__meta">
+          <span className="wpn-notice-card__meta-item">
+            <CalendarBlank className="wpn-notice-card__meta-icon" />
             {publishDate}
           </span>
-          <span className="flex items-center gap-1">
-            <MapPin className="size-3" />
+          <span className="wpn-notice-card__meta-item">
+            <MapPin className="wpn-notice-card__meta-icon" />
             {location}
           </span>
         </div>
 
         {publisher && (
-          <div className="text-xs text-muted-foreground font-medium">
+          <div className="wpn-notice-card__publisher">
             {lang === "en" ? "Published by" : "Gepubliseer deur"}: {publisher}
           </div>
         )}

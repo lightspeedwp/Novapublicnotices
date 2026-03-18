@@ -1,0 +1,493 @@
+/**
+ * Layout Component — BEM CSS
+ * Uses design tokens from theme.css
+ * Includes header, navigation, footer, and mobile menu
+ */
+
+/* ============================================================================
+   LAYOUT WRAPPER
+   ============================================================================ */
+
+.wpn-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* ============================================================================
+   TOP BAR
+   ============================================================================ */
+
+.wpn-topbar {
+  background: var(--nav-surface-inverse);
+  color: white;
+  padding: var(--space-2) 0;
+}
+
+.wpn-topbar__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wpn-topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.wpn-topbar__link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: white;
+  text-decoration: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+.wpn-topbar__link:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.wpn-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.wpn-header {
+  background: var(--card);
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-header__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wpn-header__logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+}
+
+.wpn-header__logo {
+  height: 48px;
+  width: auto;
+}
+
+/* Desktop Navigation */
+.wpn-header__nav {
+  display: none;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .wpn-header__nav {
+    display: flex;
+  }
+}
+
+.wpn-header__nav-link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+.wpn-header__nav-link:hover {
+  opacity: 1;
+  color: var(--foreground);
+}
+
+/* Mobile Menu Button */
+.wpn-header__menu-toggle {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .wpn-header__menu-toggle {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   MOBILE MENU (FULL SCREEN OVERLAY)
+   ============================================================================ */
+
+.wpn-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--background);
+  overflow-y: auto;
+  display: none;
+}
+
+.wpn-mobile-menu--open {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .wpn-mobile-menu {
+    display: none !important;
+  }
+}
+
+.wpn-mobile-menu__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.wpn-mobile-menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.wpn-mobile-menu__logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Mobile Navigation */
+.wpn-mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.wpn-mobile-menu__item {
+  /* Wrapper for menu items */
+}
+
+.wpn-mobile-menu__link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: background-color 150ms ease-in-out;
+}
+
+.wpn-mobile-menu__link:hover {
+  background-color: var(--muted);
+}
+
+/* Expandable Menu Items */
+.wpn-mobile-menu__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.wpn-mobile-menu__toggle:hover {
+  background-color: var(--muted);
+}
+
+.wpn-mobile-menu__toggle-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  transition: transform 200ms ease-in-out;
+}
+
+.wpn-mobile-menu__toggle-icon--open {
+  transform: rotate(180deg);
+}
+
+.wpn-mobile-menu__submenu {
+  padding-left: var(--space-4);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.wpn-mobile-menu__submenu-link {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  opacity: 0.7;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all 150ms ease-in-out;
+}
+
+.wpn-mobile-menu__submenu-link:hover {
+  opacity: 1;
+  background-color: var(--muted);
+}
+
+.wpn-mobile-menu__cta {
+  padding-top: var(--space-4);
+}
+
+/* ============================================================================
+   MAIN CONTENT
+   ============================================================================ */
+
+.wpn-layout__main {
+  flex: 1;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.wpn-footer {
+  background: var(--nav-surface-inverse);
+  color: white;
+  margin-top: auto;
+}
+
+.wpn-footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-4);
+}
+
+/* Newsletter Section */
+.wpn-footer__newsletter {
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-8);
+  border-bottom: var(--border-width-1) solid rgba(255, 255, 255, 0.2);
+}
+
+.wpn-footer__newsletter-content {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wpn-footer__newsletter-icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-4);
+}
+
+.wpn-footer__newsletter-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-2);
+}
+
+.wpn-footer__newsletter-description {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-6);
+}
+
+.wpn-footer__newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 448px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .wpn-footer__newsletter-form {
+    flex-direction: row;
+  }
+}
+
+.wpn-footer__newsletter-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.wpn-footer__newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Footer Grid (Flexbox-based) */
+.wpn-footer__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.wpn-footer__grid > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wpn-footer__grid > * {
+    flex: 0 0 calc(50% - var(--space-4));
+    max-width: calc(50% - var(--space-4));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-footer__grid > * {
+    flex: 0 0 calc(20% - var(--space-6_4));
+    max-width: calc(20% - var(--space-6_4));
+  }
+}
+
+/* Brand Column */
+.wpn-footer__brand {
+  /* No grid-column needed for flexbox */
+}
+
+@media (min-width: 1024px) {
+  .wpn-footer__brand {
+    grid-column: span 1;
+  }
+}
+
+.wpn-footer__brand-logo {
+  height: 32px;
+  width: auto;
+  margin-bottom: var(--space-4);
+}
+
+.wpn-footer__brand-tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+/* Social Media Links */
+.wpn-footer__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.wpn-footer__social-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 150ms ease-in-out;
+}
+
+.wpn-footer__social-link:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.wpn-footer__social-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* Footer Columns */
+.wpn-footer__column {
+  /* Generic footer column */
+}
+
+.wpn-footer__column-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-footer__column-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-footer__column-link {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 150ms ease-in-out;
+}
+
+.wpn-footer__column-link:hover {
+  color: white;
+}
+
+/* Bottom Bar */
+.wpn-footer__bottom {
+  border-top: var(--border-width-1) solid rgba(255, 255, 255, 0.2);
+  padding-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .wpn-footer__bottom {
+    flex-direction: row;
+  }
+}
+
+.wpn-footer__copyright {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .wpn-footer__copyright {
+    text-align: left;
+  }
+}
+
+.wpn-footer__legal-links {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.wpn-footer__legal-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 150ms ease-in-out;
+}
+
+.wpn-footer__legal-link:hover {
+  color: white;
+}
+
+.wpn-footer__separator {
+  color: rgba(255, 255, 255, 0.3);
+}
