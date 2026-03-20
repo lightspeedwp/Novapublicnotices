@@ -352,6 +352,165 @@
 }
 
 /* =================================================================
+   Login Wall Component
+   ================================================================= */
+
+.wpn-search-results__login-wall {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+  grid-column: 1 / -1;
+  animation: wpn-login-wall-fade-in var(--duration-slow) var(--ease-out) 0.5s both;
+}
+
+@keyframes wpn-login-wall-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wpn-search-results__login-wall-card {
+  background: linear-gradient(135deg, 
+    rgba(9, 8, 47, 0.03) 0%, 
+    rgba(215, 0, 37, 0.02) 100%
+  );
+  border: var(--border-width-2) solid var(--nova-accent);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .wpn-search-results__login-wall-card {
+    padding: var(--space-12) var(--space-10);
+  }
+}
+
+.wpn-search-results__login-wall-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--nova-accent), var(--nova-primary));
+}
+
+.wpn-search-results__login-wall-icon {
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-6);
+  opacity: 0.9;
+  animation: wpn-lock-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wpn-lock-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.wpn-search-results__login-wall-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--nova-primary);
+  margin: 0 0 var(--space-4);
+  line-height: var(--line-height-tight);
+}
+
+@media (min-width: 768px) {
+  .wpn-search-results__login-wall-title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.wpn-search-results__login-wall-description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  margin: 0 0 var(--space-8);
+  line-height: var(--line-height-relaxed);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .wpn-search-results__login-wall-description {
+    font-size: var(--text-lg);
+  }
+}
+
+.wpn-search-results__login-wall-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .wpn-search-results__login-wall-actions {
+    flex-direction: row;
+  }
+}
+
+.wpn-search-results__login-wall-actions .wpn-button {
+  min-width: 200px;
+}
+
+.wpn-search-results__login-wall-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .wpn-search-results__login-wall-benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wpn-search-results__login-wall-benefits li {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--foreground);
+  padding-left: var(--space-6);
+  position: relative;
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-search-results__login-wall-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--nova-accent);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-base);
+}
+
+/* =================================================================
    Pagination Component
    ================================================================= */
 

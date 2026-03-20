@@ -1,0 +1,394 @@
+/**
+ * Error Pages Styles (404, 500, etc.)
+ * BEM Architecture: .wpn-error-*
+ * Uses CSS variables from /src/styles/global.css
+ */
+
+/* ==========================================================================
+   Error Page Layout
+   ========================================================================== */
+
+.wpn-error {
+  min-height: calc(100vh - var(--nav-height-desktop) - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-16);
+  background: linear-gradient(135deg, rgba(9, 8, 47, 0.02) 0%, rgba(215, 0, 37, 0.02) 100%);
+}
+
+.wpn-error__container {
+  max-width: 48rem; /* 768px */
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Error Icon
+   ========================================================================== */
+
+.wpn-error__icon-wrapper {
+  margin-bottom: var(--space-8);
+  display: flex;
+  justify-content: center;
+}
+
+.wpn-error__icon {
+  width: 10rem;
+  height: 10rem;
+  color: var(--nova-accent);
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .wpn-error__icon {
+    width: 12rem;
+    height: 12rem;
+  }
+}
+
+/* ==========================================================================
+   Error Code
+   ========================================================================== */
+
+.wpn-error__code {
+  font-family: var(--font-family-heading);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-none);
+  color: var(--nova-primary);
+  margin: 0 0 var(--space-4) 0;
+  letter-spacing: var(--letter-spacing-tight);
+  background: linear-gradient(135deg, var(--nova-primary) 0%, var(--nova-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==========================================================================
+   Error Title & Description
+   ========================================================================== */
+
+.wpn-error__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--line-height-tight);
+}
+
+.wpn-error__description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  margin: 0 0 var(--space-10) 0;
+  line-height: var(--line-height-relaxed);
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   Search Section
+   ========================================================================== */
+
+.wpn-error-search {
+  margin-bottom: var(--space-10);
+}
+
+.wpn-error-search__label {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.wpn-error-search__field {
+  position: relative;
+  max-width: 32rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+.wpn-error-search__icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.wpn-error-search__input {
+  width: 100%;
+  height: var(--form-field-height);
+  padding-inline-start: calc(var(--space-4) + 1.25rem + var(--space-2));
+  padding-inline-end: var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  color: var(--foreground);
+  background: var(--input-background);
+  border: var(--border-width-1) solid var(--input-border);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-error-search__input:focus {
+  outline: none;
+  border-color: var(--nova-primary);
+  box-shadow: 0 0 0 3px rgba(9, 8, 47, 0.1);
+}
+
+.wpn-error-search__input::placeholder {
+  color: var(--form-field-placeholder);
+}
+
+/* ==========================================================================
+   Action Buttons
+   ========================================================================== */
+
+.wpn-error-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 640px) {
+  .wpn-error-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.wpn-error-actions__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 10rem;
+  height: var(--button-height-lg);
+  padding: var(--button-padding-lg);
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border-radius: var(--radius-button);
+  border: var(--border-width-2) solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-error-actions__button--primary {
+  background: var(--nova-accent);
+  color: white;
+  border-color: var(--nova-accent);
+}
+
+.wpn-error-actions__button--primary:hover {
+  background: var(--nova-accent-hover);
+  border-color: var(--nova-accent-hover);
+  transform: translateY(var(--hover-translate-y-sm));
+}
+
+.wpn-error-actions__button--secondary {
+  background: transparent;
+  color: var(--nova-primary);
+  border-color: var(--nova-primary);
+}
+
+.wpn-error-actions__button--secondary:hover {
+  background: var(--nova-primary);
+  color: white;
+}
+
+.wpn-error-actions__button-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ==========================================================================
+   Helpful Links Section
+   ========================================================================== */
+
+.wpn-error-links {
+  margin-bottom: var(--space-10);
+}
+
+.wpn-error-links__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.wpn-error-links__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-4);
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .wpn-error-links__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wpn-error-links__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--card);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-error-links__card:hover {
+  border-color: var(--nova-primary);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(var(--hover-translate-y-sm));
+}
+
+.wpn-error-links__card-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--nova-accent);
+  flex-shrink: 0;
+}
+
+.wpn-error-links__card-content {
+  flex: 1;
+  text-align: left;
+}
+
+.wpn-error-links__card-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  margin: 0 0 var(--space-1) 0;
+  line-height: var(--line-height-tight);
+}
+
+.wpn-error-links__card-description {
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+   Popular Categories
+   ========================================================================== */
+
+.wpn-error-categories {
+  margin-bottom: var(--space-10);
+}
+
+.wpn-error-categories__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.wpn-error-categories__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wpn-error-categories__item {
+  margin: 0;
+  padding: 0;
+}
+
+.wpn-error-categories__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--foreground);
+  background: var(--muted);
+  border: var(--border-width-1) solid var(--border-color-light);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-error-categories__link:hover {
+  background: var(--nova-primary);
+  color: white;
+  border-color: var(--nova-primary);
+}
+
+/* ==========================================================================
+   Support Section
+   ========================================================================== */
+
+.wpn-error-support {
+  padding: var(--space-8);
+  background: var(--muted);
+  border-radius: var(--radius-lg);
+  border: var(--border-width-1) solid var(--border-color-light);
+}
+
+.wpn-error-support__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.wpn-error-support__text {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.wpn-error-support__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--nova-accent);
+  text-decoration: none;
+}
+
+.wpn-error-support__link:hover {
+  text-decoration: underline;
+}
+
+.wpn-error-support__link-icon {
+  width: 1rem;
+  height: 1rem;
+}

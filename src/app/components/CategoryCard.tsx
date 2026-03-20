@@ -1,126 +1,161 @@
 /**
- * Nova Public Notices Portal - Category Card Component
+ * Category Card Grid Component
  * 
- * Dynamic category card with icon, count, and hover animation
- * Data-driven from categories-data.ts
+ * Responsive grid with automatic column scaling:
+ * - Mobile (320px+): 2 columns
+ * - Tablet (640px+): 3 columns
+ * - Laptop (1024px+): 4 columns
+ * - Desktop (1440px+): 5 columns
+ * - Ultra-wide (2000px+): 6 columns
+ * 
+ * Supports two variants:
+ * - large: Full cards with description (default)
+ * - compact: Horizontal cards without description
  */
 
 import { Link } from 'react-router';
-import { CategoryWithCount } from '../data/categories/categories-data';
-import {
+import { 
   Scroll, Wine, Briefcase, MapTrifold, Storefront, Gavel, FileX, Leaf,
   Hammer, Heart, Bell, Buildings, ShieldCheck, Warning, UsersThree,
   TrendDown, Vault, ArrowsClockwise, Handshake, HandPalm, Megaphone
 } from '@phosphor-icons/react';
+import { CategoryWithCount } from '../data/categories/categories-data';
+import '../../styles/category-card.css';
 
-// Icon map for dynamic icon rendering - using Phosphor icons
-const iconMap: Record<string, React.ComponentType<{ className?: string; weight?: "regular" | "thin" | "light" | "bold" | "fill" | "duotone" }>> = {
-  Scroll, Wine, Briefcase, MapTrifold, Storefront, Gavel, FileX, Leaf,
-  Hammer, Heart, Bell, Buildings, ShieldCheck, Warning, UsersThree,
-  TrendDown, Vault, ArrowsClockwise, Handshake, HandPalm, Megaphone
+/* =================================================================
+   Icon Mapping
+   ================================================================= */
+
+const iconMap: Record<string, React.ComponentType<any>> = {
+  Scroll,
+  Wine,
+  Briefcase,
+  MapTrifold,
+  Storefront,
+  Gavel,
+  FileX,
+  Leaf,
+  Hammer,
+  Heart,
+  Bell,
+  Buildings,
+  ShieldCheck,
+  Warning,
+  UsersThree,
+  TrendDown,
+  Vault,
+  ArrowsClockwise,
+  Handshake,
+  HandPalm,
+  Megaphone,
 };
+
+/* =================================================================
+   CategoryCard Component
+   ================================================================= */
 
 interface CategoryCardProps {
   category: CategoryWithCount;
   language?: 'en' | 'af';
-  variant?: 'default' | 'compact' | 'featured';
+  variant?: 'large' | 'compact';
 }
 
-export function CategoryCard({ 
+function CategoryCard({ 
   category, 
   language = 'en',
-  variant = 'default'
+  variant = 'large'
 }: CategoryCardProps) {
-  const Icon = iconMap[category.icon] || Bell;
-  const baseUrl = language === 'af' ? '/af' : '';
-  const categoryPath = language === 'af' ? 'kategorie' : 'category';
+  const Icon = iconMap[category.icon] || Scroll;
+  const basePath = language === 'af' ? '/af' : '';
+  
+  // Build CSS class names
+  const cardClasses = [
+    'wpn-category-card',
+    `wpn-category-card--${category.slug}`,
+    variant === 'compact' ? 'wpn-category-card--compact' : '',
+  ].filter(Boolean).join(' ');
   
   return (
     <Link
-      to={`${baseUrl}/${categoryPath}/${category.slug}`}
-      className={`wpn-category-card wpn-category-card--${category.slug}`}
+      to={`${basePath}/category/${category.slug}`}
+      className={cardClasses}
     >
       <div className="wpn-category-card__container">
-        {/* Icon Badge */}
-        <div className="wpn-category-card__icon-wrapper">
+        {/* Decorative gradient background */}
+        <div className="wpn-category-card__gradient" />
+        
+        {/* Icon section with glow effect */}
+        <div className="wpn-category-card__icon-section">
+          <div className="wpn-category-card__icon-glow" />
           <div className="wpn-category-card__icon-badge">
-            <Icon 
-              className="wpn-category-card__icon"
-              weight="regular"
-            />
+            <Icon className="wpn-category-card__icon" weight="duotone" />
           </div>
         </div>
         
-        {/* Content */}
+        {/* Content section */}
         <div className="wpn-category-card__content">
           <h3 className="wpn-category-card__title">
             {category.name[language]}
           </h3>
-          <p className="wpn-category-card__description">
-            {category.description[language]}
-          </p>
+          
+          {variant === 'large' && category.description && (
+            <p className="wpn-category-card__description">
+              {category.description[language]}
+            </p>
+          )}
         </div>
         
-        {/* Count Badge */}
+        {/* Footer with count and arrow */}
         <div className="wpn-category-card__footer">
-          <div className="wpn-category-card__count">
-            {(category.count || 0).toLocaleString()}
+          <div className="wpn-category-card__count-badge">
+            <span className="wpn-category-card__count-number">{category.count}</span>
             <span className="wpn-category-card__count-label">
-              {(category.count || 0) === 1 
-                ? (language === 'en' ? 'notice' : 'kennisgewing')
-                : (language === 'en' ? 'notices' : 'kennisgewings')
-              }
+              {language === 'en' ? 'notices' : 'kennisgewings'}
             </span>
+          </div>
+          
+          <div className="wpn-category-card__arrow">
+            <svg className="wpn-category-card__arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </div>
         </div>
         
-        {/* Hover Arrow */}
-        <div className="wpn-category-card__arrow">
-          <svg 
-            className="wpn-category-card__arrow-icon" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M9 5l7 7-7 7" 
-            />
-          </svg>
-        </div>
+        {/* Decorative corner accent */}
+        <div className="wpn-category-card__corner-accent" />
       </div>
     </Link>
   );
 }
 
-/**
- * Category Card Grid Component
- */
+/* =================================================================
+   CategoryGrid Component
+   ================================================================= */
+
 interface CategoryGridProps {
   categories: CategoryWithCount[];
   language?: 'en' | 'af';
-  columns?: 2 | 3 | 4;
+  variant?: 'large' | 'compact';
 }
 
 export function CategoryGrid({ 
   categories, 
   language = 'en',
-  columns = 3
+  variant = 'large'
 }: CategoryGridProps) {
+  // Build grid class name
+  const gridClassName = variant === 'compact' 
+    ? 'wpn-category-grid wpn-category-grid--compact'
+    : 'wpn-category-grid';
+  
   return (
-    <div 
-      className="wpn-category-grid"
-      style={{
-        '--grid-columns': columns,
-      } as React.CSSProperties}
-    >
+    <div className={gridClassName}>
       {categories.map((category) => (
         <CategoryCard 
           key={category.id} 
           category={category} 
           language={language}
+          variant={variant}
         />
       ))}
     </div>

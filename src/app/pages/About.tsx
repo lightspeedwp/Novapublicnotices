@@ -1,85 +1,48 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import AdSlot from "../components/AdSlot";
-import {
-  Shield,
-  Users,
-  Award,
-  Target,
-  Heart,
-  TrendingUp,
-  FileText,
-  Phone,
-  Home,
-} from "lucide-react";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
+import { CheckCircle, Users, Shield, TrendUp, House } from "@phosphor-icons/react";
 import "../../styles/components.css";
 
-export default function About() {
-  const values = [
-    {
-      icon: Shield,
-      title: "Legal compliance",
-      description: "We ensure every notice meets legal requirements and regulatory standards.",
-    },
-    {
-      icon: Users,
-      title: "Customer service",
-      description: "Our team provides responsive support throughout the publication process.",
-    },
-    {
-      icon: Award,
-      title: "Quality assurance",
-      description: "Professional moderation ensures accuracy and completeness of all notices.",
-    },
-    {
-      icon: Target,
-      title: "Accessibility",
-      description: "Making public notices searchable and accessible to all South Africans.",
-    },
-  ];
+interface Feature {
+  icon: React.ComponentType<any>;
+  title: string;
+  description: string;
+}
 
-  const stats = [
-    { number: "25+", label: "Notice categories" },
-    { number: "1000+", label: "Notices published" },
-    { number: "24/7", label: "Digital access" },
-    { number: "100%", label: "Compliance rate" },
-  ];
+const features: Feature[] = [
+  {
+    icon: CheckCircle,
+    title: "Legal compliance",
+    description: "Meet all statutory requirements for public notice publication"
+  },
+  {
+    icon: Users,
+    title: "Wide reach",
+    description: "Access to thousands of legal professionals and interested parties"
+  },
+  {
+    icon: Shield,
+    title: "Secure & reliable",
+    description: "Industry-leading security with guaranteed uptime"
+  },
+  {
+    icon: TrendUp,
+    title: "Cost effective",
+    description: "Transparent pricing with no hidden fees"
+  }
+];
+
+export default function About() {
+  const heroData = useHero('about', 'en');
 
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">About us</span>
-              </li>
-            </ol>
-          </nav>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
-          <h1 className="wpn-page-header__title">
-            About Nova Public Notices
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Your trusted platform for legal notice publication in South Africa
-          </p>
-        </div>
-      </section>
-
-      {/* Mission */}
+      {/* About Content */}
       <section className="wpn-section wpn-section--white">
         <div className="wpn-container--narrow">
           <div className="wpn-section-header">

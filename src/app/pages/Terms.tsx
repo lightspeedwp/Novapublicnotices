@@ -1,42 +1,17 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
-import AdSlot from "../components/AdSlot";
-import { Home } from "lucide-react";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
+import { House } from "@phosphor-icons/react";
 import "../../styles/components.css";
 
 export default function Terms() {
+  const heroData = useHero('terms', 'en');
+
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Terms and conditions</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title">
-            Terms and conditions
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Last updated: March 16, 2026
-          </p>
-        </div>
-      </section>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
       {/* Terms Content */}
       <section className="wpn-legal-content">

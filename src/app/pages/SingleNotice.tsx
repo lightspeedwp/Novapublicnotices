@@ -140,6 +140,11 @@ export default function SingleNotice() {
             </ol>
           </nav>
 
+          {/* Leaderboard Ad */}
+          <div style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+            <AdSlot type="leaderboard" />
+          </div>
+
           <div className="wpn-notice-layout">
             {/* Main Content */}
             <div className="wpn-notice-layout__main">
@@ -226,6 +231,13 @@ export default function SingleNotice() {
                   </div>
                 )}
               </div>
+
+              {/* Native In-Feed Ad before related notices */}
+              {relatedNotices.length > 0 && (
+                <div style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+                  <AdSlot type="in-feed-native" label="Sponsored" />
+                </div>
+              )}
 
               {/* Related Notices */}
               {relatedNotices.length > 0 && (
@@ -322,13 +334,19 @@ export default function SingleNotice() {
                 )}
 
                 {/* Ads */}
-                <AdSlot slot="ad_sidebar_1" height={250} />
-                <AdSlot slot="ad_sidebar_2" height={250} />
+                <AdSlot type="sticky-sidebar" />
+                
+                <div style={{ marginTop: 'var(--space-6)' }}>
+                  <AdSlot type="medium-rectangle" />
+                </div>
               </div>
             </aside>
           </div>
         </div>
       </div>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

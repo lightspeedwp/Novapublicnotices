@@ -34,6 +34,11 @@ export default function Home() {
       {/* Hero Section */}
       {heroData && <Hero data={heroData} lang="en" />}
 
+      {/* Billboard Ad - Premium Homepage Position */}
+      <div className="wpn-container" style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <AdSlot type="billboard" />
+      </div>
+
       {/* Categories Section */}
       <section className="wpn-section--md">
         <div className="wpn-container">
@@ -49,12 +54,12 @@ export default function Home() {
           <CategoryGrid 
             categories={categories} 
             language="en"
-            columns={3}
+            variant="large"
           />
 
-          {/* Top Ad Slot */}
-          <div className="mt-12">
-            <AdSlot slot="ad_top_leaderboard" height={90} label="Advertisement" />
+          {/* Medium Rectangle Ad */}
+          <div style={{ marginTop: 'var(--space-12)' }}>
+            <AdSlot type="medium-rectangle" />
           </div>
         </div>
       </section>
@@ -89,6 +94,11 @@ export default function Home() {
                 lang="en"
               />
             ))}
+          </div>
+          
+          {/* Native In-Feed Ad */}
+          <div style={{ marginTop: 'var(--space-8)' }}>
+            <AdSlot type="in-feed-native" label="Sponsored" />
           </div>
         </div>
       </section>
@@ -201,6 +211,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

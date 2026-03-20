@@ -1,4 +1,6 @@
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { useHero } from "../../hooks/useHero";
 import AccountSidebar from "../../components/AccountSidebar";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
@@ -9,6 +11,7 @@ import { useState } from "react";
 import "./Profile.css";
 
 export default function ProfileAF() {
+  const heroData = useHero('profile', 'af');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const data = profilePageData;
   const lang = "af";
@@ -21,6 +24,9 @@ export default function ProfileAF() {
 
   return (
     <Layout lang={lang} showAds={true}>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
+
       <div className="wpn-profile">
         <div className="wpn-profile__container">
           {/* Header */}

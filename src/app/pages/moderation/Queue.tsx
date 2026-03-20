@@ -4,7 +4,7 @@ export default function Queue() {
   return (
     <PageStub
       lang="en"
-      title="Moderation Queue"
+      title="Moderation queue"
       description="Review and moderate pending notice submissions."
       showAds={false}
     />

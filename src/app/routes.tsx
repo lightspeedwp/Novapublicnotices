@@ -12,6 +12,8 @@ import SearchResults from "./pages/SearchResults";
 import SearchResultsAF from "./pages/SearchResultsAF";
 import CategoryArchive from "./pages/CategoryArchive";
 import CategoryArchiveAF from "./pages/CategoryArchiveAF";
+import AllCategories from "./pages/AllCategories";
+import AllCategoriesAF from "./pages/AllCategoriesAF";
 import SingleNotice from "./pages/SingleNotice";
 import SingleNoticeAF from "./pages/SingleNoticeAF";
 import Contact from "./pages/Contact";
@@ -95,6 +97,12 @@ import ModerationQueueAF from "./pages/moderation/QueueAF";
 import ModerationReview from "./pages/moderation/Review";
 import ModerationReviewAF from "./pages/moderation/ReviewAF";
 
+// Dev Tools pages
+import DevIndex from "./pages/dev/DevIndex";
+import ClientQuestionnaire from "./pages/dev/ClientQuestionnaire";
+import ClientQuestionnaireAF from "./pages/dev/ClientQuestionnaireAF";
+import LaunchChecklist from "./pages/dev/LaunchChecklist";
+
 // Not Found
 import NotFound from "./pages/NotFound";
 
@@ -106,6 +114,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "search", Component: SearchResults },
       { path: "category/:slug", Component: CategoryArchive },
+      { path: "all-categories", Component: AllCategories },
       { path: "notice/:id", Component: SingleNotice },
       { path: "contact", Component: Contact },
       { path: "sales", Component: Sales },
@@ -154,10 +163,16 @@ export const router = createBrowserRouter([
       { path: "moderation", Component: ModerationQueue },
       { path: "moderation/review/:id", Component: ModerationReview },
       
+      // Dev Tools
+      { path: "dev", Component: DevIndex },
+      { path: "dev/client-questionnaire", Component: ClientQuestionnaire },
+      { path: "dev/launch-checklist", Component: LaunchChecklist },
+      
       // Afrikaans routes
       { path: "af", Component: HomeAF },
       { path: "af/soek", Component: SearchResultsAF },
       { path: "af/kategorie/:slug", Component: CategoryArchiveAF },
+      { path: "af/alle-kategorieë", Component: AllCategoriesAF },
       { path: "af/kennisgewing/:id", Component: SingleNoticeAF },
       { path: "af/kontak", Component: ContactAF },
       { path: "af/verkope", Component: SalesAF },
@@ -205,6 +220,9 @@ export const router = createBrowserRouter([
       // Moderation AF
       { path: "af/moderering", Component: ModerationQueueAF },
       { path: "af/moderering/hersien/:id", Component: ModerationReviewAF },
+      
+      // Dev Tools AF
+      { path: "af/dev/kliënt-vraelys", Component: ClientQuestionnaireAF },
       
       // Catch all
       { path: "*", Component: NotFound },

@@ -263,7 +263,7 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
               {/* Mobile Menu Header */}
               <div className="wpn-layout__mobile-menu-header">
                 <Link to={basePath + "/"} onClick={() => setMobileMenuOpen(false)}>
-                  <Logo variant="light" className="h-10 w-auto" />
+                  <Logo variant="dark" className="h-10 w-auto" />
                 </Link>
                 <Button
                   variant="ghost"
@@ -347,36 +347,77 @@ export default function Layout({ children, lang = "en", showAds = true }: Layout
 
                 {/* User Account Section - Mobile Only */}
                 <div className="wpn-layout__mobile-account-section">
-                  {/* Login Link */}
-                  <Link
-                    to={basePath + userNavigation[0].href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="wpn-layout__mobile-nav-link"
-                  >
-                    {userNavigation[0].label[lang]}
-                  </Link>
-                  
-                  {/* Register Button */}
-                  <Button
-                    className="wpn-button wpn-button--md wpn-button--accent wpn-button--full"
-                    asChild
-                  >
-                    <Link to={basePath + userNavigation[1].href} onClick={() => setMobileMenuOpen(false)}>
-                      {userNavigation[1].label[lang]}
-                    </Link>
-                  </Button>
+                  {isLoggedIn ? (
+                    <>
+                      {/* Logged In - Show My Account Link */}
+                      <Link
+                        to={basePath + "/my-account"}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="wpn-layout__mobile-nav-link wpn-layout__mobile-nav-link--account"
+                      >
+                        <User weight="bold" />
+                        {text.myAccount}
+                      </Link>
+                      
+                      {/* Sign Out Button */}
+                      <Button
+                        onClick={() => {
+                          toggleLoginState();
+                          setMobileMenuOpen(false);
+                        }}
+                        variant="outline"
+                        className="wpn-button--full"
+                      >
+                        <SignOut weight="bold" />
+                        {lang === "en" ? "Sign out" : "Teken Uit"}
+                      </Button>
 
-                  {/* Language Switcher */}
-                  <Button
-                    variant="outline"
-                    className="wpn-button--full"
-                    asChild
-                  >
-                    <Link to={lang === "en" ? "/af" : "/"} onClick={() => setMobileMenuOpen(false)}>
-                      <Globe className="wpn-layout__topbar-icon" />
-                      {lang === "en" ? "Afrikaans" : "English"}
-                    </Link>
-                  </Button>
+                      {/* Language Switcher */}
+                      <Button
+                        variant="ghost"
+                        className="wpn-button--full"
+                        asChild
+                      >
+                        <Link to={lang === "en" ? "/af" : "/"} onClick={() => setMobileMenuOpen(false)}>
+                          <Globe className="wpn-layout__topbar-icon" />
+                          {lang === "en" ? "Afrikaans" : "English"}
+                        </Link>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      {/* Logged Out - Show Login Link */}
+                      <Link
+                        to={basePath + userNavigation[0].href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="wpn-layout__mobile-nav-link"
+                      >
+                        {userNavigation[0].label[lang]}
+                      </Link>
+                      
+                      {/* Register Button */}
+                      <Button
+                        className="wpn-button wpn-button--md wpn-button--accent wpn-button--full"
+                        asChild
+                      >
+                        <Link to={basePath + userNavigation[1].href} onClick={() => setMobileMenuOpen(false)}>
+                          {userNavigation[1].label[lang]}
+                        </Link>
+                      </Button>
+
+                      {/* Language Switcher */}
+                      <Button
+                        variant="ghost"
+                        className="wpn-button--full"
+                        asChild
+                      >
+                        <Link to={lang === "en" ? "/af" : "/"} onClick={() => setMobileMenuOpen(false)}>
+                          <Globe className="wpn-layout__topbar-icon" />
+                          {lang === "en" ? "Afrikaans" : "English"}
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </nav>
             </div>

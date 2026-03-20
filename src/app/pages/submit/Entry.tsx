@@ -1,17 +1,23 @@
 import { Link } from "react-router";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { heroesEN } from "../../data/heroes/heroes.en";
+import CategoryBadge from "../../components/CategoryBadge";
 import AdSlot from "../../components/AdSlot";
-import {
-  FileText,
-  Scales,
-  Wine,
-  Buildings,
+import { 
+  FileText, 
+  Building, 
+  Scale, 
+  Home as HomeIcon,
+  TreePine,
   Briefcase,
+  Wine,
+  MapPin,
+  Users,
   ArrowRight,
-  Question,
   Phone,
-} from "@phosphor-icons/react";
-import "../../../styles/components.css";
+  HelpCircle as Question
+} from "lucide-react";
 import "../../../styles/submit-entry.css";
 
 export default function Entry() {
@@ -25,7 +31,7 @@ export default function Entry() {
     },
     {
       slug: "estate",
-      icon: Scales,
+      icon: Scale,
       title: "Estates",
       description: "Deceased estate notices and creditor notifications",
       commonUses: ["Executor notices", "Creditor claims", "Distribution"],
@@ -39,7 +45,7 @@ export default function Entry() {
     },
     {
       slug: "town-planning",
-      icon: Buildings,
+      icon: Building,
       title: "Town planning",
       description: "Rezoning and land use applications",
       commonUses: ["Rezoning", "Land use", "Development"],
@@ -63,16 +69,7 @@ export default function Entry() {
   return (
     <Layout lang="en" showAds={true}>
       {/* Hero Section */}
-      <section className="wpn-hero">
-        <div className="wpn-hero__container">
-          <h1 className="wpn-hero__title">
-            Submit your public notice
-          </h1>
-          <p className="wpn-hero__subtitle">
-            Choose your notice type below to get started. Our guided forms make it easy to submit compliant notices quickly and efficiently.
-          </p>
-        </div>
-      </section>
+      <Hero data={heroesEN.submitNoticeEntry} lang="en" />
 
       {/* Notice Type Selection */}
       <div className="wpn-submit-entry">
@@ -206,7 +203,7 @@ export default function Entry() {
       </div>
 
       {/* Ad Slot */}
-      <AdSlot variant="leaderboard" />
+      <AdSlot type="leaderboard" />
 
       {/* Need Help CTA */}
       <section className="wpn-cta-section">

@@ -128,6 +128,11 @@ export default function SingleNoticeAF() {
             </ol>
           </nav>
 
+          {/* Leaderboard Ad */}
+          <div style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+            <AdSlot type="leaderboard" />
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Main Content */}
             <div className="flex-1 min-w-0">
@@ -214,6 +219,13 @@ export default function SingleNoticeAF() {
                   </div>
                 )}
               </Card>
+
+              {/* Native In-Feed Ad before related notices */}
+              {relatedNotices.length > 0 && (
+                <div style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+                  <AdSlot type="in-feed-native" label="Geborg" />
+                </div>
+              )}
 
               {/* Related Notices */}
               {relatedNotices.length > 0 && (
@@ -309,12 +321,18 @@ export default function SingleNoticeAF() {
               )}
 
               {/* Ads */}
-              <AdSlot slot="ad_sidebar_1" height={250} />
-              <AdSlot slot="ad_sidebar_2" height={250} />
+              <AdSlot type="sticky-sidebar" />
+              
+              <div style={{ marginTop: 'var(--space-6)' }}>
+                <AdSlot type="medium-rectangle" />
+              </div>
             </aside>
           </div>
         </div>
       </div>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

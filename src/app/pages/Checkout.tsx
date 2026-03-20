@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 import { 
   User, 
   Envelope, 
@@ -11,14 +12,25 @@ import {
   Wallet, 
   ShieldCheck, 
   Receipt,
-  CheckCircle
+  CheckCircle,
+  Warning
 } from "@phosphor-icons/react";
 import "../../styles/checkout.css";
 
 export default function Checkout() {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
   const [selectedPayment, setSelectedPayment] = useState("card");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  // Auth protection: redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // Store intended destination for redirect after login
+      sessionStorage.setItem('returnUrl', '/checkout');
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleSubmitOrder = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +41,28 @@ export default function Checkout() {
     // Navigate to order confirmation
     navigate("/order-confirmation");
   };
+
+  // Don't render checkout if not logged in (will redirect)
+  if (!isLoggedIn) {
+    return (
+      <Layout lang="en" showAds={false}>
+        <div className="wpn-checkout-wrapper">
+          <div className="wpn-checkout-container">
+            <div className="wpn-checkout-auth-required">
+              <Warning size={64} weight="duotone" />
+              <h2 className="wpn-h2">Authentication required</h2>
+              <p className="wpn-checkout-auth-required__message">
+                Please login or create an account to complete your checkout.
+              </p>
+              <p className="wpn-checkout-auth-required__note">
+                Redirecting to login page...
+              </p>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout

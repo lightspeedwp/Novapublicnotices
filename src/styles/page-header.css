@@ -120,7 +120,7 @@
 
 /* White text variant for dark backgrounds */
 .wpn-page-header__title--white {
-  color: #ffffff;
+  color: white;
 }
 
 .wpn-page-header__subtitle {

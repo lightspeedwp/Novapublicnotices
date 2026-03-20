@@ -185,6 +185,47 @@ export const heroesEN: HeroDataMap = {
     alignment: 'left',
   },
 
+  // Dev Tools - Index
+  'dev': {
+    title: 'Dev tools',
+    description: 'Project finalization tools for capturing client requirements and tracking launch readiness.',
+    icon: 'code',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Dev tools' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
+  // Dev Tools - Client Questionnaire
+  'dev-questionnaire': {
+    title: 'Client questionnaire',
+    description: 'Help us finalize your public notices portal by providing these important details about your organization and requirements.',
+    icon: 'clipboard-text',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Dev tools', href: '/dev' },
+      { label: 'Client questionnaire' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
+  // Dev Tools - Launch Checklist
+  'dev-launch': {
+    title: 'Launch checklist',
+    description: 'Everything we need from you to complete the prototype and prepare for launch. Track progress and see what\'s remaining.',
+    icon: 'rocket',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Dev tools', href: '/dev' },
+      { label: 'Launch checklist' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
   // Privacy
   privacy: {
     title: 'Privacy policy',
@@ -237,29 +278,56 @@ export const heroesEN: HeroDataMap = {
     alignment: 'left',
   },
 
-  // Login
+  // Auth: Login
   login: {
     title: 'Sign in to your account',
-    description: 'Access your notices, orders, and account settings.',
+    description: 'Access your dashboard, manage notices, and track submissions',
     icon: 'sign-in',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Login' },
+      { label: 'Sign in' },
     ],
-    size: 'md',
+    size: 'sm',
     alignment: 'center',
   },
 
-  // Register
+  // Auth: Register
   register: {
     title: 'Create your account',
-    description: 'Register to submit notices, track orders, and manage your publications.',
+    description: 'Get started with submitting and managing public notices',
     icon: 'user-plus',
     breadcrumbs: [
       { label: 'Home', href: '/' },
       { label: 'Register' },
     ],
-    size: 'md',
+    size: 'sm',
+    alignment: 'center',
+  },
+
+  // Auth: Forgot Password
+  forgotPassword: {
+    title: 'Reset your password',
+    description: 'Enter your email address and we\'ll send you a reset link',
+    icon: 'lock',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Sign in', href: '/login' },
+      { label: 'Reset password' },
+    ],
+    size: 'sm',
+    alignment: 'center',
+  },
+
+  // Auth: Reset Password
+  resetPassword: {
+    title: 'Choose a new password',
+    description: 'Enter your new password below',
+    icon: 'key',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Reset password' },
+    ],
+    size: 'sm',
     alignment: 'center',
   },
 
@@ -326,6 +394,42 @@ export const heroesEN: HeroDataMap = {
     alignment: 'left',
   },
 
+  // Saved Searches
+  savedSearches: {
+    title: 'Saved searches and alerts',
+    description: 'Manage your saved searches and receive email alerts when new matching notices are published.',
+    icon: 'bookmark',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'My account', href: '/my-account' },
+      { label: 'Saved searches' },
+    ],
+    size: 'md',
+    alignment: 'left',
+    buttons: [
+      {
+        text: 'Create new search',
+        href: '/search',
+        variant: 'primary',
+        icon: 'magnifying-glass',
+      },
+    ],
+  },
+
+  // Settings
+  settings: {
+    title: 'Account settings',
+    description: 'Manage your notification preferences, privacy settings, and account security.',
+    icon: 'gear',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'My account', href: '/my-account' },
+      { label: 'Settings' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
   // Submit Notice
   submitNotice: {
     title: 'Submit a public notice',
@@ -350,6 +454,33 @@ export const heroesEN: HeroDataMap = {
     ],
     size: 'sm',
     alignment: 'left',
+  },
+
+  // Submit Notice Entry (Landing)
+  submitNoticeEntry: {
+    title: 'Submit a public notice',
+    description: 'Publish your legal notice quickly and compliantly. Choose between self-serve digital or sales-assisted print and digital options.',
+    icon: 'upload',
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Submit notice' },
+    ],
+    size: 'md',
+    alignment: 'left',
+    buttons: [
+      {
+        text: 'Submit digital notice',
+        href: '/submit-notice/form',
+        variant: 'primary',
+        icon: 'upload',
+      },
+      {
+        text: 'Sales assistance',
+        href: '/sales',
+        variant: 'outline',
+        icon: 'phone',
+      },
+    ],
   },
 
   // Review Notice

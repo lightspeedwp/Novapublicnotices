@@ -1,21 +1,22 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import Hero from "../components/Hero";
 import AdSlot from "../components/AdSlot";
+import { useHero } from "../hooks/useHero";
 import {
-  HelpCircle,
+  Question,
   FileText,
-  DollarSign,
+  CurrencyCircleDollar,
   Clock,
-  Shield,
+  ShieldCheck,
+  Envelope,
   Phone,
-  Mail,
-  Home,
-} from "lucide-react";
-import "../../styles/components.css";
+} from "@phosphor-icons/react";
+import "../../styles/faq.css";
 
 export default function FAQ() {
+  const heroData = useHero('faq', 'en');
+
   const faqCategories = [
     {
       title: "Getting started",
@@ -58,8 +59,8 @@ export default function FAQ() {
       ],
     },
     {
-      title: "Pricing & Payment",
-      icon: DollarSign,
+      title: "Pricing and payment",
+      icon: CurrencyCircleDollar,
       faqs: [
         {
           question: "How much does it cost to publish a notice?",
@@ -80,7 +81,7 @@ export default function FAQ() {
       ],
     },
     {
-      title: "Moderation & Publication",
+      title: "Moderation and publication",
       icon: Clock,
       faqs: [
         {
@@ -102,8 +103,8 @@ export default function FAQ() {
       ],
     },
     {
-      title: "Account & Support",
-      icon: Shield,
+      title: "Account and support",
+      icon: ShieldCheck,
       faqs: [
         {
           question: "Do I need an account to submit a notice?",
@@ -127,134 +128,88 @@ export default function FAQ() {
 
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Frequently asked questions</span>
-              </li>
-            </ol>
-          </nav>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
-          <h1 className="wpn-page-header__title">
-            Frequently asked questions
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Find answers to common questions about publishing public notices with Nova News
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ Categories */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {faqCategories.map((category, catIdx) => {
-              const Icon = category.icon;
-              return (
-                <div key={catIdx} className="mb-12">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="wpn-bg--accent text-white rounded-lg p-2">
-                      <Icon className="size-6" />
-                    </div>
-                    <h2 className="text-2xl font-bold wpn-text--primary">
-                      {category.title}
-                    </h2>
+      {/* FAQ Content */}
+      <div className="wpn-faq">
+        <div className="wpn-faq__container">
+          {/* FAQ Categories */}
+          {faqCategories.map((category, catIdx) => {
+            const Icon = category.icon;
+            return (
+              <div key={catIdx} className="wpn-faq-category">
+                <div className="wpn-faq-category__header">
+                  <div className="wpn-faq-category__icon-wrapper">
+                    <Icon weight="duotone" className="wpn-faq-category__icon" />
                   </div>
+                  <h2 className="wpn-faq-category__title">
+                    {category.title}
+                  </h2>
+                </div>
 
-                  <div className="space-y-4">
-                    {category.faqs.map((faq, faqIdx) => (
-                      <Card key={faqIdx} className="wpn-card--bordered p-6">
-                        <h3 className="text-lg font-bold wpn-text--primary mb-3 flex items-start gap-2">
-                          <HelpCircle className="size-5 wpn-text--accent flex-shrink-0 mt-0.5" />
-                          <span>{faq.question}</span>
+                <ul className="wpn-faq-list">
+                  {category.faqs.map((faq, faqIdx) => (
+                    <li key={faqIdx} className="wpn-faq-item">
+                      <div className="wpn-faq-item__question-wrapper">
+                        <Question weight="fill" className="wpn-faq-item__question-icon" />
+                        <h3 className="wpn-faq-item__question">
+                          {faq.question}
                         </h3>
-                        <p className="text-muted-foreground ml-7">
-                          {faq.answer}
-                        </p>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Ad Slot */}
-      <AdSlot variant="leaderboard" className="my-8" />
-
-      {/* Still Have Questions */}
-      <section className="py-16 bg-[var(--muted)]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card className="wpn-bg--muted border-0">
-              <div className="p-12 text-center">
-                <HelpCircle className="size-16 wpn-text--accent mx-auto mb-6" />
-                <h2 className="text-3xl font-bold wpn-text--primary mb-4">
-                  Still Have Questions?
-                </h2>
-                <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  Can't find the answer you're looking for? Our support team is here to help you with any questions about publishing notices.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <Button size="lg" className="wpn-button wpn-button--lg wpn-button--accent" asChild>
-                    <Link to="/contact">
-                      <Mail className="mr-2 size-5" />
-                      Contact Support
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="wpn-button wpn-button--lg wpn-button--outline" asChild>
-                    <Link to="/sales">
-                      <Phone className="mr-2 size-5" />
-                      Talk to Sales
-                    </Link>
-                  </Button>
-                </div>
+                      </div>
+                      <p className="wpn-faq-item__answer">
+                        {faq.answer}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+            );
+          })}
 
-      {/* CTA Section */}
-      <section className="wpn-cta-section">
-        <div className="wpn-cta-section__container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="wpn-cta-section__title">
-              Ready to Submit Your Notice?
+          {/* Ad Slot */}
+          <AdSlot variant="leaderboard" />
+
+          {/* Support CTA */}
+          <section className="wpn-faq-support">
+            <Question weight="duotone" className="wpn-faq-support__icon" />
+            <h2 className="wpn-faq-support__title">
+              Still have questions?
             </h2>
-            <p className="wpn-cta-section__description">
+            <p className="wpn-faq-support__description">
+              Can't find the answer you're looking for? Our support team is here to help you with any questions about publishing notices.
+            </p>
+            <div className="wpn-faq-support__actions">
+              <Link to="/contact" className="wpn-faq-support__button wpn-faq-support__button--primary">
+                <Envelope weight="fill" className="wpn-faq-support__button-icon" />
+                Contact support
+              </Link>
+              <Link to="/sales" className="wpn-faq-support__button wpn-faq-support__button--secondary">
+                <Phone weight="fill" className="wpn-faq-support__button-icon" />
+                Talk to sales
+              </Link>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="wpn-faq-cta">
+            <h2 className="wpn-faq-cta__title">
+              Ready to submit your notice?
+            </h2>
+            <p className="wpn-faq-cta__description">
               Our guided submission process makes it easy to publish your public notice quickly and compliantly.
             </p>
-            <div className="wpn-cta-section__actions">
-              <Button size="lg" className="wpn-button wpn-button--lg wpn-button--white" asChild>
-                <Link to="/submit">
-                  Start Submission
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="wpn-button wpn-button--lg wpn-button--outline border-white text-white hover:bg-white/10" asChild>
-                <Link to="/pricing">
-                  View Pricing
-                </Link>
-              </Button>
+            <div className="wpn-faq-cta__actions">
+              <Link to="/submit" className="wpn-faq-cta__button wpn-faq-cta__button--primary">
+                Start submission
+              </Link>
+              <Link to="/pricing" className="wpn-faq-cta__button wpn-faq-cta__button--secondary">
+                View pricing
+              </Link>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
+      </div>
     </Layout>
   );
 }

@@ -1,275 +1,862 @@
 /**
- * Ad Component Styles (BEM)
+ * Ad Slot Styles — Comprehensive Ad System
+ * 100% CSS variables from design system
  * 
- * Styling for ad slots with IAB-approved dimensions
- * Uses design system tokens only - no inline styles
+ * Supports all ad types:
+ * - Standard display (leaderboard, MPU, billboard, etc.)
+ * - Mobile ads
+ * - Sticky ads (header, footer, sidebar)
+ * - Popups & overlays (interstitial, entry, exit intent)
+ * - Native in-feed ads
+ * - Expandable ads
+ * - Slide-in ads
  */
 
 /* =================================================================
-   Ad Container
+   Ad Slot Base — All Standard Display Ads
    ================================================================= */
 
-.wpn-ad {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.wpn-ad-slot {
   position: relative;
+  margin: var(--space-6) auto;
+  max-width: 100%;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color-light);
 }
 
-.wpn-ad__container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--duration-normal) var(--ease-out);
-}
-
-/* Hover Effect */
-.wpn-ad:hover .wpn-ad__container {
-  transform: scale(1.02);
-}
-
-/* =================================================================
-   Ad Overlay
-   ================================================================= */
-
-.wpn-ad__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(2px);
-  z-index: 2;
-}
-
-.wpn-ad__info {
-  text-align: center;
-  color: white;
-  padding: var(--space-4);
-}
-
-.wpn-ad__brand {
-  font-family: var(--font-family-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-bold);
-  color: white;
-  margin-bottom: var(--space-2);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.wpn-ad__size {
-  font-family: var(--font-family-body);
-  font-size: var(--text-lg);
-  font-weight: var(--font-weight-semibold);
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: var(--space-1);
-  font-variant-numeric: tabular-nums;
-}
-
-.wpn-ad__label {
-  font-family: var(--font-family-body);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-  margin-bottom: var(--space-3);
-}
-
-.wpn-ad__slot-name {
+.wpn-ad-slot__label {
+  display: block;
   font-family: var(--font-family-body);
   font-size: var(--text-xs);
   font-weight: var(--font-weight-normal);
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: var(--space-2);
-  padding-top: var(--space-2);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.wpn-ad-slot__content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: var(--border-width-1) solid var(--border-color-default);
+  
+  /* Dynamic ad colors from AdSlot component */
+  background: var(--ad-bg-color, var(--color-bg-primary));
+  color: var(--ad-text-color, var(--color-text-primary));
+}
+
+.wpn-ad-slot__content:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--nova-primary);
+}
+
+.wpn-ad-slot__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  height: 100%;
+}
+
+.wpn-ad-slot__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wpn-ad-slot__headline {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.wpn-ad-slot__body {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  opacity: 0.9;
+}
+
+.wpn-ad-slot__advertiser {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.7;
+}
+
+.wpn-ad-slot__cta {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  
+  /* Dynamic ad accent color from AdSlot component */
+  background: var(--ad-accent-color, var(--nova-accent));
+  color: var(--color-text-inverse);
+}
+
+.wpn-ad-slot__cta:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
 }
 
 /* =================================================================
-   Brand Logo Placeholder
+   Ad Sizes — IAB Standard Sizes
    ================================================================= */
 
-.wpn-ad__logo {
+/* Leaderboard 728×90 */
+.wpn-ad-slot--leaderboard {
+  width: 728px;
+  height: 90px;
+}
+
+.wpn-ad-slot--leaderboard .wpn-ad-slot__inner {
+  flex-direction: row;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+}
+
+.wpn-ad-slot--leaderboard .wpn-ad-slot__headline {
+  font-size: var(--text-lg);
+}
+
+.wpn-ad-slot--leaderboard .wpn-ad-slot__body {
+  font-size: var(--text-sm);
+}
+
+.wpn-ad-slot--leaderboard .wpn-ad-slot__cta {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+/* Super Leaderboard 970×90 */
+.wpn-ad-slot--super-leaderboard {
+  width: 970px;
+  height: 90px;
+}
+
+.wpn-ad-slot--super-leaderboard .wpn-ad-slot__inner {
+  flex-direction: row;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+}
+
+/* Billboard 970×250 */
+.wpn-ad-slot--billboard {
+  width: 970px;
+  height: 250px;
+}
+
+/* Medium Rectangle (MPU) 300×250 */
+.wpn-ad-slot--medium-rectangle {
+  width: 300px;
+  height: 250px;
+}
+
+/* Large Rectangle 336×280 */
+.wpn-ad-slot--large-rectangle {
+  width: 336px;
+  height: 280px;
+}
+
+/* Half Page 300×600 */
+.wpn-ad-slot--half-page {
+  width: 300px;
+  height: 600px;
+}
+
+/* Wide Skyscraper 160×600 */
+.wpn-ad-slot--wide-skyscraper {
+  width: 160px;
+  height: 600px;
+}
+
+.wpn-ad-slot--wide-skyscraper .wpn-ad-slot__inner {
+  padding: var(--space-4);
+}
+
+.wpn-ad-slot--wide-skyscraper .wpn-ad-slot__headline {
+  font-size: var(--text-lg);
+}
+
+/* Mobile Leaderboard 320×50 */
+.wpn-ad-slot--mobile-leaderboard {
+  width: 320px;
+  height: 50px;
+}
+
+.wpn-ad-slot--mobile-leaderboard .wpn-ad-slot__inner {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+}
+
+.wpn-ad-slot--mobile-leaderboard .wpn-ad-slot__headline {
+  font-size: var(--text-sm);
+}
+
+.wpn-ad-slot--mobile-leaderboard .wpn-ad-slot__body {
+  display: none;
+}
+
+.wpn-ad-slot--mobile-leaderboard .wpn-ad-slot__cta {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+/* Large Mobile Banner 320×100 */
+.wpn-ad-slot--large-mobile-banner {
+  width: 320px;
+  height: 100px;
+}
+
+.wpn-ad-slot--large-mobile-banner .wpn-ad-slot__inner {
+  padding: var(--space-3);
+  gap: var(--space-2);
+}
+
+.wpn-ad-slot--large-mobile-banner .wpn-ad-slot__headline {
+  font-size: var(--text-base);
+}
+
+.wpn-ad-slot--large-mobile-banner .wpn-ad-slot__body {
+  font-size: var(--text-sm);
+}
+
+/* =================================================================
+   Sticky Footer Ad
+   ================================================================= */
+
+.wpn-ad-slot--sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  animation: wpn-slide-up var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.wpn-ad-slot--sticky-footer .wpn-ad-slot__content {
+  border-radius: 0;
+  border: none;
+  border-top: var(--border-width-1) solid var(--border-color-default);
+}
+
+.wpn-ad-slot__label--sticky {
   position: absolute;
-  inset: 0;
+  top: var(--space-1);
+  left: var(--space-2);
+  margin: 0;
+  font-size: 10px;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.wpn-ad-slot__close--sticky {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
-  opacity: 0.15;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
-.wpn-ad__logo-text {
-  font-family: var(--font-family-heading);
-  font-size: calc(var(--text-6xl) * 2);
-  font-weight: var(--font-weight-extrabold);
-  color: white;
-  line-height: 1;
+.wpn-ad-slot__close--sticky:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
 }
 
-/* =================================================================
-   Ad Placeholder (No Advertiser)
-   ================================================================= */
-
-.wpn-ad--placeholder .wpn-ad__container--placeholder {
-  background: linear-gradient(135deg, var(--muted) 0%, var(--background) 100%);
-  border: 2px dashed var(--border-color-default);
+.wpn-ad-slot__inner--sticky-footer {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
 }
 
-.wpn-ad--placeholder .wpn-ad__overlay {
-  background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: none;
-}
-
-.wpn-ad--placeholder .wpn-ad__info {
-  color: var(--muted-foreground);
-}
-
-.wpn-ad--placeholder .wpn-ad__label {
-  color: var(--foreground);
+.wpn-ad-slot__headline--compact {
+  font-size: var(--text-base);
   font-weight: var(--font-weight-semibold);
 }
 
-.wpn-ad--placeholder .wpn-ad__size {
-  color: var(--muted-foreground);
+.wpn-ad-slot__body--compact {
+  font-size: var(--text-sm);
+  display: none;
 }
 
-.wpn-ad--placeholder .wpn-ad__placeholder-text {
+.wpn-ad-slot__cta--compact {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 768px) {
+  .wpn-ad-slot__body--compact {
+    display: inline;
+  }
+}
+
+/* =================================================================
+   Sticky Header Ad
+   ================================================================= */
+
+.wpn-ad-slot--sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: wpn-slide-down var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-slide-down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.wpn-ad-slot--sticky-header .wpn-ad-slot__content {
+  border-radius: 0;
+  border: none;
+  border-bottom: var(--border-width-1) solid var(--border-color-default);
+}
+
+/* =================================================================
+   Sticky Sidebar Ad
+   ================================================================= */
+
+.wpn-ad-slot--sticky-sidebar {
+  position: sticky;
+  top: calc(var(--nav-height-desktop) + var(--space-4));
+  margin: 0 0 var(--space-6) 0;
+}
+
+/* =================================================================
+   Popup Ads (Interstitial, Entry, Exit Intent, Modal)
+   ================================================================= */
+
+.wpn-ad-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: wpn-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.wpn-ad-popup__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.wpn-ad-popup__content {
+  position: relative;
+  width: 90vw;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  animation: wpn-scale-in var(--duration-normal) var(--ease-out);
+  
+  /* Dynamic ad colors from AdSlot component */
+  background: var(--ad-bg-color, var(--color-bg-primary));
+  color: var(--ad-text-color, var(--color-text-primary));
+}
+
+@keyframes wpn-scale-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.wpn-ad-popup__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  z-index: 1;
+}
+
+.wpn-ad-popup__close:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.wpn-ad-popup__inner {
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+}
+
+.wpn-ad-popup__headline {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.wpn-ad-popup__body {
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--space-6) 0;
+  opacity: 0.9;
+}
+
+.wpn-ad-popup__cta {
+  display: inline-block;
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-4);
+}
+
+.wpn-ad-popup__cta:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.wpn-ad-popup__advertiser {
+  display: block;
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.6;
+}
+
+/* Interstitial full screen */
+.wpn-ad-popup--interstitial .wpn-ad-popup__content {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+}
+
+/* =================================================================
+   Slide-In Ad (Corner)
+   ================================================================= */
+
+.wpn-ad-slide-in {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 9000;
+  animation: wpn-slide-in-right var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.wpn-ad-slide-in__content {
+  width: 320px;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  
+  /* Dynamic ad colors from AdSlot component */
+  background: var(--ad-bg-color, var(--color-bg-primary));
+  color: var(--ad-text-color, var(--color-text-primary));
+}
+
+.wpn-ad-slide-in__close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-ad-slide-in__close:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.wpn-ad-slide-in__headline {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.wpn-ad-slide-in__body {
   font-family: var(--font-family-body);
   font-size: var(--text-sm);
   font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--space-4) 0;
+  opacity: 0.9;
+}
+
+.wpn-ad-slide-in__cta {
+  display: block;
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  
+  /* Dynamic ad accent color */
+  background: var(--ad-accent-color, var(--nova-accent));
+  color: var(--color-text-inverse);
+}
+
+.wpn-ad-slide-in__cta:hover {
+  transform: scale(1.05);
+}
+
+/* =================================================================
+   Native In-Feed Ad
+   ================================================================= */
+
+.wpn-ad-native {
+  padding: var(--space-6);
+  background: var(--card);
+  border: var(--border-width-1) solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  margin: var(--space-6) 0;
+  position: relative;
+}
+
+.wpn-ad-native__label {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: 10px;
+  font-weight: var(--font-weight-normal);
   color: var(--muted-foreground);
-  margin-top: var(--space-2);
-  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  opacity: 0.6;
+}
+
+.wpn-ad-native__content {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-ad-native__content:hover {
+  transform: translateX(4px);
+}
+
+.wpn-ad-native__headline {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-2) 0;
+  color: var(--foreground);
+}
+
+.wpn-ad-native__body {
+  font-family: var(--font-family-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--space-4) 0;
+  color: var(--muted-foreground);
+}
+
+.wpn-ad-native__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.wpn-ad-native__advertiser {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted-foreground);
+}
+
+.wpn-ad-native__cta {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.wpn-ad-native__content:hover .wpn-ad-native__cta {
+  transform: translateX(4px);
+}
+
+/* =================================================================
+   Expandable Ad
+   ================================================================= */
+
+.wpn-ad-expandable {
+  width: 728px;
+  transition: height var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+}
+
+.wpn-ad-expandable__content {
+  height: 90px;
+  border-radius: var(--radius-md);
+  border: var(--border-width-1) solid var(--border-color-default);
+  transition: height var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+}
+
+.wpn-ad-expandable--expanded .wpn-ad-expandable__content {
+  height: 300px;
+}
+
+.wpn-ad-expandable__collapsed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  height: 90px;
+}
+
+.wpn-ad-expandable__expanded-content {
+  padding: var(--space-6);
+  animation: wpn-fade-in-down var(--duration-normal) var(--ease-out);
+}
+
+@keyframes wpn-fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================================================
+   Placeholder Ad
+   ================================================================= */
+
+.wpn-ad-slot--placeholder {
+  background: linear-gradient(135deg, var(--muted), var(--border-color-default));
+  border: var(--border-width-2) dashed var(--border-color-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+}
+
+.wpn-ad-slot__placeholder-content {
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.wpn-ad-slot__placeholder-label {
+  display: block;
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-1);
+}
+
+.wpn-ad-slot__placeholder-size {
+  display: block;
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  opacity: 0.7;
 }
 
 /* =================================================================
    Responsive Adjustments
    ================================================================= */
 
-/* Small Ads (Buttons, Micro Bar) */
-.wpn-ad[style*="width: 120px"],
-.wpn-ad[style*="width: 88px"] {
-  .wpn-ad__brand {
-    font-size: var(--text-sm);
-  }
-  
-  .wpn-ad__size {
-    font-size: var(--text-xs);
-  }
-  
-  .wpn-ad__label {
-    font-size: 10px;
-  }
-  
-  .wpn-ad__slot-name {
+@media (max-width: 767px) {
+  /* Hide desktop ads on mobile */
+  .wpn-ad-slot--leaderboard,
+  .wpn-ad-slot--super-leaderboard,
+  .wpn-ad-slot--billboard,
+  .wpn-ad-slot--half-page,
+  .wpn-ad-slot--wide-skyscraper,
+  .wpn-ad-slot--skyscraper,
+  .wpn-ad-slot--expandable {
     display: none;
   }
   
-  .wpn-ad__logo-text {
-    font-size: var(--text-4xl);
-  }
-}
-
-/* Mobile Banners */
-@media (max-width: 767px) {
-  .wpn-ad[style*="width: 320px"] {
-    width: 100% !important;
+  /* Full width mobile ads */
+  .wpn-ad-slot--mobile-leaderboard,
+  .wpn-ad-slot--large-mobile-banner,
+  .wpn-ad-slot--medium-rectangle {
+    width: 100%;
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
   }
+  
+  /* Adjust popup sizes */
+  .wpn-ad-popup__content {
+    width: 95vw;
+  }
+  
+  .wpn-ad-popup__inner {
+    padding: var(--space-8) var(--space-4);
+  }
+  
+  .wpn-ad-popup__headline {
+    font-size: var(--text-2xl);
+  }
+  
+  /* Slide-in on mobile */
+  .wpn-ad-slide-in {
+    bottom: var(--space-2);
+    right: var(--space-2);
+  }
+  
+  .wpn-ad-slide-in__content {
+    width: calc(100vw - var(--space-4));
+    max-width: 320px;
+  }
 }
 
-/* =================================================================
-   Ad Spacing Utilities
-   ================================================================= */
-
-.wpn-ad-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-6);
-}
-
-.wpn-ad-wrapper--compact {
-  padding: var(--space-4);
-}
-
-.wpn-ad-wrapper--spacious {
-  padding: var(--space-8);
-}
-
-/* Ad Label Above Slot */
-.wpn-ad-label {
-  font-family: var(--font-family-body);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--muted-foreground);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-  text-align: center;
-  margin-bottom: var(--space-2);
-}
-
-/* =================================================================
-   Sticky Mobile Ad
-   ================================================================= */
-
-.wpn-ad--sticky-mobile {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  box-shadow: var(--shadow-lg);
-  border-radius: 0;
-  border-bottom: 0;
-}
-
-@media (min-width: 1024px) {
-  .wpn-ad--sticky-mobile {
+@media (min-width: 768px) {
+  /* Hide mobile ads on desktop */
+  .wpn-ad-slot--mobile-leaderboard,
+  .wpn-ad-slot--large-mobile-banner {
     display: none;
   }
 }
 
 /* =================================================================
-   Ad Grid Layout (Multiple Ads)
+   Accessibility
    ================================================================= */
 
-.wpn-ad-grid {
-  display: grid;
-  gap: var(--space-6);
-  align-items: start;
+.wpn-ad-slot__close:focus,
+.wpn-ad-popup__close:focus,
+.wpn-ad-slide-in__close:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
-.wpn-ad-grid--sidebar {
-  grid-template-columns: 1fr;
-  gap: var(--space-8);
-}
-
-.wpn-ad-grid--horizontal {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-6);
-  justify-items: center;
-}
-
-/* =================================================================
-   Print Styles (Hide Ads)
-   ================================================================= */
-
-@media print {
-  .wpn-ad,
-  .wpn-ad-wrapper,
-  .wpn-ad--sticky-mobile {
-    display: none !important;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wpn-ad-slot,
+  .wpn-ad-popup,
+  .wpn-ad-slide-in,
+  .wpn-ad-expandable,
+  .wpn-ad-native__content {
+    animation: none;
+    transition: none;
+  }
+  
+  .wpn-ad-slot__content:hover,
+  .wpn-ad-slot__cta:hover,
+  .wpn-ad-native__content:hover {
+    transform: none;
   }
 }

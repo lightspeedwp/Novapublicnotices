@@ -239,28 +239,83 @@ export const heroesAF: HeroDataMap = {
 
   // Login
   login: {
-    title: 'Meld aan by jou rekening',
-    description: 'Toegang tot jou kennisgewings, bestellings en rekening instellings.',
+    title: 'Teken in by jou rekening',
+    description: 'Toegang tot jou dashboard, bestuur kennisgewings, en volg indiening',
     icon: 'sign-in',
     breadcrumbs: [
       { label: 'Tuis', href: '/af' },
-      { label: 'Aanmeld' },
+      { label: 'Teken in' },
     ],
-    size: 'md',
+    size: 'sm',
     alignment: 'center',
   },
 
   // Register
   register: {
     title: 'Skep jou rekening',
-    description: 'Registreer om kennisgewings in te dien, bestellings te volg en jou publikasies te bestuur.',
+    description: 'Begin met die indiening en bestuur van openbare kennisgewings',
     icon: 'user-plus',
     breadcrumbs: [
       { label: 'Tuis', href: '/af' },
       { label: 'Registreer' },
     ],
-    size: 'md',
+    size: 'sm',
     alignment: 'center',
+  },
+
+  // Auth: Forgot Password
+  forgotPassword: {
+    title: 'Herstel jou wagwoord',
+    description: 'Voer jou e-posadres in en ons sal vir jou \'n herstel skakel stuur',
+    icon: 'lock',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'Teken in', href: '/af/aanmeld' },
+      { label: 'Herstel wagwoord' },
+    ],
+    size: 'sm',
+    alignment: 'center',
+  },
+
+  // Auth: Reset Password
+  resetPassword: {
+    title: 'Kies \'n nuwe wagwoord',
+    description: 'Voer jou nuwe wagwoord hieronder in',
+    icon: 'key',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'Herstel wagwoord' },
+    ],
+    size: 'sm',
+    alignment: 'center',
+  },
+
+  // Dev Tools: Client Questionnaire
+  clientQuestionnaire: {
+    title: 'Kliënt vraelys',
+    description: 'Noodsaaklike vrae om ons te help om jou perfekte openbare kennisgewings portaal te bou',
+    icon: 'clipboard-text',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'Ont gereedskap' },
+      { label: 'Kliënt vraelys' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
+  // Dev Tools: Launch Checklist
+  launchChecklist: {
+    title: 'Bekendstelling kontrolelys',
+    description: 'Alles wat ons nodig het om jou openbare kennisgewings portaal van prototipe na produksie te neem',
+    icon: 'checklist',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'Ont gereedskap' },
+      { label: 'Bekendstelling kontrolelys' },
+    ],
+    size: 'md',
+    alignment: 'left',
   },
 
   // My Account
@@ -326,6 +381,42 @@ export const heroesAF: HeroDataMap = {
     alignment: 'left',
   },
 
+  // Saved Searches
+  savedSearches: {
+    title: 'Gestoorde soektogte en kennisgewings',
+    description: 'Bestuur jou gestoorde soektogte en ontvang e-pos kennisgewings wanneer nuwe toepaslike kennisgewings gepubliseer word.',
+    icon: 'bookmark',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'My rekening', href: '/af/my-rekening' },
+      { label: 'Gestoorde soektogte' },
+    ],
+    size: 'md',
+    alignment: 'left',
+    buttons: [
+      {
+        text: 'Skep nuwe soektog',
+        href: '/af/soek',
+        variant: 'primary',
+        icon: 'magnifying-glass',
+      },
+    ],
+  },
+
+  // Settings
+  settings: {
+    title: 'Rekening instellings',
+    description: 'Bestuur jou kennisgewing voorkeure, privaatheid instellings, en rekening sekuriteit.',
+    icon: 'gear',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'My rekening', href: '/af/my-rekening' },
+      { label: 'Instellings' },
+    ],
+    size: 'md',
+    alignment: 'left',
+  },
+
   // Submit Notice
   submitNotice: {
     title: 'Dien \'n openbare kennisgewing in',
@@ -350,6 +441,33 @@ export const heroesAF: HeroDataMap = {
     ],
     size: 'sm',
     alignment: 'left',
+  },
+
+  // Submit Notice Entry (Landing)
+  submitNoticeEntry: {
+    title: "Dien 'n openbare kennisgewing in",
+    description: 'Publiseer jou regskennisgewing vinnig en voldoende. Kies tussen selfbediening digitaal of verkoopgeassisteerde druk en digitale opsies.',
+    icon: 'upload',
+    breadcrumbs: [
+      { label: 'Tuis', href: '/af' },
+      { label: 'Dien kennisgewing in' },
+    ],
+    size: 'md',
+    alignment: 'left',
+    buttons: [
+      {
+        text: 'Dien digitale kennisgewing in',
+        href: '/af/dien-kennisgewing-in/vorm',
+        variant: 'primary',
+        icon: 'upload',
+      },
+      {
+        text: 'Verkope ondersteuning',
+        href: '/af/verkope',
+        variant: 'outline',
+        icon: 'phone',
+      },
+    ],
   },
 
   // Review Notice
@@ -391,7 +509,7 @@ export const heroesAF: HeroDataMap = {
   // Success
   success: {
     title: 'Sukses!',
-    description: 'Jou kennisgewing is suksesvol ingedien.',
+    description: 'U kennisgewing is suksesvol ingedien.',
     icon: 'check-circle',
     size: 'md',
     alignment: 'center',

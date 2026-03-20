@@ -20,7 +20,7 @@ export default function AccountSidebar({ lang = "en", activePage }: AccountSideb
     },
     {
       id: "notices",
-      label: { en: "My Notices", af: "My Kennisgewings" },
+      label: { en: "My notices", af: "My kennisgewings" },
       href: `${basePath}/my-account/notices`,
       icon: FileText
     },
@@ -32,7 +32,7 @@ export default function AccountSidebar({ lang = "en", activePage }: AccountSideb
     },
     {
       id: "saved-searches",
-      label: { en: "Saved Searches", af: "Gestoorde Soektogte" },
+      label: { en: "Saved searches", af: "Gestoorde soektogte" },
       href: lang === "af" ? `${basePath}/my-rekening/gestoorde-soektogte` : `${basePath}/my-account/saved-searches`,
       icon: MagnifyingGlass
     },

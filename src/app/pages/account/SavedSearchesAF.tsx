@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { heroesAF } from "../../data/heroes/heroes.af";
 import AccountSidebar from "../../components/AccountSidebar";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
@@ -96,6 +98,9 @@ export default function SavedSearchesAF() {
 
   return (
     <Layout lang="af" showAds={true}>
+      {/* Hero Section */}
+      <Hero data={heroesAF.savedSearches} lang="af" />
+
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}

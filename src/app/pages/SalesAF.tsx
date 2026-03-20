@@ -1,42 +1,19 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { Check, Upload, FileText, DollarSign, Clock, Phone, Home } from "lucide-react";
 import "../../styles/components.css";
 
 export default function SalesAF() {
+  const heroData = useHero('sales', 'af');
+
   return (
     <Layout lang="af" showAds={true}>
-      {/* Page Header */}
-      <div className="wpn-page-header wpn-bg--primary">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb wpn-breadcrumb--light" aria-label="Broodkrummels">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/af" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Tuis
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Verkope en ondersteuning</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title wpn-page-header__title--white">
-            Hoe om openbare kennisgewings te publiseer
-          </h1>
-          <p className="wpn-page-header__subtitle wpn-page-header__subtitle--light">
-            Alles wat u moet weet oor die publisering van wettige kennisgewings in Suid-Afrika
-          </p>
-        </div>
-      </div>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
 
       <div className="bg-muted py-12">
         <div className="container mx-auto px-4">

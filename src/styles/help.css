@@ -1,0 +1,588 @@
+/**
+ * Help Page Styles
+ * BEM Architecture: .wpn-help-*
+ * Uses CSS variables from /src/styles/global.css
+ */
+
+/* ==========================================================================
+   Help Page Layout
+   ========================================================================== */
+
+.wpn-help {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+  padding-block: var(--space-3xl);
+}
+
+.wpn-help__container {
+  max-width: var(--max-width-content, 1440px);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  width: 100%;
+}
+
+/* ==========================================================================
+   Search Section
+   ========================================================================== */
+
+.wpn-help-search {
+  background: var(--color-background);
+  border: var(--border-width-sm) solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.wpn-help-search__inner {
+  max-width: 48rem; /* 768px */
+  margin-inline: auto;
+}
+
+.wpn-help-search__label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.wpn-help-search__field {
+  position: relative;
+}
+
+.wpn-help-search__icon {
+  position: absolute;
+  left: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.wpn-help-search__input {
+  width: 100%;
+  padding-inline-start: 3rem;
+  padding-inline-end: var(--space-md);
+}
+
+.wpn-help-search__results {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Quick Help Section
+   ========================================================================== */
+
+.wpn-help-quick {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.wpn-help-quick__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.wpn-help-quick__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .wpn-help-quick__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-help-quick__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Quick Help Card */
+.wpn-help-quick-card {
+  background: var(--color-background);
+  border: var(--border-width-sm) solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  transition: box-shadow 0.2s ease;
+}
+
+.wpn-help-quick-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.wpn-help-quick-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wpn-help-quick-card__icon {
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-md);
+}
+
+.wpn-help-quick-card__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.wpn-help-quick-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+  transition: color 0.2s ease;
+}
+
+.wpn-help-quick-card__link:hover .wpn-help-quick-card__title {
+  color: var(--color-accent);
+}
+
+.wpn-help-quick-card__description {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Category Filter Section
+   ========================================================================== */
+
+.wpn-help-categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.wpn-help-categories__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.wpn-help-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .wpn-help-categories__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-help-categories__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Category Button */
+.wpn-help-category {
+  display: block;
+  width: 100%;
+  padding: var(--space-md);
+  border: var(--border-width-md) solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  background: var(--color-background);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wpn-help-category:hover {
+  border-color: var(--color-border);
+}
+
+.wpn-help-category--active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.wpn-help-category__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.wpn-help-category__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.wpn-help-category--active .wpn-help-category__icon {
+  color: var(--color-white);
+}
+
+.wpn-help-category__content {
+  flex: 1;
+}
+
+.wpn-help-category__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.wpn-help-category--active .wpn-help-category__title {
+  color: var(--color-white);
+}
+
+.wpn-help-category__count {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.wpn-help-category--active .wpn-help-category__count {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+
+.wpn-help-faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.wpn-help-faq__inner {
+  max-width: 64rem; /* 1024px */
+  margin-inline: auto;
+  width: 100%;
+}
+
+.wpn-help-faq__header {
+  margin-bottom: var(--space-lg);
+}
+
+.wpn-help-faq__header-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.wpn-help-faq__header-description {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.wpn-help-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* FAQ Item */
+.wpn-help-faq-item {
+  background: var(--color-background);
+  border: var(--border-width-sm) solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.wpn-help-faq-item__button {
+  width: 100%;
+  padding: var(--space-xl);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.wpn-help-faq-item__button:hover {
+  background: var(--color-background-muted);
+}
+
+.wpn-help-faq-item__question {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.wpn-help-faq-item__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+  transition: transform 0.2s ease;
+}
+
+.wpn-help-faq-item__icon--expanded {
+  transform: rotate(180deg);
+}
+
+.wpn-help-faq-item__answer {
+  padding-inline: var(--space-xl);
+  padding-block-end: var(--space-xl);
+  border-top: var(--border-width-sm) solid var(--color-border-light);
+}
+
+.wpn-help-faq-item__answer-inner {
+  padding-top: var(--space-md);
+}
+
+.wpn-help-faq-item__answer-text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Empty State */
+.wpn-help-faq__empty {
+  background: var(--color-background);
+  border: var(--border-width-sm) solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-3xl);
+  text-align: center;
+}
+
+.wpn-help-faq__empty-icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-text-muted);
+  margin-inline: auto;
+  margin-bottom: var(--space-md);
+}
+
+.wpn-help-faq__empty-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.wpn-help-faq__empty-description {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-lg) 0;
+}
+
+/* ==========================================================================
+   Contact Support Section
+   ========================================================================== */
+
+.wpn-help-support {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+
+.wpn-help-support__inner {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.wpn-help-support__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.wpn-help-support__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 var(--space-2xl) 0;
+}
+
+.wpn-help-support__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .wpn-help-support__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Support Card */
+.wpn-help-support-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: var(--border-width-sm) solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+}
+
+.wpn-help-support-card__icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-white);
+  margin-inline: auto;
+  margin-bottom: var(--space-sm);
+}
+
+.wpn-help-support-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.wpn-help-support-card__description {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.wpn-help-support-card__link {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.wpn-help-support-card__link:hover {
+  text-decoration: none;
+}
+
+.wpn-help-support-card__button {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-white);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.wpn-help-support-card__button:hover {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Resources Section
+   ========================================================================== */
+
+.wpn-help-resources {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.wpn-help-resources__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.wpn-help-resources__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .wpn-help-resources__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Resource Card */
+.wpn-help-resource-card {
+  background: var(--color-background);
+  border: var(--border-width-sm) solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+}
+
+.wpn-help-resource-card__icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.wpn-help-resource-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.wpn-help-resource-card__description {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.wpn-help-resource-card__link {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.wpn-help-resource-card__link:hover {
+  text-decoration: underline;
+}

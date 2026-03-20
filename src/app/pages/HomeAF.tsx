@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import SearchFilterBar from "../components/SearchFilterBar";
 import NoticeCard from "../components/NoticeCard";
 import AdSlot from "../components/AdSlot";
@@ -18,6 +20,7 @@ import {
 import { sampleNotices } from "../data/sampleNotices";
 
 export default function HomeAF() {
+  const heroData = useHero('home', 'af');
   const recentNotices = sampleNotices.slice(0, 6);
 
   const categories = [
@@ -34,42 +37,12 @@ export default function HomeAF() {
   return (
     <Layout lang="af" showAds={true}>
       {/* Hero Section */}
-      <section className="wpn-hero">
-        <div className="wpn-hero__container">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="wpn-hero__title">
-              Suid-Afrika se Regskennisgewings Gids
-            </h1>
-            <p className="wpn-hero__subtitle">
-              Soek, ontdek en publiseer wetlik vereiste regskennisgewings vinnig en
-              doeltreffend. U betroubare bron vir tenders, boedels, lisensies, en meer.
-            </p>
-            <div className="wpn-hero__actions">
-              <Button
-                size="lg"
-                className="wpn-button wpn-button--lg wpn-button--accent"
-                asChild
-              >
-                <Link to="/af/soek">
-                  <Search className="mr-2 size-5" />
-                  Soek Kennisgewings
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="wpn-button wpn-button--lg wpn-button--white"
-                asChild
-              >
-                <Link to="/af/indien">
-                  <Upload className="mr-2 size-5" />
-                  Dien 'n Kennisgewing In
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {heroData && <Hero data={heroData} lang="af" />}
+
+      {/* Billboard Ad - Premium Homepage Position */}
+      <div className="wpn-container" style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <AdSlot type="billboard" />
+      </div>
 
       {/* Search Bar Section */}
       <section className="py-8 bg-muted">
@@ -108,7 +81,7 @@ export default function HomeAF() {
           </div>
 
           {/* Top Ad Slot */}
-          <AdSlot slot="ad_top_leaderboard" height={90} label="Advertensie" />
+          <AdSlot type="leaderboard" label="Advertensie" />
         </div>
       </section>
 
@@ -142,6 +115,11 @@ export default function HomeAF() {
                 lang="af"
               />
             ))}
+          </div>
+
+          {/* Medium Rectangle Ad */}
+          <div style={{ marginTop: 'var(--space-12)' }}>
+            <AdSlot type="medium-rectangle" />
           </div>
         </div>
       </section>
@@ -247,6 +225,9 @@ export default function HomeAF() {
           </div>
         </div>
       </section>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

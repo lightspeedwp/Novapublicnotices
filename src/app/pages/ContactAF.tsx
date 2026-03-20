@@ -1,4 +1,6 @@
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
@@ -20,37 +22,12 @@ import { socialLinks } from "../data/navigation";
 import "../../styles/components.css";
 
 export default function ContactAF() {
+  const heroData = useHero('contact', 'af');
+
   return (
     <Layout lang="af" showAds={true}>
-      {/* Page Header - Modern Design */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Broodkrummels">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/af" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Tuis
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Kontak ons</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title">
-            {contactPageHeader.title.af}
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            {contactPageHeader.subtitle.af}
-          </p>
-        </div>
-      </section>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
 
       <div className="wpn-container wpn-py-lg">
         {/* Social Media Section */}

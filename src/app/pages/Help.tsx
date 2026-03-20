@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { Card } from "../components/ui/card";
 import {
   Search,
   ChevronDown,
@@ -20,12 +21,12 @@ import {
   Calculator,
   Headphones,
   BookOpen,
-  Home,
 } from "lucide-react";
 import { faqCategories, faqItems, quickHelpLinks } from "../data/help/faq-data";
-import "../../styles/components.css";
+import "../../styles/help.css";
 
 export default function Help() {
+  const heroData = useHero('help', 'en');
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [expandedFAQ, setExpandedFAQ] = useState<string[]>([]);
@@ -75,361 +76,297 @@ export default function Help() {
 
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Help center</span>
-              </li>
-            </ol>
-          </nav>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
-          <h1 className="wpn-page-header__title">
-            Help center
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Find answers to your questions about public notices, submissions, and our platform
-          </p>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-4 py-12">
-        {/* Search Bar */}
-        <Card className="p-6 mb-8">
-          <div className="max-w-2xl mx-auto">
-            <label htmlFor="faq-search" className="block wpn-heading-h4 wpn-heading--primary mb-4 text-center">
-              Search for answers
-            </label>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[var(--muted-foreground)]" />
-              <Input
-                type="search"
-                placeholder="Search help articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4"
-              />
-            </div>
-            {searchQuery && (
-              <p className="text-sm text-[var(--muted-foreground)] mt-3 text-center">
-                Found {filteredFAQs.length} result{filteredFAQs.length !== 1 ? "s" : ""}
-              </p>
-            )}
-          </div>
-        </Card>
-
-        {/* Quick Help Links */}
-        <section className="mb-12">
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Quick Help
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickHelpLinks[lang].map((link, index) => {
-              const Icon = getQuickLinkIcon(link.icon);
-              return (
-                <Card
-                  key={index}
-                  className="p-6 hover:shadow-lg transition-shadow duration-200"
-                >
-                  <a href={link.href} className="block group">
-                    <div className="wpn-icon-badge wpn-bg--accent mb-4">
-                      <Icon className="wpn-icon-badge__icon text-white" />
-                    </div>
-                    <h3 className="wpn-heading-h5 wpn-heading--primary mb-2 group-hover:wpn-text--accent transition-colors">
-                      {link.title}
-                    </h3>
-                    <p className="text-sm text-[var(--muted-foreground)]">
-                      {link.description}
-                    </p>
-                  </a>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Category Filter */}
-        <section className="mb-8">
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Browse by Category
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button
-              onClick={() => setSelectedCategory("all")}
-              className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
-                selectedCategory === "all"
-                  ? "wpn-border--accent wpn-bg--accent text-white"
-                  : "border-[var(--border-color-light)] hover:border-[var(--border)]"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <HelpCircle
-                  className={`size-6 ${
-                    selectedCategory === "all" ? "text-white" : "wpn-text--accent"
-                  }`}
+      {/* Help Page Content */}
+      <div className="wpn-help">
+        <div className="wpn-help__container">
+          
+          {/* Search Bar */}
+          <section className="wpn-help-search">
+            <div className="wpn-help-search__inner">
+              <label htmlFor="faq-search" className="wpn-help-search__label">
+                Search for answers
+              </label>
+              <div className="wpn-help-search__field">
+                <Search className="wpn-help-search__icon" />
+                <Input
+                  type="search"
+                  id="faq-search"
+                  placeholder="Search help articles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="wpn-help-search__input"
                 />
-                <div>
-                  <h4
-                    className={`font-semibold ${
-                      selectedCategory === "all" ? "text-white" : "wpn-text--primary"
+              </div>
+              {searchQuery && (
+                <p className="wpn-help-search__results">
+                  Found {filteredFAQs.length} result{filteredFAQs.length !== 1 ? "s" : ""}
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* Quick Help Links */}
+          <section className="wpn-help-quick">
+            <h2 className="wpn-help-quick__title">Quick help</h2>
+            <div className="wpn-help-quick__grid">
+              {quickHelpLinks[lang].map((link, index) => {
+                const Icon = getQuickLinkIcon(link.icon);
+                return (
+                  <div key={index} className="wpn-help-quick-card">
+                    <a href={link.href} className="wpn-help-quick-card__link">
+                      <div className="wpn-help-quick-card__icon">
+                        <Icon />
+                      </div>
+                      <h3 className="wpn-help-quick-card__title">
+                        {link.title}
+                      </h3>
+                      <p className="wpn-help-quick-card__description">
+                        {link.description}
+                      </p>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Category Filter */}
+          <section className="wpn-help-categories">
+            <h2 className="wpn-help-categories__title">Browse by category</h2>
+            <div className="wpn-help-categories__grid">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`wpn-help-category ${
+                  selectedCategory === "all" ? "wpn-help-category--active" : ""
+                }`}
+              >
+                <div className="wpn-help-category__inner">
+                  <HelpCircle className="wpn-help-category__icon" />
+                  <div className="wpn-help-category__content">
+                    <h4 className="wpn-help-category__title">All categories</h4>
+                    <p className="wpn-help-category__count">
+                      {faqItems.length} questions
+                    </p>
+                  </div>
+                </div>
+              </button>
+
+              {faqCategories.map((category) => {
+                const Icon = getCategoryIcon(category.icon);
+                const count = faqItems.filter(
+                  (faq) => faq.category === category.id
+                ).length;
+                const isSelected = selectedCategory === category.id;
+
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`wpn-help-category ${
+                      isSelected ? "wpn-help-category--active" : ""
                     }`}
                   >
-                    All Categories
-                  </h4>
-                  <p
-                    className={`text-sm ${
-                      selectedCategory === "all" ? "text-white/80" : "text-[var(--muted-foreground)]"
-                    }`}
-                  >
-                    {faqItems.length} questions
+                    <div className="wpn-help-category__inner">
+                      <Icon className="wpn-help-category__icon" />
+                      <div className="wpn-help-category__content">
+                        <h4 className="wpn-help-category__title">
+                          {category.name[lang]}
+                        </h4>
+                        <p className="wpn-help-category__count">
+                          {count} question{count !== 1 ? "s" : ""}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* FAQ Accordion */}
+          <section className="wpn-help-faq">
+            <div className="wpn-help-faq__inner">
+              {selectedCategory !== "all" && (
+                <div className="wpn-help-faq__header">
+                  <h2 className="wpn-help-faq__header-title">
+                    {faqCategories.find((cat) => cat.id === selectedCategory)
+                      ?.name[lang]}
+                  </h2>
+                  <p className="wpn-help-faq__header-description">
+                    {faqCategories.find((cat) => cat.id === selectedCategory)
+                      ?.description[lang]}
                   </p>
                 </div>
-              </div>
-            </button>
+              )}
 
-            {faqCategories.map((category) => {
-              const Icon = getCategoryIcon(category.icon);
-              const count = faqItems.filter(
-                (faq) => faq.category === category.id
-              ).length;
-              const isSelected = selectedCategory === category.id;
+              {filteredFAQs.length === 0 ? (
+                <div className="wpn-help-faq__empty">
+                  <HelpCircle className="wpn-help-faq__empty-icon" />
+                  <h3 className="wpn-help-faq__empty-title">
+                    No results found
+                  </h3>
+                  <p className="wpn-help-faq__empty-description">
+                    Try adjusting your search or browse all categories
+                  </p>
+                  <Button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedCategory("all");
+                    }}
+                    variant="outline"
+                    className="wpn-button wpn-button--outline"
+                  >
+                    Clear filters
+                  </Button>
+                </div>
+              ) : (
+                <div className="wpn-help-faq__list">
+                  {filteredFAQs.map((faq) => {
+                    const isExpanded = expandedFAQ.includes(faq.id);
 
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
-                    isSelected
-                      ? "wpn-border--accent wpn-bg--accent text-white"
-                      : "border-[var(--border-color-light)] hover:border-[var(--border)]"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Icon
-                      className={`size-6 ${
-                        isSelected ? "text-white" : "wpn-text--accent"
-                      }`}
-                    />
-                    <div>
-                      <h4
-                        className={`font-semibold ${
-                          isSelected ? "text-white" : "wpn-text--primary"
-                        }`}
-                      >
-                        {category.name[lang]}
-                      </h4>
-                      <p
-                        className={`text-sm ${
-                          isSelected ? "text-white/80" : "text-[var(--muted-foreground)]"
-                        }`}
-                      >
-                        {count} question{count !== 1 ? "s" : ""}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* FAQ Accordion */}
-        <section className="mb-12">
-          <div className="max-w-4xl mx-auto">
-            {selectedCategory !== "all" && (
-              <div className="mb-6">
-                <h2 className="wpn-heading-h3 wpn-heading--primary mb-2">
-                  {faqCategories.find((cat) => cat.id === selectedCategory)
-                    ?.name[lang]}
-                </h2>
-                <p className="text-[var(--muted-foreground)]">
-                  {faqCategories.find((cat) => cat.id === selectedCategory)
-                    ?.description[lang]}
-                </p>
-              </div>
-            )}
-
-            {filteredFAQs.length === 0 ? (
-              <Card className="p-12 text-center">
-                <HelpCircle className="size-16 text-[var(--muted-foreground)] mx-auto mb-4" />
-                <h3 className="wpn-heading-h4 wpn-heading--primary mb-2">
-                  No results found
-                </h3>
-                <p className="text-[var(--muted-foreground)] mb-6">
-                  Try adjusting your search or browse all categories
-                </p>
-                <Button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCategory("all");
-                  }}
-                  variant="outline"
-                >
-                  Clear Filters
-                </Button>
-              </Card>
-            ) : (
-              <div className="space-y-3">
-                {filteredFAQs.map((faq) => {
-                  const isExpanded = expandedFAQ.includes(faq.id);
-
-                  return (
-                    <Card key={faq.id} className="overflow-hidden">
-                      <button
-                        onClick={() => toggleFAQ(faq.id)}
-                        className="w-full p-6 text-left flex items-start justify-between gap-4 hover:bg-[var(--muted)] transition-colors duration-150"
-                      >
-                        <div className="flex-1">
-                          <h3 className="wpn-heading-h5 wpn-heading--primary mb-0">
+                    return (
+                      <div key={faq.id} className="wpn-help-faq-item">
+                        <button
+                          onClick={() => toggleFAQ(faq.id)}
+                          className="wpn-help-faq-item__button"
+                        >
+                          <h3 className="wpn-help-faq-item__question">
                             {faq.question[lang]}
                           </h3>
-                        </div>
-                        <ChevronDown
-                          className={`size-6 wpn-text--accent flex-shrink-0 transition-transform duration-200 ${
-                            isExpanded ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
+                          <ChevronDown
+                            className={`wpn-help-faq-item__icon ${
+                              isExpanded ? "wpn-help-faq-item__icon--expanded" : ""
+                            }`}
+                          />
+                        </button>
 
-                      {isExpanded && (
-                        <div className="px-6 pb-6 border-t">
-                          <div className="pt-4">
-                            <p className="text-[var(--foreground)] leading-relaxed">
-                              {faq.answer[lang]}
-                            </p>
+                        {isExpanded && (
+                          <div className="wpn-help-faq-item__answer">
+                            <div className="wpn-help-faq-item__answer-inner">
+                              <p className="wpn-help-faq-item__answer-text">
+                                {faq.answer[lang]}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </Card>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        </section>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </section>
 
-        {/* Contact Support Section */}
-        <section className="mb-12">
-          <Card className="p-8 wpn-bg--primary text-white">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="wpn-heading-h3 wpn-heading--white mb-4">
+          {/* Contact Support Section */}
+          <section className="wpn-help-support">
+            <div className="wpn-help-support__inner">
+              <h2 className="wpn-help-support__title">
                 Still need help?
               </h2>
-              <p className="text-xl text-white/80 mb-8">
+              <p className="wpn-help-support__subtitle">
                 Our support team is ready to assist you with any questions
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <Mail className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white text-[#ffffff] m-[0px]">Email Support</h4>
-                  <p className="text-sm text-white/80 m-[0px]">
+              <div className="wpn-help-support__grid">
+                <div className="wpn-help-support-card">
+                  <Mail className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">Email support</h4>
+                  <p className="wpn-help-support-card__description">
                     Get a response within 24 hours
                   </p>
                   <a
                     href="mailto:support@novanews.co.za"
-                    className="text-sm text-white underline hover:no-underline"
+                    className="wpn-help-support-card__link"
                   >
                     support@novanews.co.za
                   </a>
-                </Card>
+                </div>
 
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <Phone className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white text-[#ffffff] m-[0px]">Phone Support</h4>
-                  <p className="text-sm text-white/80 mb-4">
+                <div className="wpn-help-support-card">
+                  <Phone className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">Phone support</h4>
+                  <p className="wpn-help-support-card__description">
                     Mon-Fri, 8am-5pm SAST
                   </p>
                   <a
                     href="tel:+27123456789"
-                    className="text-sm text-white underline hover:no-underline"
+                    className="wpn-help-support-card__link"
                   >
                     +27 12 345 6789
                   </a>
-                </Card>
+                </div>
 
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <MessageCircle className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white text-[#ffffff] m-[0px]">Live Chat</h4>
-                  <p className="text-sm text-white/80 mb-4">
+                <div className="wpn-help-support-card">
+                  <MessageCircle className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">Live chat</h4>
+                  <p className="wpn-help-support-card__description">
                     Chat with us in real-time
                   </p>
-                  <button className="text-sm text-white underline hover:no-underline">
-                    Start Chat
+                  <button className="wpn-help-support-card__button">
+                    Start chat
                   </button>
-                </Card>
+                </div>
               </div>
 
-              <div className="mt-8">
+              <div>
                 <Button
                   className="wpn-button wpn-button--accent"
                   asChild
                 >
-                  <a href="/contact">Contact Sales Team</a>
+                  <Link to="/contact">Contact sales team</Link>
                 </Button>
               </div>
             </div>
-          </Card>
-        </section>
+          </section>
 
-        {/* Additional Resources */}
-        <section>
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Additional Resources
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6">
-              <FileText className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Legal Guides
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Download comprehensive guides for different notice types
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Browse Guides →
-              </a>
-            </Card>
+          {/* Additional Resources */}
+          <section className="wpn-help-resources">
+            <h2 className="wpn-help-resources__title">Additional resources</h2>
+            <div className="wpn-help-resources__grid">
+              <div className="wpn-help-resource-card">
+                <FileText className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Legal guides
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Download comprehensive guides for different notice types
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Browse guides →
+                </a>
+              </div>
 
-            <Card className="p-6">
-              <BookOpen className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Video Tutorials
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Watch step-by-step video guides for submitting notices
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Watch Videos →
-              </a>
-            </Card>
+              <div className="wpn-help-resource-card">
+                <BookOpen className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Video tutorials
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Watch step-by-step video guides for submitting notices
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Watch videos →
+                </a>
+              </div>
 
-            <Card className="p-6">
-              <Calculator className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Pricing Calculator
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Estimate the cost of publishing your notice
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Calculate Cost →
-              </a>
-            </Card>
-          </div>
-        </section>
+              <div className="wpn-help-resource-card">
+                <Calculator className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Pricing calculator
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Estimate the cost of publishing your notice
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Calculate cost →
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </Layout>
   );

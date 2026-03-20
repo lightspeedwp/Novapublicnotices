@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 import { 
   CheckCircle, 
   Receipt, 
@@ -9,12 +11,45 @@ import {
   Eye,
   Download,
   Headset,
-  Question
+  Question,
+  Warning
 } from "@phosphor-icons/react";
 import "../../styles/order-confirmation.css";
 
 export default function OrderConfirmation() {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
+
+  // Auth protection: redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // Store intended destination
+      sessionStorage.setItem('returnUrl', '/order-confirmation');
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
+
+  // Don't render if not logged in (will redirect)
+  if (!isLoggedIn) {
+    return (
+      <Layout lang="en" showAds={false}>
+        <div className="wpn-confirmation-wrapper">
+          <div className="wpn-confirmation-container">
+            <div className="wpn-confirmation-auth-required">
+              <Warning size={64} weight="duotone" />
+              <h2 className="wpn-h2">Authentication required</h2>
+              <p className="wpn-confirmation-auth-required__message">
+                Please login to view your order confirmation.
+              </p>
+              <p className="wpn-confirmation-auth-required__note">
+                Redirecting to login page...
+              </p>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout

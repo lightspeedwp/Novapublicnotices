@@ -30,133 +30,157 @@
   --nova-blue: #549CBE;
   
   /* =================================================================
-     Category Colors — All 25 Public Notice Categories
+     Category Colors — Public Notices
      ================================================================= */
+  /* Tenders */
+  --category-tenders-color: #0066cc;
+  --category-tenders-hover: #0052a3;
+  --category-tenders-light: #e6f2ff;
+  --category-tenders-dark: #004080;
   
   /* Estates */
-  --color-category-estates-bg: rgba(84, 156, 190, 0.1);
-  --color-category-estates-fg: #2c5f7d;
-  --color-category-estates-border: rgba(84, 156, 190, 0.3);
-  
-  /* Tenders */
-  --color-category-tenders-bg: rgba(215, 0, 37, 0.1);
-  --color-category-tenders-fg: #b5001f;
-  --color-category-tenders-border: rgba(215, 0, 37, 0.3);
+  --category-estates-color: #7c3aed;
+  --category-estates-hover: #6d28d9;
+  --category-estates-light: #f3e8ff;
+  --category-estates-dark: #5b21b6;
   
   /* Liquor Licences */
-  --color-category-liquor-licences-bg: rgba(255, 159, 28, 0.1);
-  --color-category-liquor-licences-fg: #cc7700;
-  --color-category-liquor-licences-border: rgba(255, 159, 28, 0.3);
-  
-  /* Court Orders */
-  --color-category-court-orders-bg: rgba(120, 80, 160, 0.1);
-  --color-category-court-orders-fg: #6a4c93;
-  --color-category-court-orders-border: rgba(120, 80, 160, 0.3);
-  
-  /* Divorce / Antenuptial */
-  --color-category-divorce-bg: rgba(231, 76, 60, 0.1);
-  --color-category-divorce-fg: #c0392b;
-  --color-category-divorce-border: rgba(231, 76, 60, 0.3);
-  
-  /* Insolvent Estates */
-  --color-category-insolvent-estates-bg: rgba(155, 89, 182, 0.1);
-  --color-category-insolvent-estates-fg: #8e44ad;
-  --color-category-insolvent-estates-border: rgba(155, 89, 182, 0.3);
-  
-  /* Curatorship */
-  --color-category-curatorship-bg: rgba(52, 152, 219, 0.1);
-  --color-category-curatorship-fg: #2980b9;
-  --color-category-curatorship-border: rgba(52, 152, 219, 0.3);
-  
-  /* Surrender of Estate */
-  --color-category-surrender-of-estate-bg: rgba(149, 165, 166, 0.1);
-  --color-category-surrender-of-estate-fg: #7f8c8d;
-  --color-category-surrender-of-estate-border: rgba(149, 165, 166, 0.3);
-  
-  /* Environmental */
-  --color-category-environmental-bg: rgba(46, 204, 113, 0.1);
-  --color-category-environmental-fg: #27ae60;
-  --color-category-environmental-border: rgba(46, 204, 113, 0.3);
-  
-  /* Business Licences */
-  --color-category-business-licences-bg: rgba(241, 196, 15, 0.1);
-  --color-category-business-licences-fg: #f39c12;
-  --color-category-business-licences-border: rgba(241, 196, 15, 0.3);
-  
-  /* Sale in Execution */
-  --color-category-sale-in-execution-bg: rgba(230, 126, 34, 0.1);
-  --color-category-sale-in-execution-fg: #d35400;
-  --color-category-sale-in-execution-border: rgba(230, 126, 34, 0.3);
-  
-  /* Sale of Business */
-  --color-category-sale-of-business-bg: rgba(26, 188, 156, 0.1);
-  --color-category-sale-of-business-fg: #16a085;
-  --color-category-sale-of-business-border: rgba(26, 188, 156, 0.3);
+  --category-liquor-licences-color: #dc2626;
+  --category-liquor-licences-hover: #b91c1c;
+  --category-liquor-licences-light: #fee2e2;
+  --category-liquor-licences-dark: #991b1b;
   
   /* Town Planning */
-  --color-category-town-planning-bg: rgba(52, 73, 94, 0.1);
-  --color-category-town-planning-fg: #34495e;
-  --color-category-town-planning-border: rgba(52, 73, 94, 0.3);
+  --category-town-planning-color: #059669;
+  --category-town-planning-hover: #047857;
+  --category-town-planning-light: #d1fae5;
+  --category-town-planning-dark: #065f46;
   
-  /* Pension / Provident */
-  --color-category-pension-provident-bg: rgba(142, 68, 173, 0.1);
-  --color-category-pension-provident-fg: #9b59b6;
-  --color-category-pension-provident-border: rgba(142, 68, 173, 0.3);
+  /* Business Licences */
+  --category-business-licences-color: #ea580c;
+  --category-business-licences-hover: #c2410c;
+  --category-business-licences-light: #ffedd5;
+  --category-business-licences-dark: #9a3412;
   
   /* Adoptions */
-  --color-category-adoptions-bg: rgba(255, 107, 129, 0.1);
-  --color-category-adoptions-fg: #e74c3c;
-  --color-category-adoptions-border: rgba(255, 107, 129, 0.3);
+  --category-adoptions-color: #ec4899;
+  --category-adoptions-hover: #db2777;
+  --category-adoptions-light: #fce7f3;
+  --category-adoptions-dark: #be185d;
   
-  /* Lost Documents */
-  --color-category-lost-documents-bg: rgba(189, 195, 199, 0.1);
-  --color-category-lost-documents-fg: #95a5a6;
-  --color-category-lost-documents-border: rgba(189, 195, 199, 0.3);
+  /* Court Orders */
+  --category-court-orders-color: #1e40af;
+  --category-court-orders-hover: #1e3a8a;
+  --category-court-orders-light: #dbeafe;
+  --category-court-orders-dark: #1e3a8a;
   
-  /* Re-registrations */
-  --color-category-re-registrations-bg: rgba(41, 128, 185, 0.1);
-  --color-category-re-registrations-fg: #2980b9;
-  --color-category-re-registrations-border: rgba(41, 128, 185, 0.3);
+  /* Curatorship */
+  --category-curatorship-color: #7c2d12;
+  --category-curatorship-hover: #78350f;
+  --category-curatorship-light: #fed7aa;
+  --category-curatorship-dark: #78350f;
   
   /* Demolition */
-  --color-category-demolition-bg: rgba(192, 57, 43, 0.1);
-  --color-category-demolition-fg: #c0392b;
-  --color-category-demolition-border: rgba(192, 57, 43, 0.3);
+  --category-demolition-color: #b91c1c;
+  --category-demolition-hover: #991b1b;
+  --category-demolition-light: #fecaca;
+  --category-demolition-dark: #7f1d1d;
+  
+  /* Divorce */
+  --category-divorce-color: #9333ea;
+  --category-divorce-hover: #7e22ce;
+  --category-divorce-light: #f3e8ff;
+  --category-divorce-dark: #6b21a8;
+  
+  /* Insolvent Estates */
+  --category-insolvent-estates-color: #4338ca;
+  --category-insolvent-estates-hover: #3730a3;
+  --category-insolvent-estates-light: #e0e7ff;
+  --category-insolvent-estates-dark: #312e81;
+  
+  /* Lost Documents */
+  --category-lost-documents-color: #0891b2;
+  --category-lost-documents-hover: #0e7490;
+  --category-lost-documents-light: #cffafe;
+  --category-lost-documents-dark: #155e75;
+  
+  /* Environmental */
+  --category-environmental-color: #16a34a;
+  --category-environmental-hover: #15803d;
+  --category-environmental-light: #dcfce7;
+  --category-environmental-dark: #166534;
+  
+  /* Pension Funds */
+  --category-pension-funds-color: #0d9488;
+  --category-pension-funds-hover: #0f766e;
+  --category-pension-funds-light: #ccfbf1;
+  --category-pension-funds-dark: #115e59;
+  
+  /* Re-registrations */
+  --category-re-registrations-color: #2563eb;
+  --category-re-registrations-hover: #1d4ed8;
+  --category-re-registrations-light: #dbeafe;
+  --category-re-registrations-dark: #1e40af;
+  
+  /* Sale of Business */
+  --category-sale-of-business-color: #ca8a04;
+  --category-sale-of-business-hover: #a16207;
+  --category-sale-of-business-light: #fef9c3;
+  --category-sale-of-business-dark: #854d0e;
+  
+  /* Sale in Execution */
+  --category-sale-in-execution-color: #d97706;
+  --category-sale-in-execution-hover: #b45309;
+  --category-sale-in-execution-light: #fed7aa;
+  --category-sale-in-execution-dark: #92400e;
+  
+  /* Surrender of Estate */
+  --category-surrender-of-estate-color: #8b5cf6;
+  --category-surrender-of-estate-hover: #7c3aed;
+  --category-surrender-of-estate-light: #ede9fe;
+  --category-surrender-of-estate-dark: #6d28d9;
   
   /* Town Establishment */
-  --color-category-town-establishment-bg: rgba(127, 140, 141, 0.1);
-  --color-category-town-establishment-fg: #7f8c8d;
-  --color-category-town-establishment-border: rgba(127, 140, 141, 0.3);
-  
-  /* General Notices */
-  --color-category-general-bg: rgba(108, 122, 137, 0.1);
-  --color-category-general-fg: #6c7a89;
-  --color-category-general-border: rgba(108, 122, 137, 0.3);
+  --category-town-establishment-color: #10b981;
+  --category-town-establishment-hover: #059669;
+  --category-town-establishment-light: #d1fae5;
+  --category-town-establishment-dark: #047857;
   
   /* Name Changes */
-  --color-category-name-changes-bg: rgba(87, 96, 111, 0.1);
-  --color-category-name-changes-fg: #57606f;
-  --color-category-name-changes-border: rgba(87, 96, 111, 0.3);
+  --category-name-changes-color: #06b6d4;
+  --category-name-changes-hover: #0891b2;
+  --category-name-changes-light: #cffafe;
+  --category-name-changes-dark: #0e7490;
   
   /* Company Notices */
-  --color-category-company-bg: rgba(39, 174, 96, 0.1);
-  --color-category-company-fg: #27ae60;
-  --color-category-company-border: rgba(39, 174, 96, 0.3);
+  --category-company-notices-color: #6366f1;
+  --category-company-notices-hover: #4f46e5;
+  --category-company-notices-light: #e0e7ff;
+  --category-company-notices-dark: #4338ca;
   
-  /* Municipalities */
-  --color-category-municipalities-bg: rgba(22, 160, 133, 0.1);
-  --color-category-municipalities-fg: #16a085;
-  --color-category-municipalities-border: rgba(22, 160, 133, 0.3);
+  /* Antenuptial Contracts */
+  --category-antenuptial-contracts-color: #f43f5e;
+  --category-antenuptial-contracts-hover: #e11d48;
+  --category-antenuptial-contracts-light: #ffe4e6;
+  --category-antenuptial-contracts-dark: #be123c;
   
-  /* Government Gazette */
-  --color-category-government-gazette-bg: rgba(41, 128, 185, 0.1);
-  --color-category-government-gazette-fg: #2980b9;
-  --color-category-government-gazette-border: rgba(41, 128, 185, 0.3);
+  /* Road Closures */
+  --category-road-closures-color: #f59e0b;
+  --category-road-closures-hover: #d97706;
+  --category-road-closures-light: #fef3c7;
+  --category-road-closures-dark: #b45309;
   
-  /* Close Corporations */
-  --color-category-close-corporations-bg: rgba(211, 84, 0, 0.1);
-  --color-category-close-corporations-fg: #d35400;
-  --color-category-close-corporations-border: rgba(211, 84, 0, 0.3);
+  /* Trusts */
+  --category-trusts-color: #14b8a6;
+  --category-trusts-hover: #0d9488;
+  --category-trusts-light: #ccfbf1;
+  --category-trusts-dark: #0f766e;
+  
+  /* General */
+  --category-general-color: #64748b;
+  --category-general-hover: #475569;
+  --category-general-light: #f1f5f9;
+  --category-general-dark: #334155;
   
   /* =================================================================
      Semantic Colors (UI System)

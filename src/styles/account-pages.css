@@ -11,13 +11,19 @@
 
 .wpn-account-wrapper {
   background-color: var(--muted);
-  padding: var(--space-8) 0;
+  padding: var(--space-8) var(--space-4);
   min-height: 70vh;
 }
 
 @media (min-width: 768px) {
   .wpn-account-wrapper {
-    padding: var(--space-12) 0;
+    padding: var(--space-12) var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpn-account-wrapper {
+    padding: var(--space-12) var(--space-8);
   }
 }
 
@@ -383,7 +389,7 @@
 
 @media (max-width: 767px) {
   .wpn-account-wrapper {
-    padding: var(--space-6) 0;
+    padding: var(--space-6) var(--space-3);
   }
 
   .wpn-account-card {

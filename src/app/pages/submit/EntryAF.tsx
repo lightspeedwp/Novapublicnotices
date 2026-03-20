@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { heroesAF } from "../../data/heroes/heroes.af";
 import AdSlot from "../../components/AdSlot";
 import {
   FileText,
@@ -61,16 +63,7 @@ export default function EntryAF() {
   return (
     <Layout lang="af" showAds={true}>
       {/* Hero Section */}
-      <section className="wpn-hero">
-        <div className="wpn-hero__container">
-          <h1 className="wpn-hero__title">
-            Dien u openbare kennisgewing in
-          </h1>
-          <p className="wpn-hero__subtitle">
-            Kies u kennisgewingstipe hieronder om te begin. Ons geleide vorms maak dit maklik om voldoende kennisgewings vinnig en doeltreffend in te dien.
-          </p>
-        </div>
-      </section>
+      <Hero data={heroesAF.submitNoticeEntry} lang="af" />
 
       {/* Notice Type Selection */}
       <div className="wpn-submit-entry">

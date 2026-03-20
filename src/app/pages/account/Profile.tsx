@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { useHero } from "../../hooks/useHero";
 import AccountSidebar from "../../components/AccountSidebar";
 import { CheckCircle, User, Envelope, Phone, MapPin, Buildings, Lock, FloppyDisk } from "@phosphor-icons/react";
 import { useState } from "react";
 import "../../../styles/components.css";
 
 export default function Profile() {
+  const heroData = useHero('profile', 'en');
   const navigate = useNavigate();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
@@ -23,6 +26,9 @@ export default function Profile() {
 
   return (
     <Layout lang="en" showAds={true}>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
+
       <div className="wpn-account-wrapper">
         <div className="wpn-account-container">
           <h1 className="wpn-heading-h1 wpn-heading--primary wpn-account__page-title">

@@ -316,6 +316,166 @@ Show both:
 * logged-out teaser / wall
 * logged-in full access state
 
+### 8.2 Logged in vs logged out state definitions
+
+**Critical state management rules across all pages and components.**
+
+#### Public Access (Logged Out State)
+
+**Public Pages (No Authentication Required):**
+- Homepage (/)
+- Sales/How It Works (/sales)
+- Contact (/contact)
+- Help & FAQ (/help, /faq)
+- About (/about)
+- Terms of Service (/terms)
+- Privacy Policy (/privacy)
+- Sitemap (/sitemap)
+- Login (/login)
+- Register (/register)
+- Forgot Password (/forgot-password)
+
+**Restricted Access (Login Wall):**
+- Public Notice Listings (/search, /category/:slug) — Show teaser + login prompt
+- Single Notice Detail (/notice/:slug) — Show excerpt + login prompt  
+- Submit Notice (/submit) — Redirect to login
+- My Account (/my-account/*) — Redirect to login
+- Checkout (/checkout) — Redirect to login
+- Order Confirmation (/order-confirmation) — Redirect to login
+
+#### Logged In State Access
+
+**All Pages Available:**
+- All public pages (homepage, sales, contact, help, legal, etc.)
+- Full public notice listings (/search, /category/:slug) — No restrictions
+- Full single notice detail (/notice/:slug) — Complete access to notice body, attachments, metadata
+- Submit Notice (/submit) — Full submission form access
+- My Account (/my-account) — Dashboard, profile, orders, submissions
+- Checkout (/checkout) — Payment and order processing
+- Order Confirmation (/order-confirmation) — Success states
+
+#### Header Navigation Differences
+
+**Logged Out Header:**
+- Top bar right: [Language Switcher] [Login Link] [Register Button]
+- Main nav: Search Notices | How It Works | Contact | [Submit Notice Button]
+
+**Logged In Header:**
+- Top bar right: [Language Switcher] [My Account Link with User Icon]
+- Main nav: Search Notices | How It Works | Contact | [Submit Notice Button]
+- Optional: Show user name/email in top bar
+- Optional: Add Sign Out button in account dropdown
+
+#### Mobile Menu Differences
+
+**Logged Out Mobile:**
+- Top section: About | Help | Sales
+- Main section: Search | How It Works | Contact
+- Account section: [Login Link] [Register Button] [Language Switcher]
+
+**Logged In Mobile:**
+- Top section: About | Help | Sales
+- Main section: Search | How It Works | Contact | My Account
+- Account section: [Sign Out Button] [Language Switcher]
+- Optional: Show user greeting at top
+
+#### Public Notice Listing Behavior
+
+**Logged Out:**
+- Show first 3-5 notices with full metadata
+- Show notice title, category, date, location, reference number
+- Truncate body text to 2-3 lines with "..." ellipsis
+- Display login wall overlay on 6th+ notice cards
+- Prominent CTA: "Login to view all notices" or "Register to access full listings"
+- No access to filters beyond basic category/location
+
+**Logged In:**
+- Show all public notice listings without restriction
+- Full notice cards with complete metadata
+- Access to all advanced filters (date range, category, location, reference number, etc.)
+- No truncation or login walls
+- Infinite scroll or pagination with no limits
+
+#### Single Notice Page Behavior
+
+**Logged Out:**
+- Show notice metadata (title, category, date, location, reference number)
+- Show first 2-3 paragraphs of notice body
+- Hide attachments section or show "Login required to view attachments"
+- Display prominent login wall: "Create a free account to view the full notice"
+- Show related notices (truncated) below login wall
+
+**Logged In:**
+- Show complete notice body (no truncation)
+- Full access to all attachments (PDFs, images, documents)
+- Download buttons enabled
+- Full related notices section
+- Print/export functionality enabled
+- Save to favorites (if feature exists)
+
+#### Cart & Checkout State
+
+**Cart Requirements:**
+- Must be logged in to add items to cart
+- Logged out users attempting to add items → Redirect to /login with return URL
+- After login, auto-add item to cart and redirect to /checkout
+
+**Checkout Requirements:**
+- Must be logged in to access /checkout
+- Logged out users → Redirect to /login with return URL to /checkout
+- Preserve cart items in session/localStorage during auth flow
+
+**Order Confirmation Requirements:**
+- Must be logged in to view /order-confirmation
+- Only show confirmation if user owns the order (security check)
+- Logged out users → Redirect to /login
+
+#### Submit Notice State
+
+**Logged Out:**
+- Redirect to /login immediately
+- Show message: "Please login or register to submit a notice"
+- After login, redirect to /submit with pre-filled draft (if applicable)
+
+**Logged In:**
+- Full access to submission form
+- Save draft functionality
+- Multi-step form progress preserved
+- File upload enabled
+- Access to saved organization details
+
+#### My Account State
+
+**Logged Out:**
+- All /my-account/* routes redirect to /login
+- Show message: "Please login to access your account"
+
+**Logged In:**
+- Full dashboard access
+- Sidebar navigation: Dashboard | Notices | Orders | Profile | Submissions
+- Show user greeting: "Welcome back, [Name]"
+- Display account stats (notices submitted, orders placed, etc.)
+
+#### Dev Toggle (Prototype Only)
+
+**Purpose:**
+- Allow rapid switching between logged in/logged out states for testing
+- Show in top bar with clear visual indicator
+
+**Display:**
+- Logged Out: [User Icon Outline] "Logged Out" 
+- Logged In: [User Icon Filled] "Logged In"
+
+**Behavior:**
+- Click to toggle state
+- Preserve current page URL (don't redirect)
+- Update all UI components immediately
+- Show notice listings accordingly (truncated vs full)
+
+**Production:**
+- Remove dev toggle completely
+- Use real authentication (WordPress users, JWT, session cookies, etc.)
+
 ---
 
 ## 9) Public notice content model
@@ -598,19 +758,468 @@ Audit existing content and update to sentence case before deployment.
 
 ## 14) Ads
 
-Ads must be supported on every major template except:
+### 14.1 IAB Standards & Ad Sizes
 
-* checkout
-* order confirmation
+Nova Public Notices Portal follows **Interactive Advertising Bureau (IAB)** standards for all advertising placements. All ad sizes comply with IAB specifications for compatibility across ad networks and devices.
 
-Include realistic ad placeholders and reserved layout areas for:
+#### Universal Ad Sizes (Most Common)
 
-* leaderboard
-* MPU / sidebar
-* inline content slots
-* mobile placements where relevant
+These standard sizes offer the highest inventory and performance:
 
-Ad placeholders must not break reading of legal content.
+| Ad Type | Size (Pixels) | Aspect Ratio | Best Use Case |
+|---------|---------------|--------------|---------------|
+| **Medium Rectangle (MPU)** | 300×250 | 6:5 | In-content (articles) or sidebars; works on both desktop and mobile |
+| **Leaderboard** | 728×90 | 8:1 | Top or bottom of desktop pages; high visibility |
+| **Wide Skyscraper** | 160×600 | 4:15 | Sidebar/right rail; stays visible while scrolling |
+| **Mobile Banner** | 320×50 | 32:5 | Standard mobile placement; often sticky at top or bottom |
+| **Half-Page** | 300×600 | 1:2 | High-impact vertical; excellent for branding and rich media |
+
+#### Large & High-Impact Units (Rising Stars)
+
+Premium placements for branding campaigns:
+
+| Ad Type | Size (Pixels) | Aspect Ratio | Use Case |
+|---------|---------------|--------------|----------|
+| **Billboard** | 970×250 | 97:25 | Massive header unit for major takeovers |
+| **Portrait** | 300×1050 | 2:7 | Premium vertical unit, often divided into interactive segments |
+| **Super Leaderboard** | 970×90 | 97:9 | Wider leaderboard, sometimes used for pushdown ads |
+| **Large Rectangle** | 336×280 | 6:5 | Slightly larger than MPU; common in desktop article feeds |
+
+#### Additional Standard Sizes
+
+| Ad Type | Size (Pixels) | Use Case |
+|---------|---------------|----------|
+| **Skyscraper** | 120×600 | Narrow sidebar placement |
+| **Large Mobile Banner** | 320×100 | Mobile placement with more vertical space |
+| **Mobile Leaderboard** | 320×50 | Standard mobile top/bottom banner |
+
+#### IAB New Ad Portfolio (Flexible Sizes)
+
+Modern aspect-ratio-based units for responsive design:
+
+| Aspect Ratio | Replaces | Use Case |
+|--------------|----------|----------|
+| **1:1 (Square)** | 250×250 | Flexible square placements |
+| **4:1 (Horizontal)** | 970×250 Billboard | Responsive header units |
+| **8:1 (Horizontal)** | 728×90 Leaderboard | Responsive leaderboard |
+| **1:2 (Vertical)** | 300×600 Half-Page | Responsive vertical units |
+| **9:16, 2:3, 3:4 (Full-Page)** | Various | Mobile interstitials and immersive experiences |
+
+#### Design & Technical Specs (LEAN Principles)
+
+**LEAN Standards:**
+- **Light:** Low file weight (150-250 KB initial load)
+- **Encrypted:** HTTPS required
+- **AdChoices-supported:** Privacy disclosure required
+- **Non-invasive:** No auto-play audio, no pop-unders
+
+**File Sizes:**
+- Initial Load: 150-250 KB (depending on unit size)
+- Subload (Host-initiated): Up to 1 MB (loads 1 second after page finishes)
+- Video: MP4 format preferred, 16:9 or 4:3 aspect ratio
+
+**Accessibility:**
+- All ads must have "Advertisement" or "Sponsored" label
+- Close buttons must meet 44×44 minimum touch target
+- No flashing content (seizure risk)
+- No auto-play audio without user interaction
+
+### 14.1.1 News Website Ad Strategy
+
+Nova Public Notices Portal follows a **news website ad strategy** that balances high-impact visibility with non-disruptive user experience.
+
+#### 1. Top-of-Page (The "Hook")
+
+First ads readers see upon landing:
+
+**Desktop:**
+- **Leaderboard (728×90)** — Above main navigation or below site logo
+- **Billboard (970×250)** — Premium homepage takeovers and brand campaigns
+
+**Mobile:**
+- **Mobile Smartphone Banner (320×50)** — Standard mobile header (swaps with desktop Leaderboard)
+
+**Implementation:**
+```tsx
+// Desktop
+<AdSlot type="leaderboard" className="wpn-ad-slot--header" />
+
+// Premium campaigns
+<AdSlot type="billboard" className="wpn-ad-slot--takeover" />
+
+// Mobile (auto-swaps via CSS)
+<AdSlot type="mobile-leaderboard" className="wpn-ad-slot--mobile-header" />
+```
+
+#### 2. Sidebar (The "Peripheral")
+
+Consistent visibility as readers scan content:
+
+**Desktop Sidebar:**
+- **Wide Skyscraper (160×600)** — Stays visible in peripheral vision while scrolling
+- **Half-Page (300×600)** — Fast-growing branding unit with significant creative space
+- **Medium Rectangle (300×250)** — The "workhorse" of digital ads; universally compatible
+
+**Implementation:**
+```tsx
+// Sticky sidebar
+<AdSlot type="wide-skyscraper" className="wpn-ad-slot--sidebar-sticky" />
+
+// High-impact branding
+<AdSlot type="half-page" className="wpn-ad-slot--sidebar-primary" />
+
+// Secondary sidebar
+<AdSlot type="medium-rectangle" className="wpn-ad-slot--sidebar-secondary" />
+```
+
+#### 3. In-Article (The "Engagement")
+
+Placements within content where reader attention is highest:
+
+**In-Content:**
+- **In-Feed / In-Content (300×250)** — Inject after specific paragraph (e.g., after paragraph 2 or 5)
+- **Native Ads** — Match editorial styling for seamless integration
+
+**Implementation:**
+```tsx
+// After paragraph 2
+<AdSlot 
+  type="in-feed-native" 
+  label="Sponsored" 
+  className="wpn-ad-slot--in-content" 
+/>
+
+// Native editorial match
+<AdSlot 
+  type="in-feed-native" 
+  label="Partner Content" 
+  className="wpn-ad-slot--native-editorial"
+/>
+```
+
+#### 4. Bottom-of-Article & Footer (The "Closure")
+
+Capture users who finished reading:
+
+**End-of-Content:**
+- **Large Rectangle (336×280)** — High-impact placement at article end
+- **Ad Grids / Multiplex Ads** — Grid of related "Recommended" or "Sponsored" content
+
+**Implementation:**
+```tsx
+// End of article
+<AdSlot type="large-rectangle" className="wpn-ad-slot--article-end" />
+
+// Ad grid (use multiple slots in grid layout)
+<div className="wpn-ad-grid">
+  <AdSlot type="sponsored-listing" label="From our partners" />
+  <AdSlot type="sponsored-listing" label="From our partners" />
+  <AdSlot type="sponsored-listing" label="From our partners" />
+</div>
+```
+
+#### 5. Specialty High-Performance Units
+
+**Sticky/Anchor Ads:**
+- Bottom-stuck mobile ads (high CTR format)
+- Must be dismissable (user control)
+
+**Background/Skin Ads:**
+- Monetize white space on desktop (left/right of main content)
+- Subtle, non-intrusive branding
+
+**Implementation:**
+```tsx
+// Sticky footer (mobile)
+<AdSlot 
+  type="sticky-footer" 
+  dismissable={true} 
+  className="wpn-ad-slot--anchor"
+/>
+
+// Background skin (desktop only)
+<AdSlot 
+  type="wallpaper" 
+  className="wpn-ad-slot--background-skin"
+/>
+```
+
+### 14.2 Ad Placement Strategy
+
+Ads must be supported on every major template **except:**
+
+* Checkout
+* Order confirmation
+
+#### Homepage Ad Placements
+
+**Total Ad Slots:** 4-6
+
+1. **Leaderboard** (728×90) — Below header, above hero
+2. **Medium Rectangle** (300×250) — After category grid
+3. **In-Feed Native** — Between notice cards (every 6-8 notices)
+4. **Half-Page** (300×600) — Right sidebar (desktop only)
+5. **Sticky Footer** (320×50) — Mobile sticky bottom
+
+**Revenue Potential:** R18,000-25,000/month
+
+#### Search Results Ad Placements
+
+**Total Ad Slots:** 5-7
+
+1. **Super Leaderboard** (970×90) — Below search bar
+2. **Medium Rectangle** (300×250) — Above results (fold)
+3. **Sponsored Listing** — Every 5th result
+4. **Half-Page** (300×600) — Right sidebar (sticky)
+5. **Mobile Banner** (320×50) — Mobile sticky footer
+
+**Revenue Potential:** R22,000-30,000/month
+
+#### Category Archive Ad Placements
+
+**Total Ad Slots:** 4-6
+
+1. **Leaderboard** (728×90) — Below hero
+2. **Medium Rectangle** (300×250) — After description
+3. **In-Feed Native** — Every 6 notices
+4. **Wide Skyscraper** (160×600) — Right sidebar
+5. **Sticky Footer** (320×50) — Mobile only
+
+**Revenue Potential:** R15,000-22,000/month
+
+#### Single Notice Ad Placements
+
+**Total Ad Slots:** 6-8
+
+1. **Leaderboard** (728×90) — Below hero
+2. **Medium Rectangle** (300×250) — After notice metadata
+3. **Large Rectangle** (336×280) — Mid-content
+4. **Half-Page** (300×600) — Right sidebar (sticky)
+5. **Medium Rectangle** (300×250) — Below content
+6. **Related Sponsored** — In related notices section
+
+**Revenue Potential:** R30,000-40,000/month (highest traffic)
+
+#### Content Pages (About, FAQ, Help)
+
+**Total Ad Slots:** 2-3
+
+1. **Leaderboard** (728×90) — Below hero
+2. **Medium Rectangle** (300×250) — Right sidebar
+3. **Mobile Banner** (320×50) — Mobile sticky footer
+
+**Revenue Potential:** R5,000-8,000/month
+
+#### Account Pages (Dashboard, Profile, Orders)
+
+**Total Ad Slots:** 1-2
+
+1. **Medium Rectangle** (300×250) — Sidebar or bottom
+2. **Mobile Banner** (320×50) — Mobile only
+
+**Revenue Potential:** R3,000-5,000/month
+
+#### Ad-Free Pages
+
+**No Ads Allowed:**
+- Checkout
+- Order confirmation
+- Payment pages
+- Login/Register
+- Password reset
+- Submit notice form (until review stage)
+
+**Rationale:** 
+- Legal compliance (no interference with transactions)
+- User experience (critical conversion paths)
+- Trust building (no commercial pressure during legal submissions)
+
+### 14.3 Ad Placement Rules
+
+**Placement Guidelines:**
+
+1. **Above the Fold**
+   - Maximum 1 ad unit above fold
+   - Must not push primary content below fold
+   - Leaderboard preferred over MPU for top placement
+
+2. **Content Integration**
+   - In-feed ads every 5-8 items (not every 3)
+   - Native ads must match content styling
+   - "Advertisement" or "Sponsored" label required
+   - Clear visual separation from editorial content
+
+3. **Sidebar Placement**
+   - Maximum 2 ad units per sidebar
+   - Half-page (300×600) preferred for high-impact
+   - Sticky ads should have close button
+   - Must not obscure primary content
+
+4. **Mobile Placement**
+   - Maximum 1 sticky ad (top or bottom, not both)
+   - Sticky ads must be dismissable
+   - In-feed ads every 6-8 items
+   - No interstitials on first page load
+
+5. **Content Integrity**
+   - Ads must not break reading of legal content
+   - Notices must be fully readable without ad interference
+   - Reference numbers and legal text must remain accessible
+   - Attachments/PDFs must be reachable without ad clicks
+
+6. **Performance**
+   - Lazy load below-the-fold ads
+   - Reserve layout space to prevent CLS
+   - Maximum 6 ad units per page (desktop)
+   - Maximum 4 ad units per page (mobile)
+
+### 14.4 Technical Implementation
+
+**Component Usage:**
+
+All ads must use the `AdSlot` component from `/src/app/components/AdSlot.tsx`:
+
+```tsx
+import AdSlot from '../components/AdSlot';
+
+// Standard display ad
+<AdSlot type="medium-rectangle" />
+
+// Sticky footer (mobile)
+<AdSlot type="sticky-footer" dismissable={true} />
+
+// In-feed native ad
+<AdSlot type="in-feed-native" label="Sponsored" />
+
+// Half-page sidebar (sticky)
+<AdSlot type="half-page" className="sticky-ad" />
+```
+
+**Supported Ad Types:**
+
+**Display Ads:**
+- `leaderboard` (728×90)
+- `super-leaderboard` (970×90)
+- `billboard` (970×250)
+- `medium-rectangle` (300×250)
+- `large-rectangle` (336×280)
+- `half-page` (300×600)
+- `wide-skyscraper` (160×600)
+- `skyscraper` (120×600)
+
+**Mobile Ads:**
+- `mobile-leaderboard` (320×50)
+- `large-mobile-banner` (320×100)
+- `mobile-rectangle` (300×250)
+
+**Sticky Ads:**
+- `sticky-footer`
+- `sticky-sidebar`
+- `sticky-header`
+
+**Advanced Ads:**
+- `in-feed-native`
+- `sponsored-listing`
+- `expandable-banner`
+- `interstitial` (use sparingly)
+- `modal-overlay`
+- `slide-in`
+
+**Styling:**
+
+All ad styling uses CSS variables from `/src/styles/ads.css`:
+
+```css
+/* Ad container */
+.wpn-ad-slot {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* Ad label */
+.wpn-ad-slot__label {
+  font-family: var(--font-family-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+}
+```
+
+**No hardcoded styling allowed:**
+- ❌ `style={{ padding: '16px' }}`
+- ❌ `style={{ color: '#666' }}`
+- ✅ Use CSS variables and BEM classes only
+
+### 14.5 Revenue Model
+
+**Estimated Monthly Revenue by Page Type:**
+
+| Page Type | Avg. Impressions/Month | CPM | Est. Revenue |
+|-----------|------------------------|-----|--------------|
+| Homepage | 50,000 | R40 | R20,000 |
+| Single Notice | 120,000 | R35 | R42,000 |
+| Search Results | 80,000 | R30 | R24,000 |
+| Category Archive | 60,000 | R30 | R18,000 |
+| Content Pages | 20,000 | R25 | R5,000 |
+| Account Pages | 15,000 | R20 | R3,000 |
+| **Total** | **345,000** | **Avg R33** | **R112,000** |
+
+**Revenue Optimization:**
+
+1. **High-Traffic Pages:** Single Notice (highest CPM)
+2. **Premium Placements:** Half-page, Billboard (2-3x CPM)
+3. **Native Ads:** 50-100% higher CTR than display
+4. **Direct Sales:** Liquor industry, legal services, real estate (3-5x CPM)
+5. **Seasonal Campaigns:** Tenders (Q4), Estates (Q1)
+
+### 14.6 Bilingual Ad Labels
+
+**English Labels:**
+- "Advertisement"
+- "Sponsored"
+- "Promoted"
+- "Partner Content"
+
+**Afrikaans Labels:**
+- "Advertensie"
+- "Geborg"
+- "Promoveer"
+- "Vennootinhoud"
+
+**Component Usage:**
+
+```tsx
+// English
+<AdSlot type="medium-rectangle" label="Advertisement" />
+
+// Afrikaans
+<AdSlot type="medium-rectangle" label="Advertensie" />
+```
+
+### 14.7 Accessibility & Compliance
+
+**Required:**
+- ✅ "Advertisement" or "Sponsored" label on every ad
+- ✅ Close button on sticky/overlay ads (44×44 minimum)
+- ✅ `rel="sponsored"` on all ad links
+- ✅ No auto-play audio without user interaction
+- ✅ No flashing content (seizure risk)
+- ✅ Keyboard accessible close buttons
+- ✅ Screen reader compatible labels
+
+**POPIA Compliance:**
+- No tracking without consent
+- No PII collection in ad creatives
+- AdChoices icon required for behavioral targeting
+- Privacy policy disclosure
+
+**Legal:**
+- No misleading ad content
+- No ads mimicking editorial content without "Advertisement" label
+- No ads for illegal services
+- Age-restricted ads (alcohol, gambling) must comply with SA regulations
 
 ---
 
@@ -702,6 +1311,64 @@ Must explain the process in detail:
 * support expectations
 * contact path
 
+### 15.10 Dev tools pages
+
+Development utility pages for client requirements gathering and project management.
+
+**Required pages:**
+
+* `/dev` — Dev tools index
+* `/dev/client-questionnaire` — Client requirements capture (75 questions across 12 sections)
+* `/dev/launch-checklist` — Launch readiness tracking (66 items across 11 sections)
+
+**Client questionnaire sections:**
+
+1. Business and brand (6 questions)
+2. Visual identity (6 questions)
+3. Content and messaging (6 questions)
+4. Features and functionality (7 questions)
+5. Search and discovery (6 questions)
+6. User accounts and access (6 questions)
+7. Pricing and payments (7 questions)
+8. Moderation and workflow (7 questions)
+9. Legal and compliance (6 questions)
+10. Advertising and revenue (5 questions)
+11. Contact information (7 questions)
+12. Technical and integration (6 questions)
+
+**Launch checklist sections:**
+
+1. Content and copy (7 items) — critical
+2. Branding and design (5 items) — critical
+3. Contact information (7 items) — critical
+4. Pricing and payments (6 items) — critical
+5. Users and access (5 items) — high
+6. Technical setup (7 items) — critical
+7. Notice categories and data (5 items) — high
+8. Moderation workflow (5 items) — high
+9. Legal and compliance (6 items) — critical
+10. Testing and quality assurance (7 items) — high
+11. Launch preparation (6 items) — critical
+
+**Design requirements:**
+
+* BEM architecture (`.wpn-dev-*`)
+* CSS variables only
+* Hero component integration
+* Progress tracking (launch checklist)
+* Priority badges (critical, high, medium)
+* Status indicators (complete, pending, blocked)
+* Export functionality (questionnaire)
+* No ads
+
+**Purpose:**
+
+* Capture all client requirements before finalization
+* Track launch readiness and identify blockers
+* Reduce back-and-forth communication
+* Ensure WordPress migration readiness
+* Provide clear visibility into project status
+
 ---
 
 ## 16) Accessibility and performance
@@ -771,7 +1438,116 @@ A feature is not done unless:
 
 ---
 
-## 19) Protected files and folders
+## 19) Error pages and 404 handling
+
+### 19.1 404 Page requirements
+
+The 404 page must be helpful and actionable, not just informative.
+
+**Required elements:**
+- Clear error code and message
+- Search functionality (allows immediate recovery)
+- "Go back" and "Go home" buttons
+- Helpful links grid (6 key pages minimum)
+- Popular category links
+- Contact/support information
+- No ads (error pages are service recovery, not monetization)
+
+**Design requirements:**
+- BEM architecture (`.wpn-error-*`)
+- CSS variables only
+- Gradient error code (primary → accent)
+- Large, friendly icon
+- Mobile-first responsive
+- Accessible keyboard navigation
+
+**User recovery paths:**
+1. Search for what they were looking for
+2. Go back to previous page
+3. Go to homepage
+4. Browse popular categories
+5. Access help/FAQ/contact
+6. Submit a notice
+
+### 19.2 Error page CSS file
+
+All error pages (404, 500, etc.) must use `/src/styles/error-pages.css` with the `.wpn-error-*` BEM namespace.
+
+Do not create separate CSS files for each error code.
+
+### 19.3 Future error pages
+
+If creating 500, 503, or other error pages:
+- Use the same BEM structure
+- Adjust messaging for the specific error
+- Keep the same recovery paths
+- Maintain consistent design
+
+---
+
+## 20) BEM refactoring progress
+
+### 20.1 Pages with complete BEM architecture
+
+**Completed (8 pages):**
+- ✅ `/help` (Help.tsx, HelpAF.tsx) — Complete with dedicated CSS
+- ✅ `404` (NotFound.tsx) — Enhanced with search, categories, helpful links
+- ✅ `/faq` (FAQ.tsx, FAQAF.tsx) — Complete with dedicated CSS, Hero, Phosphor icons
+- ✅ `/` (Home.tsx) — home.css exists with BEM
+- ✅ `/notice/:id` (SingleNotice.tsx) — single-notice.css exists with BEM
+- ✅ `/dev/client-questionnaire` (ClientQuestionnaire.tsx) — Complete with dedicated CSS (75 questions)
+- ✅ `/dev/launch-checklist` (LaunchChecklist.tsx) — Complete with dedicated CSS (66 items)
+- ✅ Dev tools shared CSS (dev-tools.css) — 70+ BEM classes
+
+**Pending (9 pages):**
+- 🔲 `/login`
+- 🔲 `/register`
+- 🔲 `/sitemap`
+- 🔲 `/submit`
+- 🔲 `/privacy`
+- 🔲 `/terms`
+- 🔲 `/my-account`
+- 🔲 `/my-account/notices`
+- 🔲 `/search`
+
+### 20.2 BEM compliance checklist
+
+For each page refactor, ensure:
+1. ✅ Dedicated CSS file created in `/src/styles/`
+2. ✅ All classes follow BEM naming (`.wpn-[block]__[element]--[modifier]`)
+3. ✅ 100% CSS variables (no hardcoded values)
+4. ✅ Font faces from design system only
+5. ✅ No inline styles
+6. ✅ Responsive design with breakpoints
+7. ✅ Hero component integrated (where applicable)
+8. ✅ Sentence case for all headings
+9. ✅ Bilingual support (EN + AF)
+10. ✅ Accessibility baseline (WCAG 2.1 AA)
+
+### 20.3 Font weight system
+
+**All font weights reduced by 100 for lighter, more readable text:**
+
+```css
+--font-weight-thin: 100;
+--font-weight-light: 200;
+--font-weight-normal: 300;
+--font-weight-regular: 300;
+--font-weight-medium: 400;
+--font-weight-semibold: 500;
+--font-weight-bold: 500;
+--font-weight-extrabold: 600;
+```
+
+**Heading defaults:**
+- H1-H4: `--font-weight-semibold` (500)
+- H5-H6: `--font-weight-medium` (400)
+
+Never use hardcoded font weights. Always use CSS variables.
+
+---
+
+## 21) Protected files and folders
 
 Do not delete or move without reason:
 
@@ -791,7 +1567,7 @@ If a file is being moved, only delete the old file after the new location is con
 
 ---
 
-## 20) Immediate follow-on files to create after this one
+## 22) Immediate follow-on files to create after this one
 
 Create next:
 
@@ -810,7 +1586,7 @@ This file remains the parent guide and should link to those sub-guides as they a
 
 ---
 
-## 21) Guidelines and Prompts Structure
+## 23) Guidelines and Prompts Structure
 
 ### Created Guidelines
 
@@ -838,6 +1614,10 @@ This file remains the parent guide and should link to those sub-guides as they a
 
 **Master Orchestrator:**
 * **[orchestrator.md](../prompts/orchestrator.md)** — Master audit coordinator that runs all sub-audits in sequence
+
+**Fix Prompts:**
+* **[fix-orchestrator.md](../prompts/fix-orchestrator.md)** — Master fix coordinator that runs all fix prompts
+* **[fix-titles.md](../prompts/fix-titles.md)** — Enforce sentence case for all titles and headings
 
 **Architecture Audits:**
 * **[audit-locale.md](../prompts/audit-locale.md)** — Bilingual architecture & route equivalence audit

@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "react-router";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { useHero } from "../../hooks/useHero";
 import AccountSidebar from "../../components/AccountSidebar";
 import { Eye, ShoppingBag, FileText, ClockCounterClockwise } from "@phosphor-icons/react";
 import "../../../styles/components.css";
 
 export default function DashboardAF() {
+  const heroData = useHero('account', 'af');
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,12 +18,11 @@ export default function DashboardAF() {
 
   return (
     <Layout lang="af" showAds={true}>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
+
       <div className="wpn-account-wrapper">
         <div className="wpn-account-container">
-          <h1 className="wpn-heading-h1 wpn-heading--primary wpn-account__page-title">
-            My rekening
-          </h1>
-
           <div className="wpn-account-layout">
             {/* Sidebar Navigation */}
             <AccountSidebar currentPage="dashboard" onLogout={handleLogout} lang="af" />

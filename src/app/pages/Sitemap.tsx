@@ -1,41 +1,18 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { categories } from "../data/categories";
-import { Home } from "lucide-react";
+import { getCategoryColor } from "../data/notices/category-colors";
 import "../../styles/components.css";
 
 export default function Sitemap() {
+  const heroData = useHero('sitemap', 'en');
+
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Sitemap</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title wpn-page-header__title--white">
-            Sitemap
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Navigate all pages and notice categories on the Nova Public Notices Portal
-          </p>
-        </div>
-      </section>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
       {/* Sitemap Content */}
       <section className="wpn-sitemap">

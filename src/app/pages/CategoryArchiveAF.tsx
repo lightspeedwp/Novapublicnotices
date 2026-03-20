@@ -100,6 +100,11 @@ export default function CategoryArchiveAF() {
       {/* Hero Section */}
       <Hero data={heroData} lang="af" />
 
+      {/* Leaderboard Ad */}
+      <div className="wpn-container" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+        <AdSlot type="leaderboard" />
+      </div>
+
       {/* Stats Block */}
       <section className="wpn-section--sm wpn-section--muted">
         <div className="wpn-container">
@@ -112,11 +117,28 @@ export default function CategoryArchiveAF() {
         <div className="wpn-results-layout__main">
           {paginatedNotices.length > 0 ? (
             <>
+              {/* First 6 notices */}
               <NoticeGrid 
-                notices={paginatedNotices} 
+                notices={paginatedNotices.slice(0, 6)} 
                 lang="af"
                 columns={3}
               />
+              
+              {/* Native In-Feed Ad after first 6 results */}
+              {paginatedNotices.length > 6 && (
+                <div style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+                  <AdSlot type="in-feed-native" label="Geborg" />
+                </div>
+              )}
+              
+              {/* Remaining notices */}
+              {paginatedNotices.length > 6 && (
+                <NoticeGrid 
+                  notices={paginatedNotices.slice(6)} 
+                  lang="af"
+                  columns={3}
+                />
+              )}
 
               {/* Pagination */}
               {totalPages > 1 && (
@@ -177,11 +199,19 @@ export default function CategoryArchiveAF() {
         {/* Sidebar */}
         <aside className="wpn-results-layout__sidebar">
           <div className="wpn-results-layout__sidebar-inner">
-            <AdSlot slot="ad_sidebar_1" height={250} />
-            <AdSlot slot="ad_sidebar_2" height={250} />
+            {/* Sticky Sidebar Ad */}
+            <AdSlot type="sticky-sidebar" />
+            
+            {/* Second Sidebar Ad */}
+            <div style={{ marginTop: 'var(--space-6)' }}>
+              <AdSlot type="medium-rectangle" />
+            </div>
           </div>
         </aside>
       </div>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

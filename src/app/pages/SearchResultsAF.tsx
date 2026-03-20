@@ -111,6 +111,11 @@ export default function SearchResultsAF() {
         showSearchBar={false}
       />
 
+      {/* Leaderboard Ad */}
+      <div className="wpn-container" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+        <AdSlot type="leaderboard" />
+      </div>
+
       {/* Main Content */}
       <div className="wpn-search-results">
         <div className="wpn-search-results__container">
@@ -173,11 +178,30 @@ export default function SearchResultsAF() {
               {/* Results Grid or Empty State */}
               <div className="wpn-search-results__grid">
                 {paginatedResults.length > 0 ? (
-                  <NoticeGrid 
-                    notices={paginatedResults} 
-                    lang="af"
-                    columns={3}
-                  />
+                  <>
+                    {/* First 6 results */}
+                    <NoticeGrid 
+                      notices={paginatedResults.slice(0, 6)} 
+                      lang="af"
+                      columns={3}
+                    />
+                    
+                    {/* Native In-Feed Ad after first 6 results */}
+                    {paginatedResults.length > 6 && (
+                      <div style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+                        <AdSlot type="in-feed-native" label="Geborg" />
+                      </div>
+                    )}
+                    
+                    {/* Remaining results */}
+                    {paginatedResults.length > 6 && (
+                      <NoticeGrid 
+                        notices={paginatedResults.slice(6)} 
+                        lang="af"
+                        columns={3}
+                      />
+                    )}
+                  </>
                 ) : (
                   <EmptyState
                     type="no-results"
@@ -243,14 +267,22 @@ export default function SearchResultsAF() {
             {/* Sidebar */}
             <aside className="wpn-search-results__sidebar">
               <div className="wpn-search-results__sidebar-inner">
-                <AdSlot slot="ad_sidebar_1" height={250} />
-                <AdSlot slot="ad_sidebar_2" height={250} />
+                {/* Sticky Sidebar Ad */}
+                <AdSlot type="sticky-sidebar" />
+                
+                {/* Second Sidebar Ad */}
+                <div style={{ marginTop: 'var(--space-6)' }}>
+                  <AdSlot type="medium-rectangle" />
+                </div>
               </div>
             </aside>
 
           </div>
         </div>
       </div>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import { useHero } from "../../hooks/useHero";
 import AccountSidebar from "../../components/AccountSidebar";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
@@ -22,6 +24,7 @@ import {
 } from "lucide-react";
 
 export default function SettingsAF() {
+  const heroData = useHero('settings', 'af');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(false);
@@ -40,6 +43,9 @@ export default function SettingsAF() {
 
   return (
     <Layout lang="af" showAds={true}>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
+
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}

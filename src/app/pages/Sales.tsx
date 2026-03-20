@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { 
   Check, 
   FileText, 
@@ -19,46 +21,12 @@ import {
 import "../../styles/sales.css";
 
 export default function Sales() {
+  const heroData = useHero('sales', 'en');
+
   return (
     <Layout lang="en" showAds={true}>
-      {/* Page Header */}
-      <div className="wpn-page-header wpn-bg--primary">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb wpn-breadcrumb--light" aria-label="Breadcrumb">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/" className="wpn-breadcrumb__link">
-                  <House className="wpn-breadcrumb__icon" />
-                  Home
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Sales & support</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title wpn-page-header__title--white">
-            How to publish public notices
-          </h1>
-          <p className="wpn-page-header__subtitle wpn-page-header__subtitle--light">
-            Everything you need to know about publishing legal notices in South Africa
-          </p>
-
-          <div className="wpn-page-header__actions">
-            <Link to="/submit" className="wpn-button wpn-button--lg wpn-button--accent">
-              Start publishing
-            </Link>
-            <Link to="/pricing" className="wpn-button wpn-button--lg wpn-button--white">
-              View pricing
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="en" />}
 
       {/* What are Public Notices */}
       <div className="wpn-section wpn-section--white">

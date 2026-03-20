@@ -385,6 +385,17 @@
   font-size: var(--text-xl);
 }
 
+/* Account link with icon */
+.wpn-layout__mobile-nav-link--account {
+  gap: var(--space-3);
+  font-weight: var(--font-weight-medium);
+}
+
+.wpn-layout__mobile-nav-link--account svg {
+  width: var(--space-5);
+  height: var(--space-5);
+}
+
 /* ============================================
    Expandable Menu Items — Modern Accordion
    ============================================ */

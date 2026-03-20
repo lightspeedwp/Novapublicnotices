@@ -48,13 +48,13 @@
 }
 
 /* =================================================================
-   Card Title (Compact but Distinguished)
+   Card Title (20px Fixed Size, Semibold)
    ================================================================= */
 
 .wpn-notice-card__title {
   font-family: var(--font-family-heading);
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-medium);
+  font-size: 20px; /* Fixed 20px as requested */
+  font-weight: var(--font-weight-semibold);
   color: var(--foreground);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
@@ -218,9 +218,7 @@
     padding: var(--space-4);
   }
 
-  .wpn-notice-card__title {
-    font-size: var(--text-lg);
-  }
+  /* Title stays at 20px on all screen sizes */
 }
 
 /* =================================================================

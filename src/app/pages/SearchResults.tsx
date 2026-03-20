@@ -6,13 +6,15 @@ import SearchFilterBar from "../components/SearchFilterBar";
 import NoticeGrid from "../components/NoticeGrid";
 import EmptyState from "../components/EmptyState";
 import AdSlot from "../components/AdSlot";
-import { CaretLeft, CaretRight, House, FileText, Funnel } from "@phosphor-icons/react";
+import { useAuth } from "../contexts/AuthContext";
+import { CaretLeft, CaretRight, House, FileText, Funnel, Lock, UserPlus } from "@phosphor-icons/react";
 import { searchNotices, SearchFilters } from "../lib/searchOptimized";
 import "../../styles/search-results.css";
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const { isLoggedIn } = useAuth();
   const resultsPerPage = 12;
 
   // Extract filters from URL params
@@ -111,6 +113,11 @@ export default function SearchResults() {
         showSearchBar={false}
       />
 
+      {/* Leaderboard Ad */}
+      <div className="wpn-container" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+        <AdSlot type="leaderboard" />
+      </div>
+
       {/* Main Content */}
       <div className="wpn-search-results">
         <div className="wpn-search-results__container">
@@ -173,11 +180,63 @@ export default function SearchResults() {
               {/* Results Grid or Empty State */}
               <div className="wpn-search-results__grid">
                 {paginatedResults.length > 0 ? (
-                  <NoticeGrid 
-                    notices={paginatedResults} 
-                    lang="en"
-                    columns={3}
-                  />
+                  <>
+                    {/* Show first 5 notices to all users */}
+                    <NoticeGrid 
+                      notices={paginatedResults.slice(0, 5)} 
+                      lang="en"
+                      columns={3}
+                    />
+                    
+                    {/* Login Wall for logged out users (after 5 notices) */}
+                    {!isLoggedIn && paginatedResults.length > 5 && (
+                      <div className="wpn-search-results__login-wall">
+                        <div className="wpn-search-results__login-wall-card">
+                          <Lock className="wpn-search-results__login-wall-icon" size={64} weight="duotone" />
+                          <h3 className="wpn-search-results__login-wall-title">
+                            Create a free account to view all {totalResults} notices
+                          </h3>
+                          <p className="wpn-search-results__login-wall-description">
+                            You're viewing the first 5 results. Sign up or log in to access our complete database of public notices with advanced search and filtering.
+                          </p>
+                          <div className="wpn-search-results__login-wall-actions">
+                            <Link to="/register" className="wpn-button wpn-button--primary wpn-button--lg">
+                              <UserPlus weight="bold" />
+                              Create free account
+                            </Link>
+                            <Link to="/login" className="wpn-button wpn-button--secondary wpn-button--lg">
+                              Login to continue
+                            </Link>
+                          </div>
+                          <ul className="wpn-search-results__login-wall-benefits">
+                            <li>Access to all {totalResults.toLocaleString()}+ public notices</li>
+                            <li>Advanced search and filtering tools</li>
+                            <li>Save searches and create alerts</li>
+                            <li>Download official documents and attachments</li>
+                            <li>Track notice publication history</li>
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Show remaining notices only to logged in users */}
+                    {isLoggedIn && paginatedResults.length > 5 && (
+                      <>
+                        {/* Native In-Feed Ad after first 6 results */}
+                        {paginatedResults.length > 6 && (
+                          <div className="wpn-search-results__ad-break">
+                            <AdSlot type="in-feed-native" label="Sponsored" />
+                          </div>
+                        )}
+                        
+                        <NoticeGrid 
+                          notices={paginatedResults.slice(5)} 
+                          lang="en"
+                          columns={3}
+                        />
+                      </>
+                    )}
+                  </>
                 ) : (
                   <EmptyState
                     type="no-results"
@@ -243,14 +302,20 @@ export default function SearchResults() {
             {/* Sidebar */}
             <aside className="wpn-search-results__sidebar">
               <div className="wpn-search-results__sidebar-inner">
-                <AdSlot slot="ad_sidebar_1" height={250} />
-                <AdSlot slot="ad_sidebar_2" height={250} />
+                {/* Sticky Sidebar Ad - Medium Rectangle */}
+                <AdSlot type="sticky-sidebar" />
+                
+                {/* Second Sidebar Ad - Medium Rectangle */}
+                <AdSlot type="medium-rectangle" className="wpn-mt-6" />
               </div>
             </aside>
 
           </div>
         </div>
       </div>
+      
+      {/* Sticky Footer Ad */}
+      <AdSlot type="sticky-footer" dismissable={true} />
     </Layout>
   );
 }

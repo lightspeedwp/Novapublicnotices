@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { Card } from "../components/ui/card";
 import {
   Search,
   ChevronDown,
@@ -20,12 +21,12 @@ import {
   Calculator,
   Headphones,
   BookOpen,
-  Home,
 } from "lucide-react";
 import { faqCategories, faqItems, quickHelpLinks } from "../data/help/faq-data";
-import "../../styles/components.css";
+import "../../styles/help.css";
 
 export default function HelpAF() {
+  const heroData = useHero('help', 'af');
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [expandedFAQ, setExpandedFAQ] = useState<string[]>([]);
@@ -65,374 +66,307 @@ export default function HelpAF() {
 
   const getQuickLinkIcon = (iconName: string) => {
     const icons: Record<string, React.ComponentType<{ className?: string }>> = {
-      "file-plus": FilePlus,
-      calculator: Calculator,
-      headset: Headphones,
-      "book-open": BookOpen,
       headphones: Headphones,
+      "book-open": BookOpen,
+      calculator: Calculator,
       "file-text": FileText,
     };
     return icons[iconName] || HelpCircle;
   };
 
   return (
-    <Layout lang={lang} showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Broodkrummels">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/af" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Tuis
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Hulpsentrum</span>
-              </li>
-            </ol>
-          </nav>
+    <Layout lang="af" showAds={true}>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
 
-          <h1 className="wpn-page-header__title">
-            Hulpsentrum
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Vind antwoorde op u vrae oor openbare kennisgewings, indienings, en ons platform
-          </p>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-4 py-12">
-        {/* Search Bar */}
-        <Card className="p-6 mb-8">
-          <div className="max-w-2xl mx-auto">
-            <label htmlFor="faq-search" className="block wpn-heading-h4 wpn-heading--primary mb-4 text-center">
-              Soek vir antwoorde
-            </label>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[var(--muted-foreground)]" />
-              <Input
-                id="faq-search"
-                type="text"
-                placeholder="Tik u vraag hier..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-6 text-lg"
-              />
-            </div>
-            {searchQuery && (
-              <p className="text-sm text-[var(--muted-foreground)] mt-3 text-center">
-                {filteredFAQs.length} resultaa{filteredFAQs.length !== 1 ? "te" : "t"} gevind
-              </p>
-            )}
-          </div>
-        </Card>
-
-        {/* Quick Help Links */}
-        <section className="mb-12">
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Vinnige Hulp
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickHelpLinks[lang].map((link, index) => {
-              const Icon = getQuickLinkIcon(link.icon);
-              return (
-                <Card
-                  key={index}
-                  className="p-6 hover:shadow-lg transition-shadow duration-200"
-                >
-                  <a href={link.href} className="block group">
-                    <div className="wpn-icon-badge wpn-bg--accent mb-4">
-                      <Icon className="wpn-icon-badge__icon text-white" />
-                    </div>
-                    <h3 className="wpn-heading-h5 wpn-heading--primary mb-2 group-hover:wpn-text--accent transition-colors">
-                      {link.title}
-                    </h3>
-                    <p className="text-sm text-[var(--muted-foreground)]">
-                      {link.description}
-                    </p>
-                  </a>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Category Filter */}
-        <section className="mb-8">
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Blaai Volgens Kategorie
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button
-              onClick={() => setSelectedCategory("all")}
-              className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
-                selectedCategory === "all"
-                  ? "wpn-border--accent wpn-bg--accent text-white"
-                  : "border-[var(--border-color-light)] hover:border-[var(--border)]"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <HelpCircle
-                  className={`size-6 ${
-                    selectedCategory === "all" ? "text-white" : "wpn-text--accent"
-                  }`}
+      {/* Help Page Content */}
+      <div className="wpn-help">
+        <div className="wpn-help__container">
+          
+          {/* Search Bar */}
+          <section className="wpn-help-search">
+            <div className="wpn-help-search__inner">
+              <label htmlFor="faq-search" className="wpn-help-search__label">
+                Soek vir antwoorde
+              </label>
+              <div className="wpn-help-search__field">
+                <Search className="wpn-help-search__icon" />
+                <Input
+                  type="search"
+                  id="faq-search"
+                  placeholder="Soek hulpartikels..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="wpn-help-search__input"
                 />
-                <div>
-                  <h4
-                    className={`font-semibold ${
-                      selectedCategory === "all" ? "text-white" : "wpn-text--primary"
+              </div>
+              {searchQuery && (
+                <p className="wpn-help-search__results">
+                  {filteredFAQs.length} resultate gevind
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* Quick Help Links */}
+          <section className="wpn-help-quick">
+            <h2 className="wpn-help-quick__title">Vinnige hulp</h2>
+            <div className="wpn-help-quick__grid">
+              {quickHelpLinks[lang].map((link, index) => {
+                const Icon = getQuickLinkIcon(link.icon);
+                return (
+                  <div key={index} className="wpn-help-quick-card">
+                    <a href={link.href} className="wpn-help-quick-card__link">
+                      <div className="wpn-help-quick-card__icon">
+                        <Icon />
+                      </div>
+                      <h3 className="wpn-help-quick-card__title">
+                        {link.title}
+                      </h3>
+                      <p className="wpn-help-quick-card__description">
+                        {link.description}
+                      </p>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Category Filter */}
+          <section className="wpn-help-categories">
+            <h2 className="wpn-help-categories__title">Blaai volgens kategorie</h2>
+            <div className="wpn-help-categories__grid">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`wpn-help-category ${
+                  selectedCategory === "all" ? "wpn-help-category--active" : ""
+                }`}
+              >
+                <div className="wpn-help-category__inner">
+                  <HelpCircle className="wpn-help-category__icon" />
+                  <div className="wpn-help-category__content">
+                    <h4 className="wpn-help-category__title">Alle kategorieë</h4>
+                    <p className="wpn-help-category__count">
+                      {faqItems.length} vrae
+                    </p>
+                  </div>
+                </div>
+              </button>
+
+              {faqCategories.map((category) => {
+                const Icon = getCategoryIcon(category.icon);
+                const count = faqItems.filter(
+                  (faq) => faq.category === category.id
+                ).length;
+                const isSelected = selectedCategory === category.id;
+
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`wpn-help-category ${
+                      isSelected ? "wpn-help-category--active" : ""
                     }`}
                   >
-                    Alle Kategorieë
-                  </h4>
-                  <p
-                    className={`text-sm ${
-                      selectedCategory === "all" ? "text-white/80" : "text-[var(--muted-foreground)]"
-                    }`}
-                  >
-                    {faqItems.length} vrae
+                    <div className="wpn-help-category__inner">
+                      <Icon className="wpn-help-category__icon" />
+                      <div className="wpn-help-category__content">
+                        <h4 className="wpn-help-category__title">
+                          {category.name[lang]}
+                        </h4>
+                        <p className="wpn-help-category__count">
+                          {count} {count !== 1 ? "vrae" : "vraag"}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* FAQ Accordion */}
+          <section className="wpn-help-faq">
+            <div className="wpn-help-faq__inner">
+              {selectedCategory !== "all" && (
+                <div className="wpn-help-faq__header">
+                  <h2 className="wpn-help-faq__header-title">
+                    {faqCategories.find((cat) => cat.id === selectedCategory)
+                      ?.name[lang]}
+                  </h2>
+                  <p className="wpn-help-faq__header-description">
+                    {faqCategories.find((cat) => cat.id === selectedCategory)
+                      ?.description[lang]}
                   </p>
                 </div>
-              </div>
-            </button>
+              )}
 
-            {faqCategories.map((category) => {
-              const Icon = getCategoryIcon(category.icon);
-              const count = faqItems.filter(
-                (faq) => faq.category === category.id
-              ).length;
-              const isSelected = selectedCategory === category.id;
+              {filteredFAQs.length === 0 ? (
+                <div className="wpn-help-faq__empty">
+                  <HelpCircle className="wpn-help-faq__empty-icon" />
+                  <h3 className="wpn-help-faq__empty-title">
+                    Geen resultate gevind nie
+                  </h3>
+                  <p className="wpn-help-faq__empty-description">
+                    Probeer jou soektog aanpas of blaai alle kategorieë
+                  </p>
+                  <Button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedCategory("all");
+                    }}
+                    variant="outline"
+                    className="wpn-button wpn-button--outline"
+                  >
+                    Maak filters skoon
+                  </Button>
+                </div>
+              ) : (
+                <div className="wpn-help-faq__list">
+                  {filteredFAQs.map((faq) => {
+                    const isExpanded = expandedFAQ.includes(faq.id);
 
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
-                    isSelected
-                      ? "wpn-border--accent wpn-bg--accent text-white"
-                      : "border-[var(--border-color-light)] hover:border-[var(--border)]"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Icon
-                      className={`size-6 ${
-                        isSelected ? "text-white" : "wpn-text--accent"
-                      }`}
-                    />
-                    <div>
-                      <h4
-                        className={`font-semibold ${
-                          isSelected ? "text-white" : "wpn-text--primary"
-                        }`}
-                      >
-                        {category.name[lang]}
-                      </h4>
-                      <p
-                        className={`text-sm ${
-                          isSelected ? "text-white/80" : "text-[var(--muted-foreground)]"
-                        }`}
-                      >
-                        {count} vra{count !== 1 ? "e" : "ag"}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* FAQ Accordion */}
-        <section className="mb-12">
-          <div className="max-w-4xl mx-auto">
-            {selectedCategory !== "all" && (
-              <div className="mb-6">
-                <h2 className="wpn-heading-h3 wpn-heading--primary mb-2">
-                  {faqCategories.find((cat) => cat.id === selectedCategory)
-                    ?.name[lang]}
-                </h2>
-                <p className="text-[var(--muted-foreground)]">
-                  {faqCategories.find((cat) => cat.id === selectedCategory)
-                    ?.description[lang]}
-                </p>
-              </div>
-            )}
-
-            {filteredFAQs.length === 0 ? (
-              <Card className="p-12 text-center">
-                <HelpCircle className="size-16 text-[var(--muted-foreground)] mx-auto mb-4" />
-                <h3 className="wpn-heading-h4 wpn-heading--primary mb-2">
-                  Geen resultate gevind nie
-                </h3>
-                <p className="text-[var(--muted-foreground)] mb-6">
-                  Probeer u soektog aanpas of blaai deur alle kategorieë
-                </p>
-                <Button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCategory("all");
-                  }}
-                  variant="outline"
-                >
-                  Maak Filters Skoon
-                </Button>
-              </Card>
-            ) : (
-              <div className="space-y-3">
-                {filteredFAQs.map((faq) => {
-                  const isExpanded = expandedFAQ.includes(faq.id);
-
-                  return (
-                    <Card key={faq.id} className="overflow-hidden">
-                      <button
-                        onClick={() => toggleFAQ(faq.id)}
-                        className="w-full p-6 text-left flex items-start justify-between gap-4 hover:bg-[var(--muted)] transition-colors duration-150"
-                      >
-                        <div className="flex-1">
-                          <h3 className="wpn-heading-h5 wpn-heading--primary mb-0">
+                    return (
+                      <div key={faq.id} className="wpn-help-faq-item">
+                        <button
+                          onClick={() => toggleFAQ(faq.id)}
+                          className="wpn-help-faq-item__button"
+                        >
+                          <h3 className="wpn-help-faq-item__question">
                             {faq.question[lang]}
                           </h3>
-                        </div>
-                        <ChevronDown
-                          className={`size-6 wpn-text--accent flex-shrink-0 transition-transform duration-200 ${
-                            isExpanded ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
+                          <ChevronDown
+                            className={`wpn-help-faq-item__icon ${
+                              isExpanded ? "wpn-help-faq-item__icon--expanded" : ""
+                            }`}
+                          />
+                        </button>
 
-                      {isExpanded && (
-                        <div className="px-6 pb-6 border-t">
-                          <div className="pt-4">
-                            <p className="text-[var(--foreground)] leading-relaxed">
-                              {faq.answer[lang]}
-                            </p>
+                        {isExpanded && (
+                          <div className="wpn-help-faq-item__answer">
+                            <div className="wpn-help-faq-item__answer-inner">
+                              <p className="wpn-help-faq-item__answer-text">
+                                {faq.answer[lang]}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </Card>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        </section>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </section>
 
-        {/* Contact Support Section */}
-        <section className="mb-12">
-          <Card className="p-8 wpn-bg--primary text-white">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="wpn-heading-h3 wpn-heading--white mb-4">
-                Steeds hulp nodig?
+          {/* Contact Support Section */}
+          <section className="wpn-help-support">
+            <div className="wpn-help-support__inner">
+              <h2 className="wpn-help-support__title">
+                Benodig steeds hulp?
               </h2>
-              <p className="text-xl text-white/80 mb-8">
-                Ons ondersteuningspan is gereed om u met enige vrae by te staan
+              <p className="wpn-help-support__subtitle">
+                Ons ondersteuningspan is gereed om jou te help met enige vrae
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <Mail className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white mb-2">E-posondersteuning</h4>
-                  <p className="text-sm text-white/80 mb-4">
+              <div className="wpn-help-support__grid">
+                <div className="wpn-help-support-card">
+                  <Mail className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">E-pos ondersteuning</h4>
+                  <p className="wpn-help-support-card__description">
                     Kry 'n antwoord binne 24 uur
                   </p>
                   <a
                     href="mailto:support@novanews.co.za"
-                    className="text-sm text-white underline hover:no-underline"
+                    className="wpn-help-support-card__link"
                   >
                     support@novanews.co.za
                   </a>
-                </Card>
+                </div>
 
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <Phone className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white mb-2">Telefoonondersteuning</h4>
-                  <p className="text-sm text-white/80 mb-4">
+                <div className="wpn-help-support-card">
+                  <Phone className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">Foon ondersteuning</h4>
+                  <p className="wpn-help-support-card__description">
                     Ma-Vr, 8vm-5nm SAST
                   </p>
                   <a
                     href="tel:+27123456789"
-                    className="text-sm text-white underline hover:no-underline"
+                    className="wpn-help-support-card__link"
                   >
                     +27 12 345 6789
                   </a>
-                </Card>
+                </div>
 
-                <Card className="p-6 bg-white/10 border-white/20">
-                  <MessageCircle className="size-8 text-white mx-auto mb-3" />
-                  <h4 className="font-semibold text-white mb-2">Lewendige Klets</h4>
-                  <p className="text-sm text-white/80 mb-4">
-                    Klets met ons in reële tyd
+                <div className="wpn-help-support-card">
+                  <MessageCircle className="wpn-help-support-card__icon" />
+                  <h4 className="wpn-help-support-card__title">Lewendige klets</h4>
+                  <p className="wpn-help-support-card__description">
+                    Klets met ons in werklike tyd
                   </p>
-                  <button className="text-sm text-white underline hover:no-underline">
-                    Begin Klets
+                  <button className="wpn-help-support-card__button">
+                    Begin klets
                   </button>
-                </Card>
+                </div>
               </div>
 
-              <div className="mt-8">
+              <div>
                 <Button
                   className="wpn-button wpn-button--accent"
                   asChild
                 >
-                  <a href="/af/kontak">Kontak Verkoopspan</a>
+                  <Link to="/af/kontak">Kontak verkoopspan</Link>
                 </Button>
               </div>
             </div>
-          </Card>
-        </section>
+          </section>
 
-        {/* Additional Resources */}
-        <section>
-          <h2 className="wpn-heading-h3 wpn-heading--primary mb-6 text-center">
-            Addisionele Hulpbronne
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6">
-              <FileText className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Wetlike Gidse
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Laai omvattende gidse af vir verskillende kennisgewingtipes
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Blaai Deur Gidse →
-              </a>
-            </Card>
+          {/* Additional Resources */}
+          <section className="wpn-help-resources">
+            <h2 className="wpn-help-resources__title">Bykomende hulpbronne</h2>
+            <div className="wpn-help-resources__grid">
+              <div className="wpn-help-resource-card">
+                <FileText className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Regsgidse
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Laai omvattende gidse af vir verskillende kennisgewingtipes
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Blaai gidse →
+                </a>
+              </div>
 
-            <Card className="p-6">
-              <BookOpen className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Video-tutoriale
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Kyk stap-vir-stap videogidse vir die indiening van kennisgewings
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Kyk Videos →
-              </a>
-            </Card>
+              <div className="wpn-help-resource-card">
+                <BookOpen className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Video tutoriale
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Kyk stap-vir-stap video gidse vir indiening van kennisgewings
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Kyk video's →
+                </a>
+              </div>
 
-            <Card className="p-6">
-              <Calculator className="size-8 wpn-text--accent mb-4" />
-              <h3 className="wpn-heading-h5 wpn-heading--primary mb-2">
-                Prysberekening
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)] mb-4">
-                Skat die koste om u kennisgewing te publiseer
-              </p>
-              <a href="#" className="text-sm wpn-text--accent hover:underline">
-                Bereken Koste →
-              </a>
-            </Card>
-          </div>
-        </section>
+              <div className="wpn-help-resource-card">
+                <Calculator className="wpn-help-resource-card__icon" />
+                <h3 className="wpn-help-resource-card__title">
+                  Prysberekeningsprogram
+                </h3>
+                <p className="wpn-help-resource-card__description">
+                  Skat die koste van publikasie van jou kennisgewing
+                </p>
+                <a href="#" className="wpn-help-resource-card__link">
+                  Bereken koste →
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </Layout>
   );

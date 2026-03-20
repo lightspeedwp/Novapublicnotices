@@ -1,42 +1,17 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
-import AdSlot from "../components/AdSlot";
-import { Home } from "lucide-react";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
+import { House } from "@phosphor-icons/react";
 import "../../styles/components.css";
 
 export default function TermsAF() {
+  const heroData = useHero('terms', 'af');
+
   return (
     <Layout lang="af" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Broodkrummels">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/af" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Tuis
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Terme en voorwaardes</span>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="wpn-page-header__title">
-            Terme en voorwaardes
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Laas opgedateer: 16 Maart 2026
-          </p>
-        </div>
-      </section>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
 
       {/* Terms Content */}
       <section className="py-16 bg-white">

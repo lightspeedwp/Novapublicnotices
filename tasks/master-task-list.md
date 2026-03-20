@@ -1,7 +1,7 @@
 # Master Task List — Nova Public Notices Portal
 
 **Last Updated:** 2026-03-18  
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Status:** Active
 
 ---
@@ -11,7 +11,9 @@
 Central tracking for all project tasks across audits, features, and improvements.
 
 **Task Organization:**
-- `/tasks/2026-03-18-hero-fixes.md` — Hero template part fixes (16 critical)
+- `/tasks/2026-03-18-hero-tasks.md` — Hero template part implementation (25 tasks)
+- `/tasks/2026-03-18-design-system-tasks.md` — Design system compliance (19 tasks)
+- `/tasks/2026-03-18-hero-fixes.md` — Hero template part fixes (16 critical) — ARCHIVED
 - `/tasks/wordpress-architecture-migration.md` — Component structure refactoring
 - `/tasks/design-system-compliance.md` — CSS variables and font face enforcement
 - This file — Master checklist and progress tracking
@@ -20,26 +22,56 @@ Central tracking for all project tasks across audits, features, and improvements
 
 ## Active Sprints
 
-### Current Sprint: Hero Fixes & WordPress Architecture (March 18-25, 2026)
+### Current Sprint: Design System Compliance & Hero Implementation (March 18-25, 2026)
 
-**Sprint Goal:** Fix all hardcoded heroes and establish WordPress component architecture
+**Sprint Goal:** Achieve 100% design system compliance and fix all hardcoded heroes
 
 **Priority Tasks:**
 1. ✅ Document WordPress component architecture — COMPLETE
 2. ✅ Audit hero implementation — COMPLETE
-3. 🔲 Fix 16 pages with hardcoded heroes — IN PROGRESS
-4. 🔲 Create missing hero data entries — PENDING
-5. 🔲 Migrate to WordPress folder structure — PENDING
+3. ✅ Audit design system compliance — COMPLETE
+4. ✅ Create hero tasks list — COMPLETE
+5. ✅ Create design system tasks list — COMPLETE
+6. 🔲 Fix inline styles in 15 TSX files — PENDING
+7. 🔲 Fix hardcoded CSS in AccountSidebar.css and page-header.css — PENDING
+8. 🔲 Fix 22 pages with hardcoded heroes — PENDING
 
 **Sprint Metrics:**
-- Tasks completed: 2 / 5 (40%)
-- Critical bugs fixed: 0 / 16
+- Tasks completed: 5 / 8 (62.5%)
+- Critical bugs identified: 15 inline styles, 22 hardcoded heroes
 - Documentation created: 5 files (3,300+ lines)
-- Prompts created: 3 new (51 total)
+- Task lists created: 2 new (hero tasks, design system tasks)
 
 ---
 
 ## Critical Tasks (P0 — Blocking)
+
+### Design System Compliance — Inline Styles
+
+**Source:** `/reports/2026-03-18-design-system-audit.md`  
+**Task List:** `/tasks/2026-03-18-design-system-tasks.md`
+
+**Status:** 0 / 15 (0%)
+
+Critical violation: 15 TSX files contain inline `style={{ width: '14px', height: '14px' }}` on breadcrumb icons
+
+| File | Status | Lines | Priority |
+|------|--------|-------|----------|
+| SingleNoticeAF.tsx | 🔲 Pending | 109, 118 | P0 |
+| ContactAF.tsx | 🔲 Pending | 33 | P0 |
+| SalesAF.tsx | 🔲 Pending | 19 | P0 |
+| About.tsx | 🔲 Pending | 60 | P0 |
+| Terms.tsx | 🔲 Pending | 19 | P0 |
+| TermsAF.tsx | 🔲 Pending | 19 | P0 |
+| Privacy.tsx | 🔲 Pending | 19 | P0 |
+| PrivacyAF.tsx | 🔲 Pending | 19 | P0 |
+| FAQ.tsx | 🔲 Pending | 138 | P0 |
+| FAQAF.tsx | 🔲 Pending | 138 | P0 |
+| Pricing.tsx | 🔲 Pending | 89 | P0 |
+| PricingAF.tsx | 🔲 Pending | 89 | P0 |
+| Sitemap.tsx | 🔲 Pending | 18 | P0 |
+| SitemapAF.tsx | 🔲 Pending | 19 | P0 |
+| Advertise.tsx | 🔲 Pending | 19 | P0 |
 
 ### Hero Template Part Fixes
 
@@ -355,5 +387,6 @@ Central tracking for all project tasks across audits, features, and improvements
 
 | Version | Date | Changes |
 |---|---|---|
+| 2.1.0 | 2026-03-18 | Major update: Added hero tasks, design system compliance tasks, and updated task organization |
 | 2.0.0 | 2026-03-18 | Major update: Added hero fixes, WordPress architecture, expand prompts, design system tasks |
 | 1.0.0 | 2026-03-16 | Initial master task list |

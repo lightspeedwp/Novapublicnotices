@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router";
 import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
 import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Card } from "../../components/ui/card";
 import { useState } from "react";
-import { Eye, EyeOff, Upload, X } from "lucide-react";
+import { Eye, EyeSlash, UploadSimple, X, User, Buildings, CheckCircle } from "@phosphor-icons/react";
+import "../../../styles/register.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -41,283 +41,340 @@ export default function Register() {
 
   return (
     <Layout lang="en" showAds={false}>
-      <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center py-12 px-4">
-        <div className="w-full max-w-3xl">
-          <div className="text-center mb-8">
-            <h1 className="wpn-heading-h1 wpn-heading--primary mb-2">
-              Register
-            </h1>
-            <p className="text-gray-600">Create your account to access public notices</p>
+      {/* Hero Section */}
+      <Hero
+        lang="en"
+        title="Create your account"
+        subtitle="Join Nova Public Notices"
+        description="Register for instant access to legal public notices, submit your own publications, and manage everything from your personalized dashboard."
+        icon="user-plus"
+        size="sm"
+        variant="center"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Register", href: "/register" }
+        ]}
+      />
+
+      <div className="wpn-register">
+        <div className="wpn-register__container">
+          {/* Progress Indicator */}
+          <div className="wpn-register-progress">
+            <div className="wpn-register-progress__step wpn-register-progress__step--active">
+              <div className="wpn-register-progress__indicator">
+                <User weight="bold" size={16} />
+              </div>
+              <div className="wpn-register-progress__label">Account</div>
+            </div>
+            <div className={`wpn-register-progress__step ${registerAsPublisher ? 'wpn-register-progress__step--active' : ''}`}>
+              <div className="wpn-register-progress__indicator">
+                <Buildings weight="bold" size={16} />
+              </div>
+              <div className="wpn-register-progress__label">Company</div>
+            </div>
+            <div className="wpn-register-progress__step">
+              <div className="wpn-register-progress__indicator">
+                <CheckCircle weight="bold" size={16} />
+              </div>
+              <div className="wpn-register-progress__label">Complete</div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="wpn-register__form">
             {/* User Details Section */}
-            <Card className="p-8">
-              <h2 className="wpn-heading-h3 wpn-heading--primary mb-6">
-                User Details
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium mb-2">
-                      Name *
+            <div className="wpn-register-section">
+              <h2 className="wpn-register-section__title">Personal information</h2>
+
+              <div className="wpn-register-section__body">
+                {/* Name & Surname Grid */}
+                <div className="wpn-register-field-grid">
+                  <div className="wpn-register-field">
+                    <label htmlFor="firstName" className="wpn-register-field__label wpn-register-field__label--required">
+                      First name
                     </label>
-                    <Input 
-                      id="firstName" 
-                      placeholder="Ash" 
-                      required 
-                      className="bg-white"
+                    <input
+                      id="firstName"
+                      type="text"
+                      placeholder="Enter your first name"
+                      required
+                      className="wpn-register-field__input"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium mb-2">
-                      Surname *
+
+                  <div className="wpn-register-field">
+                    <label htmlFor="lastName" className="wpn-register-field__label wpn-register-field__label--required">
+                      Last name
                     </label>
-                    <Input 
-                      id="lastName" 
-                      placeholder="Shaw" 
-                      required 
-                      className="bg-white"
+                    <input
+                      id="lastName"
+                      type="text"
+                      placeholder="Enter your last name"
+                      required
+                      className="wpn-register-field__input"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email *
+                {/* Email */}
+                <div className="wpn-register-field">
+                  <label htmlFor="email" className="wpn-register-field__label wpn-register-field__label--required">
+                    Email address
                   </label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="ash@lightspeed.agency" 
-                    required 
-                    className="bg-white"
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                    className="wpn-register-field__input"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="password" className="block text-sm font-medium mb-2">
-                      Password *
+                {/* Password & Confirm Password Grid */}
+                <div className="wpn-register-field-grid">
+                  <div className="wpn-register-field">
+                    <label htmlFor="password" className="wpn-register-field__label wpn-register-field__label--required">
+                      Password
                     </label>
-                    <div className="relative">
-                      <Input 
-                        id="password" 
+                    <div className="wpn-register-field__password-wrapper">
+                      <input
+                        id="password"
                         type={showPassword ? "text" : "password"}
-                        placeholder="••••••••" 
-                        required 
-                        className="bg-blue-50 pr-10"
+                        placeholder="Create a strong password"
+                        required
+                        className="wpn-register-field__input wpn-register-field__input--password"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        className="wpn-register-field__password-toggle"
+                        aria-label={showPassword ? "Hide password" : "Show password"}
                       >
-                        {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                        {showPassword ? (
+                          <EyeSlash className="wpn-register-field__password-toggle-icon" weight="bold" />
+                        ) : (
+                          <Eye className="wpn-register-field__password-toggle-icon" weight="bold" />
+                        )}
                       </button>
                     </div>
                   </div>
-                  <div>
-                    <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
-                      Confirm Password *
+
+                  <div className="wpn-register-field">
+                    <label htmlFor="confirmPassword" className="wpn-register-field__label wpn-register-field__label--required">
+                      Confirm password
                     </label>
-                    <div className="relative">
-                      <Input 
-                        id="confirmPassword" 
+                    <div className="wpn-register-field__password-wrapper">
+                      <input
+                        id="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"}
-                        placeholder="••••••••" 
-                        required 
-                        className="bg-blue-50 pr-10"
+                        placeholder="Re-enter your password"
+                        required
+                        className="wpn-register-field__input wpn-register-field__input--password"
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        className="wpn-register-field__password-toggle"
+                        aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                       >
-                        {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                        {showConfirmPassword ? (
+                          <EyeSlash className="wpn-register-field__password-toggle-icon" weight="bold" />
+                        ) : (
+                          <Eye className="wpn-register-field__password-toggle-icon" weight="bold" />
+                        )}
                       </button>
                     </div>
                   </div>
                 </div>
 
-                {/* Checkbox to register as publisher */}
-                <div className="flex items-start gap-3 pt-4 border-t border-gray-200">
-                  <input 
-                    type="checkbox" 
-                    id="registerPublisher" 
-                    className="mt-1 size-4"
-                    style={{ accentColor: 'var(--nova-accent)' }}
+                {/* Publisher Toggle */}
+                <div
+                  className="wpn-register-toggle"
+                  onClick={() => setRegisterAsPublisher(!registerAsPublisher)}
+                >
+                  <input
+                    type="checkbox"
+                    id="registerPublisher"
+                    className="wpn-register-toggle__checkbox"
                     checked={registerAsPublisher}
                     onChange={(e) => setRegisterAsPublisher(e.target.checked)}
+                    onClick={(e) => e.stopPropagation()}
                   />
-                  <label htmlFor="registerPublisher" className="text-sm text-gray-700 font-medium">
-                    Register as a company to publish notices
+                  <label htmlFor="registerPublisher" className="wpn-register-toggle__label">
+                    I'm registering on behalf of a company or organization
                   </label>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Company Details Section - Only shown if registering as publisher */}
             {registerAsPublisher && (
-              <Card className="p-8">
-                <h2 className="wpn-heading-h3 wpn-heading--primary mb-6">
-                  Company Details
-                </h2>
-                
-                <div className="space-y-6">
-                  <div>
-                    <label htmlFor="companyName" className="block text-sm font-medium mb-2">
-                      Company Name *
+              <div className="wpn-register-section">
+                <h2 className="wpn-register-section__title">Company details</h2>
+
+                <div className="wpn-register-section__body">
+                  {/* Company Name */}
+                  <div className="wpn-register-field">
+                    <label htmlFor="companyName" className="wpn-register-field__label wpn-register-field__label--required">
+                      Company name
                     </label>
-                    <Input 
-                      id="companyName" 
-                      placeholder="LightSpeed" 
+                    <input
+                      id="companyName"
+                      type="text"
+                      placeholder="Enter your company name"
                       required={registerAsPublisher}
-                      className="bg-white"
+                      className="wpn-register-field__input"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="contactPerson" className="block text-sm font-medium mb-2">
-                        Contact Person *
+                  {/* Contact Person & Phone Grid */}
+                  <div className="wpn-register-field-grid">
+                    <div className="wpn-register-field">
+                      <label htmlFor="contactPerson" className="wpn-register-field__label wpn-register-field__label--required">
+                        Contact person
                       </label>
-                      <Input 
-                        id="contactPerson" 
-                        placeholder="Ash" 
+                      <input
+                        id="contactPerson"
+                        type="text"
+                        placeholder="Primary contact name"
                         required={registerAsPublisher}
-                        className="bg-white"
+                        className="wpn-register-field__input"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                        Phone Number *
+
+                    <div className="wpn-register-field">
+                      <label htmlFor="phone" className="wpn-register-field__label wpn-register-field__label--required">
+                        Phone number
                       </label>
-                      <Input 
-                        id="phone" 
-                        type="tel" 
-                        placeholder="0845656767" 
+                      <input
+                        id="phone"
+                        type="tel"
+                        placeholder="+27 12 345 6789"
                         required={registerAsPublisher}
-                        className="bg-white"
+                        className="wpn-register-field__input"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="vatNumber" className="block text-sm font-medium mb-2">
-                      VAT Number
+                  {/* VAT Number */}
+                  <div className="wpn-register-field">
+                    <label htmlFor="vatNumber" className="wpn-register-field__label">
+                      VAT number (optional)
                     </label>
-                    <Input 
-                      id="vatNumber" 
-                      placeholder="4170226023" 
-                      className="bg-white"
+                    <input
+                      id="vatNumber"
+                      type="text"
+                      placeholder="4170226023"
+                      className="wpn-register-field__input"
                     />
                   </div>
 
-                  <div>
-                    <label htmlFor="address" className="block text-sm font-medium mb-2">
-                      Address *
+                  {/* Address */}
+                  <div className="wpn-register-field">
+                    <label htmlFor="address" className="wpn-register-field__label wpn-register-field__label--required">
+                      Business address
                     </label>
-                    <Input 
-                      id="address" 
-                      placeholder="Woodstock, Cape Town" 
+                    <input
+                      id="address"
+                      type="text"
+                      placeholder="Street address, city, postal code"
                       required={registerAsPublisher}
-                      className="bg-white"
+                      className="wpn-register-field__input"
                     />
                   </div>
 
                   {/* Logo Upload */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Company Logo
-                    </label>
+                  <div className="wpn-register-logo">
+                    <label className="wpn-register-logo__label">Company logo (optional)</label>
                     {logoPreview ? (
-                      <div className="relative inline-block">
-                        <img 
-                          src={logoPreview} 
-                          alt="Company logo preview" 
-                          className="max-w-xs max-h-32 border border-gray-200 rounded"
+                      <div className="wpn-register-logo__preview-wrapper">
+                        <img
+                          src={logoPreview}
+                          alt="Company logo preview"
+                          className="wpn-register-logo__preview"
                         />
                         <button
                           type="button"
                           onClick={removeLogo}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                          className="wpn-register-logo__remove"
+                          aria-label="Remove logo"
                         >
-                          <X className="size-4" />
+                          <X className="wpn-register-logo__remove-icon" weight="bold" />
                         </button>
                       </div>
                     ) : (
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:wpn-border--accent transition-colors cursor-pointer">
+                      <div className="wpn-register-logo__dropzone">
                         <input
                           type="file"
                           id="logo"
                           accept="image/*"
                           onChange={handleLogoUpload}
-                          className="hidden"
+                          className="wpn-register-logo__input"
                         />
-                        <label htmlFor="logo" className="cursor-pointer">
-                          <Upload className="size-8 text-gray-400 mx-auto mb-2" />
-                          <p className="text-sm text-gray-600">
+                        <label htmlFor="logo" className="wpn-register-logo__upload-label">
+                          <UploadSimple className="wpn-register-logo__upload-icon" weight="bold" />
+                          <p className="wpn-register-logo__upload-text">
                             Click to upload or drag and drop
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            PNG, JPG up to 5MB
+                          <p className="wpn-register-logo__upload-hint">
+                            PNG, JPG, or SVG up to 5MB
                           </p>
                         </label>
                       </div>
                     )}
                   </div>
                 </div>
-              </Card>
+              </div>
             )}
 
             {/* Terms & Actions */}
-            <Card className="p-8">
-              <div className="space-y-6">
-                <div className="flex items-start gap-3">
-                  <input 
-                    type="checkbox" 
-                    id="terms" 
-                    className="mt-1 size-4"
-                    style={{ accentColor: 'var(--nova-accent)' }}
-                    required 
+            <div className="wpn-register-section">
+              <div className="wpn-register-section__body">
+                {/* Terms Checkbox */}
+                <div className="wpn-register-terms">
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    className="wpn-register-terms__checkbox"
+                    required
                   />
-                  <label htmlFor="terms" className="text-sm text-gray-700">
+                  <label htmlFor="terms" className="wpn-register-terms__label">
                     I agree to the{" "}
-                    <Link to="/terms" className="wpn-link--accent font-medium">
+                    <Link to="/terms" className="wpn-register-terms__link">
                       Terms of Service
                     </Link>
                     {" "}and{" "}
-                    <Link to="/privacy" className="wpn-link--accent font-medium">
+                    <Link to="/privacy" className="wpn-register-terms__link">
                       Privacy Policy
                     </Link>
                   </label>
                 </div>
 
-                <div className="flex gap-4">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    className="flex-1"
+                {/* Action Buttons */}
+                <div className="wpn-register-actions">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="wpn-register-actions__button"
                     onClick={() => navigate("/login")}
                   >
                     Cancel
                   </Button>
-                  <Button 
-                    type="submit" 
-                    className="flex-1 wpn-button wpn-button--accent"
+                  <Button
+                    type="submit"
+                    className="wpn-register-actions__button wpn-button wpn-button--accent"
                   >
-                    Submit
+                    Create account
                   </Button>
                 </div>
               </div>
-            </Card>
+            </div>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
+          {/* Footer */}
+          <div className="wpn-register__footer">
             Already have an account?{" "}
-            <Link to="/login" className="wpn-link--accent font-medium">
+            <Link to="/login" className="wpn-register__footer-link">
               Sign in here
             </Link>
           </div>

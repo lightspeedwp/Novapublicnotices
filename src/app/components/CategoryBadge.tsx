@@ -3,6 +3,7 @@ import {
   Hammer, Heart, Bell, Buildings, ShieldCheck, Warning, UsersThree,
   TrendDown, Vault, ArrowsClockwise, Handshake, HandPalm, Megaphone
 } from "@phosphor-icons/react";
+import { getCategoryColor } from "../data/notices/category-colors";
 import { cn } from "./ui/utils";
 import "./CategoryBadge.css";
 
@@ -116,14 +117,19 @@ export default function CategoryBadge({
 }: CategoryBadgeProps) {
   const label = categoryLabels[lang][category as keyof typeof categoryLabels.en] || category;
   const Icon = categoryIcons[category] || Bell;
+  const categoryColor = getCategoryColor(category);
 
   return (
     <span
       className={cn(
         "wpn-category-badge",
-        `wpn-category-badge--${category}`,
         className
       )}
+      style={{
+        backgroundColor: categoryColor.colorLight,
+        color: categoryColor.colorDark,
+        borderColor: categoryColor.color,
+      }}
     >
       {showIcon && <Icon className="wpn-category-badge__icon" weight="regular" />}
       {label}

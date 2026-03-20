@@ -4,7 +4,7 @@ export default function Review() {
   return (
     <PageStub
       lang="en"
-      title="Review Notice"
+      title="Review notice"
       description="Review and approve or reject this notice submission."
       showAds={false}
     />

@@ -40,6 +40,49 @@
 }
 
 /* =================================================================
+   Auth Required State
+   ================================================================= */
+
+.wpn-confirmation-auth-required {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  max-width: 600px;
+  margin: var(--space-12) auto;
+  border: var(--border-width-1) solid var(--border-color-default);
+  box-shadow: var(--shadow-sm);
+}
+
+.wpn-confirmation-auth-required svg {
+  color: var(--nova-accent);
+  margin: 0 auto var(--space-6);
+}
+
+.wpn-confirmation-auth-required h2 {
+  margin-bottom: var(--space-4);
+  color: var(--foreground);
+}
+
+.wpn-confirmation-auth-required__message {
+  font-family: var(--font-family-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-normal);
+}
+
+.wpn-confirmation-auth-required__note {
+  font-family: var(--font-family-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* =================================================================
    Confirmation Hero
    ================================================================= */
 

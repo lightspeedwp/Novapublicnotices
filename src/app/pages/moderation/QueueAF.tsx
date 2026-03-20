@@ -4,7 +4,7 @@ export default function QueueAF() {
   return (
     <PageStub
       lang="af"
-      title="Moderering Tou"
+      title="Moderering tou"
       description="Hersien en modereer hangende kennisgewing indienings."
       showAds={false}
     />

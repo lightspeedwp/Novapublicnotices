@@ -1,7 +1,7 @@
 # Prompt Triggers — Nova Public Notices Portal
 
 **Category:** Reference  
-**Version:** 5.0.0  
+**Version:** 6.0.0  
 **Last Updated:** 2026-03-18  
 **Status:** Active
 
@@ -19,11 +19,31 @@ Quick reference guide for all prompt trigger words in the Nova Public Notices Po
 |---------|-------------|---------|
 | `audit` | `/prompts/orchestrator.md` | Run all audit sub-prompts in sequence |
 | `orchestrator` | `/prompts/orchestrator.md` | Same as `audit` |
+| `fix` | `/prompts/fix-orchestrator.md` | Run all fix prompts in sequence |
 | `archive` | `/prompts/archive-orchestrator.md` | Run all archive-* prompts in sequence |
 | `cleanup` | `/prompts/cleanup-orchestrator.md` | Run all cleanup-* prompts + archive |
 | `update` | `/prompts/update-orchestrator.md` | Run all update-* prompts in sequence |
 | `expand` | `/prompts/expand-orchestrator.md` | Run all expand-* prompts in sequence |
 | `optimise` or `optimize` | `/prompts/optimise.md` | Run all optimization prompts in sequence |
+
+---
+
+## Fix Prompts (NEW)
+
+### Content Fixes
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `fix titles` | `/prompts/fix-titles.md` | Enforce sentence case for all titles and headings |
+| `fix sentence-case` | `/prompts/fix-titles.md` | (Alias for fix-titles) |
+
+### Code Fixes (Planned)
+
+| Trigger | Prompt File | Purpose |
+|---------|-------------|---------|
+| `fix icons` | `/prompts/fix-icons.md` | Migrate Lucide to Phosphor Icons (TO CREATE) |
+| `fix variables` | `/prompts/fix-variables.md` | Replace hardcoded values with CSS variables (TO CREATE) |
+| `fix spacing` | `/prompts/fix-spacing.md` | Enforce gap-first spacing, remove margins (TO CREATE) |
 
 ---
 
@@ -380,6 +400,7 @@ To add new audit trigger:
 
 | Version | Date | Changes |
 |---|---|---|
+| 6.0.0 | 2026-03-18 | Added fix orchestrator + fix-titles prompt for sentence case enforcement — Total: 63 active prompts |
 | 5.0.0 | 2026-03-18 | Added 10 new optimization prompts (memory, performance, assets, css, components, data, accessibility, a11y, seo, fonts, images, bundle, forms, routing, animation, state, caching, testing) — Total: 61 active prompts |
 | 4.1.0 | 2026-03-18 | Added 3 new expand prompts (blocks, parts, styles) for WordPress architecture — Total: 51 active prompts |
 | 4.0.0 | 2026-03-18 | Added expand orchestrator + 10 expand prompts (functionality, pages, templates, patterns, components, data, triggers, dev-tools) — Total: 48 active prompts |

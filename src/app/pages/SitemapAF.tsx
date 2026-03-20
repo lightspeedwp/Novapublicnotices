@@ -1,43 +1,19 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
-import { Card } from "../components/ui/card";
+import Hero from "../components/Hero";
+import { useHero } from "../hooks/useHero";
 import { categories } from "../data/categories";
-import { Home } from "lucide-react";
 import "../../styles/components.css";
 
 export default function SitemapAF() {
+  const heroData = useHero('sitemap', 'af');
+
   return (
     <Layout lang="af" showAds={true}>
-      {/* Page Header */}
-      <section className="wpn-page-header">
-        <div className="wpn-page-header__container">
-          {/* Breadcrumb */}
-          <nav className="wpn-breadcrumb" aria-label="Broodkrummels">
-            <ol className="wpn-breadcrumb__list">
-              <li className="wpn-breadcrumb__item">
-                <Link to="/af" className="wpn-breadcrumb__link">
-                  <Home className="wpn-breadcrumb__icon" />
-                  Tuis
-                </Link>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__separator">/</span>
-              </li>
-              <li className="wpn-breadcrumb__item">
-                <span className="wpn-breadcrumb__current">Werfkaart</span>
-              </li>
-            </ol>
-          </nav>
+      {/* Hero Section */}
+      {heroData && <Hero data={heroData} lang="af" />}
 
-          <h1 className="wpn-page-header__title">
-            Werfkaart
-          </h1>
-          <p className="wpn-page-header__subtitle">
-            Navigeer alle bladsye en kennisgewingkategorieë op die Nova Openbare Kennisgewings Portaal
-          </p>
-        </div>
-      </section>
-
+      {/* Sitemap Content */}
       <div className="bg-[var(--muted)] pb-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
